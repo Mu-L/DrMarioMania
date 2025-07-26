@@ -1,0 +1,25 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bdrp3t67u8j0q"]
+
+[ext_resource type="FontFile" uid="uid://c2e4sl3d40to5" path="res://Assets/Fonts/PressStart2P.ttf" id="1_wi14v"]
+[ext_resource type="Script" path="res://Scripts/Resources/ThemeAttributes.cs" id="2_l0pbc"]
+
+[resource]
+script = ExtResource("2_l0pbc")
+JarOffset = -11
+MultiplayerJarOffset = -20
+TopLeftHudOffset = 0
+RightHudGroupOffset = 0
+VirusRingOffset = 0
+PillPreviewOffset = 0
+MusicFolder = "NES"
+SfxFolder = "WhatsApp"
+LabelColour = Color(0, 0, 0, 1)
+LabelFont = ExtResource("1_wi14v")
+UseLabelShadow = false
+NeverUseLightLabelColour = false
+ColourOrder = 3
+LightColour = Color(1, 1, 1, 1)
+PreLightColour = Color(0.223529, 0.901961, 0.313726, 1)
+PowerUpPreviewColour = Color(1, 1, 1, 1)
+UseUIShadows = true
+HasRingOverlay = false

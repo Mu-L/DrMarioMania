@@ -1,0 +1,33 @@
+[gd_resource type="Resource" load_steps=12 format=3 uid="uid://cwkwokd34qh80"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/CommonGameSettings.cs" id="1_0ghk3"]
+[ext_resource type="Resource" uid="uid://cwxmv5gjaigr2" path="res://Assets/Resources/P1GameSettings.tres" id="1_6avm1"]
+[ext_resource type="Resource" uid="uid://umdcmmt3wu76" path="res://Assets/Resources/CustomLevelGameSettings.tres" id="1_56onb"]
+[ext_resource type="Resource" uid="uid://coypr8e7qqypk" path="res://Assets/Resources/P2GameSettings.tres" id="2_3lkx6"]
+[ext_resource type="Resource" uid="uid://cy48dohdjrl4w" path="res://Assets/Resources/P3GameSettings.tres" id="3_je880"]
+[ext_resource type="Resource" uid="uid://dehmkp4vvgycp" path="res://Assets/Resources/P1MultiInputSettings.tres" id="3_wave2"]
+[ext_resource type="Resource" uid="uid://rb3mnyja6yi" path="res://Assets/Resources/P4GameSettings.tres" id="4_j56fm"]
+[ext_resource type="Resource" uid="uid://b2iuu3gh2uh0r" path="res://Assets/Resources/P2MultiInputSettings.tres" id="5_qmb6r"]
+[ext_resource type="Resource" uid="uid://buseoen2tyl28" path="res://Assets/Resources/P3MultiInputSettings.tres" id="7_bi3ij"]
+[ext_resource type="Resource" uid="uid://c3yu67jlscn32" path="res://Assets/Resources/P4MultiInputSettings.tres" id="9_smlgy"]
+[ext_resource type="Resource" uid="uid://cwxx0untun2hu" path="res://Assets/Resources/ThemeList.tres" id="11_j3ocu"]
+
+[resource]
+script = ExtResource("1_0ghk3")
+P1GameSettings = ExtResource("1_6avm1")
+P2GameSettings = ExtResource("2_3lkx6")
+P3GameSettings = ExtResource("3_je880")
+P4GameSettings = ExtResource("4_j56fm")
+CustomLevelGameSettings = ExtResource("1_56onb")
+P1MultiInputSettings = ExtResource("3_wave2")
+P2MultiInputSettings = ExtResource("5_qmb6r")
+P3MultiInputSettings = ExtResource("7_bi3ij")
+P4MultiInputSettings = ExtResource("9_smlgy")
+themeList = ExtResource("11_j3ocu")
+PlayerCount = 1
+Theme = 0
+Music = -1
+CustomLevelMusic = -1
+IsGhostPillEnabled = true
+IsHardDropEnabled = true
+ManualAutoFallSpeedUp = true

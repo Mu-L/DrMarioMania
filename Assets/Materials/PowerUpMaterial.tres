@@ -1,0 +1,6 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dua6x8i1hj8vt"]
+
+[ext_resource type="Shader" path="res://Assets/Shaders/PowerUpShader.gdshader" id="1_d66xe"]
+
+[resource]
+shader = ExtResource("1_d66xe")

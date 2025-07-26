@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://cby15vvdhphb1"]
+
+[ext_resource type="PackedScene" uid="uid://4x81aemi6t00" path="res://Assets/Prefabs/PowerUps/BasePowerUp.tscn" id="1_q1dvq"]
+[ext_resource type="Script" path="res://Scripts/PowerUps/PowerUpPlus.cs" id="2_ai2lr"]
+[ext_resource type="Texture2D" uid="uid://cb6qr0bqxms7o" path="res://Assets/Sprites/Themes/Modern/PowerUpTiles.png" id="3_onhx2"]
+
+[node name="PowerUpPlus" node_paths=PackedStringArray("projectiles") instance=ExtResource("1_q1dvq")]
+script = ExtResource("2_ai2lr")
+projectiles = [NodePath("Projectile"), NodePath("Projectile2"), NodePath("Projectile3"), NodePath("Projectile4")]
+acceleration = 750.0
+maxSpeed = 250.0
+powerUp = 2
+
+[node name="Sprite2D" parent="." index="0"]
+frame = 2
+
+[node name="Projectile" type="Sprite2D" parent="." index="1"]
+position = Vector2(-2.38419e-07, -2.38419e-07)
+texture = ExtResource("3_onhx2")
+hframes = 7
+vframes = 11
+frame = 2
+
+[node name="Projectile2" type="Sprite2D" parent="." index="2"]
+position = Vector2(-2.38419e-07, -2.38419e-07)
+texture = ExtResource("3_onhx2")
+hframes = 7
+vframes = 11
+frame = 2
+
+[node name="Projectile3" type="Sprite2D" parent="." index="3"]
+position = Vector2(-2.38419e-07, -2.38419e-07)
+texture = ExtResource("3_onhx2")
+hframes = 7
+vframes = 11
+frame = 2
+
+[node name="Projectile4" type="Sprite2D" parent="." index="4"]
+position = Vector2(-2.38419e-07, -2.38419e-07)
+texture = ExtResource("3_onhx2")
+hframes = 7
+vframes = 11
+frame = 2

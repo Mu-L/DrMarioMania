@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://dyijwdbglbgly"]
+
+[ext_resource type="Script" path="res://Scripts/Menu/GameSettingUI/GameSettingSlider.cs" id="1_fyc0h"]
+[ext_resource type="Resource" uid="uid://cwkwokd34qh80" path="res://Assets/Resources/CommonGameSettings.tres" id="2_07yy6"]
+[ext_resource type="AudioStream" uid="uid://gv4mvj4cchkt" path="res://Assets/Audio/Sounds/NES/Move.ogg" id="3_5hsdh"]
+
+[node name="GameSettingSlider" type="HSlider" node_paths=PackedStringArray("audioPlayer")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.0
+offset_top = -8.0
+offset_right = 103.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+max_value = 20.0
+rounded = true
+scrollable = false
+script = ExtResource("1_fyc0h")
+settingName = &"VirusLevel"
+commonGameSettings = ExtResource("2_07yy6")
+audioPlayer = NodePath("AudioStreamPlayer")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_5hsdh")
+bus = &"SFX"
+
+[connection signal="value_changed" from="." to="." method="PlaySound"]
+[connection signal="value_changed" from="." to="." method="SetSettingValue"]

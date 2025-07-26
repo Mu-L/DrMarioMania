@@ -1,0 +1,124 @@
+[gd_scene load_steps=13 format=3 uid="uid://bs5xmilfh02x8"]
+
+[ext_resource type="Script" path="res://Scripts/Menu/UserCustomLevelPanel.cs" id="1_kp6o3"]
+[ext_resource type="Resource" uid="uid://31tismb2r7a" path="res://Assets/Resources/UserCustomLevelList.tres" id="2_kroqh"]
+[ext_resource type="Texture2D" uid="uid://be6drct25wp0f" path="res://Assets/Sprites/UI/ButtonIcons/PlayIcon.png" id="2_tktd3"]
+[ext_resource type="Resource" uid="uid://cwkwokd34qh80" path="res://Assets/Resources/CommonGameSettings.tres" id="3_75tpe"]
+[ext_resource type="Texture2D" uid="uid://bb8u8pkapqvep" path="res://Assets/Sprites/UI/ButtonIcons/EditIcon.png" id="3_hnr7k"]
+[ext_resource type="Texture2D" uid="uid://c12jrpj0uv1b6" path="res://Assets/Sprites/UI/ButtonIcons/DeleteIcon.png" id="4_ou3am"]
+[ext_resource type="Texture2D" uid="uid://dsxsg0l520k5s" path="res://Assets/Sprites/UI/ButtonIcons/ExportIcon.png" id="4_rcp3k"]
+[ext_resource type="Texture2D" uid="uid://ciysi0rxdl5ox" path="res://Assets/Sprites/UI/ButtonIcons/MoveToTopIcon.png" id="6_04alr"]
+[ext_resource type="Texture2D" uid="uid://g0codg7mc243" path="res://Assets/Sprites/UI/ButtonIcons/MoveUpIcon.png" id="7_7a15h"]
+[ext_resource type="Texture2D" uid="uid://otil5y3x7vis" path="res://Assets/Sprites/UI/ButtonIcons/ArrangeIcon.png" id="7_ot43h"]
+[ext_resource type="Texture2D" uid="uid://bs4f1buh07q7t" path="res://Assets/Sprites/UI/ButtonIcons/MoveDownIcon.png" id="8_kbgf6"]
+[ext_resource type="Texture2D" uid="uid://grww7ye3863w" path="res://Assets/Sprites/UI/ButtonIcons/MoveToBottomIcon.png" id="10_agm8m"]
+
+[node name="CustomLevelPanel" type="Panel" node_paths=PackedStringArray("nameLabel", "dateLabel", "deleteButton", "arrangeButton", "playButton", "editButton")]
+custom_minimum_size = Vector2(220, 45)
+offset_right = 220.0
+offset_bottom = 45.0
+mouse_filter = 2
+script = ExtResource("1_kp6o3")
+nameLabel = NodePath("NameLabel")
+dateLabel = NodePath("DataLabel")
+deleteButton = NodePath("HBoxContainer/DeleteButton")
+arrangeButton = NodePath("HBoxContainer/ArrangeButton")
+playButton = NodePath("HBoxContainer/PlayButton")
+editButton = NodePath("HBoxContainer/EditButton")
+levelList = ExtResource("2_kroqh")
+commonGameSettings = ExtResource("3_75tpe")
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 1
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 217.0
+offset_bottom = 24.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 0
+text = "123456789012345678901234567890123456"
+autowrap_mode = 3
+
+[node name="DataLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -121.0
+offset_top = 16.0
+offset_right = -3.0
+offset_bottom = 24.0
+grow_horizontal = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 0
+text = "99:99 99/99/9999"
+horizontal_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = -19.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 2
+alignment = 2
+
+[node name="DeleteButton" type="MenuButton" parent="HBoxContainer"]
+layout_mode = 2
+focus_mode = 2
+mouse_filter = 1
+icon = ExtResource("4_ou3am")
+flat = false
+icon_alignment = 2
+item_count = 1
+popup/item_0/text = "Delete?"
+
+[node name="ArrangeButton" type="MenuButton" parent="HBoxContainer"]
+layout_mode = 2
+focus_mode = 2
+mouse_filter = 1
+icon = ExtResource("7_ot43h")
+flat = false
+icon_alignment = 2
+item_count = 4
+popup/item_0/text = "Top"
+popup/item_0/icon = ExtResource("6_04alr")
+popup/item_1/text = "Up"
+popup/item_1/icon = ExtResource("7_7a15h")
+popup/item_1/id = 1
+popup/item_2/text = "Down"
+popup/item_2/icon = ExtResource("8_kbgf6")
+popup/item_2/id = 2
+popup/item_3/text = "Bot."
+popup/item_3/icon = ExtResource("10_agm8m")
+popup/item_3/id = 3
+
+[node name="ExportButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+text = "EXPORT"
+icon = ExtResource("4_rcp3k")
+
+[node name="EditButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+text = "EDIT"
+icon = ExtResource("3_hnr7k")
+
+[node name="PlayButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+text = "PLAY"
+icon = ExtResource("2_tktd3")
+
+[connection signal="pressed" from="HBoxContainer/ExportButton" to="." method="Export"]

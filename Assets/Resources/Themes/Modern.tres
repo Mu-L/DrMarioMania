@@ -1,0 +1,25 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://gc363j5q8cwj"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/ThemeAttributes.cs" id="1_cmcib"]
+[ext_resource type="FontFile" uid="uid://c2e4sl3d40to5" path="res://Assets/Fonts/PressStart2P.ttf" id="1_k3gcq"]
+
+[resource]
+script = ExtResource("1_cmcib")
+JarOffset = -11
+MultiplayerJarOffset = -20
+TopLeftHudOffset = 0
+RightHudGroupOffset = 0
+VirusRingOffset = 0
+PillPreviewOffset = 0
+MusicFolder = "NES"
+SfxFolder = "NES"
+LabelColour = Color(0, 0, 0, 1)
+LabelFont = ExtResource("1_k3gcq")
+UseLabelShadow = false
+NeverUseLightLabelColour = false
+ColourOrderCategory = 0
+LightColour = Color(1, 1, 1, 1)
+PreLightColour = Color(0.54902, 0.54902, 0.870588, 1)
+PowerUpPreviewColour = Color(1, 1, 1, 1)
+UseUIShadows = true
+HasRingOverlay = false

@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://0hh3qvd83qw"]
+
+[ext_resource type="Script" path="res://Scripts/Pill.cs" id="1_gv3nb"]
+[ext_resource type="Material" uid="uid://dpotog8k5cmqr" path="res://Assets/Materials/RainbowPowerUpMaterial.tres" id="2_3r0dj"]
+[ext_resource type="Texture2D" uid="uid://dlska1epmujlf" path="res://Assets/Sprites/Themes/Modern/PillTiles.png" id="3_j1sv8"]
+
+[node name="Pill" type="Node2D" node_paths=PackedStringArray("centreSegmentSprite", "secondarySegmentSprite")]
+script = ExtResource("1_gv3nb")
+centreSegmentSprite = NodePath("CentreSegment")
+secondarySegmentSprite = NodePath("SecondarySegment")
+rainbowMat = ExtResource("2_3r0dj")
+metadata/_edit_group_ = true
+
+[node name="CentreSegment" type="Sprite2D" parent="."]
+texture = ExtResource("3_j1sv8")
+hframes = 6
+vframes = 10
+
+[node name="SecondarySegment" type="Sprite2D" parent="."]
+position = Vector2(8, 0)
+texture = ExtResource("3_j1sv8")
+hframes = 6
+vframes = 10
+frame = 7

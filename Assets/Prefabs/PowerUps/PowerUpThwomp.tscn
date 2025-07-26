@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://rqtlvoynhl0i"]
+
+[ext_resource type="PackedScene" uid="uid://4x81aemi6t00" path="res://Assets/Prefabs/PowerUps/BasePowerUp.tscn" id="1_jkyrm"]
+[ext_resource type="Script" path="res://Scripts/PowerUps/PowerUpThwomp.cs" id="2_3cp3m"]
+
+[node name="PowerUpThwomp" instance=ExtResource("1_jkyrm")]
+script = ExtResource("2_3cp3m")
+acceleration = 750.0
+maxSpeed = 300.0

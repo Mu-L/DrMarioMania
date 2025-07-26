@@ -1,0 +1,1454 @@
+[gd_scene load_steps=59 format=3 uid="uid://dhy6fjq1xc4w2"]
+
+[ext_resource type="PackedScene" uid="uid://up7l7b7sr6ch" path="res://Scenes/GameScene.tscn" id="1_s5m0s"]
+[ext_resource type="Script" path="res://Scripts/Editor/EditorBaseSelector.cs" id="2_g5ukp"]
+[ext_resource type="Script" path="res://Scripts/Editor/EditorCursor.cs" id="2_gugl5"]
+[ext_resource type="PackedScene" uid="uid://cwyo15lik8i87" path="res://Assets/Prefabs/Screens/MusicScreen.tscn" id="2_p06dh"]
+[ext_resource type="Script" path="res://Scripts/Editor/EditorManager.cs" id="2_tonjn"]
+[ext_resource type="Script" path="res://Scripts/Editor/EditorPauseManager.cs" id="2_v05gp"]
+[ext_resource type="Script" path="res://Scripts/Editor/EditorTileTypeSelector.cs" id="2_xon2s"]
+[ext_resource type="Texture2D" uid="uid://b30smkhq4nsws" path="res://Assets/Sprites/UI/Editor/DrawStyleIcons.png" id="2_ydxxe"]
+[ext_resource type="Texture2D" uid="uid://c0hiufv220hj7" path="res://Assets/Sprites/Themes/Modern/VirusTiles.png" id="3_6i3kl"]
+[ext_resource type="Material" uid="uid://d0mvlpdi7fs7q" path="res://Assets/Materials/BlurMaterial.tres" id="3_ch1cv"]
+[ext_resource type="Script" path="res://Scripts/Editor/EditorUndoRedoManager.cs" id="3_lu7lp"]
+[ext_resource type="Script" path="res://Scripts/Editor/EditorBaseInputSelector.cs" id="4_5hitg"]
+[ext_resource type="Script" path="res://Scripts/Menu/Screens/BaseScreen.cs" id="4_wfo3c"]
+[ext_resource type="Script" path="res://Scripts/Editor/EditorColourSelector.cs" id="5_6i5u8"]
+[ext_resource type="Texture2D" uid="uid://kqh3uxtqxbxw" path="res://Assets/Sprites/UI/ButtonIcons/BackIcon.png" id="5_ei750"]
+[ext_resource type="FontFile" uid="uid://c2e4sl3d40to5" path="res://Assets/Fonts/PressStart2P.ttf" id="5_hdt4s"]
+[ext_resource type="Texture2D" uid="uid://b30ik7biqp7qt" path="res://Assets/Sprites/UI/Editor/DrawToolIcons.png" id="5_ompws"]
+[ext_resource type="Script" path="res://Scripts/Editor/EditorLevelNameBox.cs" id="6_afx88"]
+[ext_resource type="PackedScene" uid="uid://db3d4vw78ejqe" path="res://Assets/Prefabs/Screens/AdvancedSettingsScreen.tscn" id="7_78srm"]
+[ext_resource type="Script" path="res://Scripts/Menu/GameSettingUI/GameSettingButtonGroup.cs" id="8_ieu3j"]
+[ext_resource type="Script" path="res://Scripts/Editor/EditorResetButton.cs" id="8_pskj7"]
+[ext_resource type="Resource" uid="uid://cwkwokd34qh80" path="res://Assets/Resources/CommonGameSettings.tres" id="9_ljri1"]
+[ext_resource type="Texture2D" uid="uid://c5iii5buijc4a" path="res://Assets/Sprites/UI/Editor/ResetButton.png" id="9_nsotx"]
+[ext_resource type="Script" path="res://Scripts/Menu/Screens/UpdateableSettingScreen.cs" id="9_yts8l"]
+[ext_resource type="PackedScene" uid="uid://3igdbj037lt3" path="res://Assets/Prefabs/GameSettingsUI/GameSettingGameplayContainer.tscn" id="10_hpr3b"]
+[ext_resource type="PackedScene" uid="uid://cg3ssstpw3jum" path="res://Assets/Prefabs/GameSettingsUI/GameSettingButton.tscn" id="10_ngkki"]
+[ext_resource type="Script" path="res://Scripts/Menu/GameSettingUI/GameSettingEditorFallSpeedButtonGroup.cs" id="11_if8ix"]
+[ext_resource type="PackedScene" uid="uid://b4pwwg8xgiew0" path="res://Assets/Prefabs/PopUpButton.tscn" id="11_j7upk"]
+[ext_resource type="PackedScene" uid="uid://cxdy3o34byr8t" path="res://Assets/Prefabs/GameSettingsUI/GameSettingThemeContainer.tscn" id="12_7nw2i"]
+[ext_resource type="Script" path="res://Scripts/Menu/ThemePreview.cs" id="12_tbay8"]
+[ext_resource type="Script" path="res://Scripts/Editor/EditorBaseSingleButton.cs" id="13_hyfa0"]
+[ext_resource type="Texture2D" uid="uid://coud3817vdr2r" path="res://Assets/Sprites/UI/Editor/UndoRedoIcons.png" id="13_iq6qk"]
+[ext_resource type="Resource" uid="uid://cwxx0untun2hu" path="res://Assets/Resources/ThemeList.tres" id="13_mykto"]
+[ext_resource type="Texture2D" uid="uid://wjvng62544bt" path="res://Assets/Sprites/Themes/Modern/BGMed.png" id="14_snxut"]
+[ext_resource type="Texture2D" uid="uid://i4ji6ee1hdhl" path="res://Assets/Sprites/UI/Editor/DrawToolPreviews.png" id="14_tpaje"]
+[ext_resource type="Texture2D" uid="uid://pn63ad76k4o2" path="res://Assets/Sprites/Themes/Modern/Jar.png" id="15_6tw3r"]
+[ext_resource type="Texture2D" uid="uid://dlska1epmujlf" path="res://Assets/Sprites/Themes/Modern/PillTiles.png" id="17_bppd6"]
+[ext_resource type="PackedScene" uid="uid://mdtbub1d7nur" path="res://Assets/Prefabs/Screens/SettingsScreen.tscn" id="22_4ru8j"]
+[ext_resource type="Resource" uid="uid://31tismb2r7a" path="res://Assets/Resources/UserCustomLevelList.tres" id="22_h7pql"]
+[ext_resource type="PackedScene" uid="uid://ciycvm6fh6cel" path="res://Assets/Prefabs/PopUpGroup.tscn" id="24_ngsmh"]
+[ext_resource type="PackedScene" uid="uid://dejlotb7w8jno" path="res://Assets/Prefabs/MusicPreviewPlayer.tscn" id="29_pwdah"]
+[ext_resource type="Texture2D" uid="uid://be6drct25wp0f" path="res://Assets/Sprites/UI/ButtonIcons/PlayIcon.png" id="35_fosab"]
+[ext_resource type="Texture2D" uid="uid://cb6qr0bqxms7o" path="res://Assets/Sprites/Themes/Modern/PowerUpTiles.png" id="40_s6gkj"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_pb8p5"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_xv70d"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_r6tdw"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_3u7qh"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_agiio"]
+
+[sub_resource type="Animation" id="Animation_fmwac"]
+resource_name = "Hide"
+length = 0.16667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ScreenCentre/ScreenContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-2.98023e-08, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ScreenCentre/ScreenContainer:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 8)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.166667),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_t6ddt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ScreenCentre/ScreenContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ScreenCentre/ScreenContainer:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_mjd7c"]
+resource_name = "Show"
+length = 0.16667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ScreenCentre/ScreenContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ScreenCentre/ScreenContainer:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(0, -8), Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_nt83l"]
+resource_name = "new_animation"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v3bw1"]
+_data = {
+"Hide": SubResource("Animation_fmwac"),
+"RESET": SubResource("Animation_t6ddt"),
+"Show": SubResource("Animation_mjd7c"),
+"new_animation": SubResource("Animation_nt83l")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7hvga"]
+content_margin_left = 4.0
+content_margin_top = 5.0
+content_margin_right = 4.0
+content_margin_bottom = 3.0
+bg_color = Color(0, 0, 0, 0.333333)
+border_width_left = 1
+border_width_top = 2
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.392157)
+anti_aliasing = false
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_2iqrs"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_c0egn"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_6wdwj"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_qyv4c"]
+
+[node name="EditorScene" instance=ExtResource("1_s5m0s")]
+
+[node name="PauseLayer" parent="." index="0"]
+layer = 3
+
+[node name="Button" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/TabButtons" index="0"]
+button_group = SubResource("ButtonGroup_pb8p5")
+
+[node name="Button2" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/TabButtons" index="1"]
+button_group = SubResource("ButtonGroup_pb8p5")
+
+[node name="Button3" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/TabButtons" index="2"]
+button_group = SubResource("ButtonGroup_xv70d")
+
+[node name="Button" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="0"]
+button_group = SubResource("ButtonGroup_r6tdw")
+
+[node name="Button2" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="1"]
+button_group = SubResource("ButtonGroup_r6tdw")
+
+[node name="Button3" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="2"]
+button_group = SubResource("ButtonGroup_r6tdw")
+
+[node name="Button4" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="3"]
+button_group = SubResource("ButtonGroup_r6tdw")
+
+[node name="EditorPauseLayer" type="CanvasLayer" parent="." index="1"]
+layer = 3
+visible = false
+
+[node name="EditorPauseManager" type="Node" parent="EditorPauseLayer" index="0" node_paths=PackedStringArray("editorMan", "popUpGroup", "musicPreviewPlayer", "pauseAni", "gameMan", "screenContainer")]
+script = ExtResource("2_v05gp")
+editorMan = NodePath("../../EditorManager")
+popUpGroup = NodePath("../PopUpGroup")
+musicPreviewPlayer = NodePath("../../MusicPreviewPlayer")
+pauseAni = NodePath("../EditorPauseAniPlayer")
+gameMan = NodePath("../../GameManager")
+screenContainer = NodePath("../ScreenCentre/ScreenContainer")
+
+[node name="Background" type="Control" parent="EditorPauseLayer" index="1"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="EditorPauseLayer/Background" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.27451)
+
+[node name="Blur" type="ColorRect" parent="EditorPauseLayer/Background" index="1"]
+material = ExtResource("3_ch1cv")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ScreenCentre" type="Control" parent="EditorPauseLayer" index="2"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ScreenContainer" type="Control" parent="EditorPauseLayer/ScreenCentre" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SaveScreen" type="Control" parent="EditorPauseLayer/ScreenCentre/ScreenContainer" index="0" node_paths=PackedStringArray("InitialHoverNode")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_wfo3c")
+InitialHoverNode = NodePath("VBoxContainer/SaveButton")
+
+[node name="PauseTitle" type="Label" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -55.0
+offset_right = 36.0
+offset_bottom = -47.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_hdt4s")
+theme_override_font_sizes/font_size = 8
+text = "SAVE MENU"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen" index="1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -40.0
+offset_right = 72.0
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+metadata/_edit_group_ = true
+
+[node name="LevelNameBox" type="LineEdit" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer" index="0"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+placeholder_text = "Untitled"
+max_length = 32
+script = ExtResource("6_afx88")
+commonGameSettings = ExtResource("9_ljri1")
+
+[node name="Divider" type="Control" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer" index="1"]
+custom_minimum_size = Vector2(0, 9)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/Divider" index="0"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.745098)
+
+[node name="SaveButton" type="Button" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer" index="2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_hdt4s")
+theme_override_font_sizes/font_size = 8
+text = "SAVE"
+
+[node name="SaveAndQuitButton" type="Button" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer" index="3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_hdt4s")
+theme_override_font_sizes/font_size = 8
+text = "SAVE & QUIT"
+
+[node name="QuitButton" type="Button" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer" index="4"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_hdt4s")
+theme_override_font_sizes/font_size = 8
+text = "QUIT WITHOUT SAVE"
+
+[node name="SettingsButton" type="Button" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen" index="2"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -79.0
+offset_top = -29.0
+offset_right = -7.0
+offset_bottom = -7.0
+grow_horizontal = 0
+grow_vertical = 0
+focus_neighbor_right = NodePath("../VBoxContainer/Button2")
+text = "SETTINGS"
+
+[node name="BackButton" type="Button" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen" index="3"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = -29.0
+offset_right = 71.0
+offset_bottom = -7.0
+grow_vertical = 0
+focus_neighbor_right = NodePath("../VBoxContainer/Button2")
+text = "BACK"
+icon = ExtResource("5_ei750")
+
+[node name="QuitConfirmationScreen" type="Control" parent="EditorPauseLayer/ScreenCentre/ScreenContainer" index="1" node_paths=PackedStringArray("InitialHoverNode")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -48.0
+offset_right = 46.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_wfo3c")
+InitialHoverNode = NodePath("VBoxContainer/NoButton")
+
+[node name="Title" type="Label" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/QuitConfirmationScreen" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -21.0
+offset_right = 80.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_hdt4s")
+theme_override_font_sizes/font_size = 8
+text = "Quit without saving?"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/QuitConfirmationScreen" index="1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -6.0
+offset_right = 36.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+metadata/_edit_group_ = true
+
+[node name="YesButton" type="Button" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/QuitConfirmationScreen/VBoxContainer" index="0"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_hdt4s")
+theme_override_font_sizes/font_size = 8
+text = "YES"
+
+[node name="NoButton" type="Button" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/QuitConfirmationScreen/VBoxContainer" index="1"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_hdt4s")
+theme_override_font_sizes/font_size = 8
+text = "NO"
+
+[node name="MusicScreen" parent="EditorPauseLayer/ScreenCentre/ScreenContainer" index="2" instance=ExtResource("2_p06dh")]
+visible = false
+layout_mode = 1
+
+[node name="SongCategoryContainer" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/MusicScreen" index="1" node_paths=PackedStringArray("screenMan", "musicPreviewPlayer")]
+screenMan = NodePath("../../../../EditorPauseManager")
+musicPreviewPlayer = NodePath("../../../../../MusicPreviewPlayer")
+settingName = &"CustomLevelMusic"
+
+[node name="LevelSettingsScreen" type="Control" parent="EditorPauseLayer/ScreenCentre/ScreenContainer" index="3" node_paths=PackedStringArray("InitialHoverNode")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_yts8l")
+UseRecursiveSearch = true
+InitialHoverNode = NodePath("SettingsContainer/BoxContainer/GameplayStyle/PopUpButton")
+
+[node name="Title" type="Label" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen" index="0"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -92.0
+offset_top = 10.0
+offset_right = 91.0
+offset_bottom = 18.0
+grow_horizontal = 2
+text = "LEVEL CONFIG"
+horizontal_alignment = 1
+
+[node name="SettingsContainer" type="ScrollContainer" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen" index="1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = -86.0
+offset_right = 112.0
+offset_bottom = 79.0
+grow_horizontal = 2
+grow_vertical = 2
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="BoxContainer" type="BoxContainer" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+vertical = true
+
+[node name="GameplayStyle" type="Control" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer" index="0"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="GameplayLabel" type="Label" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/GameplayStyle" index="0"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 4.0
+offset_right = 113.0
+offset_bottom = 12.0
+text = "Gameplay Style"
+
+[node name="PopUpButton" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/GameplayStyle" index="1" node_paths=PackedStringArray("popUpGroup") instance=ExtResource("11_j7upk")]
+layout_mode = 1
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 116.0
+offset_top = 1.0
+offset_right = 128.0
+offset_bottom = 15.0
+grow_horizontal = 1
+grow_vertical = 1
+title = "GAMEPLAY STYLE"
+description = "Modern: Has hold slot and generous lock delay
+
+Classic: Gameplay closer to older Dr. Mario games
+
+Quad: Modern with 4 colours
+
+Items: Modern with power-ups
+
+Custom: Use custom game rules"
+alignDescToLeft = true
+popUpGroup = NodePath("../../../../../../../PopUpGroup")
+
+[node name="GameplayScrollContainer" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/GameplayStyle" index="2" instance=ExtResource("10_hpr3b")]
+layout_mode = 1
+anchors_preset = 10
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 16.0
+offset_right = 0.0
+offset_bottom = 42.0
+grow_vertical = 1
+
+[node name="Button3" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/GameplayStyle/GameplayScrollContainer/MarginContainer/GameplayContainer" index="2"]
+visible = false
+
+[node name="FallSpeed" type="Control" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer" index="1"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="FallSpeedLabel" type="Label" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/FallSpeed" index="0"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 81.0
+offset_bottom = 9.0
+text = "Fall Speed"
+
+[node name="FallSpeedContainer" type="BoxContainer" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/FallSpeed" index="1" node_paths=PackedStringArray("themePreview", "gameThemer")]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 14.0
+offset_bottom = 30.0
+grow_horizontal = 2
+alignment = 1
+script = ExtResource("11_if8ix")
+themePreview = NodePath("../../Theme/ThemePreview")
+gameThemer = NodePath("../../../../../../../../GameThemer")
+settingName = &"SpeedLevel"
+commonGameSettings = ExtResource("9_ljri1")
+metadata/_edit_group_ = true
+
+[node name="Button" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/FallSpeed/FallSpeedContainer" index="0" instance=ExtResource("10_ngkki")]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+button_pressed = true
+text = "LOW"
+
+[node name="Button2" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/FallSpeed/FallSpeedContainer" index="1" instance=ExtResource("10_ngkki")]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "MEDIUM"
+value = 1
+
+[node name="Button3" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/FallSpeed/FallSpeedContainer" index="2" instance=ExtResource("10_ngkki")]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "HIGH"
+value = 2
+
+[node name="Theme" type="Control" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer" index="2"]
+custom_minimum_size = Vector2(0, 76)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ThemeLabel" type="Label" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Theme" index="0"]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 40.0
+offset_bottom = 9.0
+text = "Theme"
+
+[node name="ThemePreview" type="Control" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Theme" index="1" node_paths=PackedStringArray("bg", "jar", "virus", "pill", "pill2")]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -96.0
+offset_top = 13.0
+offset_bottom = 77.0
+grow_horizontal = 0
+mouse_filter = 2
+script = ExtResource("12_tbay8")
+bg = NodePath("BG")
+jar = NodePath("Jar")
+virus = NodePath("Virus")
+pill = NodePath("Pill")
+pill2 = NodePath("Pill2")
+useSpeedBg = true
+themeList = ExtResource("13_mykto")
+commonGameSettings = ExtResource("9_ljri1")
+metadata/_edit_group_ = true
+
+[node name="BG" type="TextureRect" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Theme/ThemePreview" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_snxut")
+stretch_mode = 1
+
+[node name="Jar" type="TextureRect" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Theme/ThemePreview" index="1"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = -8.0
+offset_right = 88.0
+offset_bottom = 168.0
+texture = ExtResource("15_6tw3r")
+
+[node name="Virus" type="Sprite2D" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Theme/ThemePreview" index="2"]
+position = Vector2(32, 48)
+scale = Vector2(2, 2)
+texture = ExtResource("3_6i3kl")
+hframes = 3
+vframes = 10
+frame = 3
+
+[node name="Pill" type="Sprite2D" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Theme/ThemePreview" index="3"]
+position = Vector2(50, 48)
+scale = Vector2(2, 2)
+texture = ExtResource("17_bppd6")
+hframes = 6
+vframes = 10
+frame = 12
+
+[node name="Pill2" type="Sprite2D" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Theme/ThemePreview" index="4"]
+position = Vector2(66, 48)
+scale = Vector2(2, 2)
+texture = ExtResource("17_bppd6")
+hframes = 6
+vframes = 10
+frame = 1
+
+[node name="ThemeScrollContainer" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Theme" index="2" instance=ExtResource("12_7nw2i")]
+layout_mode = 1
+anchors_preset = 15
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 13.0
+offset_right = -97.0
+offset_bottom = 1.0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 1
+
+[node name="ThemeContainer" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Theme/ThemeScrollContainer/MarginContainer" index="0" node_paths=PackedStringArray("themePreview", "gameThemer")]
+vertical = true
+themePreview = NodePath("../../../ThemePreview")
+gameThemer = NodePath("../../../../../../../../../../GameThemer")
+settingName = &"CustomLevelTheme"
+
+[node name="Music" type="Control" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer" index="3"]
+custom_minimum_size = Vector2(0, 31)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MusicLabel" type="Label" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Music" index="0"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 41.0
+offset_bottom = 9.0
+text = "Music"
+
+[node name="MusicContainer" type="BoxContainer" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Music" index="1" node_paths=PackedStringArray("fallBackHighlightButton")]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 1.0
+offset_top = 14.0
+offset_right = -2.0
+offset_bottom = 30.0
+grow_horizontal = 2
+alignment = 1
+script = ExtResource("8_ieu3j")
+settingName = &"CustomLevelMusic"
+isCommonSetting = true
+commonGameSettings = ExtResource("9_ljri1")
+fallBackHighlightButton = NodePath("Button3")
+metadata/_edit_group_ = true
+
+[node name="Button" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Music/MusicContainer" index="0" instance=ExtResource("10_ngkki")]
+layout_mode = 2
+button_pressed = true
+text = "FEVER"
+value = -1
+
+[node name="Button2" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Music/MusicContainer" index="1" instance=ExtResource("10_ngkki")]
+layout_mode = 2
+text = "CHILL"
+value = -2
+
+[node name="Button3" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Music/MusicContainer" index="2" instance=ExtResource("10_ngkki")]
+layout_mode = 2
+text = "MORE!"
+value = -3
+
+[node name="Button5" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Music/MusicContainer" index="3" instance=ExtResource("10_ngkki")]
+layout_mode = 2
+text = "??"
+value = -4
+
+[node name="Button4" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Music/MusicContainer" index="4" instance=ExtResource("10_ngkki")]
+layout_mode = 2
+text = "OFF"
+
+[node name="BackButton" type="Button" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen" index="2"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = -29.0
+offset_right = 77.0
+offset_bottom = -7.0
+grow_vertical = 0
+text = "BACK"
+icon = ExtResource("5_ei750")
+
+[node name="AdvancedGameplayScreen" parent="EditorPauseLayer/ScreenCentre/ScreenContainer" index="4" node_paths=PackedStringArray("popUpGroup", "InitialHoverNode") instance=ExtResource("7_78srm")]
+visible = false
+layout_mode = 1
+popUpGroup = NodePath("../../../PopUpGroup")
+InitialHoverNode = NodePath("SettingsContainer/BoxContainer/Streak/PopUpButton")
+
+[node name="Colour" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer" index="0"]
+visible = false
+
+[node name="Streak" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer" index="1"]
+custom_minimum_size = Vector2(0, 29)
+
+[node name="StreakLabel" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer/Streak" index="0"]
+offset_top = 4.0
+offset_bottom = 12.0
+
+[node name="PopUpButton" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer/Streak" index="1" node_paths=PackedStringArray("popUpGroup")]
+offset_top = 1.0
+offset_bottom = 15.0
+focus_neighbor_top = NodePath("")
+popUpGroup = NodePath("../../../../../../../PopUpGroup")
+
+[node name="StreakSlider" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer/Streak" index="2"]
+offset_top = 15.0
+offset_bottom = 33.0
+
+[node name="PopUpButton" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer/PowerUps" index="1" node_paths=PackedStringArray("popUpGroup")]
+popUpGroup = NodePath("../../../../../../../PopUpGroup")
+
+[node name="PopUpButton" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer/PowerUpMeter" index="1" node_paths=PackedStringArray("popUpGroup")]
+popUpGroup = NodePath("../../../../../../../PopUpGroup")
+
+[node name="PopUpButton" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer/Hold" index="2" node_paths=PackedStringArray("popUpGroup")]
+popUpGroup = NodePath("../../../../../../../PopUpGroup")
+
+[node name="PopUpButton" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer/LockDelay" index="2" node_paths=PackedStringArray("popUpGroup")]
+popUpGroup = NodePath("../../../../../../../PopUpGroup")
+
+[node name="PopUpButton" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer/FixedFallSpeed" index="2" node_paths=PackedStringArray("popUpGroup")]
+popUpGroup = NodePath("../../../../../../../PopUpGroup")
+
+[node name="PopUpButton" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer/SingleColourPills" index="2" node_paths=PackedStringArray("popUpGroup")]
+popUpGroup = NodePath("../../../../../../../PopUpGroup")
+
+[node name="PopUpButton" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer/SoftDrop" index="2" node_paths=PackedStringArray("popUpGroup")]
+popUpGroup = NodePath("../../../../../../../PopUpGroup")
+
+[node name="PopUpButton" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer/SoftDropLock" index="2" node_paths=PackedStringArray("popUpGroup")]
+popUpGroup = NodePath("../../../../../../../PopUpGroup")
+
+[node name="PopUpButton" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer/MatchCheck" index="2" node_paths=PackedStringArray("popUpGroup")]
+popUpGroup = NodePath("../../../../../../../PopUpGroup")
+
+[node name="PopUpButton" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer/FasterAutoFall" index="2" node_paths=PackedStringArray("popUpGroup")]
+popUpGroup = NodePath("../../../../../../../PopUpGroup")
+
+[node name="SettingsScreen" parent="EditorPauseLayer/ScreenCentre/ScreenContainer" index="5" instance=ExtResource("22_4ru8j")]
+visible = false
+layout_mode = 1
+
+[node name="Button" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/TabButtons" index="0"]
+button_group = SubResource("ButtonGroup_3u7qh")
+
+[node name="Button2" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/TabButtons" index="1"]
+button_group = SubResource("ButtonGroup_3u7qh")
+
+[node name="Button3" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/TabButtons" index="2"]
+button_group = SubResource("ButtonGroup_3u7qh")
+
+[node name="Label" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3" index="0"]
+visible = true
+
+[node name="OverrideColoursPanel" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3" index="1"]
+visible = false
+
+[node name="Button" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="0"]
+button_group = SubResource("ButtonGroup_agiio")
+
+[node name="Button2" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="1"]
+button_group = SubResource("ButtonGroup_agiio")
+
+[node name="Button3" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="2"]
+button_group = SubResource("ButtonGroup_agiio")
+
+[node name="Button4" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="3"]
+button_group = SubResource("ButtonGroup_agiio")
+
+[node name="PopUpGroup" parent="EditorPauseLayer" index="3" node_paths=PackedStringArray("screenMan") instance=ExtResource("24_ngsmh")]
+screenMan = NodePath("../EditorPauseManager")
+
+[node name="EditorPauseAniPlayer" type="AnimationPlayer" parent="EditorPauseLayer" index="4"]
+libraries = {
+"": SubResource("AnimationLibrary_v3bw1")
+}
+
+[node name="GameThemer" parent="." index="5" node_paths=PackedStringArray("editorCursor", "tileTypeSelector", "colourSelector")]
+editorCursor = NodePath("../GameLayer/EditorCursor")
+tileTypeSelector = NodePath("../EditorUILayer/TopToolbar/TileTypeSelector")
+colourSelector = NodePath("../EditorUILayer/TopToolbar/ColourSelector")
+
+[node name="GameManager" parent="." index="6" node_paths=PackedStringArray("editorMan")]
+editorMan = NodePath("../EditorManager")
+
+[node name="EditorManager" type="Node" parent="." index="7" node_paths=PackedStringArray("editorPauseMan", "undoRedoMan", "cursor", "drawingToolSelector", "editorUILayer", "colourSelector", "tileTypeSelector", "gameMan", "gameThemer", "sfxMan", "musicMan", "touchControlsMan")]
+script = ExtResource("2_tonjn")
+editorPauseMan = NodePath("../EditorPauseLayer/EditorPauseManager")
+undoRedoMan = NodePath("../UndoRedoManager")
+cursor = NodePath("../GameLayer/EditorCursor")
+drawingToolSelector = NodePath("../EditorUILayer/LeftSideToolbar/ColorRect/DrawingToolSelector")
+editorUILayer = NodePath("../EditorUILayer")
+colourSelector = NodePath("../EditorUILayer/TopToolbar/ColourSelector")
+tileTypeSelector = NodePath("../EditorUILayer/TopToolbar/TileTypeSelector")
+gameMan = NodePath("../GameManager")
+gameThemer = NodePath("../GameThemer")
+sfxMan = NodePath("../SfxManager")
+musicMan = NodePath("../MusicPlayer")
+touchControlsMan = NodePath("../TouchLayer")
+commonGameSettings = ExtResource("9_ljri1")
+userCustomLevelList = ExtResource("22_h7pql")
+
+[node name="UndoRedoManager" type="Node" parent="." index="8" node_paths=PackedStringArray("gameMan", "editorMan", "cursor")]
+script = ExtResource("3_lu7lp")
+gameMan = NodePath("../GameManager")
+editorMan = NodePath("../EditorManager")
+cursor = NodePath("../GameLayer/EditorCursor")
+
+[node name="MusicPreviewPlayer" parent="." index="10" instance=ExtResource("29_pwdah")]
+bus = &"Music"
+
+[node name="EditorUILayer" type="CanvasLayer" parent="." index="11"]
+layer = 2
+
+[node name="LeftSideToolbar" type="Control" parent="EditorUILayer" index="0"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -42.0
+offset_right = -42.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="EditorUILayer/LeftSideToolbar" index="0"]
+self_modulate = Color(1, 1, 1, 0.498039)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="DrawingToolSelector" type="FlowContainer" parent="EditorUILayer/LeftSideToolbar/ColorRect" index="0" node_paths=PackedStringArray("editorMan")]
+layout_mode = 1
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 18.0
+offset_bottom = 83.0
+theme_override_constants/h_separation = 1
+theme_override_constants/v_separation = 1
+alignment = 1
+script = ExtResource("4_5hitg")
+inputNames = Array[StringName]([&"EditorToolPlace", &"EditorToolDelete", &"EditorToolSelect", &"EditorToolDuplicate", &"EditorToolColourPicker"])
+editorMan = NodePath("../../../../EditorManager")
+metadata/_edit_group_ = true
+
+[node name="Button" type="Button" parent="EditorUILayer/LeftSideToolbar/ColorRect/DrawingToolSelector" index="0"]
+custom_minimum_size = Vector2(14, 15)
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7hvga")
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_2iqrs")
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUILayer/LeftSideToolbar/ColorRect/DrawingToolSelector/Button" index="0"]
+position = Vector2(7, 7)
+texture = ExtResource("5_ompws")
+hframes = 5
+
+[node name="Button2" type="Button" parent="EditorUILayer/LeftSideToolbar/ColorRect/DrawingToolSelector" index="1"]
+custom_minimum_size = Vector2(14, 15)
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7hvga")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_2iqrs")
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUILayer/LeftSideToolbar/ColorRect/DrawingToolSelector/Button2" index="0"]
+position = Vector2(7, 7)
+texture = ExtResource("5_ompws")
+hframes = 5
+frame = 1
+
+[node name="Button3" type="Button" parent="EditorUILayer/LeftSideToolbar/ColorRect/DrawingToolSelector" index="2"]
+custom_minimum_size = Vector2(14, 15)
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7hvga")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_2iqrs")
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUILayer/LeftSideToolbar/ColorRect/DrawingToolSelector/Button3" index="0"]
+position = Vector2(7, 7)
+texture = ExtResource("5_ompws")
+hframes = 5
+frame = 2
+
+[node name="Button4" type="Button" parent="EditorUILayer/LeftSideToolbar/ColorRect/DrawingToolSelector" index="3"]
+custom_minimum_size = Vector2(14, 15)
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7hvga")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_2iqrs")
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUILayer/LeftSideToolbar/ColorRect/DrawingToolSelector/Button4" index="0"]
+position = Vector2(7, 7)
+texture = ExtResource("5_ompws")
+hframes = 5
+frame = 3
+
+[node name="Button5" type="Button" parent="EditorUILayer/LeftSideToolbar/ColorRect/DrawingToolSelector" index="4"]
+custom_minimum_size = Vector2(14, 15)
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7hvga")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_2iqrs")
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUILayer/LeftSideToolbar/ColorRect/DrawingToolSelector/Button5" index="0"]
+position = Vector2(7, 7)
+texture = ExtResource("5_ompws")
+hframes = 5
+frame = 4
+
+[node name="DrawingStyleSelector" type="FlowContainer" parent="EditorUILayer/LeftSideToolbar/ColorRect" index="1"]
+layout_mode = 1
+offset_left = 20.0
+offset_top = 4.0
+offset_right = 34.0
+offset_bottom = 83.0
+theme_override_constants/h_separation = 1
+theme_override_constants/v_separation = 1
+alignment = 1
+script = ExtResource("2_g5ukp")
+metadata/_edit_group_ = true
+
+[node name="Button" type="Button" parent="EditorUILayer/LeftSideToolbar/ColorRect/DrawingStyleSelector" index="0"]
+custom_minimum_size = Vector2(14, 15)
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7hvga")
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_c0egn")
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUILayer/LeftSideToolbar/ColorRect/DrawingStyleSelector/Button" index="0"]
+position = Vector2(7, 7)
+texture = ExtResource("2_ydxxe")
+hframes = 5
+
+[node name="Button2" type="Button" parent="EditorUILayer/LeftSideToolbar/ColorRect/DrawingStyleSelector" index="1"]
+custom_minimum_size = Vector2(14, 15)
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7hvga")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_c0egn")
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUILayer/LeftSideToolbar/ColorRect/DrawingStyleSelector/Button2" index="0"]
+position = Vector2(7, 7)
+texture = ExtResource("2_ydxxe")
+hframes = 5
+frame = 1
+
+[node name="Button3" type="Button" parent="EditorUILayer/LeftSideToolbar/ColorRect/DrawingStyleSelector" index="2"]
+custom_minimum_size = Vector2(14, 15)
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7hvga")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_c0egn")
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUILayer/LeftSideToolbar/ColorRect/DrawingStyleSelector/Button3" index="0"]
+position = Vector2(7, 7)
+texture = ExtResource("2_ydxxe")
+hframes = 5
+frame = 2
+
+[node name="Button4" type="Button" parent="EditorUILayer/LeftSideToolbar/ColorRect/DrawingStyleSelector" index="3"]
+custom_minimum_size = Vector2(14, 15)
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7hvga")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_c0egn")
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUILayer/LeftSideToolbar/ColorRect/DrawingStyleSelector/Button4" index="0"]
+position = Vector2(7, 7)
+texture = ExtResource("2_ydxxe")
+hframes = 5
+frame = 3
+
+[node name="Button5" type="Button" parent="EditorUILayer/LeftSideToolbar/ColorRect/DrawingStyleSelector" index="4"]
+custom_minimum_size = Vector2(14, 15)
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7hvga")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_c0egn")
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUILayer/LeftSideToolbar/ColorRect/DrawingStyleSelector/Button5" index="0"]
+position = Vector2(7, 7)
+texture = ExtResource("2_ydxxe")
+hframes = 5
+frame = 4
+
+[node name="BottomToolbar" type="Control" parent="EditorUILayer" index="1"]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="EditorUILayer/BottomToolbar" index="0"]
+self_modulate = Color(1, 1, 1, 0.498039)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="RedoButton" type="Button" parent="EditorUILayer/BottomToolbar" index="1"]
+custom_minimum_size = Vector2(14, 15)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -19.0
+offset_right = 21.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7hvga")
+script = ExtResource("13_hyfa0")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUILayer/BottomToolbar/RedoButton" index="0"]
+position = Vector2(10, 7)
+texture = ExtResource("13_iq6qk")
+hframes = 2
+frame = 1
+
+[node name="UndoButton" type="Button" parent="EditorUILayer/BottomToolbar" index="2"]
+custom_minimum_size = Vector2(14, 15)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -21.0
+offset_top = -19.0
+offset_right = -1.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7hvga")
+script = ExtResource("13_hyfa0")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUILayer/BottomToolbar/UndoButton" index="0"]
+position = Vector2(10, 7)
+texture = ExtResource("13_iq6qk")
+hframes = 2
+
+[node name="LevelSettingsButton" type="Button" parent="EditorUILayer/BottomToolbar" index="3"]
+custom_minimum_size = Vector2(14, 15)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -20.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7hvga")
+text = "CONFIG"
+metadata/_edit_group_ = true
+
+[node name="PlayButton" type="Button" parent="EditorUILayer/BottomToolbar" index="4"]
+custom_minimum_size = Vector2(14, 15)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -20.0
+offset_right = 56.0
+offset_bottom = -4.0
+grow_vertical = 0
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7hvga")
+text = "TEST"
+icon = ExtResource("35_fosab")
+metadata/_edit_group_ = true
+
+[node name="TopToolbar" type="Control" parent="EditorUILayer" index="2"]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 32.0
+grow_horizontal = 2
+
+[node name="ColorRect" type="ColorRect" parent="EditorUILayer/TopToolbar" index="0"]
+self_modulate = Color(1, 1, 1, 0.498039)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="TileTypeSelector" type="FlowContainer" parent="EditorUILayer/TopToolbar" index="1" node_paths=PackedStringArray("colourSelector", "firstButton", "cursor", "drawingToolSelector", "editorMan")]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 1.0
+offset_bottom = 15.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 1
+theme_override_constants/v_separation = 1
+alignment = 1
+script = ExtResource("2_xon2s")
+colourSelector = NodePath("../ColourSelector")
+virusTexture = ExtResource("3_6i3kl")
+powerUpTexture = ExtResource("40_s6gkj")
+firstButton = NodePath("Button")
+cursor = NodePath("../../../GameLayer/EditorCursor")
+drawingToolSelector = NodePath("../../LeftSideToolbar/ColorRect/DrawingToolSelector")
+inputNames = Array[StringName]([])
+backwardsInput = &"EditorTileTypePrev"
+forwardsInput = &"EditorTileTypeNext"
+editorMan = NodePath("../../../EditorManager")
+metadata/_edit_group_ = true
+
+[node name="Button" type="Button" parent="EditorUILayer/TopToolbar/TileTypeSelector" index="0"]
+custom_minimum_size = Vector2(13, 14)
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7hvga")
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_6wdwj")
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUILayer/TopToolbar/TileTypeSelector/Button" index="0"]
+position = Vector2(7, 7)
+texture = ExtResource("3_6i3kl")
+hframes = 3
+vframes = 10
+
+[node name="ColourSelector" type="FlowContainer" parent="EditorUILayer/TopToolbar" index="2" node_paths=PackedStringArray("tileSelector", "firstButton", "cursor", "drawingToolSelector", "editorMan")]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 17.0
+offset_bottom = 31.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 1
+theme_override_constants/v_separation = 1
+alignment = 1
+script = ExtResource("5_6i5u8")
+tileSelector = NodePath("../TileTypeSelector")
+virusTexture = ExtResource("3_6i3kl")
+powerUpTexture = ExtResource("40_s6gkj")
+firstButton = NodePath("Button")
+cursor = NodePath("../../../GameLayer/EditorCursor")
+drawingToolSelector = NodePath("../../LeftSideToolbar/ColorRect/DrawingToolSelector")
+inputNames = Array[StringName]([&"Editor1", &"Editor2", &"Editor3", &"Editor4", &"Editor5", &"Editor6", &"Editor7", &"Editor8", &"Editor9", &"Editor0"])
+backwardsInput = &"EditorColourPrev"
+forwardsInput = &"EditorColourNext"
+ignoreBackwardsInput = &"EditorTileTypePrev"
+ignoreForwardsInput = &"EditorTileTypeNext"
+editorMan = NodePath("../../../EditorManager")
+metadata/_edit_group_ = true
+
+[node name="Button" type="Button" parent="EditorUILayer/TopToolbar/ColourSelector" index="0"]
+custom_minimum_size = Vector2(13, 14)
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7hvga")
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_qyv4c")
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUILayer/TopToolbar/ColourSelector/Button" index="0"]
+position = Vector2(7, 7)
+texture = ExtResource("3_6i3kl")
+hframes = 3
+vframes = 10
+
+[node name="SaveButton" type="Button" parent="EditorUILayer/TopToolbar" index="3"]
+custom_minimum_size = Vector2(14, 15)
+layout_mode = 1
+offset_left = 7.0
+offset_top = 8.0
+offset_right = 47.0
+offset_bottom = 24.0
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7hvga")
+text = "SAVE"
+metadata/_edit_group_ = true
+
+[node name="ResetButton" type="Button" parent="EditorUILayer/TopToolbar" index="4" node_paths=PackedStringArray("sprite", "gameMan", "editorMan", "undoRedoMan")]
+custom_minimum_size = Vector2(14, 15)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -27.0
+offset_top = 8.0
+offset_right = -7.0
+offset_bottom = 23.0
+grow_horizontal = 0
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7hvga")
+script = ExtResource("8_pskj7")
+sprite = NodePath("Sprite2D")
+gameMan = NodePath("../../../GameManager")
+editorMan = NodePath("../../../EditorManager")
+undoRedoMan = NodePath("../../../UndoRedoManager")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUILayer/TopToolbar/ResetButton" index="0"]
+position = Vector2(10, 7)
+texture = ExtResource("9_nsotx")
+hframes = 4
+
+[node name="EditorCursor" type="Node2D" parent="GameLayer" index="1" node_paths=PackedStringArray("sprite", "gameMan", "editorMan", "undoRedoMan", "toolSelector", "styleSelector")]
+z_index = 1
+script = ExtResource("2_gugl5")
+virusTexture = ExtResource("3_6i3kl")
+powerUpTexture = ExtResource("40_s6gkj")
+toolPreviewTexture = ExtResource("14_tpaje")
+sprite = NodePath("Sprite2D")
+gameMan = NodePath("../../GameManager")
+editorMan = NodePath("../../EditorManager")
+undoRedoMan = NodePath("../../UndoRedoManager")
+toolSelector = NodePath("../../EditorUILayer/LeftSideToolbar/ColorRect/DrawingToolSelector")
+styleSelector = NodePath("../../EditorUILayer/LeftSideToolbar/ColorRect/DrawingStyleSelector")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="GameLayer/EditorCursor" index="0"]
+texture = ExtResource("3_6i3kl")
+hframes = 3
+vframes = 10
+
+[connection signal="text_changed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/LevelNameBox" to="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/LevelNameBox" method="UpdateLevelName"]
+[connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/SaveButton" to="EditorPauseLayer/EditorPauseManager" method="GoBack"]
+[connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/SaveButton" to="EditorManager" method="SaveLevel"]
+[connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/SaveAndQuitButton" to="EditorManager" method="SaveLevelAndQuit"]
+[connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/QuitButton" to="EditorPauseLayer/EditorPauseManager" method="SetScreen" binds= [1]]
+[connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/SettingsButton" to="EditorPauseLayer/EditorPauseManager" method="SetScreen" binds= [5]]
+[connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/BackButton" to="EditorPauseLayer/EditorPauseManager" method="GoBack"]
+[connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/QuitConfirmationScreen/VBoxContainer/YesButton" to="GameManager" method="QuitGame"]
+[connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/QuitConfirmationScreen/VBoxContainer/NoButton" to="EditorPauseLayer/EditorPauseManager" method="GoBack"]
+[connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/GameplayStyle/GameplayScrollContainer/MarginContainer/GameplayContainer/Button4" to="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen" method="RefreshUpdateableSettingScreenValues"]
+[connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/GameplayStyle/GameplayScrollContainer/MarginContainer/GameplayContainer/Button4" to="EditorPauseLayer/EditorPauseManager" method="SetScreen" binds= [4]]
+[connection signal="focus_entered" from="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Music/MusicContainer/Button" to="MusicPreviewPlayer" method="SetPreviewMusic" binds= [-1]]
+[connection signal="focus_entered" from="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Music/MusicContainer/Button2" to="MusicPreviewPlayer" method="SetPreviewMusic" binds= [-2]]
+[connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Music/MusicContainer/Button3" to="EditorPauseLayer/ScreenCentre/ScreenContainer/MusicScreen/SongCategoryContainer" method="UpdateVisuals"]
+[connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Music/MusicContainer/Button3" to="EditorPauseLayer/EditorPauseManager" method="SetScreen" binds= [2]]
+[connection signal="focus_entered" from="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Music/MusicContainer/Button4" to="MusicPreviewPlayer" method="SetPreviewMusic" binds= [0]]
+[connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/BackButton" to="EditorPauseLayer/EditorPauseManager" method="GoBack"]
+[connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/OkButton" to="EditorPauseLayer/EditorPauseManager" method="GoBack"]
+[connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/BackButton" to="EditorPauseLayer/EditorPauseManager" method="GoBack"]
+[connection signal="pressed" from="EditorUILayer/LeftSideToolbar/ColorRect/DrawingToolSelector/Button" to="GameLayer/EditorCursor" method="SetDrawingTool" binds= [0]]
+[connection signal="pressed" from="EditorUILayer/LeftSideToolbar/ColorRect/DrawingToolSelector/Button2" to="GameLayer/EditorCursor" method="SetDrawingTool" binds= [1]]
+[connection signal="pressed" from="EditorUILayer/LeftSideToolbar/ColorRect/DrawingToolSelector/Button3" to="GameLayer/EditorCursor" method="SetDrawingTool" binds= [2]]
+[connection signal="pressed" from="EditorUILayer/LeftSideToolbar/ColorRect/DrawingToolSelector/Button4" to="GameLayer/EditorCursor" method="SetDrawingTool" binds= [3]]
+[connection signal="pressed" from="EditorUILayer/LeftSideToolbar/ColorRect/DrawingToolSelector/Button5" to="GameLayer/EditorCursor" method="SetDrawingTool" binds= [4]]
+[connection signal="pressed" from="EditorUILayer/LeftSideToolbar/ColorRect/DrawingStyleSelector/Button" to="GameLayer/EditorCursor" method="SetDrawingStyle" binds= [0]]
+[connection signal="pressed" from="EditorUILayer/LeftSideToolbar/ColorRect/DrawingStyleSelector/Button2" to="GameLayer/EditorCursor" method="SetDrawingStyle" binds= [1]]
+[connection signal="pressed" from="EditorUILayer/LeftSideToolbar/ColorRect/DrawingStyleSelector/Button3" to="GameLayer/EditorCursor" method="SetDrawingStyle" binds= [2]]
+[connection signal="pressed" from="EditorUILayer/LeftSideToolbar/ColorRect/DrawingStyleSelector/Button4" to="GameLayer/EditorCursor" method="SetDrawingStyle" binds= [3]]
+[connection signal="pressed" from="EditorUILayer/LeftSideToolbar/ColorRect/DrawingStyleSelector/Button5" to="GameLayer/EditorCursor" method="SetDrawingStyle" binds= [4]]
+[connection signal="pressed" from="EditorUILayer/BottomToolbar/RedoButton" to="UndoRedoManager" method="Redo"]
+[connection signal="pressed" from="EditorUILayer/BottomToolbar/UndoButton" to="UndoRedoManager" method="Undo"]
+[connection signal="pressed" from="EditorUILayer/BottomToolbar/LevelSettingsButton" to="EditorManager" method="OpenPauseScreen" binds= [3]]
+[connection signal="pressed" from="EditorUILayer/BottomToolbar/PlayButton" to="EditorManager" method="PlayTest"]
+[connection signal="pressed" from="EditorUILayer/TopToolbar/SaveButton" to="EditorManager" method="OpenPauseScreen" binds= [0.0]]
+[connection signal="button_down" from="EditorUILayer/TopToolbar/ResetButton" to="EditorUILayer/TopToolbar/ResetButton" method="BeginPress"]
+[connection signal="button_up" from="EditorUILayer/TopToolbar/ResetButton" to="EditorUILayer/TopToolbar/ResetButton" method="EndPress"]
+
+[editable path="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen"]
+[editable path="EditorPauseLayer/ScreenCentre/ScreenContainer/MusicScreen"]
+[editable path="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/GameplayStyle/GameplayScrollContainer"]
+[editable path="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Theme/ThemeScrollContainer"]
+[editable path="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen"]
+[editable path="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer/Hold"]
+[editable path="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer/LockDelay"]
+[editable path="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer/FixedFallSpeed"]
+[editable path="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer/SingleColourPills"]
+[editable path="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer/SoftDrop"]
+[editable path="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer/SoftDropLock"]
+[editable path="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer/MatchCheck"]
+[editable path="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer/FasterAutoFall"]
+[editable path="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen"]

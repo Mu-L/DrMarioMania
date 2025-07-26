@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dr1bov2ro2dec"]
+
+[ext_resource type="Script" path="res://Scripts/NotificationManager.cs" id="1_68mpg"]
+[ext_resource type="Resource" uid="uid://cwkwokd34qh80" path="res://Assets/Resources/CommonGameSettings.tres" id="2_2kcn8"]
+
+[node name="SaveAndQuitManager" type="Node"]
+script = ExtResource("1_68mpg")
+commonGameSettings = ExtResource("2_2kcn8")

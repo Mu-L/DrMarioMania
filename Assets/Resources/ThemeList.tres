@@ -1,0 +1,7 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cwxx0untun2hu"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/ThemeList.cs" id="1_avnkq"]
+
+[resource]
+script = ExtResource("1_avnkq")
+themeFolderNames = Array[String](["Modern", "NES", "SNES", "ModernSNES", "GBC", "GB", "GBP", "GBGreyscale", "N64", "WhatsApp"])

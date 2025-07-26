@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://cg3ssstpw3jum"]
+
+[ext_resource type="Script" path="res://Scripts/Menu/GameSettingUI/GameSettingButtonInGroup.cs" id="2_3a1l2"]
+
+[node name="Button" type="Button"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -122.0
+offset_right = -72.0
+offset_bottom = -106.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+toggle_mode = true
+text = "MODERN"
+script = ExtResource("2_3a1l2")

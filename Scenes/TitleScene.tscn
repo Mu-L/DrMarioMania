@@ -1,0 +1,628 @@
+[gd_scene load_steps=28 format=3 uid="uid://ceub54vom5fq0"]
+
+[ext_resource type="AudioStream" uid="uid://c8v3338gs6cbo" path="res://Assets/Audio/Sounds/NES/Land.ogg" id="1_dofet"]
+[ext_resource type="Texture2D" uid="uid://cabal1d13sm0y" path="res://Assets/Sprites/UI/Logo/LogoPill.png" id="1_uec1p"]
+[ext_resource type="AudioStream" uid="uid://bnd7stjdlimp4" path="res://Assets/Audio/Sounds/NES/Thud.ogg" id="1_w0lrv"]
+[ext_resource type="Texture2D" uid="uid://du1kajxucnuk0" path="res://Assets/Sprites/UI/Logo/LogoDrMarioShadow.png" id="2_jcv2n"]
+[ext_resource type="Material" uid="uid://b0u6onr3cki1v" path="res://Assets/Materials/ScrollMaterial.tres" id="2_lgagd"]
+[ext_resource type="Texture2D" uid="uid://comrscse70ehx" path="res://Assets/Sprites/UI/Logo/LogoDrMario.png" id="2_pmocp"]
+[ext_resource type="AudioStream" uid="uid://coikqfk706hsc" path="res://Assets/Audio/Sounds/NES/VirusStunLand.ogg" id="2_q4w2c"]
+[ext_resource type="FontFile" uid="uid://c2e4sl3d40to5" path="res://Assets/Fonts/PressStart2P.ttf" id="2_vm2fe"]
+[ext_resource type="Texture2D" uid="uid://bm6o7rbeg7xou" path="res://Assets/Sprites/BGTitle.png" id="3_2p18k"]
+[ext_resource type="Texture2D" uid="uid://dp3uvibhlh367" path="res://Assets/Sprites/UI/Logo/LogoManiaShadow.png" id="3_b2om6"]
+[ext_resource type="AudioStream" uid="uid://c74lk1hcxrdgv" path="res://Assets/Audio/Sounds/NES/Shine.ogg" id="4_18ylh"]
+[ext_resource type="Texture2D" uid="uid://beq38af1r7csh" path="res://Assets/Sprites/UI/Logo/LogoMania.png" id="4_b5g64"]
+[ext_resource type="Texture2D" uid="uid://xc52k5ksik2e" path="res://Assets/Sprites/UI/Logo/LogoManiaShine.png" id="5_iny71"]
+[ext_resource type="PackedScene" uid="uid://ciycvm6fh6cel" path="res://Assets/Prefabs/PopUpGroup.tscn" id="8_n6d3v"]
+[ext_resource type="PackedScene" uid="uid://blrcky0050ep3" path="res://Assets/Prefabs/ScreenTransition.tscn" id="10_3e8r8"]
+[ext_resource type="AudioStream" uid="uid://don7ccvg8w41o" path="res://Assets/Audio/Music/World/MultiLobby.mp3" id="10_ek7j1"]
+[ext_resource type="Script" path="res://Scripts/TitleManager.cs" id="10_si3tg"]
+[ext_resource type="Resource" uid="uid://cwkwokd34qh80" path="res://Assets/Resources/CommonGameSettings.tres" id="12_hfm7h"]
+[ext_resource type="Resource" uid="uid://31tismb2r7a" path="res://Assets/Resources/UserCustomLevelList.tres" id="13_avuk5"]
+[ext_resource type="Resource" uid="uid://62i3k0vvpg7q" path="res://Assets/Resources/HighScoreList.tres" id="14_lkan4"]
+
+[sub_resource type="Animation" id="Animation_bk65j"]
+resource_name = "FallIn"
+length = 2.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.666667, 0.866667, 1.06667, 1.16667, 1.26667, 1.33333, 1.4),
+"transitions": PackedFloat32Array(2, 0.5, 2, 0.5, 2, 0.5, 2, 0.5),
+"update": 0,
+"values": [Vector2(-94, -192), Vector2(-94, -60), Vector2(-94, -76), Vector2(-94, -60), Vector2(-94, -64), Vector2(-94, -60), Vector2(-94, -61), Vector2(-94, -60)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DrMarioTextShadow:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.666667, 1.06667),
+"transitions": PackedFloat32Array(0.5, 2),
+"update": 0,
+"values": [Vector2(25, 24), Vector2(25, 13)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DrMarioTextShadow/ManiaTextShadow:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.06667, 1.4, 1.53333, 1.66667),
+"transitions": PackedFloat32Array(2, 0.5, 2, 0.5),
+"update": 0,
+"values": [Vector2(23, 7), Vector2(23, 37), Vector2(23, 33), Vector2(23, 37)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("DrMarioTextShadow/ManiaTextShadow:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.06667, 1.26667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("DrMarioTextShadow/ManiaTextShadow/ManiaText/TextShine:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1.53333, 1.86667, 2.16667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-128, -1), Vector2(8, -1), Vector2(160, -1)]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../../StartContainer/StartAniPlayer")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(2.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"FadeIn", -1, 1.0, false],
+"method": &"play"
+}]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../../../MusicPlayer:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 2.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../../../TitleManager")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(2.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [true],
+"method": &"set_process"
+}]
+}
+tracks/9/type = "method"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("../LandSFX")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(1.06667, 1.26667),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/10/type = "method"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("../ShineSFX")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(1.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/11/type = "method"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("../ThudSFX")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0.666667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/12/type = "method"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("../FallSFX")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_3l542"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(14, 32)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DrMarioTextShadow:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(25, 24)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DrMarioTextShadow/ManiaTextShadow:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("DrMarioTextShadow/ManiaTextShadow:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(35, 22)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("DrMarioTextShadow/ManiaTextShadow/ManiaText/TextShine:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-12, -42)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../../../MusicPlayer:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6isiw"]
+_data = {
+"FallIn": SubResource("Animation_bk65j"),
+"RESET": SubResource("Animation_3l542")
+}
+
+[sub_resource type="Animation" id="Animation_0qk8i"]
+resource_name = "FadeIn"
+length = 0.333337
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../..:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../StartAniPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.333333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"Hover", -1, 1.0, false],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_oqj7n"]
+resource_name = "Hover"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(0.5, 2, 0.5, 2, 0.5),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -1), Vector2(0, 0), Vector2(0, 1), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 0, 1), Color(1, 1, 1, 1), Color(1, 1, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../..:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_58pxa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../..:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5fnvw"]
+_data = {
+"FadeIn": SubResource("Animation_0qk8i"),
+"Hover": SubResource("Animation_oqj7n"),
+"RESET": SubResource("Animation_58pxa")
+}
+
+[node name="TitleScene" type="Node2D"]
+modulate = Color(1, 1, 1, 0)
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="LogoContainer" type="Control" parent="UILayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -4.0
+offset_right = 20.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ThudSFX" type="AudioStreamPlayer" parent="UILayer/LogoContainer"]
+stream = ExtResource("1_w0lrv")
+volume_db = -3.0
+bus = &"SFX"
+
+[node name="LandSFX" type="AudioStreamPlayer" parent="UILayer/LogoContainer"]
+stream = ExtResource("1_dofet")
+volume_db = -8.0
+bus = &"SFX"
+
+[node name="FallSFX" type="AudioStreamPlayer" parent="UILayer/LogoContainer"]
+stream = ExtResource("2_q4w2c")
+volume_db = -3.0
+pitch_scale = 0.5
+bus = &"SFX"
+
+[node name="ShineSFX" type="AudioStreamPlayer" parent="UILayer/LogoContainer"]
+stream = ExtResource("4_18ylh")
+volume_db = -4.0
+bus = &"SFX"
+
+[node name="LogoPill" type="TextureRect" parent="UILayer/LogoContainer"]
+layout_mode = 1
+offset_left = 14.0
+offset_top = 32.0
+offset_right = 242.0
+offset_bottom = 118.0
+texture = ExtResource("1_uec1p")
+
+[node name="DrMarioTextShadow" type="TextureRect" parent="UILayer/LogoContainer/LogoPill"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 24.0
+offset_right = 206.0
+offset_bottom = 61.0
+texture = ExtResource("2_jcv2n")
+
+[node name="ManiaTextShadow" type="TextureRect" parent="UILayer/LogoContainer/LogoPill/DrMarioTextShadow"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 35.0
+offset_top = 22.0
+offset_right = 169.0
+offset_bottom = 48.0
+texture = ExtResource("3_b2om6")
+
+[node name="ManiaText" type="TextureRect" parent="UILayer/LogoContainer/LogoPill/DrMarioTextShadow/ManiaTextShadow"]
+clip_children = 2
+layout_mode = 0
+offset_right = 134.0
+offset_bottom = 26.0
+texture = ExtResource("4_b5g64")
+
+[node name="TextShine" type="TextureRect" parent="UILayer/LogoContainer/LogoPill/DrMarioTextShadow/ManiaTextShadow/ManiaText"]
+modulate = Color(1, 1, 1, 0.439216)
+layout_mode = 0
+offset_left = -12.0
+offset_top = -42.0
+offset_right = 124.0
+offset_bottom = -16.0
+texture = ExtResource("5_iny71")
+
+[node name="DrMarioText" type="TextureRect" parent="UILayer/LogoContainer/LogoPill/DrMarioTextShadow"]
+layout_mode = 0
+offset_right = 181.0
+offset_bottom = 37.0
+texture = ExtResource("2_pmocp")
+
+[node name="LogoAniPlayer" type="AnimationPlayer" parent="UILayer/LogoContainer/LogoPill"]
+libraries = {
+"": SubResource("AnimationLibrary_6isiw")
+}
+
+[node name="StartContainer" type="Control" parent="UILayer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VersionLabel" type="Label" parent="UILayer/StartContainer"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -13.0
+offset_right = 108.0
+offset_bottom = -4.0
+grow_vertical = 0
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.27451)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = ExtResource("2_vm2fe")
+theme_override_font_sizes/font_size = 8
+text = "v?.?.?"
+
+[node name="StartLabelContainer" type="Control" parent="UILayer/StartContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.5
+offset_top = 44.5
+offset_right = 54.5
+offset_bottom = 51.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartLabel" type="Label" parent="UILayer/StartContainer/StartLabelContainer"]
+layout_mode = 1
+offset_right = 112.0
+offset_bottom = 10.0
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.27451)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = ExtResource("2_vm2fe")
+theme_override_font_sizes/font_size = 8
+text = "PRESS ANY KEY!"
+horizontal_alignment = 1
+
+[node name="StartAniPlayer" type="AnimationPlayer" parent="UILayer/StartContainer"]
+root_node = NodePath("../StartLabelContainer/StartLabel")
+libraries = {
+"": SubResource("AnimationLibrary_5fnvw")
+}
+
+[node name="PopUpGroup" parent="UILayer" instance=ExtResource("8_n6d3v")]
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="BackgroundTex" type="TextureRect" parent="BackgroundLayer"]
+material = ExtResource("2_lgagd")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_2p18k")
+stretch_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="BackgroundDarken" type="TextureRect" parent="BackgroundLayer"]
+self_modulate = Color(0, 0, 0, 0.498039)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_2p18k")
+stretch_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="TransitionLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="ScreenTransition" parent="TransitionLayer" node_paths=PackedStringArray("musicPlayer") instance=ExtResource("10_3e8r8")]
+musicPlayer = NodePath("../../MusicPlayer")
+uncoverStyle = 0
+
+[node name="TitleManager" type="Node" parent="." node_paths=PackedStringArray("logoAniPlayer", "versionLabel", "startLabel", "screenTransition", "popUpGroup")]
+script = ExtResource("10_si3tg")
+mobileStartText = "TAP TO START!"
+disclaimerTitleText = "DISCLAIMER"
+disclaimerText = "This is a NON-PROFIT FAN-MADE game and is NOT affiliated by Nintendo in any way. This game is a passion project and must NOT be monetised.
+
+All characters, music, etc belong to their respective owners.
+
+If you enjoy this fan game, support Nintendo by buying their consoles and games."
+logoAniPlayer = NodePath("../UILayer/LogoContainer/LogoPill/LogoAniPlayer")
+versionLabel = NodePath("../UILayer/StartContainer/VersionLabel")
+startLabel = NodePath("../UILayer/StartContainer/StartLabelContainer/StartLabel")
+screenTransition = NodePath("../TransitionLayer/ScreenTransition")
+popUpGroup = NodePath("../UILayer/PopUpGroup")
+commonGameSettings = ExtResource("12_hfm7h")
+userCustomLevelList = ExtResource("13_avuk5")
+highScoreList = ExtResource("14_lkan4")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_ek7j1")
+volume_db = -4.0
+bus = &"Music"
+parameters/looping = true
+
+[connection signal="pressed" from="UILayer/PopUpGroup/PopUpBox/OkButton" to="TitleManager" method="AcceptDisclaimer"]
+
+[editable path="UILayer/PopUpGroup"]

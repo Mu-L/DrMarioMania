@@ -1,0 +1,7 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://31tismb2r7a"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/UserCustomLevelList.cs" id="1_7wrtt"]
+
+[resource]
+script = ExtResource("1_7wrtt")
+exampleLevels = Array[String]([])

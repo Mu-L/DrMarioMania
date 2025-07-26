@@ -1,0 +1,25 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://b5ctpuitukav3"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/ThemeAttributes.cs" id="1_f4ubl"]
+[ext_resource type="FontFile" uid="uid://blrwqb3sn4f2x" path="res://Assets/Fonts/Early GameBoy.ttf" id="1_m6rie"]
+
+[resource]
+script = ExtResource("1_f4ubl")
+JarOffset = -11
+MultiplayerJarOffset = -20
+TopLeftHudOffset = 0
+RightHudGroupOffset = 0
+VirusRingOffset = 0
+PillPreviewOffset = 0
+MusicFolder = "GB"
+SfxFolder = "GB"
+LabelColour = Color(0, 0, 0, 1)
+LabelFont = ExtResource("1_m6rie")
+UseLabelShadow = false
+NeverUseLightLabelColour = true
+ColourOrder = 2
+LightColour = Color(1, 1, 1, 1)
+PreLightColour = Color(0.54902, 0.54902, 0.870588, 1)
+PowerUpPreviewColour = Color(0, 0, 0, 1)
+UseUIShadows = false
+HasRingOverlay = false

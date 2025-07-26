@@ -1,0 +1,634 @@
+[gd_scene load_steps=43 format=3 uid="uid://up7l7b7sr6ch"]
+
+[ext_resource type="Script" path="res://Scripts/PauseManager.cs" id="1_40uu0"]
+[ext_resource type="Material" uid="uid://d0mvlpdi7fs7q" path="res://Assets/Materials/BlurMaterial.tres" id="1_eplak"]
+[ext_resource type="Texture2D" uid="uid://crkrr2jd53bhj" path="res://Assets/Sprites/Themes/Modern/BGLow.png" id="1_knt7d"]
+[ext_resource type="FontFile" uid="uid://c2e4sl3d40to5" path="res://Assets/Fonts/PressStart2P.ttf" id="1_q2dbg"]
+[ext_resource type="Script" path="res://Scripts/Menu/Screens/BaseScreen.cs" id="3_c841w"]
+[ext_resource type="PackedScene" uid="uid://blrcky0050ep3" path="res://Assets/Prefabs/ScreenTransition.tscn" id="3_tamir"]
+[ext_resource type="PackedScene" uid="uid://mdtbub1d7nur" path="res://Assets/Prefabs/Screens/SettingsScreen.tscn" id="5_ek13n"]
+[ext_resource type="Resource" uid="uid://cwxx0untun2hu" path="res://Assets/Resources/ThemeList.tres" id="7_7mg6x"]
+[ext_resource type="Resource" uid="uid://bbsie5itk63lc" path="res://Assets/Resources/MusicList.tres" id="11_oh0kq"]
+[ext_resource type="PackedScene" uid="uid://dpdnlbcibdfrl" path="res://Assets/Prefabs/JarGroupSingle.tscn" id="15_g4ex7"]
+[ext_resource type="PackedScene" uid="uid://02754jllxaxf" path="res://Assets/Prefabs/JarGroupMulti.tscn" id="16_dn43w"]
+[ext_resource type="Resource" uid="uid://31tismb2r7a" path="res://Assets/Resources/UserCustomLevelList.tres" id="16_prtkc"]
+[ext_resource type="Resource" uid="uid://bg0t1x05maugm" path="res://Assets/Resources/OfficialCustomLevelList.tres" id="17_0ason"]
+[ext_resource type="Resource" uid="uid://62i3k0vvpg7q" path="res://Assets/Resources/HighScoreList.tres" id="17_52tsd"]
+[ext_resource type="Script" path="res://Scripts/MusicManager.cs" id="18_2sap3"]
+[ext_resource type="Texture2D" uid="uid://cc5yi6lyuvqx8" path="res://Assets/Sprites/UI/Touch/TouchButtonBig.png" id="19_p5jid"]
+[ext_resource type="Script" path="res://Scripts/TouchControlsManager.cs" id="19_ycptx"]
+[ext_resource type="Texture2D" uid="uid://b6sjhp06s5puv" path="res://Assets/Sprites/UI/Touch/TouchButtonPressBig.png" id="20_7yxq7"]
+[ext_resource type="Texture2D" uid="uid://j3he3pm1474" path="res://Assets/Sprites/UI/Touch/TouchButtonWide.png" id="21_yjfja"]
+[ext_resource type="Script" path="res://Scripts/GameThemer.cs" id="22_1mga1"]
+[ext_resource type="Texture2D" uid="uid://2hxfhghy4f5y" path="res://Assets/Sprites/UI/Touch/Icons/TouchIconArrow.png" id="22_7bdi0"]
+[ext_resource type="Texture2D" uid="uid://d15jfrbsu0aeq" path="res://Assets/Sprites/UI/Touch/TouchButtonPressWide.png" id="22_76cef"]
+[ext_resource type="Resource" uid="uid://cwkwokd34qh80" path="res://Assets/Resources/CommonGameSettings.tres" id="23_1agr5"]
+[ext_resource type="Texture2D" uid="uid://b8n2v0jrxl2ku" path="res://Assets/Sprites/UI/Touch/TouchButtonWideThin.png" id="23_7pj5b"]
+[ext_resource type="Texture2D" uid="uid://bpebkb8w5p1u3" path="res://Assets/Sprites/UI/Touch/TouchButtonMedium.png" id="23_81f88"]
+[ext_resource type="Script" path="res://Scripts/GameManager.cs" id="23_grvs6"]
+[ext_resource type="Texture2D" uid="uid://eceqfwcnn78d" path="res://Assets/Sprites/UI/Touch/TouchButtonPressWideThin.png" id="24_h4pvx"]
+[ext_resource type="Texture2D" uid="uid://2aijxmklhfj7" path="res://Assets/Sprites/UI/Touch/TouchButtonPressMedium.png" id="24_vh38a"]
+[ext_resource type="Texture2D" uid="uid://blg3f5j0rtwjq" path="res://Assets/Sprites/UI/Touch/Icons/TouchIconHardDrop.png" id="25_ej1nu"]
+[ext_resource type="Texture2D" uid="uid://cjyhpmfw4jvsg" path="res://Assets/Sprites/UI/Touch/TouchButtonSmall.png" id="25_t2bri"]
+[ext_resource type="Texture2D" uid="uid://cnkqungkvmoxa" path="res://Assets/Sprites/UI/Touch/TouchButtonPressSmall.png" id="26_i2jl7"]
+[ext_resource type="Script" path="res://Scripts/SfxManager.cs" id="26_n3a3f"]
+[ext_resource type="Texture2D" uid="uid://md8j36gorno7" path="res://Assets/Sprites/UI/Touch/Icons/TouchIconRotate.png" id="26_ny5v5"]
+[ext_resource type="Texture2D" uid="uid://bj4eemaj7k6l4" path="res://Assets/Sprites/UI/Touch/Icons/TouchIconHold.png" id="29_do82d"]
+[ext_resource type="Texture2D" uid="uid://dtcpfswxlssuq" path="res://Assets/Sprites/UI/Touch/Icons/TouchIconPause.png" id="32_pgi8w"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_bfh0x"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_dlvyy"]
+
+[sub_resource type="Animation" id="Animation_fmwac"]
+resource_name = "Hide"
+length = 0.16667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ScreenCentre/ScreenContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-2.98023e-08, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ScreenCentre/ScreenContainer:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 8)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.166667),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_t6ddt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ScreenCentre/ScreenContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ScreenCentre/ScreenContainer:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_mjd7c"]
+resource_name = "Show"
+length = 0.16667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ScreenCentre/ScreenContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ScreenCentre/ScreenContainer:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(0, -8), Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_nt83l"]
+resource_name = "new_animation"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v3bw1"]
+_data = {
+"Hide": SubResource("Animation_fmwac"),
+"RESET": SubResource("Animation_t6ddt"),
+"Show": SubResource("Animation_mjd7c"),
+"new_animation": SubResource("Animation_nt83l")
+}
+
+[node name="GameScene" type="Node2D"]
+
+[node name="PauseLayer" type="CanvasLayer" parent="."]
+layer = 2
+visible = false
+
+[node name="PauseManager" type="Node" parent="PauseLayer" node_paths=PackedStringArray("pauseAni", "gameMan", "screenContainer")]
+script = ExtResource("1_40uu0")
+pauseAni = NodePath("../PauseAniPlayer")
+gameMan = NodePath("../../GameManager")
+screenContainer = NodePath("../ScreenCentre/ScreenContainer")
+
+[node name="Background" type="Control" parent="PauseLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="PauseLayer/Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.27451)
+
+[node name="Blur" type="ColorRect" parent="PauseLayer/Background"]
+material = ExtResource("1_eplak")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ScreenCentre" type="Control" parent="PauseLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ScreenContainer" type="Control" parent="PauseLayer/ScreenCentre"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseMainScreen" type="Control" parent="PauseLayer/ScreenCentre/ScreenContainer" node_paths=PackedStringArray("InitialHoverNode")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -48.0
+offset_right = 46.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_c841w")
+InitialHoverNode = NodePath("VBoxContainer/ContinueButton")
+
+[node name="PauseTitle" type="Label" parent="PauseLayer/ScreenCentre/ScreenContainer/PauseMainScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 10.0
+offset_right = 20.0
+offset_bottom = 18.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_q2dbg")
+theme_override_font_sizes/font_size = 8
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseLayer/ScreenCentre/ScreenContainer/PauseMainScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -17.0
+offset_right = 40.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+metadata/_edit_group_ = true
+
+[node name="ContinueButton" type="Button" parent="PauseLayer/ScreenCentre/ScreenContainer/PauseMainScreen/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_q2dbg")
+theme_override_font_sizes/font_size = 8
+text = "CONTINUE"
+
+[node name="SettingsButton" type="Button" parent="PauseLayer/ScreenCentre/ScreenContainer/PauseMainScreen/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_q2dbg")
+theme_override_font_sizes/font_size = 8
+text = "SETTINGS"
+
+[node name="QuitButton" type="Button" parent="PauseLayer/ScreenCentre/ScreenContainer/PauseMainScreen/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_q2dbg")
+theme_override_font_sizes/font_size = 8
+text = "QUIT"
+
+[node name="SettingsScreen" parent="PauseLayer/ScreenCentre/ScreenContainer" instance=ExtResource("5_ek13n")]
+layout_mode = 1
+
+[node name="Button" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/TabButtons" index="0"]
+button_group = SubResource("ButtonGroup_bfh0x")
+
+[node name="Button2" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/TabButtons" index="1"]
+button_group = SubResource("ButtonGroup_bfh0x")
+
+[node name="Button3" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/TabButtons" index="2"]
+button_group = SubResource("ButtonGroup_bfh0x")
+
+[node name="Label" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3" index="0"]
+visible = true
+
+[node name="OverrideColoursPanel" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3" index="1"]
+visible = false
+
+[node name="Button" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="0"]
+button_group = SubResource("ButtonGroup_dlvyy")
+
+[node name="Button2" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="1"]
+button_group = SubResource("ButtonGroup_dlvyy")
+
+[node name="Button3" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="2"]
+button_group = SubResource("ButtonGroup_dlvyy")
+
+[node name="Button4" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="3"]
+button_group = SubResource("ButtonGroup_dlvyy")
+
+[node name="PauseAniPlayer" type="AnimationPlayer" parent="PauseLayer"]
+libraries = {
+"": SubResource("AnimationLibrary_v3bw1")
+}
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="BackgroundTex" type="TextureRect" parent="BackgroundLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_knt7d")
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="TransitionLayer" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="ScreenTransition" parent="TransitionLayer" node_paths=PackedStringArray("musicPlayer") instance=ExtResource("3_tamir")]
+musicPlayer = NodePath("../../MusicPlayer")
+coverStyle = 0
+
+[node name="SfxManager" type="Node" parent="."]
+script = ExtResource("26_n3a3f")
+
+[node name="Move" type="AudioStreamPlayer" parent="SfxManager"]
+volume_db = -4.0
+bus = &"SFX"
+
+[node name="Rotate" type="AudioStreamPlayer" parent="SfxManager"]
+volume_db = -4.0
+bus = &"SFX"
+
+[node name="Hold" type="AudioStreamPlayer" parent="SfxManager"]
+volume_db = -4.0
+bus = &"SFX"
+
+[node name="ChainX2" type="AudioStreamPlayer" parent="SfxManager"]
+volume_db = -4.0
+bus = &"SFX"
+
+[node name="ChainX3" type="AudioStreamPlayer" parent="SfxManager"]
+volume_db = -4.0
+bus = &"SFX"
+
+[node name="VirusMatch" type="AudioStreamPlayer" parent="SfxManager"]
+volume_db = -4.0
+bus = &"SFX"
+
+[node name="PillMatch" type="AudioStreamPlayer" parent="SfxManager"]
+volume_db = -4.0
+bus = &"SFX"
+
+[node name="Land" type="AudioStreamPlayer" parent="SfxManager"]
+volume_db = -4.0
+bus = &"SFX"
+
+[node name="Fall" type="AudioStreamPlayer" parent="SfxManager"]
+volume_db = -4.0
+bus = &"SFX"
+
+[node name="FastFall" type="AudioStreamPlayer" parent="SfxManager"]
+volume_db = -4.0
+bus = &"SFX"
+
+[node name="Pause" type="AudioStreamPlayer" parent="SfxManager"]
+volume_db = -4.0
+bus = &"SFX"
+
+[node name="SpeedUp" type="AudioStreamPlayer" parent="SfxManager"]
+volume_db = -4.0
+bus = &"SFX"
+
+[node name="SingleHit" type="AudioStreamPlayer" parent="SfxManager"]
+volume_db = -4.0
+bus = &"SFX"
+
+[node name="Explode" type="AudioStreamPlayer" parent="SfxManager"]
+volume_db = -4.0
+bus = &"SFX"
+
+[node name="Thud" type="AudioStreamPlayer" parent="SfxManager"]
+volume_db = -4.0
+bus = &"SFX"
+
+[node name="Ricochet" type="AudioStreamPlayer" parent="SfxManager"]
+volume_db = -4.0
+bus = &"SFX"
+
+[node name="VirusVanish" type="AudioStreamPlayer" parent="SfxManager"]
+volume_db = -4.0
+bus = &"SFX"
+
+[node name="VirusStunLand" type="AudioStreamPlayer" parent="SfxManager"]
+volume_db = -4.0
+bus = &"SFX"
+
+[node name="GameThemer" type="Node" parent="." node_paths=PackedStringArray("sfxMan", "musicMan", "bgTexture", "gameMan")]
+script = ExtResource("22_1mga1")
+sfxMan = NodePath("../SfxManager")
+musicMan = NodePath("../MusicPlayer")
+bgTexture = NodePath("../BackgroundLayer/BackgroundTex")
+gameMan = NodePath("../GameManager")
+commonGameSettings = ExtResource("23_1agr5")
+themeList = ExtResource("7_7mg6x")
+musicList = ExtResource("11_oh0kq")
+
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("musicMan", "sfxMan", "gameThemer", "gameLayer", "touchControlsMan", "screenTransition", "pauseMan")]
+script = ExtResource("23_grvs6")
+jarSpacing = 98
+musicMan = NodePath("../MusicPlayer")
+sfxMan = NodePath("../SfxManager")
+jarGroupSinglePrefab = ExtResource("15_g4ex7")
+jarGroupMultiPrefab = ExtResource("16_dn43w")
+gameThemer = NodePath("../GameThemer")
+gameLayer = NodePath("../GameLayer")
+touchControlsMan = NodePath("../TouchLayer")
+screenTransition = NodePath("../TransitionLayer/ScreenTransition")
+pauseMan = NodePath("../PauseLayer/PauseManager")
+commonGameSettings = ExtResource("23_1agr5")
+userCustomLevelList = ExtResource("16_prtkc")
+officialCustomLevelList = ExtResource("17_0ason")
+highScoreList = ExtResource("17_52tsd")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -4.0
+bus = &"Music"
+script = ExtResource("18_2sap3")
+
+[node name="GameLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="Camera2D" type="Camera2D" parent="GameLayer"]
+
+[node name="TouchLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("hardDropButton", "holdButton")]
+visible = false
+script = ExtResource("19_ycptx")
+commonGameSettings = ExtResource("23_1agr5")
+hardDropButton = NodePath("ButtonContainerBottomLeft/HardDropButton")
+holdButton = NodePath("ButtonContainerBottomRight/HoldButton")
+
+[node name="ButtonContainerBottomLeft" type="Control" parent="TouchLayer"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+
+[node name="LeftButton" type="TouchScreenButton" parent="TouchLayer/ButtonContainerBottomLeft"]
+modulate = Color(1, 1, 1, 0.498039)
+position = Vector2(0, -103)
+texture_normal = ExtResource("19_p5jid")
+texture_pressed = ExtResource("20_7yxq7")
+passby_press = true
+action = "KeyboardFullMoveLeft"
+
+[node name="Sprite2D" type="Sprite2D" parent="TouchLayer/ButtonContainerBottomLeft/LeftButton"]
+position = Vector2(36, 36)
+texture = ExtResource("22_7bdi0")
+flip_h = true
+
+[node name="RightButton" type="TouchScreenButton" parent="TouchLayer/ButtonContainerBottomLeft"]
+modulate = Color(1, 1, 1, 0.498039)
+position = Vector2(71, -103)
+texture_normal = ExtResource("19_p5jid")
+texture_pressed = ExtResource("20_7yxq7")
+passby_press = true
+action = "KeyboardFullMoveRight"
+
+[node name="Sprite2D" type="Sprite2D" parent="TouchLayer/ButtonContainerBottomLeft/RightButton"]
+position = Vector2(36, 36)
+texture = ExtResource("22_7bdi0")
+
+[node name="SoftDropButton" type="TouchScreenButton" parent="TouchLayer/ButtonContainerBottomLeft"]
+modulate = Color(1, 1, 1, 0.498039)
+position = Vector2(7, -32)
+texture_normal = ExtResource("23_7pj5b")
+texture_pressed = ExtResource("24_h4pvx")
+passby_press = true
+action = "KeyboardFullSoftDrop"
+
+[node name="Sprite2D" type="Sprite2D" parent="TouchLayer/ButtonContainerBottomLeft/SoftDropButton"]
+position = Vector2(64, 16)
+rotation = 1.5708
+texture = ExtResource("22_7bdi0")
+
+[node name="HardDropButton" type="TouchScreenButton" parent="TouchLayer/ButtonContainerBottomLeft"]
+modulate = Color(1, 1, 1, 0.498039)
+position = Vector2(7, -150)
+texture_normal = ExtResource("21_yjfja")
+texture_pressed = ExtResource("22_76cef")
+action = "KeyboardFullHardDrop"
+
+[node name="Sprite2D" type="Sprite2D" parent="TouchLayer/ButtonContainerBottomLeft/HardDropButton"]
+position = Vector2(64, 24)
+texture = ExtResource("25_ej1nu")
+
+[node name="ButtonContainerBottomRight" type="Control" parent="TouchLayer"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="RotateLeftButton" type="TouchScreenButton" parent="TouchLayer/ButtonContainerBottomRight"]
+modulate = Color(1, 1, 1, 0.498039)
+position = Vector2(-143, -72)
+texture_normal = ExtResource("19_p5jid")
+texture_pressed = ExtResource("20_7yxq7")
+action = "KeyboardFullRotateLeft"
+
+[node name="Sprite2D" type="Sprite2D" parent="TouchLayer/ButtonContainerBottomRight/RotateLeftButton"]
+position = Vector2(36, 36)
+texture = ExtResource("26_ny5v5")
+flip_h = true
+
+[node name="RotateRightButton" type="TouchScreenButton" parent="TouchLayer/ButtonContainerBottomRight"]
+modulate = Color(1, 1, 1, 0.498039)
+position = Vector2(-72, -72)
+texture_normal = ExtResource("19_p5jid")
+texture_pressed = ExtResource("20_7yxq7")
+action = "KeyboardFullRotateRight"
+
+[node name="Sprite2D" type="Sprite2D" parent="TouchLayer/ButtonContainerBottomRight/RotateRightButton"]
+position = Vector2(36, 36)
+texture = ExtResource("26_ny5v5")
+
+[node name="HoldButton" type="TouchScreenButton" parent="TouchLayer/ButtonContainerBottomRight"]
+modulate = Color(1, 1, 1, 0.498039)
+position = Vector2(-64, -135)
+texture_normal = ExtResource("23_81f88")
+texture_pressed = ExtResource("24_vh38a")
+passby_press = true
+action = "KeyboardFullHold"
+
+[node name="Sprite2D" type="Sprite2D" parent="TouchLayer/ButtonContainerBottomRight/HoldButton"]
+position = Vector2(28, 28)
+texture = ExtResource("29_do82d")
+
+[node name="ButtonContainerTopRight" type="Control" parent="TouchLayer"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+
+[node name="PauseButton" type="TouchScreenButton" parent="TouchLayer/ButtonContainerTopRight"]
+modulate = Color(1, 1, 1, 0.498039)
+position = Vector2(-40, 8)
+texture_normal = ExtResource("25_t2bri")
+texture_pressed = ExtResource("26_i2jl7")
+passby_press = true
+action = "Pause"
+
+[node name="Sprite2D" type="Sprite2D" parent="TouchLayer/ButtonContainerTopRight/PauseButton"]
+position = Vector2(16, 16)
+texture = ExtResource("32_pgi8w")
+
+[connection signal="pressed" from="PauseLayer/ScreenCentre/ScreenContainer/PauseMainScreen/VBoxContainer/ContinueButton" to="GameManager" method="SetIsPaused" binds= [false]]
+[connection signal="pressed" from="PauseLayer/ScreenCentre/ScreenContainer/PauseMainScreen/VBoxContainer/SettingsButton" to="PauseLayer/PauseManager" method="SetScreen" binds= [1]]
+[connection signal="pressed" from="PauseLayer/ScreenCentre/ScreenContainer/PauseMainScreen/VBoxContainer/QuitButton" to="GameManager" method="QuitGame"]
+[connection signal="pressed" from="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/BackButton" to="PauseLayer/PauseManager" method="GoBack"]
+
+[editable path="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen"]

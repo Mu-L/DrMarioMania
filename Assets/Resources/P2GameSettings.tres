@@ -1,0 +1,22 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://coypr8e7qqypk"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/PlayerGameSettings.cs" id="1_ionf8"]
+
+[resource]
+script = ExtResource("1_ionf8")
+isCustomLevelSettings = false
+GameplayStyle = 0
+InitialVirusLevel = 0
+SpeedLevel = 1
+SegmentColours = Array[int]([1, 2, 3])
+ColourCount = 3
+MinStreakLength = 4
+IsHoldEnabled = true
+FasterSoftDrop = false
+GenerousLockDelay = true
+ImpatientMatching = true
+FasterAutoFall = true
+InstantSoftDropLock = false
+NoFallSpeedIncrease = false
+OnlySingleColourPills = false
+PowerUpMeterMaxLevel = 0

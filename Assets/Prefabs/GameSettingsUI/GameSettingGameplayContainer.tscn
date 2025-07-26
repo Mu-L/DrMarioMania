@@ -1,0 +1,62 @@
+[gd_scene load_steps=4 format=3 uid="uid://3igdbj037lt3"]
+
+[ext_resource type="Script" path="res://Scripts/Menu/GameSettingUI/GameSettingButtonGroup.cs" id="1_k0ivl"]
+[ext_resource type="Resource" uid="uid://cwkwokd34qh80" path="res://Assets/Resources/CommonGameSettings.tres" id="2_c5ryp"]
+[ext_resource type="PackedScene" uid="uid://cg3ssstpw3jum" path="res://Assets/Prefabs/GameSettingsUI/GameSettingButton.tscn" id="3_2jvn8"]
+
+[node name="GameplayScrollContainer" type="ScrollContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -6.0
+offset_right = 109.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+follow_focus = true
+vertical_scroll_mode = 0
+metadata/_edit_group_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 1
+
+[node name="GameplayContainer" type="BoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+script = ExtResource("1_k0ivl")
+settingName = &"GameplayStyle"
+commonGameSettings = ExtResource("2_c5ryp")
+metadata/_edit_group_ = true
+
+[node name="Button" parent="MarginContainer/GameplayContainer" instance=ExtResource("3_2jvn8")]
+layout_mode = 2
+button_pressed = true
+
+[node name="Button2" parent="MarginContainer/GameplayContainer" instance=ExtResource("3_2jvn8")]
+layout_mode = 2
+text = "CLASSIC"
+value = 1
+
+[node name="Button3" parent="MarginContainer/GameplayContainer" instance=ExtResource("3_2jvn8")]
+layout_mode = 2
+text = "QUAD"
+value = 2
+
+[node name="Button5" parent="MarginContainer/GameplayContainer" instance=ExtResource("3_2jvn8")]
+layout_mode = 2
+text = "ITEMS"
+value = 4
+
+[node name="Button4" parent="MarginContainer/GameplayContainer" instance=ExtResource("3_2jvn8")]
+layout_mode = 2
+text = "CUSTOM"
+value = 3

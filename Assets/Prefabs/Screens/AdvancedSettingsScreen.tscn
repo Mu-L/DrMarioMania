@@ -1,0 +1,629 @@
+[gd_scene load_steps=12 format=3 uid="uid://db3d4vw78ejqe"]
+
+[ext_resource type="Script" path="res://Scripts/Menu/Screens/AdvancedSettingsScreen.cs" id="1_gddgy"]
+[ext_resource type="FontFile" uid="uid://c2e4sl3d40to5" path="res://Assets/Fonts/PressStart2P.ttf" id="2_0262g"]
+[ext_resource type="PackedScene" uid="uid://dyijwdbglbgly" path="res://Assets/Prefabs/GameSettingsUI/GameSettingSlider.tscn" id="3_o5tmg"]
+[ext_resource type="Script" path="res://Scripts/Menu/GameSettingUI/GameSettingPowerUpContainer.cs" id="4_3i0vp"]
+[ext_resource type="Texture2D" uid="uid://cb6qr0bqxms7o" path="res://Assets/Sprites/Themes/Modern/PowerUpTiles.png" id="4_7bqxt"]
+[ext_resource type="PackedScene" uid="uid://cp1qswt54iel8" path="res://Assets/Prefabs/GameSettingsUI/GameSettingToggleButtonPanel.tscn" id="4_tr5vp"]
+[ext_resource type="PackedScene" uid="uid://b4pwwg8xgiew0" path="res://Assets/Prefabs/PopUpButton.tscn" id="4_utjcu"]
+[ext_resource type="Material" uid="uid://dpotog8k5cmqr" path="res://Assets/Materials/RainbowPowerUpMaterial.tres" id="5_1lxi6"]
+[ext_resource type="Resource" uid="uid://cwkwokd34qh80" path="res://Assets/Resources/CommonGameSettings.tres" id="5_b2lsy"]
+[ext_resource type="Resource" uid="uid://cwxx0untun2hu" path="res://Assets/Resources/ThemeList.tres" id="6_js1ir"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jqtnu"]
+content_margin_left = 4.0
+content_margin_top = 5.0
+content_margin_right = 4.0
+content_margin_bottom = 3.0
+bg_color = Color(0, 0, 0, 0.333333)
+border_width_left = 1
+border_width_top = 2
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.392157)
+anti_aliasing = false
+
+[node name="AdvancedSettingsScreen" type="Control" node_paths=PackedStringArray("InitialHoverNode")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_gddgy")
+UseRecursiveSearch = true
+InitialHoverNode = NodePath("SettingsContainer/BoxContainer/Colour/ColourSlider")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -92.0
+offset_top = 14.0
+offset_right = 91.0
+offset_bottom = 37.0
+grow_horizontal = 2
+text = "CUSTOM GAMEPLAY STYLE"
+horizontal_alignment = 1
+
+[node name="SettingsContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -114.0
+offset_top = -79.0
+offset_right = 114.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="BoxContainer" type="BoxContainer" parent="SettingsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+vertical = true
+
+[node name="Colour" type="Control" parent="SettingsContainer/BoxContainer"]
+custom_minimum_size = Vector2(0, 27)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="ColourLabel" type="Label" parent="SettingsContainer/BoxContainer/Colour"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 222.0
+offset_bottom = 9.0
+text = "No. of Colours:"
+
+[node name="Number" type="Label" parent="SettingsContainer/BoxContainer/Colour/ColourLabel"]
+layout_mode = 1
+offset_left = 120.0
+offset_right = 341.0
+offset_bottom = 8.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.27451)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_outline_size = 3
+theme_override_fonts/font = ExtResource("2_0262g")
+theme_override_font_sizes/font_size = 8
+text = "3"
+
+[node name="ColourSlider" parent="SettingsContainer/BoxContainer/Colour" node_paths=PackedStringArray("numberLabel") instance=ExtResource("3_o5tmg")]
+layout_mode = 1
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 12.0
+offset_right = 211.0
+offset_bottom = 28.0
+grow_horizontal = 1
+grow_vertical = 1
+focus_neighbor_bottom = NodePath("../../Streak/PopUpButton")
+min_value = 1.0
+max_value = 10.0
+value = 2.0
+tick_count = 10
+ticks_on_borders = true
+settingName = &"ColourCount"
+numberLabel = NodePath("../ColourLabel/Number")
+
+[node name="Streak" type="Control" parent="SettingsContainer/BoxContainer"]
+custom_minimum_size = Vector2(0, 27)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="StreakLabel" type="Label" parent="SettingsContainer/BoxContainer/Streak"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 222.0
+offset_bottom = 9.0
+text = "Min. Streak for Match:"
+
+[node name="Number" type="Label" parent="SettingsContainer/BoxContainer/Streak/StreakLabel"]
+layout_mode = 1
+offset_left = 176.0
+offset_right = 397.0
+offset_bottom = 8.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.27451)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_outline_size = 3
+theme_override_fonts/font = ExtResource("2_0262g")
+theme_override_font_sizes/font_size = 8
+text = "4"
+
+[node name="PopUpButton" parent="SettingsContainer/BoxContainer/Streak" instance=ExtResource("4_utjcu")]
+layout_mode = 1
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 189.0
+offset_top = -2.0
+offset_right = 201.0
+offset_bottom = 12.0
+grow_horizontal = 1
+grow_vertical = 1
+focus_neighbor_top = NodePath("../../Colour/ColourSlider")
+title = "MIN. STREAK FOR MATCH"
+description = "The minimum number of tiles in a line to make a match."
+alignDescToLeft = true
+
+[node name="StreakSlider" parent="SettingsContainer/BoxContainer/Streak" node_paths=PackedStringArray("numberLabel") instance=ExtResource("3_o5tmg")]
+layout_mode = 1
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 12.0
+offset_right = 211.0
+offset_bottom = 28.0
+grow_horizontal = 1
+grow_vertical = 1
+focus_neighbor_bottom = NodePath("../../PowerUps/PopUpButton")
+min_value = 3.0
+max_value = 5.0
+value = 3.0
+tick_count = 3
+ticks_on_borders = true
+settingName = &"MinStreakLength"
+numberLabel = NodePath("../StreakLabel/Number")
+
+[node name="PowerUps" type="Control" parent="SettingsContainer/BoxContainer"]
+custom_minimum_size = Vector2(0, 59)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="PowerUpLabel" type="Label" parent="SettingsContainer/BoxContainer/PowerUps"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 222.0
+offset_bottom = 9.0
+text = "Power-Ups"
+
+[node name="PopUpButton" parent="SettingsContainer/BoxContainer/PowerUps" instance=ExtResource("4_utjcu")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -143.0
+offset_top = -2.0
+offset_right = -131.0
+offset_bottom = 12.0
+grow_horizontal = 0
+grow_vertical = 1
+focus_neighbor_top = NodePath("../../Streak/StreakSlider")
+title = "POWER-UPS"
+description = "Power-ups need to be matched to activate, except for the rarer rainbow variants.
+------------
+Thwomp: Destroys everything above and below it.
+
+Shell: Destroys everything to the left and right of it.
+
+Spikeinator: Destroys everything above, below and either side of it.
+
+Bomb: Destroys surrounding objects.
+
+Pill Blaster: Elminates all pills of a certain colour (all if rainbow).
+
+Virus Blaster: Elminates all viruses of a certain colour (or halves them all if rainbow)."
+alignDescToLeft = true
+
+[node name="PowerUpContainer" type="FlowContainer" parent="SettingsContainer/BoxContainer/PowerUps" node_paths=PackedStringArray("firstButton")]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 1.0
+offset_top = 14.0
+offset_right = -1.0
+offset_bottom = 35.0
+grow_horizontal = 2
+script = ExtResource("4_3i0vp")
+commonGameSettings = ExtResource("5_b2lsy")
+themeList = ExtResource("6_js1ir")
+firstButton = NodePath("Button")
+
+[node name="Button" type="Button" parent="SettingsContainer/BoxContainer/PowerUps/PowerUpContainer"]
+custom_minimum_size = Vector2(20, 21)
+layout_mode = 2
+focus_neighbor_top = NodePath("../../PopUpButton")
+mouse_filter = 1
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jqtnu")
+toggle_mode = true
+
+[node name="Sprite2D" type="Sprite2D" parent="SettingsContainer/BoxContainer/PowerUps/PowerUpContainer/Button"]
+position = Vector2(11, 11)
+scale = Vector2(2, 2)
+texture = ExtResource("4_7bqxt")
+hframes = 7
+vframes = 11
+frame = 7
+
+[node name="SpecialPowerUpContainer" type="FlowContainer" parent="SettingsContainer/BoxContainer/PowerUps" node_paths=PackedStringArray("firstButton")]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = -1.0
+offset_bottom = 58.0
+grow_horizontal = 2
+script = ExtResource("4_3i0vp")
+isSpecialPowerUps = true
+commonGameSettings = ExtResource("5_b2lsy")
+themeList = ExtResource("6_js1ir")
+firstButton = NodePath("Button")
+
+[node name="Button" type="Button" parent="SettingsContainer/BoxContainer/PowerUps/SpecialPowerUpContainer"]
+custom_minimum_size = Vector2(20, 21)
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../../../PowerUpMeter/PopUpButton")
+mouse_filter = 1
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jqtnu")
+toggle_mode = true
+
+[node name="Sprite2D" type="Sprite2D" parent="SettingsContainer/BoxContainer/PowerUps/SpecialPowerUpContainer/Button"]
+material = ExtResource("5_1lxi6")
+position = Vector2(11, 11)
+scale = Vector2(2, 2)
+texture = ExtResource("4_7bqxt")
+hframes = 7
+vframes = 11
+
+[node name="PowerUpMeter" type="Control" parent="SettingsContainer/BoxContainer"]
+custom_minimum_size = Vector2(0, 27)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="PowerUpMeterLabel" type="Label" parent="SettingsContainer/BoxContainer/PowerUpMeter"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 153.0
+offset_bottom = 9.0
+text = "Power-Up Meter Max:"
+
+[node name="Number" type="Label" parent="SettingsContainer/BoxContainer/PowerUpMeter/PowerUpMeterLabel"]
+layout_mode = 1
+offset_left = 151.0
+offset_right = 167.0
+offset_bottom = 8.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.27451)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_outline_size = 3
+theme_override_fonts/font = ExtResource("2_0262g")
+theme_override_font_sizes/font_size = 8
+text = "16"
+
+[node name="PopUpButton" parent="SettingsContainer/BoxContainer/PowerUpMeter" instance=ExtResource("4_utjcu")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -48.0
+offset_top = -2.0
+offset_right = -36.0
+offset_bottom = 12.0
+grow_horizontal = 0
+grow_vertical = 1
+title = "POWER-UP METER MAX"
+description = "The power up meter increases after every pill and for any combos.
+
+This setting determines how many \"increases\" must happen before spawning a power-up."
+alignDescToLeft = true
+
+[node name="StreakSlider" parent="SettingsContainer/BoxContainer/PowerUpMeter" node_paths=PackedStringArray("numberLabel") instance=ExtResource("3_o5tmg")]
+layout_mode = 1
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 12.0
+offset_right = 211.0
+offset_bottom = 28.0
+grow_horizontal = 1
+grow_vertical = 1
+min_value = 2.0
+max_value = 32.0
+step = 2.0
+value = 16.0
+tick_count = 16
+ticks_on_borders = true
+settingName = &"PowerUpMeterMaxLevel"
+numberLabel = NodePath("../PowerUpMeterLabel/Number")
+
+[node name="Hold" parent="SettingsContainer/BoxContainer" instance=ExtResource("4_tr5vp")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="PopUpButton" parent="SettingsContainer/BoxContainer/Hold" instance=ExtResource("4_utjcu")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -52.0
+offset_top = 1.0
+offset_right = -40.0
+offset_bottom = 15.0
+grow_horizontal = 0
+grow_vertical = 1
+title = "HOLD"
+description = "When hold is enabled, you can \"hold\" the currently falling pill in a reserve slot. This pill can then be swapped back into play at anytime.
+
+This is a common feature in Tetris games."
+alignDescToLeft = true
+
+[node name="LockDelay" parent="SettingsContainer/BoxContainer" instance=ExtResource("4_tr5vp")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" parent="SettingsContainer/BoxContainer/LockDelay" index="0"]
+text = "Generous Lock Delay"
+
+[node name="ToggleButton" parent="SettingsContainer/BoxContainer/LockDelay" index="1"]
+settingName = &"GenerousLockDelay"
+
+[node name="PopUpButton" parent="SettingsContainer/BoxContainer/LockDelay" instance=ExtResource("4_utjcu")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -52.0
+offset_top = 1.0
+offset_right = -40.0
+offset_bottom = 15.0
+grow_horizontal = 0
+grow_vertical = 1
+title = "GENEROUS LOCK DELAY"
+description = "\"Lock delay\" refers to the time between when a pill lands until it \"locks\" in place, unable to be moved or rotated.
+
+When ON, the lock delay is slightly longer and its duration will reset whenever the pill is moved or rotated (though only for a limited number of times).
+
+When OFF, the lock delay is shorter and won't reset when moved or rotated, behaving like NES Dr. Mario."
+alignDescToLeft = true
+
+[node name="FixedFallSpeed" parent="SettingsContainer/BoxContainer" instance=ExtResource("4_tr5vp")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" parent="SettingsContainer/BoxContainer/FixedFallSpeed" index="0"]
+text = "Fixed Fall Speed"
+
+[node name="ToggleButton" parent="SettingsContainer/BoxContainer/FixedFallSpeed" index="1"]
+settingName = &"NoFallSpeedIncrease"
+
+[node name="PopUpButton" parent="SettingsContainer/BoxContainer/FixedFallSpeed" instance=ExtResource("4_utjcu")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -52.0
+offset_top = 1.0
+offset_right = -40.0
+offset_bottom = 15.0
+grow_horizontal = 0
+grow_vertical = 1
+title = "FIXED FALL SPEED"
+description = "Usually, the falling speed of pills increases after every 10 pills.
+
+With this setting ON, the fall speed will never increase."
+alignDescToLeft = true
+
+[node name="SingleColourPills" parent="SettingsContainer/BoxContainer" instance=ExtResource("4_tr5vp")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" parent="SettingsContainer/BoxContainer/SingleColourPills" index="0"]
+text = "Only 1-Colour Pills"
+
+[node name="ToggleButton" parent="SettingsContainer/BoxContainer/SingleColourPills" index="1"]
+settingName = &"OnlySingleColourPills"
+
+[node name="PopUpButton" parent="SettingsContainer/BoxContainer/SingleColourPills" instance=ExtResource("4_utjcu")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -52.0
+offset_top = 1.0
+offset_right = -40.0
+offset_bottom = 15.0
+grow_horizontal = 0
+grow_vertical = 1
+title = "1-COLOUR PILLS"
+description = "Usually, each segment of a pill can either have the same colour or two different colours.
+
+With this setting ON, pills will only ever come in a single colour."
+alignDescToLeft = true
+
+[node name="SoftDrop" parent="SettingsContainer/BoxContainer" instance=ExtResource("4_tr5vp")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" parent="SettingsContainer/BoxContainer/SoftDrop" index="0"]
+text = "Faster Soft Drop"
+
+[node name="ToggleButton" parent="SettingsContainer/BoxContainer/SoftDrop" index="1"]
+settingName = &"FasterSoftDrop"
+
+[node name="PopUpButton" parent="SettingsContainer/BoxContainer/SoftDrop" instance=ExtResource("4_utjcu")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -52.0
+offset_top = 1.0
+offset_right = -40.0
+offset_bottom = 15.0
+grow_horizontal = 0
+grow_vertical = 1
+title = "FASTER SOFT DROP"
+description = "\"Soft drop\" refers to when the player presses down to make the pill fall faster.
+
+While ON, this setting will increase the soft drop speed to match NES Dr. Mario.
+
+Note that the max regular falling speed is tied to the soft-dropping speed, so this will also increase that."
+alignDescToLeft = true
+
+[node name="SoftDropLock" parent="SettingsContainer/BoxContainer" instance=ExtResource("4_tr5vp")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" parent="SettingsContainer/BoxContainer/SoftDropLock" index="0"]
+offset_right = 161.0
+text = "Soft Drop Insta Lock"
+
+[node name="ToggleButton" parent="SettingsContainer/BoxContainer/SoftDropLock" index="1"]
+settingName = &"InstantSoftDropLock"
+
+[node name="PopUpButton" parent="SettingsContainer/BoxContainer/SoftDropLock" instance=ExtResource("4_utjcu")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -52.0
+offset_top = 1.0
+offset_right = -40.0
+offset_bottom = 15.0
+grow_horizontal = 0
+grow_vertical = 1
+title = "SOFT DROP INSTA LOCK"
+description = "\"Soft drop\" refers to when the player presses down to make the pill fall faster.
+
+While ON, the pill will instantly \"lock\" into place as soon as it touches the ground while soft-dropping. This is how NES Dr. Mario behaves."
+alignDescToLeft = true
+
+[node name="MatchCheck" parent="SettingsContainer/BoxContainer" instance=ExtResource("4_tr5vp")]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" parent="SettingsContainer/BoxContainer/MatchCheck" index="0"]
+text = "Impatient Match
+Checks"
+
+[node name="ToggleButton" parent="SettingsContainer/BoxContainer/MatchCheck" index="1"]
+offset_top = 6.0
+offset_bottom = 22.0
+settingName = &"ImpatientMatching"
+
+[node name="PopUpButton" parent="SettingsContainer/BoxContainer/MatchCheck" instance=ExtResource("4_utjcu")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -52.0
+offset_top = 7.0
+offset_right = -40.0
+offset_bottom = 21.0
+grow_horizontal = 0
+grow_vertical = 1
+title = "IMPATIENT MATCH CHECKS"
+description = "In the official Dr. Mario games, colour matches will only be made once all falling pills/segments have landed.
+
+With this setting ON, colour matches can occur for landed pills/segments even if there are other pills that haven't landed yet."
+alignDescToLeft = true
+
+[node name="FasterAutoFall" parent="SettingsContainer/BoxContainer" instance=ExtResource("4_tr5vp")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" parent="SettingsContainer/BoxContainer/FasterAutoFall" index="0"]
+text = "Faster Avalanche"
+
+[node name="ToggleButton" parent="SettingsContainer/BoxContainer/FasterAutoFall" index="1"]
+settingName = &"FasterAutoFall"
+
+[node name="PopUpButton" parent="SettingsContainer/BoxContainer/FasterAutoFall" instance=ExtResource("4_utjcu")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -52.0
+offset_top = 1.0
+offset_right = -40.0
+offset_bottom = 15.0
+grow_horizontal = 0
+grow_vertical = 1
+title = "FASTER AVALANCHE"
+description = "\"Avalanche\" refers to the state where pills or pill segments start falling due to being in mid-air after a match.
+
+While ON, mid-air pills during an avalanche will fall slightly faster.
+While OFF. mid-air pills will fall slightly slower, matching the speed of NES Dr. Mario."
+alignDescToLeft = true
+
+[node name="OkButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -35.0
+offset_top = -29.0
+offset_right = 35.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_neighbor_top = NodePath("../SettingsContainer/BoxContainer/FasterAutoFall/ToggleButton")
+text = "OK"
+
+[editable path="SettingsContainer/BoxContainer/Hold"]
+[editable path="SettingsContainer/BoxContainer/LockDelay"]
+[editable path="SettingsContainer/BoxContainer/FixedFallSpeed"]
+[editable path="SettingsContainer/BoxContainer/SingleColourPills"]
+[editable path="SettingsContainer/BoxContainer/SoftDrop"]
+[editable path="SettingsContainer/BoxContainer/SoftDropLock"]
+[editable path="SettingsContainer/BoxContainer/MatchCheck"]
+[editable path="SettingsContainer/BoxContainer/FasterAutoFall"]

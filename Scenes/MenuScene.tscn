@@ -1,0 +1,4273 @@
+[gd_scene load_steps=97 format=3 uid="uid://b2vcutf5f3jja"]
+
+[ext_resource type="Script" path="res://Scripts/Menu/MenuScreenManager.cs" id="1_i7n64"]
+[ext_resource type="Script" path="res://Scripts/Menu/Screens/UpdateableSettingScreen.cs" id="2_ig0jp"]
+[ext_resource type="FontFile" uid="uid://c2e4sl3d40to5" path="res://Assets/Fonts/PressStart2P.ttf" id="2_paq13"]
+[ext_resource type="PackedScene" uid="uid://blrcky0050ep3" path="res://Assets/Prefabs/ScreenTransition.tscn" id="3_p7paf"]
+[ext_resource type="Script" path="res://Scripts/Menu/MenuManager.cs" id="3_ytoor"]
+[ext_resource type="AudioStream" uid="uid://hoxpi3ahjvk" path="res://Assets/Audio/Music/World/Splash.mp3" id="4_ilmix"]
+[ext_resource type="Resource" uid="uid://62i3k0vvpg7q" path="res://Assets/Resources/HighScoreList.tres" id="4_jecqt"]
+[ext_resource type="PackedScene" uid="uid://dyijwdbglbgly" path="res://Assets/Prefabs/GameSettingsUI/GameSettingSlider.tscn" id="4_kvqyp"]
+[ext_resource type="Material" uid="uid://do6pci8chvuax" path="res://Assets/Materials/ScrollRainbowMaterial.tres" id="5_m231i"]
+[ext_resource type="Script" path="res://Scripts/Menu/GameSettingUI/GameSettingButtonGroup.cs" id="5_vf7kc"]
+[ext_resource type="Texture2D" uid="uid://cfrntgup7c2w5" path="res://Assets/Sprites/BGMenu.png" id="6_i5e12"]
+[ext_resource type="PackedScene" uid="uid://cg3ssstpw3jum" path="res://Assets/Prefabs/GameSettingsUI/GameSettingButton.tscn" id="7_a10ok"]
+[ext_resource type="Script" path="res://Scripts/Menu/GameSettingUI/GameSettingColourGroup.cs" id="8_1bveu"]
+[ext_resource type="Texture2D" uid="uid://kqh3uxtqxbxw" path="res://Assets/Sprites/UI/ButtonIcons/BackIcon.png" id="8_3vacb"]
+[ext_resource type="Texture2D" uid="uid://c0hiufv220hj7" path="res://Assets/Sprites/Themes/Modern/VirusTiles.png" id="8_c8gan"]
+[ext_resource type="Texture2D" uid="uid://cdx3w60jp1c15" path="res://Assets/Sprites/UI/ButtonIcons/SinglePlayerIcon.png" id="8_mdyyj"]
+[ext_resource type="Texture2D" uid="uid://bke0ljm3pmmab" path="res://Assets/Sprites/UI/ButtonIcons/MultiPlayerIcon.png" id="9_nkpne"]
+[ext_resource type="PackedScene" uid="uid://3igdbj037lt3" path="res://Assets/Prefabs/GameSettingsUI/GameSettingGameplayContainer.tscn" id="10_3cebr"]
+[ext_resource type="Script" path="res://Scripts/Menu/Screens/MultiplayerPlayerScreen.cs" id="14_evqt7"]
+[ext_resource type="Resource" uid="uid://cwxx0untun2hu" path="res://Assets/Resources/ThemeList.tres" id="14_pe025"]
+[ext_resource type="Texture2D" uid="uid://wjvng62544bt" path="res://Assets/Sprites/Themes/Modern/BGMed.png" id="15_02jdi"]
+[ext_resource type="Script" path="res://Scripts/Menu/ThemePreview.cs" id="15_s085x"]
+[ext_resource type="Texture2D" uid="uid://pn63ad76k4o2" path="res://Assets/Sprites/Themes/Modern/Jar.png" id="16_82dxj"]
+[ext_resource type="PackedScene" uid="uid://dmiylj2kheea0" path="res://Assets/Prefabs/GameSettingsUI/GameSettingToggleButton.tscn" id="17_03x8y"]
+[ext_resource type="Resource" uid="uid://cwkwokd34qh80" path="res://Assets/Resources/CommonGameSettings.tres" id="17_7dvs3"]
+[ext_resource type="PackedScene" uid="uid://db3d4vw78ejqe" path="res://Assets/Prefabs/Screens/AdvancedSettingsScreen.tscn" id="17_gbh87"]
+[ext_resource type="Texture2D" uid="uid://dlska1epmujlf" path="res://Assets/Sprites/Themes/Modern/PillTiles.png" id="17_h5mjb"]
+[ext_resource type="Script" path="res://Scripts/Menu/Screens/MultiplayerCountScreen.cs" id="18_2rca6"]
+[ext_resource type="PackedScene" uid="uid://cwyo15lik8i87" path="res://Assets/Prefabs/Screens/MusicScreen.tscn" id="18_hy23c"]
+[ext_resource type="PackedScene" uid="uid://cxdy3o34byr8t" path="res://Assets/Prefabs/GameSettingsUI/GameSettingThemeContainer.tscn" id="19_b6r2d"]
+[ext_resource type="PackedScene" uid="uid://b4pwwg8xgiew0" path="res://Assets/Prefabs/PopUpButton.tscn" id="19_utcow"]
+[ext_resource type="Script" path="res://Scripts/Menu/PageContainer.cs" id="19_x230w"]
+[ext_resource type="Script" path="res://Scripts/Menu/Page.cs" id="20_ahywv"]
+[ext_resource type="Script" path="res://Scripts/Menu/Screens/BaseScreen.cs" id="20_w70yh"]
+[ext_resource type="Texture2D" uid="uid://doear5od7shdw" path="res://Assets/Sprites/UI/Controls/ArrowsIcon.png" id="21_4po7x"]
+[ext_resource type="Texture2D" uid="uid://l2n8k3ovsqxj" path="res://Assets/Sprites/UI/Controls/Z.png" id="21_8jx2b"]
+[ext_resource type="Script" path="res://Scripts/Menu/GameSettingUI/GameSettingMultiGamestyleButtonGroup.cs" id="21_wrncj"]
+[ext_resource type="Texture2D" uid="uid://c5uqo86o5wt7i" path="res://Assets/Sprites/UI/Controls/RotateArrow.png" id="22_112wb"]
+[ext_resource type="Texture2D" uid="uid://mrjbvu1xrjb3" path="res://Assets/Sprites/UI/Controls/WASDIcon.png" id="22_rvc21"]
+[ext_resource type="Texture2D" uid="uid://dr0la23648k5p" path="res://Assets/Sprites/UI/Controls/ControllerIcon.png" id="23_gcu0b"]
+[ext_resource type="Texture2D" uid="uid://cvxwl6d7itucx" path="res://Assets/Sprites/UI/Controls/X.png" id="23_ni286"]
+[ext_resource type="Texture2D" uid="uid://ciw1a3l4gqtla" path="res://Assets/Sprites/UI/Controls/C.png" id="24_a4sbe"]
+[ext_resource type="Texture2D" uid="uid://cof8gtplfebr1" path="res://Assets/Sprites/UI/Controls/Space.png" id="25_axnmw"]
+[ext_resource type="Texture2D" uid="uid://cbrwkyytftq1x" path="res://Assets/Sprites/UI/Controls/Arrow.png" id="25_i3gg0"]
+[ext_resource type="Texture2D" uid="uid://dapbgt8hoku0i" path="res://Assets/Sprites/UI/Controls/K.png" id="30_20cb7"]
+[ext_resource type="Texture2D" uid="uid://c53wy2676gkn0" path="res://Assets/Sprites/UI/Controls/L.png" id="31_wnhrj"]
+[ext_resource type="Texture2D" uid="uid://svmbfa3j0hef" path="res://Assets/Sprites/UI/Controls/M.png" id="32_56hby"]
+[ext_resource type="Texture2D" uid="uid://cir0oilki61kx" path="res://Assets/Sprites/UI/Controls/S.png" id="33_ori7v"]
+[ext_resource type="Texture2D" uid="uid://ciay44eokpk46" path="res://Assets/Sprites/UI/Controls/W.png" id="34_tmdq4"]
+[ext_resource type="Texture2D" uid="uid://cd8nr2s7xlp8x" path="res://Assets/Sprites/UI/Controls/D.png" id="35_41a4v"]
+[ext_resource type="Texture2D" uid="uid://iwtp1ljopab5" path="res://Assets/Sprites/UI/Controls/A.png" id="36_d3ma7"]
+[ext_resource type="Texture2D" uid="uid://bk1qdiijkix2h" path="res://Assets/Sprites/UI/Controls/Multiplayer/MultiControlsKeyboard0.png" id="37_c1edi"]
+[ext_resource type="Script" path="res://Scripts/Menu/MultiplayerControlContainer.cs" id="37_ciowp"]
+[ext_resource type="Script" path="res://Scripts/Menu/ControlsContainer.cs" id="37_mg67h"]
+[ext_resource type="Texture2D" uid="uid://c6e38ok5lb8fr" path="res://Assets/Sprites/UI/Controls/Multiplayer/MultiControlsControllerSingle.png" id="38_yng1m"]
+[ext_resource type="Texture2D" uid="uid://brw65qv868tho" path="res://Assets/Sprites/UI/Controls/Multiplayer/MultiControlsController0.png" id="39_xaoey"]
+[ext_resource type="Texture2D" uid="uid://dmuv1i3hbl4oq" path="res://Assets/Sprites/UI/Controls/Multiplayer/MultiControlsController1.png" id="40_r75d5"]
+[ext_resource type="Texture2D" uid="uid://hm6nymjhu8pu" path="res://Assets/Sprites/UI/Controls/Multiplayer/MultiControlsController2.png" id="41_jlcx5"]
+[ext_resource type="Texture2D" uid="uid://c52m81w2j101j" path="res://Assets/Sprites/UI/Controls/Multiplayer/MultiControlsController3.png" id="42_0a0o2"]
+[ext_resource type="Texture2D" uid="uid://cd3s2lxgyx3p4" path="res://Assets/Sprites/UI/Controls/Multiplayer/MultiControlsKeyboardSingle.png" id="43_u5uqi"]
+[ext_resource type="Texture2D" uid="uid://1yee1wvydnix" path="res://Assets/Sprites/UI/Controls/Multiplayer/MultiControlsKeyboard1.png" id="45_h2lij"]
+[ext_resource type="Texture2D" uid="uid://ubwhse7f48rd" path="res://Assets/Sprites/UI/Controls/Multiplayer/MultiControlsKeyboard2.png" id="46_wbmv8"]
+[ext_resource type="Texture2D" uid="uid://dthu57o4036c5" path="res://Assets/Sprites/UI/Controls/Multiplayer/MultiControlsKeyboard3.png" id="47_63fox"]
+[ext_resource type="Texture2D" uid="uid://bd5gc2tuamjvb" path="res://Assets/Sprites/UI/Controls/ButtonL.png" id="50_l2c7j"]
+[ext_resource type="Texture2D" uid="uid://c5aw11jtkni64" path="res://Assets/Sprites/UI/Controls/Dpad.png" id="50_wa3lo"]
+[ext_resource type="Texture2D" uid="uid://d1nhp1qxu0bgx" path="res://Assets/Sprites/UI/Controls/ButtonFaceBig.png" id="52_joary"]
+[ext_resource type="Script" path="res://Scripts/Menu/UserCustomLevelPanelContainer.cs" id="54_vjxh7"]
+[ext_resource type="Resource" uid="uid://31tismb2r7a" path="res://Assets/Resources/UserCustomLevelList.tres" id="55_4q5po"]
+[ext_resource type="PackedScene" uid="uid://bs5xmilfh02x8" path="res://Assets/Prefabs/UserCustomLevelPanel.tscn" id="56_ydk6g"]
+[ext_resource type="PackedScene" uid="uid://mdtbub1d7nur" path="res://Assets/Prefabs/Screens/SettingsScreen.tscn" id="58_2hgv7"]
+[ext_resource type="Texture2D" uid="uid://blvjcqs5840m1" path="res://Assets/Sprites/UI/ButtonIcons/ClassicModeIcon.png" id="61_ailxn"]
+[ext_resource type="Texture2D" uid="uid://be21bsypr7746" path="res://Assets/Sprites/UI/ButtonIcons/CustomLevelIcon.png" id="61_j0n44"]
+[ext_resource type="Texture2D" uid="uid://b2fdeqm4vxdgl" path="res://Assets/Sprites/UI/ButtonIcons/VersusModeIcon.png" id="63_fred1"]
+[ext_resource type="Script" path="res://Scripts/Menu/NotificationBox.cs" id="64_nvfqe"]
+[ext_resource type="AudioStream" uid="uid://hcaheekwk5c" path="res://Assets/Audio/Sounds/NES/Notification.ogg" id="65_2j87m"]
+[ext_resource type="Texture2D" uid="uid://dinu0y42o015h" path="res://Assets/Sprites/UI/ButtonIcons/WebIcon.png" id="65_qeijr"]
+[ext_resource type="Script" path="res://Scripts/Menu/GameSettingUI/HighScoreScreenVariants/HighScoreButtonGroup.cs" id="66_5mwtl"]
+[ext_resource type="Texture2D" uid="uid://cwgt1jbtsslfw" path="res://Assets/Sprites/UI/ButtonIcons/ImportIcon.png" id="66_jhsql"]
+[ext_resource type="Script" path="res://Scripts/Menu/HighScorePanel.cs" id="66_q4e3w"]
+[ext_resource type="Texture2D" uid="uid://b2vmhedoxka3n" path="res://Assets/Sprites/UI/ButtonIcons/CreateIcon.png" id="66_ypj2b"]
+[ext_resource type="Script" path="res://Scripts/Menu/GameSettingUI/HighScoreScreenVariants/HighScoreToggleButton.cs" id="67_bnmyu"]
+[ext_resource type="Texture2D" uid="uid://cbv7ybh40c75x" path="res://Assets/Sprites/UI/ButtonIcons/OfficialLevelIcon.png" id="70_y4wno"]
+[ext_resource type="PackedScene" uid="uid://ciycvm6fh6cel" path="res://Assets/Prefabs/PopUpGroup.tscn" id="72_3ij4p"]
+[ext_resource type="Script" path="res://Scripts/Menu/OfficialCustomLevelPanelContainer.cs" id="73_febh5"]
+[ext_resource type="Resource" uid="uid://bg0t1x05maugm" path="res://Assets/Resources/OfficialCustomLevelList.tres" id="75_8f8n1"]
+[ext_resource type="PackedScene" uid="uid://bfcv2361x0ono" path="res://Assets/Prefabs/OfficialCustomLevelPanel.tscn" id="75_nsn7q"]
+[ext_resource type="PackedScene" uid="uid://dejlotb7w8jno" path="res://Assets/Prefabs/MusicPreviewPlayer.tscn" id="80_slce4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rwg2g"]
+content_margin_left = 4.0
+content_margin_top = 5.0
+content_margin_right = 4.0
+content_margin_bottom = 3.0
+bg_color = Color(0, 0, 0, 0.333333)
+border_width_left = 1
+border_width_top = 2
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.392157)
+anti_aliasing = false
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_8bdlw"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_3oko3"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_f08ln"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_5b5yk"]
+
+[sub_resource type="Animation" id="Animation_2uqol"]
+resource_name = "Hide"
+length = 0.60002
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(4, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -32)]
+}
+
+[sub_resource type="Animation" id="Animation_84j5u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_k1k7s"]
+resource_name = "Show"
+length = 0.60002
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(0, -32), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xglib"]
+_data = {
+"Hide": SubResource("Animation_2uqol"),
+"RESET": SubResource("Animation_84j5u"),
+"Show": SubResource("Animation_k1k7s")
+}
+
+[node name="MenuScene" type="Node2D"]
+
+[node name="MenuManager" type="Node" parent="." node_paths=PackedStringArray("screenTransition", "screenMan", "multiControlCon")]
+script = ExtResource("3_ytoor")
+screenTransition = NodePath("../TransitionLayer/ScreenTransition")
+screenMan = NodePath("../UILayer/MenuScreenManager")
+multiControlCon = NodePath("../UILayer/MenuScreenManager/MultiplayerInputScreen/ControlContainer")
+commonGameSettings = ExtResource("17_7dvs3")
+userCustomLevelList = ExtResource("55_4q5po")
+officialCustomLevelList = ExtResource("75_8f8n1")
+highScoreList = ExtResource("4_jecqt")
+themeList = ExtResource("14_pe025")
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="MenuScreenManager" type="Control" parent="UILayer" node_paths=PackedStringArray("menuMan", "musicPreviewPlayer", "multiPlayerScreen", "multiControlCon", "popUpGroup", "screenContainer")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_i7n64")
+menuMan = NodePath("../../MenuManager")
+musicPreviewPlayer = NodePath("../../MusicPreviewPlayer")
+commonGameSettings = ExtResource("17_7dvs3")
+multiPlayerScreen = NodePath("MultiplayerPlayerScreen")
+multiControlCon = NodePath("MultiplayerInputScreen/ControlContainer")
+popUpGroup = NodePath("../PopUpGroup")
+screenContainer = NodePath(".")
+
+[node name="MainScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("20_w70yh")
+InitialHoverNode = NodePath("VBoxContainer/1PButton")
+
+[node name="Title" type="Label" parent="UILayer/MenuScreenManager/MainScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -60.0
+offset_top = 25.0
+offset_right = 60.0
+offset_bottom = 48.0
+grow_horizontal = 2
+text = "MAIN MENU"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/MenuScreenManager/MainScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -34.0
+offset_right = 70.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="1PButton" type="Button" parent="UILayer/MenuScreenManager/MainScreen/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+focus_neighbor_left = NodePath("../../HelpButton")
+focus_neighbor_right = NodePath("../../SettingsButton")
+focus_neighbor_bottom = NodePath("../2PButton")
+text = "SINGLE PLAYER"
+icon = ExtResource("8_mdyyj")
+
+[node name="2PButton" type="Button" parent="UILayer/MenuScreenManager/MainScreen/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+focus_neighbor_left = NodePath("../../HelpButton")
+focus_neighbor_top = NodePath("../1PButton")
+focus_neighbor_right = NodePath("../../SettingsButton")
+focus_neighbor_bottom = NodePath("../../HighScoresButton")
+text = "MULTIPLAYER"
+icon = ExtResource("9_nkpne")
+
+[node name="QuitButton" type="Button" parent="UILayer/MenuScreenManager/MainScreen"]
+layout_mode = 1
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 59.0
+offset_bottom = 29.0
+focus_neighbor_right = NodePath("../VBoxContainer/1PButton")
+focus_neighbor_bottom = NodePath("../VBoxContainer/1PButton")
+text = "QUIT"
+icon = ExtResource("8_3vacb")
+
+[node name="CreditsButton" type="Button" parent="UILayer/MenuScreenManager/MainScreen"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -18.0
+offset_top = -29.0
+offset_right = 46.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "CREDITS"
+
+[node name="HelpButton" type="Button" parent="UILayer/MenuScreenManager/MainScreen"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -121.0
+offset_top = -29.0
+offset_right = -80.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "HELP"
+
+[node name="SettingsButton" type="Button" parent="UILayer/MenuScreenManager/MainScreen"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 49.0
+offset_top = -29.0
+offset_right = 121.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "SETTINGS"
+
+[node name="HighScoresButton" type="Button" parent="UILayer/MenuScreenManager/MainScreen"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -77.0
+offset_top = -29.0
+offset_right = -21.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "SCORES"
+
+[node name="GameplayScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_ig0jp")
+InitialHoverNode = NodePath("VirusSlider")
+
+[node name="Title" type="Label" parent="UILayer/MenuScreenManager/GameplayScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -60.0
+offset_top = 25.0
+offset_right = 60.0
+offset_bottom = 48.0
+grow_horizontal = 2
+text = "GAME RULES"
+horizontal_alignment = 1
+
+[node name="VirusLabel" type="Label" parent="UILayer/MenuScreenManager/GameplayScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.0
+offset_top = -65.0
+offset_right = 9.0
+offset_bottom = -57.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Virus Level:"
+
+[node name="VirusValue" type="Label" parent="UILayer/MenuScreenManager/GameplayScreen/VirusLabel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 36.0
+offset_top = -4.0
+offset_right = 76.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.27451)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_outline_size = 3
+theme_override_fonts/font = ExtResource("2_paq13")
+theme_override_font_sizes/font_size = 8
+text = "0"
+
+[node name="VirusSlider" parent="UILayer/MenuScreenManager/GameplayScreen" node_paths=PackedStringArray("numberLabel") instance=ExtResource("4_kvqyp")]
+layout_mode = 1
+offset_left = -111.0
+offset_top = -55.0
+offset_right = 111.0
+offset_bottom = -37.0
+tick_count = 21
+ticks_on_borders = true
+settingName = &"InitialVirusLevel"
+numberLabel = NodePath("../VirusLabel/VirusValue")
+
+[node name="GameplayLabel" type="Label" parent="UILayer/MenuScreenManager/GameplayScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.0
+offset_top = -33.0
+offset_right = 1.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Gameplay Style"
+
+[node name="GameplayScrollContainer" parent="UILayer/MenuScreenManager/GameplayScreen" instance=ExtResource("10_3cebr")]
+layout_mode = 1
+offset_left = -112.0
+offset_top = -20.0
+offset_right = 112.0
+offset_bottom = 6.0
+
+[node name="SpeedLabel" type="Label" parent="UILayer/MenuScreenManager/GameplayScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.0
+offset_top = 11.0
+offset_right = 9.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Fall Speed"
+
+[node name="SpeedContainer" type="BoxContainer" parent="UILayer/MenuScreenManager/GameplayScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = 24.0
+offset_right = 112.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("5_vf7kc")
+settingName = &"SpeedLevel"
+commonGameSettings = ExtResource("17_7dvs3")
+metadata/_edit_group_ = true
+
+[node name="Button" parent="UILayer/MenuScreenManager/GameplayScreen/SpeedContainer" instance=ExtResource("7_a10ok")]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../../ScoreKeepButton")
+button_pressed = true
+text = "LOW"
+
+[node name="Button2" parent="UILayer/MenuScreenManager/GameplayScreen/SpeedContainer" instance=ExtResource("7_a10ok")]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../../ScoreKeepButton")
+text = "MEDIUM"
+value = 1
+
+[node name="Button3" parent="UILayer/MenuScreenManager/GameplayScreen/SpeedContainer" instance=ExtResource("7_a10ok")]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../../ScoreKeepButton")
+text = "HIGH"
+value = 2
+
+[node name="ScoreKeepLabel" type="Label" parent="UILayer/MenuScreenManager/GameplayScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.0
+offset_top = 48.0
+offset_right = 9.0
+offset_bottom = 67.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Keep score
+between levels?"
+
+[node name="ScoreKeepButton" parent="UILayer/MenuScreenManager/GameplayScreen" instance=ExtResource("17_03x8y")]
+layout_mode = 1
+offset_left = 13.0
+offset_top = 50.0
+offset_right = 45.0
+offset_bottom = 66.0
+focus_neighbor_left = NodePath("../BackButton")
+settingName = &"UseScoreKeep"
+isCommonSetting = true
+
+[node name="PopUpButton" parent="UILayer/MenuScreenManager/GameplayScreen" node_paths=PackedStringArray("popUpGroup") instance=ExtResource("19_utcow")]
+layout_mode = 1
+anchors_preset = 8
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -36.0
+offset_right = 17.0
+offset_bottom = -22.0
+grow_vertical = 2
+title = "GAMEPLAY STYLE"
+description = "Modern: Has hold slot and generous lock delay
+
+Classic: Gameplay closer to older Dr. Mario games
+
+Quad: Modern with 4 colours
+
+Items: Modern with power-ups
+
+Custom: Use custom game rules"
+alignDescToLeft = true
+popUpGroup = NodePath("../../../PopUpGroup")
+
+[node name="PopUpButton2" parent="UILayer/MenuScreenManager/GameplayScreen" node_paths=PackedStringArray("popUpGroup") instance=ExtResource("19_utcow")]
+layout_mode = 1
+anchors_preset = 8
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 49.0
+offset_top = 51.0
+offset_right = 61.0
+offset_bottom = 65.0
+grow_vertical = 2
+title = "SCORE KEEP"
+description = "Score Keep is when your score doesn't reset when progressing onto the next level.
+
+This is how older Dr. Mario games behave, but scores became level-specific since the Wii installment."
+popUpGroup = NodePath("../../../PopUpGroup")
+
+[node name="BackButton" type="Button" parent="UILayer/MenuScreenManager/GameplayScreen"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = -29.0
+offset_right = 71.0
+offset_bottom = -7.0
+grow_vertical = 0
+focus_neighbor_top = NodePath("../ScoreKeepButton")
+focus_neighbor_right = NodePath("../NextButton")
+text = "BACK"
+icon = ExtResource("8_3vacb")
+
+[node name="NextButton" type="Button" parent="UILayer/MenuScreenManager/GameplayScreen"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -71.0
+offset_top = -29.0
+offset_right = -7.0
+offset_bottom = -7.0
+grow_horizontal = 0
+grow_vertical = 0
+focus_neighbor_left = NodePath("../BackButton")
+text = "NEXT"
+
+[node name="VisualsScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_ig0jp")
+InitialHoverNode = NodePath("ColourContainer/Button")
+
+[node name="Title" type="Label" parent="UILayer/MenuScreenManager/VisualsScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -71.0
+offset_top = 25.0
+offset_right = 70.0
+offset_bottom = 33.0
+grow_horizontal = 2
+text = "VISUALS & SOUND"
+horizontal_alignment = 1
+
+[node name="ThemePreview" type="Control" parent="UILayer/MenuScreenManager/VisualsScreen" node_paths=PackedStringArray("bg", "jar", "pill", "pill2")]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -69.0
+offset_right = 104.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("15_s085x")
+bg = NodePath("BG")
+jar = NodePath("Jar")
+pill = NodePath("Pill")
+pill2 = NodePath("Pill2")
+useSpeedBg = true
+themeList = ExtResource("14_pe025")
+commonGameSettings = ExtResource("17_7dvs3")
+metadata/_edit_group_ = true
+
+[node name="BG" type="TextureRect" parent="UILayer/MenuScreenManager/VisualsScreen/ThemePreview"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_02jdi")
+stretch_mode = 1
+
+[node name="Jar" type="TextureRect" parent="UILayer/MenuScreenManager/VisualsScreen/ThemePreview"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = -8.0
+offset_right = 88.0
+offset_bottom = 168.0
+texture = ExtResource("16_82dxj")
+
+[node name="Pill" type="Sprite2D" parent="UILayer/MenuScreenManager/VisualsScreen/ThemePreview"]
+position = Vector2(41, 49)
+scale = Vector2(2, 2)
+texture = ExtResource("17_h5mjb")
+hframes = 6
+vframes = 10
+frame = 6
+
+[node name="Pill2" type="Sprite2D" parent="UILayer/MenuScreenManager/VisualsScreen/ThemePreview"]
+position = Vector2(57, 49)
+scale = Vector2(2, 2)
+texture = ExtResource("17_h5mjb")
+hframes = 6
+vframes = 10
+frame = 1
+
+[node name="ColourLabel" type="Label" parent="UILayer/MenuScreenManager/VisualsScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.0
+offset_top = -68.0
+offset_right = 83.0
+offset_bottom = -60.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Colours:"
+
+[node name="ColourCount" type="Label" parent="UILayer/MenuScreenManager/VisualsScreen/ColourLabel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -4.0
+offset_right = 23.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.27451)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_outline_size = 3
+theme_override_fonts/font = ExtResource("2_paq13")
+theme_override_font_sizes/font_size = 8
+text = "4/4"
+
+[node name="ColourContainer" type="FlowContainer" parent="UILayer/MenuScreenManager/VisualsScreen" node_paths=PackedStringArray("colourCountLabel", "firstButton")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = -55.0
+offset_right = -4.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
+script = ExtResource("8_1bveu")
+commonGameSettings = ExtResource("17_7dvs3")
+themeList = ExtResource("14_pe025")
+colourCountLabel = NodePath("../ColourLabel/ColourCount")
+firstButton = NodePath("Button")
+metadata/_edit_group_ = true
+
+[node name="Button" type="Button" parent="UILayer/MenuScreenManager/VisualsScreen/ColourContainer"]
+custom_minimum_size = Vector2(20, 21)
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_rwg2g")
+toggle_mode = true
+
+[node name="Sprite2D" type="Sprite2D" parent="UILayer/MenuScreenManager/VisualsScreen/ColourContainer/Button"]
+position = Vector2(11, 11)
+scale = Vector2(2, 2)
+texture = ExtResource("8_c8gan")
+hframes = 3
+vframes = 10
+
+[node name="ThemeLabel" type="Label" parent="UILayer/MenuScreenManager/VisualsScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = -6.0
+offset_right = 8.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Theme"
+
+[node name="ThemeScrollContainer" parent="UILayer/MenuScreenManager/VisualsScreen" instance=ExtResource("19_b6r2d")]
+layout_mode = 1
+offset_left = -112.0
+offset_top = 6.0
+offset_right = 112.0
+offset_bottom = 40.0
+
+[node name="ThemeContainer" parent="UILayer/MenuScreenManager/VisualsScreen/ThemeScrollContainer/MarginContainer" index="0" node_paths=PackedStringArray("themePreview", "colourGroup")]
+themePreview = NodePath("../../../ThemePreview")
+colourGroup = NodePath("../../../ColourContainer")
+
+[node name="MusicLabel" type="Label" parent="UILayer/MenuScreenManager/VisualsScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.0
+offset_top = 45.0
+offset_right = 9.0
+offset_bottom = 53.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Music"
+
+[node name="MusicContainer" type="BoxContainer" parent="UILayer/MenuScreenManager/VisualsScreen" node_paths=PackedStringArray("fallBackHighlightButton")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = 58.0
+offset_right = 112.0
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("5_vf7kc")
+settingName = &"Music"
+isCommonSetting = true
+commonGameSettings = ExtResource("17_7dvs3")
+fallBackHighlightButton = NodePath("Button3")
+metadata/_edit_group_ = true
+
+[node name="Button" parent="UILayer/MenuScreenManager/VisualsScreen/MusicContainer" instance=ExtResource("7_a10ok")]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../../StartButton")
+button_pressed = true
+text = "FEVER"
+value = -1
+
+[node name="Button2" parent="UILayer/MenuScreenManager/VisualsScreen/MusicContainer" instance=ExtResource("7_a10ok")]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../../StartButton")
+text = "CHILL"
+value = -2
+
+[node name="Button3" parent="UILayer/MenuScreenManager/VisualsScreen/MusicContainer" instance=ExtResource("7_a10ok")]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../../StartButton")
+text = "MORE!"
+value = -3
+
+[node name="Button5" parent="UILayer/MenuScreenManager/VisualsScreen/MusicContainer" instance=ExtResource("7_a10ok")]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../../StartButton")
+text = "???"
+value = -4
+
+[node name="Button4" parent="UILayer/MenuScreenManager/VisualsScreen/MusicContainer" instance=ExtResource("7_a10ok")]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../../StartButton")
+text = "OFF"
+
+[node name="BackButton" type="Button" parent="UILayer/MenuScreenManager/VisualsScreen"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = -29.0
+offset_right = 71.0
+offset_bottom = -7.0
+grow_vertical = 0
+focus_neighbor_right = NodePath("../StartButton")
+text = "BACK"
+icon = ExtResource("8_3vacb")
+
+[node name="StartButton" type="Button" parent="UILayer/MenuScreenManager/VisualsScreen"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -71.0
+offset_top = -29.0
+offset_right = -7.0
+offset_bottom = -7.0
+grow_horizontal = 0
+grow_vertical = 0
+focus_neighbor_left = NodePath("../BackButton")
+text = "START!"
+
+[node name="AdvancedSettingsScreen" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("popUpGroup") instance=ExtResource("17_gbh87")]
+visible = false
+layout_mode = 1
+popUpGroup = NodePath("../../PopUpGroup")
+
+[node name="PopUpButton" parent="UILayer/MenuScreenManager/AdvancedSettingsScreen/SettingsContainer/BoxContainer/Streak" index="1" node_paths=PackedStringArray("popUpGroup")]
+popUpGroup = NodePath("../../../../../../PopUpGroup")
+
+[node name="PopUpButton" parent="UILayer/MenuScreenManager/AdvancedSettingsScreen/SettingsContainer/BoxContainer/PowerUps" index="1" node_paths=PackedStringArray("popUpGroup")]
+popUpGroup = NodePath("../../../../../../PopUpGroup")
+
+[node name="PopUpButton" parent="UILayer/MenuScreenManager/AdvancedSettingsScreen/SettingsContainer/BoxContainer/PowerUpMeter" index="1" node_paths=PackedStringArray("popUpGroup")]
+popUpGroup = NodePath("../../../../../../PopUpGroup")
+
+[node name="PopUpButton" parent="UILayer/MenuScreenManager/AdvancedSettingsScreen/SettingsContainer/BoxContainer/Hold" index="2" node_paths=PackedStringArray("popUpGroup")]
+popUpGroup = NodePath("../../../../../../PopUpGroup")
+
+[node name="PopUpButton" parent="UILayer/MenuScreenManager/AdvancedSettingsScreen/SettingsContainer/BoxContainer/LockDelay" index="2" node_paths=PackedStringArray("popUpGroup")]
+popUpGroup = NodePath("../../../../../../PopUpGroup")
+
+[node name="PopUpButton" parent="UILayer/MenuScreenManager/AdvancedSettingsScreen/SettingsContainer/BoxContainer/FixedFallSpeed" index="2" node_paths=PackedStringArray("popUpGroup")]
+popUpGroup = NodePath("../../../../../../PopUpGroup")
+
+[node name="PopUpButton" parent="UILayer/MenuScreenManager/AdvancedSettingsScreen/SettingsContainer/BoxContainer/SingleColourPills" index="2" node_paths=PackedStringArray("popUpGroup")]
+popUpGroup = NodePath("../../../../../../PopUpGroup")
+
+[node name="PopUpButton" parent="UILayer/MenuScreenManager/AdvancedSettingsScreen/SettingsContainer/BoxContainer/SoftDrop" index="2" node_paths=PackedStringArray("popUpGroup")]
+popUpGroup = NodePath("../../../../../../PopUpGroup")
+
+[node name="PopUpButton" parent="UILayer/MenuScreenManager/AdvancedSettingsScreen/SettingsContainer/BoxContainer/SoftDropLock" index="2" node_paths=PackedStringArray("popUpGroup")]
+popUpGroup = NodePath("../../../../../../PopUpGroup")
+
+[node name="PopUpButton" parent="UILayer/MenuScreenManager/AdvancedSettingsScreen/SettingsContainer/BoxContainer/MatchCheck" index="2" node_paths=PackedStringArray("popUpGroup")]
+popUpGroup = NodePath("../../../../../../PopUpGroup")
+
+[node name="PopUpButton" parent="UILayer/MenuScreenManager/AdvancedSettingsScreen/SettingsContainer/BoxContainer/FasterAutoFall" index="2" node_paths=PackedStringArray("popUpGroup")]
+popUpGroup = NodePath("../../../../../../PopUpGroup")
+
+[node name="MusicScreen" parent="UILayer/MenuScreenManager" instance=ExtResource("18_hy23c")]
+visible = false
+layout_mode = 1
+
+[node name="SongCategoryContainer" parent="UILayer/MenuScreenManager/MusicScreen" index="1" node_paths=PackedStringArray("screenMan", "musicPreviewPlayer")]
+screenMan = NodePath("../..")
+musicPreviewPlayer = NodePath("../../../../MusicPreviewPlayer")
+
+[node name="MultiplayerCountScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("menuMan", "screenMan", "multiControlCon", "InitialHoverNode")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("18_2rca6")
+nextScreen = 10
+menuMan = NodePath("../../../MenuManager")
+screenMan = NodePath("..")
+multiControlCon = NodePath("../MultiplayerInputScreen/ControlContainer")
+InitialHoverNode = NodePath("VBoxContainer/Button2")
+
+[node name="Title" type="Label" parent="UILayer/MenuScreenManager/MultiplayerCountScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -60.0
+offset_top = 25.0
+offset_right = 60.0
+offset_bottom = 48.0
+grow_horizontal = 2
+text = "HOW MANY PLAYERS?"
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="UILayer/MenuScreenManager/MultiplayerCountScreen"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = -29.0
+offset_right = 71.0
+offset_bottom = -7.0
+grow_vertical = 0
+focus_neighbor_right = NodePath("../VBoxContainer/Button2")
+text = "BACK"
+icon = ExtResource("8_3vacb")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/MenuScreenManager/MultiplayerCountScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = -45.0
+offset_right = 47.0
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button2" type="Button" parent="UILayer/MenuScreenManager/MultiplayerCountScreen/VBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+focus_neighbor_left = NodePath("../../BackButton")
+text = "2"
+
+[node name="Button3" type="Button" parent="UILayer/MenuScreenManager/MultiplayerCountScreen/VBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+focus_neighbor_left = NodePath("../../BackButton")
+text = "3"
+
+[node name="Button4" type="Button" parent="UILayer/MenuScreenManager/MultiplayerCountScreen/VBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+focus_neighbor_left = NodePath("../../BackButton")
+text = "4"
+
+[node name="MultiplayerPlayerScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("titleLabel", "nextButton", "allUseP1SettingsButton", "copyButton", "colourGroup", "menuMan", "screenMan", "InitialHoverNode")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("14_evqt7")
+titleLabel = NodePath("Title")
+nextButton = NodePath("NextButton")
+allUseP1SettingsButton = NodePath("AllUseP1SettingsButton")
+copyButton = NodePath("CopyButton")
+colourGroup = NodePath("ColourContainer")
+menuMan = NodePath("../../../MenuManager")
+screenMan = NodePath("..")
+commonGameSettings = ExtResource("17_7dvs3")
+InitialHoverNode = NodePath("ColourContainer/Button")
+
+[node name="Title" type="Label" parent="UILayer/MenuScreenManager/MultiplayerPlayerScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -60.0
+offset_top = 25.0
+offset_right = 60.0
+offset_bottom = 48.0
+grow_horizontal = 2
+text = "PLAYER 1 SETTINGS"
+horizontal_alignment = 1
+
+[node name="ColourLabel" type="Label" parent="UILayer/MenuScreenManager/MultiplayerPlayerScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -108.0
+offset_top = -66.0
+offset_right = 86.0
+offset_bottom = -58.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Colours:"
+
+[node name="ColourCount" type="Label" parent="UILayer/MenuScreenManager/MultiplayerPlayerScreen/ColourLabel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -4.0
+offset_right = 23.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.27451)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_outline_size = 3
+theme_override_fonts/font = ExtResource("2_paq13")
+theme_override_font_sizes/font_size = 8
+text = "4/4"
+
+[node name="ColourContainer" type="BoxContainer" parent="UILayer/MenuScreenManager/MultiplayerPlayerScreen" node_paths=PackedStringArray("colourCountLabel", "firstButton")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.0
+offset_top = -54.0
+offset_right = 111.0
+offset_bottom = -33.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+alignment = 1
+script = ExtResource("8_1bveu")
+commonGameSettings = ExtResource("17_7dvs3")
+themeList = ExtResource("14_pe025")
+colourCountLabel = NodePath("../ColourLabel/ColourCount")
+firstButton = NodePath("Button")
+metadata/_edit_group_ = true
+
+[node name="Button" type="Button" parent="UILayer/MenuScreenManager/MultiplayerPlayerScreen/ColourContainer"]
+custom_minimum_size = Vector2(20, 21)
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_rwg2g")
+toggle_mode = true
+
+[node name="Sprite2D" type="Sprite2D" parent="UILayer/MenuScreenManager/MultiplayerPlayerScreen/ColourContainer/Button"]
+position = Vector2(11, 11)
+scale = Vector2(2, 2)
+texture = ExtResource("8_c8gan")
+hframes = 3
+vframes = 10
+
+[node name="VirusLabel" type="Label" parent="UILayer/MenuScreenManager/MultiplayerPlayerScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -29.0
+offset_right = 10.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Virus Level:"
+
+[node name="VirusValue" type="Label" parent="UILayer/MenuScreenManager/MultiplayerPlayerScreen/VirusLabel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 36.0
+offset_top = -4.0
+offset_right = 76.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.27451)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_outline_size = 3
+theme_override_fonts/font = ExtResource("2_paq13")
+theme_override_font_sizes/font_size = 8
+text = "0"
+
+[node name="VirusSlider" parent="UILayer/MenuScreenManager/MultiplayerPlayerScreen" node_paths=PackedStringArray("numberLabel") instance=ExtResource("4_kvqyp")]
+layout_mode = 1
+offset_left = -111.0
+offset_top = -18.0
+offset_right = 111.0
+offset_bottom = 0.0
+tick_count = 21
+ticks_on_borders = true
+settingName = &"InitialVirusLevel"
+numberLabel = NodePath("../VirusLabel/VirusValue")
+
+[node name="GameplayLabel" type="Label" parent="UILayer/MenuScreenManager/MultiplayerPlayerScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.0
+offset_top = 3.0
+offset_right = 1.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Gameplay Style"
+
+[node name="GameplayScrollContainer" parent="UILayer/MenuScreenManager/MultiplayerPlayerScreen" instance=ExtResource("10_3cebr")]
+layout_mode = 1
+offset_left = -112.0
+offset_top = 14.0
+offset_right = 112.0
+offset_bottom = 40.0
+
+[node name="GameplayContainer" parent="UILayer/MenuScreenManager/MultiplayerPlayerScreen/GameplayScrollContainer/MarginContainer" index="0" node_paths=PackedStringArray("colourGroup")]
+script = ExtResource("21_wrncj")
+colourGroup = NodePath("../../../ColourContainer")
+
+[node name="PopUpButton" parent="UILayer/MenuScreenManager/MultiplayerPlayerScreen" node_paths=PackedStringArray("popUpGroup") instance=ExtResource("19_utcow")]
+layout_mode = 1
+anchors_preset = 8
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 2.0
+offset_top = 0.0
+offset_right = 14.0
+offset_bottom = 14.0
+grow_vertical = 2
+title = "GAMEPLAY STYLE"
+description = "Modern: Has hold slot and generous lock delay
+
+Classic: Gameplay closer to older Dr. Mario games
+
+Quad: Modern with 4 colours
+
+Items: Modern with power-ups
+
+Custom: Use custom game rules"
+alignDescToLeft = true
+popUpGroup = NodePath("../../../PopUpGroup")
+
+[node name="SpeedLabel" type="Label" parent="UILayer/MenuScreenManager/MultiplayerPlayerScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.0
+offset_top = 44.0
+offset_right = 9.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Fall Speed"
+
+[node name="SpeedContainer" type="BoxContainer" parent="UILayer/MenuScreenManager/MultiplayerPlayerScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = 56.0
+offset_right = 112.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("5_vf7kc")
+settingName = &"SpeedLevel"
+commonGameSettings = ExtResource("17_7dvs3")
+metadata/_edit_group_ = true
+
+[node name="Button" parent="UILayer/MenuScreenManager/MultiplayerPlayerScreen/SpeedContainer" instance=ExtResource("7_a10ok")]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../../NextButton")
+button_pressed = true
+text = "LOW"
+
+[node name="Button2" parent="UILayer/MenuScreenManager/MultiplayerPlayerScreen/SpeedContainer" instance=ExtResource("7_a10ok")]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../../NextButton")
+text = "MEDIUM"
+value = 1
+
+[node name="Button3" parent="UILayer/MenuScreenManager/MultiplayerPlayerScreen/SpeedContainer" instance=ExtResource("7_a10ok")]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../../NextButton")
+text = "HIGH"
+value = 2
+
+[node name="BackButton" type="Button" parent="UILayer/MenuScreenManager/MultiplayerPlayerScreen"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = -29.0
+offset_right = 71.0
+offset_bottom = -7.0
+grow_vertical = 0
+text = "BACK"
+icon = ExtResource("8_3vacb")
+
+[node name="NextButton" type="Button" parent="UILayer/MenuScreenManager/MultiplayerPlayerScreen"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -71.0
+offset_top = -29.0
+offset_right = -7.0
+offset_bottom = -7.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "NEXT"
+
+[node name="AllUseP1SettingsButton" type="Button" parent="UILayer/MenuScreenManager/MultiplayerPlayerScreen"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -52.0
+offset_top = -30.0
+offset_right = 52.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_neighbor_left = NodePath("../BackButton")
+text = "All use the
+same & START"
+
+[node name="CopyButton" type="Button" parent="UILayer/MenuScreenManager/MultiplayerPlayerScreen"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -52.0
+offset_top = -30.0
+offset_right = 52.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_paq13")
+theme_override_font_sizes/font_size = 8
+text = "COPY P1"
+
+[node name="MultiplayerCommonScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_ig0jp")
+InitialHoverNode = NodePath("ThemeScrollContainer/MarginContainer/ThemeContainer/Button")
+
+[node name="Title" type="Label" parent="UILayer/MenuScreenManager/MultiplayerCommonScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -71.0
+offset_top = 25.0
+offset_right = 70.0
+offset_bottom = 33.0
+grow_horizontal = 2
+text = "VISUALS & SOUND"
+horizontal_alignment = 1
+
+[node name="ThemePreview" type="Control" parent="UILayer/MenuScreenManager/MultiplayerCommonScreen" node_paths=PackedStringArray("bg", "jar", "virus", "pill", "pill2")]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -71.0
+offset_right = 48.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("15_s085x")
+bg = NodePath("BG")
+jar = NodePath("Jar")
+virus = NodePath("Virus")
+pill = NodePath("Pill")
+pill2 = NodePath("Pill2")
+themeList = ExtResource("14_pe025")
+commonGameSettings = ExtResource("17_7dvs3")
+metadata/_edit_group_ = true
+
+[node name="BG" type="TextureRect" parent="UILayer/MenuScreenManager/MultiplayerCommonScreen/ThemePreview"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_02jdi")
+stretch_mode = 1
+
+[node name="Jar" type="TextureRect" parent="UILayer/MenuScreenManager/MultiplayerCommonScreen/ThemePreview"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = -8.0
+offset_right = 88.0
+offset_bottom = 168.0
+texture = ExtResource("16_82dxj")
+
+[node name="Virus" type="Sprite2D" parent="UILayer/MenuScreenManager/MultiplayerCommonScreen/ThemePreview"]
+position = Vector2(32, 48)
+scale = Vector2(2, 2)
+texture = ExtResource("8_c8gan")
+hframes = 3
+vframes = 10
+frame = 3
+
+[node name="Pill" type="Sprite2D" parent="UILayer/MenuScreenManager/MultiplayerCommonScreen/ThemePreview"]
+position = Vector2(50, 48)
+scale = Vector2(2, 2)
+texture = ExtResource("17_h5mjb")
+hframes = 6
+vframes = 10
+frame = 12
+
+[node name="Pill2" type="Sprite2D" parent="UILayer/MenuScreenManager/MultiplayerCommonScreen/ThemePreview"]
+position = Vector2(66, 48)
+scale = Vector2(2, 2)
+texture = ExtResource("17_h5mjb")
+hframes = 6
+vframes = 10
+frame = 1
+
+[node name="ThemeLabel" type="Label" parent="UILayer/MenuScreenManager/MultiplayerCommonScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = -9.0
+offset_right = -72.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Theme"
+
+[node name="ThemeScrollContainer" parent="UILayer/MenuScreenManager/MultiplayerCommonScreen" instance=ExtResource("19_b6r2d")]
+layout_mode = 1
+offset_left = -112.0
+offset_top = 3.0
+offset_right = 112.0
+offset_bottom = 37.0
+
+[node name="ThemeContainer" parent="UILayer/MenuScreenManager/MultiplayerCommonScreen/ThemeScrollContainer/MarginContainer" index="0" node_paths=PackedStringArray("themePreview", "colourGroup")]
+themePreview = NodePath("../../../ThemePreview")
+colourGroup = NodePath("../../../../MultiplayerPlayerScreen/ColourContainer")
+
+[node name="MusicLabel" type="Label" parent="UILayer/MenuScreenManager/MultiplayerCommonScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.0
+offset_top = 42.0
+offset_right = 9.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Music"
+
+[node name="MusicContainer" type="BoxContainer" parent="UILayer/MenuScreenManager/MultiplayerCommonScreen" node_paths=PackedStringArray("fallBackHighlightButton")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = 55.0
+offset_right = 112.0
+offset_bottom = 71.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("5_vf7kc")
+settingName = &"Music"
+isCommonSetting = true
+commonGameSettings = ExtResource("17_7dvs3")
+fallBackHighlightButton = NodePath("Button3")
+metadata/_edit_group_ = true
+
+[node name="Button" parent="UILayer/MenuScreenManager/MultiplayerCommonScreen/MusicContainer" instance=ExtResource("7_a10ok")]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../../NextButton")
+button_pressed = true
+text = "FEVER"
+value = -1
+
+[node name="Button2" parent="UILayer/MenuScreenManager/MultiplayerCommonScreen/MusicContainer" instance=ExtResource("7_a10ok")]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../../NextButton")
+text = "CHILL"
+value = -2
+
+[node name="Button3" parent="UILayer/MenuScreenManager/MultiplayerCommonScreen/MusicContainer" instance=ExtResource("7_a10ok")]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../../NextButton")
+text = "MORE!"
+value = -3
+
+[node name="Button5" parent="UILayer/MenuScreenManager/MultiplayerCommonScreen/MusicContainer" instance=ExtResource("7_a10ok")]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../../NextButton")
+text = "???"
+value = -4
+
+[node name="Button4" parent="UILayer/MenuScreenManager/MultiplayerCommonScreen/MusicContainer" instance=ExtResource("7_a10ok")]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../../NextButton")
+text = "OFF"
+
+[node name="BackButton" type="Button" parent="UILayer/MenuScreenManager/MultiplayerCommonScreen"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = -29.0
+offset_right = 71.0
+offset_bottom = -7.0
+grow_vertical = 0
+focus_neighbor_right = NodePath("../NextButton")
+text = "BACK"
+icon = ExtResource("8_3vacb")
+
+[node name="NextButton" type="Button" parent="UILayer/MenuScreenManager/MultiplayerCommonScreen"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -71.0
+offset_top = -29.0
+offset_right = -7.0
+offset_bottom = -7.0
+grow_horizontal = 0
+grow_vertical = 0
+focus_neighbor_left = NodePath("../BackButton")
+text = "NEXT"
+
+[node name="HelpScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("20_w70yh")
+InitialHoverNode = NodePath("BackButton")
+
+[node name="Title" type="Label" parent="UILayer/MenuScreenManager/HelpScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -60.0
+offset_top = 7.0
+offset_right = 60.0
+offset_bottom = 15.0
+grow_horizontal = 2
+text = "HOW TO PLAY"
+horizontal_alignment = 1
+
+[node name="PageTitle" type="Label" parent="UILayer/MenuScreenManager/HelpScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.0
+offset_top = 83.0
+offset_right = 118.0
+offset_bottom = 91.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "1. Intro"
+horizontal_alignment = 2
+
+[node name="HelpPanel" type="Panel" parent="UILayer/MenuScreenManager/HelpScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -121.0
+offset_top = -91.0
+offset_right = 121.0
+offset_bottom = 78.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PageContainer" type="Control" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel" node_paths=PackedStringArray("pageTitleLabel", "pageNumberLabel")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("19_x230w")
+pageTitleLabel = NodePath("../../PageTitle")
+pageNumberLabel = NodePath("../PageNumber")
+showNumberOnTitle = true
+
+[node name="PageLabel" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 3.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Welcome to Dr. Mario Mania!
+
+This handy guide will teach you the basics of the game."
+autowrap_mode = 3
+script = ExtResource("20_ahywv")
+title = "Intro"
+
+[node name="ControlsContainer" type="Control" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel" node_paths=PackedStringArray("RotateUpKeyboardGroups", "HardDropUpKeyboardGroups", "NoneUpControllerGroups", "HardDropUpControllerGroups")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("37_mg67h")
+RotateUpKeyboardGroups = [NodePath("ArrowControls/UpRotateGroup"), NodePath("WASDControls/UpRotateGroup")]
+HardDropUpKeyboardGroups = [NodePath("ArrowControls/UpHardDropGroup"), NodePath("WASDControls/UpHardDropGroup")]
+NoneUpControllerGroups = [NodePath("ControllerControls/UpNoneGroup")]
+HardDropUpControllerGroups = [NodePath("ControllerControls/UpHardDropGroup")]
+commonGameSettings = ExtResource("17_7dvs3")
+
+[node name="ArrowControls" type="Control" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("20_ahywv")
+title = "Arrows"
+
+[node name="UpRotateGroup" type="Control" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Z" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpRotateGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -101.0
+offset_top = -85.0
+offset_right = -86.0
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("21_8jx2b")
+
+[node name="RotateArrow" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpRotateGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -115.0
+offset_top = -84.0
+offset_right = -103.0
+offset_bottom = -71.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("22_112wb")
+
+[node name="RotateArrow2" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpRotateGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -66.0
+offset_top = -84.0
+offset_right = -54.0
+offset_bottom = -71.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("22_112wb")
+flip_h = true
+
+[node name="X" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpRotateGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -83.0
+offset_top = -85.0
+offset_right = -68.0
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("23_ni286")
+
+[node name="C" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpRotateGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -41.0
+offset_top = -85.0
+offset_right = -26.0
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("24_a4sbe")
+
+[node name="Space" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpRotateGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -88.0
+offset_top = -51.0
+offset_right = -41.0
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("25_axnmw")
+
+[node name="Arrow" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpRotateGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 42.0
+offset_top = -67.0
+offset_right = 57.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("25_i3gg0")
+flip_v = true
+
+[node name="Arrow2" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpRotateGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 42.0
+offset_top = -84.0
+offset_right = 57.0
+offset_bottom = -69.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("25_i3gg0")
+
+[node name="Arrow3" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpRotateGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 74.0
+offset_top = -67.0
+offset_right = 89.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 1.5708
+texture = ExtResource("25_i3gg0")
+
+[node name="Arrow4" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpRotateGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = -52.0
+offset_right = 40.0
+offset_bottom = -37.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = -1.5708
+texture = ExtResource("25_i3gg0")
+
+[node name="Label" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpRotateGroup"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 63.0
+offset_right = 60.0
+offset_bottom = 71.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Rotate"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpRotateGroup"]
+layout_mode = 0
+offset_left = 146.0
+offset_top = 64.0
+offset_right = 194.0
+offset_bottom = 72.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Rotate"
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpRotateGroup"]
+layout_mode = 0
+offset_left = 111.0
+offset_top = 95.0
+offset_right = 143.0
+offset_bottom = 103.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Move"
+horizontal_alignment = 2
+
+[node name="Label6" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpRotateGroup"]
+layout_mode = 0
+offset_left = 197.0
+offset_top = 95.0
+offset_right = 229.0
+offset_bottom = 103.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Move"
+
+[node name="Label7" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpRotateGroup"]
+layout_mode = 0
+offset_left = 133.0
+offset_top = 111.0
+offset_right = 205.0
+offset_bottom = 119.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Soft Drop"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpRotateGroup"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 63.0
+offset_right = 103.0
+offset_bottom = 71.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Hold"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpRotateGroup"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 97.0
+offset_right = 92.0
+offset_bottom = 105.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Hard Drop"
+horizontal_alignment = 1
+
+[node name="UpHardDropGroup" type="Control" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Z" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpHardDropGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -101.0
+offset_top = -72.0
+offset_right = -86.0
+offset_bottom = -57.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("21_8jx2b")
+
+[node name="RotateArrow" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpHardDropGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -115.0
+offset_top = -71.0
+offset_right = -103.0
+offset_bottom = -58.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("22_112wb")
+
+[node name="RotateArrow2" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpHardDropGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -66.0
+offset_top = -71.0
+offset_right = -54.0
+offset_bottom = -58.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("22_112wb")
+flip_h = true
+
+[node name="X" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpHardDropGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -83.0
+offset_top = -72.0
+offset_right = -68.0
+offset_bottom = -57.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("23_ni286")
+
+[node name="C" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpHardDropGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -41.0
+offset_top = -72.0
+offset_right = -26.0
+offset_bottom = -57.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("24_a4sbe")
+
+[node name="Arrow" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpHardDropGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 42.0
+offset_top = -67.0
+offset_right = 57.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("25_i3gg0")
+flip_v = true
+
+[node name="Arrow2" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpHardDropGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 42.0
+offset_top = -84.0
+offset_right = 57.0
+offset_bottom = -69.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("25_i3gg0")
+
+[node name="Arrow3" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpHardDropGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 74.0
+offset_top = -67.0
+offset_right = 89.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 1.5708
+texture = ExtResource("25_i3gg0")
+
+[node name="Arrow4" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpHardDropGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = -52.0
+offset_right = 40.0
+offset_bottom = -37.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = -1.5708
+texture = ExtResource("25_i3gg0")
+
+[node name="Label" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpHardDropGroup"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 76.0
+offset_right = 60.0
+offset_bottom = 84.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Rotate"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpHardDropGroup"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 76.0
+offset_right = 103.0
+offset_bottom = 84.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Hold"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpHardDropGroup"]
+layout_mode = 0
+offset_left = 133.0
+offset_top = 64.0
+offset_right = 205.0
+offset_bottom = 72.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Hard Drop"
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpHardDropGroup"]
+layout_mode = 0
+offset_left = 111.0
+offset_top = 95.0
+offset_right = 143.0
+offset_bottom = 103.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Move"
+horizontal_alignment = 2
+
+[node name="Label6" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpHardDropGroup"]
+layout_mode = 0
+offset_left = 197.0
+offset_top = 95.0
+offset_right = 229.0
+offset_bottom = 103.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Move"
+
+[node name="Label7" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ArrowControls/UpHardDropGroup"]
+layout_mode = 0
+offset_left = 133.0
+offset_top = 111.0
+offset_right = 205.0
+offset_bottom = 119.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Soft Drop"
+horizontal_alignment = 1
+
+[node name="WASDControls" type="Control" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("20_ahywv")
+title = "WASD"
+
+[node name="UpRotateGroup" type="Control" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Z" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpRotateGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 63.0
+offset_top = -84.0
+offset_right = 78.0
+offset_bottom = -69.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("30_20cb7")
+
+[node name="RotateArrow" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpRotateGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 49.0
+offset_top = -83.0
+offset_right = 61.0
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("22_112wb")
+
+[node name="RotateArrow2" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpRotateGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 98.0
+offset_top = -83.0
+offset_right = 110.0
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("22_112wb")
+flip_h = true
+
+[node name="X" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpRotateGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 81.0
+offset_top = -84.0
+offset_right = 96.0
+offset_bottom = -69.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("31_wnhrj")
+
+[node name="C" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpRotateGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 21.0
+offset_top = -84.0
+offset_right = 36.0
+offset_bottom = -69.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("32_56hby")
+
+[node name="Space" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpRotateGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 34.0
+offset_top = -50.0
+offset_right = 81.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("25_axnmw")
+
+[node name="Arrow" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpRotateGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -63.0
+offset_top = -67.0
+offset_right = -48.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("33_ori7v")
+
+[node name="Arrow2" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpRotateGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -63.0
+offset_top = -84.0
+offset_right = -48.0
+offset_bottom = -69.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("34_tmdq4")
+
+[node name="Arrow3" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpRotateGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -46.0
+offset_top = -67.0
+offset_right = -31.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("35_41a4v")
+
+[node name="Arrow4" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpRotateGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -67.0
+offset_right = -65.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("36_d3ma7")
+
+[node name="Label" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpRotateGroup"]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 64.0
+offset_right = 224.0
+offset_bottom = 72.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Rotate"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpRotateGroup"]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 64.0
+offset_right = 89.0
+offset_bottom = 72.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Rotate"
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpRotateGroup"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 95.0
+offset_right = 38.0
+offset_bottom = 103.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Move"
+horizontal_alignment = 2
+
+[node name="Label6" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpRotateGroup"]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 95.0
+offset_right = 124.0
+offset_bottom = 103.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Move"
+
+[node name="Label7" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpRotateGroup"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 111.0
+offset_right = 100.0
+offset_bottom = 119.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Soft Drop"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpRotateGroup"]
+layout_mode = 0
+offset_left = 133.0
+offset_top = 64.0
+offset_right = 165.0
+offset_bottom = 72.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Hold"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpRotateGroup"]
+layout_mode = 0
+offset_left = 142.0
+offset_top = 98.0
+offset_right = 214.0
+offset_bottom = 106.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Hard Drop"
+horizontal_alignment = 1
+
+[node name="UpHardDropGroup" type="Control" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Z" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpHardDropGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 63.0
+offset_top = -72.0
+offset_right = 78.0
+offset_bottom = -57.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("30_20cb7")
+
+[node name="RotateArrow" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpHardDropGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 49.0
+offset_top = -71.0
+offset_right = 61.0
+offset_bottom = -58.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("22_112wb")
+
+[node name="RotateArrow2" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpHardDropGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 98.0
+offset_top = -71.0
+offset_right = 110.0
+offset_bottom = -58.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("22_112wb")
+flip_h = true
+
+[node name="X" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpHardDropGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 81.0
+offset_top = -72.0
+offset_right = 96.0
+offset_bottom = -57.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("31_wnhrj")
+
+[node name="C" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpHardDropGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 21.0
+offset_top = -72.0
+offset_right = 36.0
+offset_bottom = -57.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("32_56hby")
+
+[node name="Arrow" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpHardDropGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -63.0
+offset_top = -67.0
+offset_right = -48.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("33_ori7v")
+
+[node name="Arrow2" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpHardDropGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -63.0
+offset_top = -84.0
+offset_right = -48.0
+offset_bottom = -69.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("34_tmdq4")
+
+[node name="Arrow3" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpHardDropGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -46.0
+offset_top = -67.0
+offset_right = -31.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("35_41a4v")
+
+[node name="Arrow4" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpHardDropGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -67.0
+offset_right = -65.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("36_d3ma7")
+
+[node name="Label" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpHardDropGroup"]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 76.0
+offset_right = 224.0
+offset_bottom = 84.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Rotate"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpHardDropGroup"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 64.0
+offset_right = 100.0
+offset_bottom = 72.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Hard Drop"
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpHardDropGroup"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 95.0
+offset_right = 38.0
+offset_bottom = 103.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Move"
+horizontal_alignment = 2
+
+[node name="Label6" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpHardDropGroup"]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 95.0
+offset_right = 124.0
+offset_bottom = 103.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Move"
+
+[node name="Label7" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpHardDropGroup"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 111.0
+offset_right = 100.0
+offset_bottom = 119.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Soft Drop"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/WASDControls/UpHardDropGroup"]
+layout_mode = 0
+offset_left = 133.0
+offset_top = 76.0
+offset_right = 165.0
+offset_bottom = 84.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Hold"
+horizontal_alignment = 1
+
+[node name="ControllerControls" type="Control" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("20_ahywv")
+title = "Controller"
+
+[node name="UpNoneGroup" type="Control" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ControllerControls"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RotateArrow" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ControllerControls/UpNoneGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 57.0
+offset_top = -35.0
+offset_right = 69.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = -1.5708
+texture = ExtResource("22_112wb")
+
+[node name="RotateArrow2" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ControllerControls/UpNoneGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 76.0
+offset_top = -75.0
+offset_right = 88.0
+offset_bottom = -62.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("22_112wb")
+flip_h = true
+
+[node name="C" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ControllerControls/UpNoneGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -32.0
+offset_right = 20.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("50_l2c7j")
+
+[node name="Dpad" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ControllerControls/UpNoneGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -95.0
+offset_right = -32.0
+offset_bottom = -47.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("50_wa3lo")
+flip_v = true
+
+[node name="Dpad2" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ControllerControls/UpNoneGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 26.0
+offset_top = -95.0
+offset_right = 74.0
+offset_bottom = -47.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("52_joary")
+flip_v = true
+
+[node name="Label" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ControllerControls/UpNoneGroup"]
+layout_mode = 0
+offset_left = 181.0
+offset_top = 100.0
+offset_right = 229.0
+offset_bottom = 108.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Rotate"
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ControllerControls/UpNoneGroup"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 84.0
+offset_right = 38.0
+offset_bottom = 92.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Move"
+horizontal_alignment = 2
+
+[node name="Label6" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ControllerControls/UpNoneGroup"]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 84.0
+offset_right = 124.0
+offset_bottom = 92.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Move"
+
+[node name="Label7" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ControllerControls/UpNoneGroup"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 115.0
+offset_right = 100.0
+offset_bottom = 123.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Soft Drop"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ControllerControls/UpNoneGroup"]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 115.0
+offset_right = 149.0
+offset_bottom = 123.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Hold"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ControllerControls/UpNoneGroup"]
+layout_mode = 0
+offset_left = 133.0
+offset_top = 53.0
+offset_right = 205.0
+offset_bottom = 61.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Hard Drop"
+horizontal_alignment = 1
+
+[node name="UpHardDropGroup" type="Control" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ControllerControls"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RotateArrow" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ControllerControls/UpHardDropGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 57.0
+offset_top = -35.0
+offset_right = 69.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = -1.5708
+texture = ExtResource("22_112wb")
+
+[node name="RotateArrow2" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ControllerControls/UpHardDropGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 76.0
+offset_top = -75.0
+offset_right = 88.0
+offset_bottom = -62.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("22_112wb")
+flip_h = true
+
+[node name="C" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ControllerControls/UpHardDropGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -32.0
+offset_right = 20.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("50_l2c7j")
+
+[node name="Dpad" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ControllerControls/UpHardDropGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -95.0
+offset_right = -32.0
+offset_bottom = -47.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("50_wa3lo")
+flip_v = true
+
+[node name="Dpad2" type="TextureRect" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ControllerControls/UpHardDropGroup"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 26.0
+offset_top = -95.0
+offset_right = 74.0
+offset_bottom = -47.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("52_joary")
+flip_v = true
+
+[node name="Label" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ControllerControls/UpHardDropGroup"]
+layout_mode = 0
+offset_left = 181.0
+offset_top = 100.0
+offset_right = 229.0
+offset_bottom = 108.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Rotate"
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ControllerControls/UpHardDropGroup"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 84.0
+offset_right = 38.0
+offset_bottom = 92.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Move"
+horizontal_alignment = 2
+
+[node name="Label6" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ControllerControls/UpHardDropGroup"]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 84.0
+offset_right = 124.0
+offset_bottom = 92.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Move"
+
+[node name="Label7" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ControllerControls/UpHardDropGroup"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 115.0
+offset_right = 100.0
+offset_bottom = 123.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Soft Drop"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ControllerControls/UpHardDropGroup"]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 115.0
+offset_right = 149.0
+offset_bottom = 123.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Hold"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer/ControllerControls/UpHardDropGroup"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 53.0
+offset_right = 100.0
+offset_bottom = 61.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Hard Drop"
+horizontal_alignment = 1
+
+[node name="ControlsButton" type="Button" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -19.0
+offset_right = 24.0
+offset_bottom = 1.0
+grow_vertical = 0
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_8bdlw")
+icon = ExtResource("21_4po7x")
+
+[node name="ControlsButton2" type="Button" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 26.0
+offset_top = -19.0
+offset_right = 51.0
+offset_bottom = 1.0
+grow_vertical = 0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_8bdlw")
+icon = ExtResource("22_rvc21")
+
+[node name="ControlsButton3" type="Button" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 53.0
+offset_top = -19.0
+offset_right = 78.0
+offset_bottom = 1.0
+grow_vertical = 0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_8bdlw")
+icon = ExtResource("23_gcu0b")
+
+[node name="PageLabel2" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 3.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "The aim of the game is to clear out all the viruses inside of a jar using pills.
+
+Pill are made out of 2 segments with randomised colours. They will fall from the top of the jar one at a time.
+
+You can move falling pills sideways, rotate them, or move them downwards faster (soft-dropping)."
+autowrap_mode = 3
+script = ExtResource("20_ahywv")
+title = "Pills"
+
+[node name="PageLabel3" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 3.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "If at least 4 pill segments or viruses of the same colour match in a row or column, they will be eliminated from the jar.
+
+Place your pills carefully to clear out all the viruses!"
+autowrap_mode = 3
+script = ExtResource("20_ahywv")
+title = "Matching"
+
+[node name="PageLabel4" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 3.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "If pills or viruses get cleared causing a pill to remain in mid-air, it will be affected by gravity and fall.
+
+You do not have direct control over pills in this state, but if you plan ahead, you could cause a chain reaction of multiple matches in a single move!"
+autowrap_mode = 3
+script = ExtResource("20_ahywv")
+title = "Avalanche"
+
+[node name="PageLabel5" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 3.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "The more viruses you defeat in a single move,
+the more you'll be rewarded for each virus in that move.
+
+Try to aim for a high score!"
+autowrap_mode = 3
+script = ExtResource("20_ahywv")
+title = "Scoring"
+
+[node name="PageLabel6" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 3.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "As the game progresses, the speed of the falling pills will increase.
+
+If you manage to clear out all of the viruses, you'll proceed onto the next level.
+
+If you block the top of the jar where pills start falling from, then the game will be over."
+autowrap_mode = 3
+script = ExtResource("20_ahywv")
+title = "Win/Lose"
+
+[node name="PageLabel7" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 3.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Before starting a game in classic mode, you'll be met with various options allowing you to customise the game!
+
+You can choose between how many viruses to start of with, how fast pills should fall, different gamemodes, including making your own!
+
+There are also several visual themes and music tracks to choose from!"
+autowrap_mode = 3
+script = ExtResource("20_ahywv")
+title = "Customisation"
+
+[node name="PageNumber" type="Label" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -46.0
+offset_top = -15.0
+offset_right = -22.0
+offset_bottom = -7.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "0/0"
+
+[node name="PreviousButton" type="Button" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -66.0
+offset_top = -19.0
+offset_right = -50.0
+offset_bottom = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "<"
+
+[node name="NextButton" type="Button" parent="UILayer/MenuScreenManager/HelpScreen/HelpPanel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -19.0
+offset_top = -19.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+text = ">"
+
+[node name="BackButton" type="Button" parent="UILayer/MenuScreenManager/HelpScreen"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = -29.0
+offset_right = 71.0
+offset_bottom = -7.0
+grow_vertical = 0
+text = "BACK"
+icon = ExtResource("8_3vacb")
+
+[node name="CreditsScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("20_w70yh")
+InitialHoverNode = NodePath("BackButton")
+
+[node name="Title" type="Label" parent="UILayer/MenuScreenManager/CreditsScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -60.0
+offset_top = 17.0
+offset_right = 60.0
+offset_bottom = 25.0
+grow_horizontal = 2
+text = "CREDITS"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="UILayer/MenuScreenManager/CreditsScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -124.0
+offset_top = -76.0
+offset_right = 124.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UILayer/MenuScreenManager/CreditsScreen/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UILayer/MenuScreenManager/CreditsScreen/Panel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 2
+
+[node name="Credits" type="Label" parent="UILayer/MenuScreenManager/CreditsScreen/Panel/ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "Fan game created by Toadfan
+
+Original concept, characters, etc created by Nintendo
+
+Music from Nintendo and SEGA
+
+Dr. Mario gameplay documented by harddrop.com, wiki.drmar.io and Mario Wiki
+
+\"Press Start 2P\" font by Codeman38
+\"Early GameBoy\" font by Jimmy Campbell
+
+Ripped sprites from Mario Wiki, The Spriters Resource and mariomayhem.com
+
+WhatsApp theme inspired by the \"Dr. WhatsApp\" Smash Bros mod by TheHaya
+
+Game created with the Godot game engine"
+autowrap_mode = 2
+
+[node name="BackButton" type="Button" parent="UILayer/MenuScreenManager/CreditsScreen"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = -29.0
+offset_right = 71.0
+offset_bottom = -7.0
+grow_vertical = 0
+text = "BACK"
+icon = ExtResource("8_3vacb")
+
+[node name="LinkButton" type="Button" parent="UILayer/MenuScreenManager/CreditsScreen"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -71.0
+offset_top = -23.0
+offset_right = -7.0
+offset_bottom = -7.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "ITCH.IO"
+
+[node name="MultiplayerInputScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("20_w70yh")
+InitialHoverNode = NodePath("ControlContainer/ControlButton")
+
+[node name="Title" type="Label" parent="UILayer/MenuScreenManager/MultiplayerInputScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -92.0
+offset_top = 25.0
+offset_right = 92.0
+offset_bottom = 33.0
+grow_horizontal = 2
+text = "KEYBOARD OR CONTROLLER?
+(Click to toggle)"
+horizontal_alignment = 1
+
+[node name="HardDropNotice" type="Label" parent="UILayer/MenuScreenManager/MultiplayerInputScreen"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = -45.0
+offset_right = 120.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "NOTE: Hard Drop cannot be used
+while sharing
+the keyboard."
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="UILayer/MenuScreenManager/MultiplayerInputScreen"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = -29.0
+offset_right = 71.0
+offset_bottom = -7.0
+grow_vertical = 0
+text = "BACK"
+icon = ExtResource("8_3vacb")
+
+[node name="NextButton" type="Button" parent="UILayer/MenuScreenManager/MultiplayerInputScreen"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -71.0
+offset_top = -29.0
+offset_right = -7.0
+offset_bottom = -7.0
+grow_horizontal = 0
+grow_vertical = 0
+focus_neighbor_left = NodePath("../BackButton")
+text = "NEXT"
+
+[node name="ControlContainer" type="VBoxContainer" parent="UILayer/MenuScreenManager/MultiplayerInputScreen" node_paths=PackedStringArray("nextButton", "hardDropNotice")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -77.0
+offset_top = -60.0
+offset_right = 77.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("37_ciowp")
+controllerTex = ExtResource("38_yng1m")
+nextButton = NodePath("../NextButton")
+multiControllerTexs = Array[Texture2D]([ExtResource("39_xaoey"), ExtResource("40_r75d5"), ExtResource("41_jlcx5"), ExtResource("42_0a0o2")])
+keyboardTex = ExtResource("43_u5uqi")
+hardDropNotice = NodePath("../HardDropNotice")
+multiKeyboardTexs = Array[Texture2D]([ExtResource("37_c1edi"), ExtResource("45_h2lij"), ExtResource("46_wbmv8"), ExtResource("47_63fox")])
+commonGameSettings = ExtResource("17_7dvs3")
+
+[node name="ControlButton" type="Button" parent="UILayer/MenuScreenManager/MultiplayerInputScreen/ControlContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+focus_neighbor_left = NodePath("../../BackButton")
+focus_neighbor_right = NodePath("../../NextButton")
+text = "PLAYER 1"
+icon = ExtResource("37_c1edi")
+alignment = 0
+icon_alignment = 2
+
+[node name="ControlButton2" type="Button" parent="UILayer/MenuScreenManager/MultiplayerInputScreen/ControlContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+focus_neighbor_left = NodePath("../../BackButton")
+focus_neighbor_right = NodePath("../../NextButton")
+text = "PLAYER 2"
+icon = ExtResource("37_c1edi")
+alignment = 0
+icon_alignment = 2
+
+[node name="ControlButton3" type="Button" parent="UILayer/MenuScreenManager/MultiplayerInputScreen/ControlContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+focus_neighbor_left = NodePath("../../BackButton")
+focus_neighbor_right = NodePath("../../NextButton")
+text = "PLAYER 3"
+icon = ExtResource("37_c1edi")
+alignment = 0
+icon_alignment = 2
+
+[node name="ControlButton4" type="Button" parent="UILayer/MenuScreenManager/MultiplayerInputScreen/ControlContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+focus_neighbor_left = NodePath("../../BackButton")
+focus_neighbor_right = NodePath("../../NextButton")
+text = "PLAYER 4"
+icon = ExtResource("37_c1edi")
+alignment = 0
+icon_alignment = 2
+
+[node name="UserCustomLevelScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("20_w70yh")
+InitialHoverNode = NodePath("HBoxContainer/CreateButton")
+
+[node name="Title" type="Label" parent="UILayer/MenuScreenManager/UserCustomLevelScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -60.0
+offset_top = 13.0
+offset_right = 60.0
+offset_bottom = 21.0
+grow_horizontal = 2
+text = "CUSTOM LEVELS"
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="UILayer/MenuScreenManager/UserCustomLevelScreen"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = -29.0
+offset_right = 71.0
+offset_bottom = -7.0
+grow_vertical = 0
+text = "BACK"
+icon = ExtResource("8_3vacb")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/MenuScreenManager/UserCustomLevelScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -114.0
+offset_top = 28.0
+offset_right = 114.0
+offset_bottom = 44.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="BrowseButton" type="Button" parent="UILayer/MenuScreenManager/UserCustomLevelScreen/HBoxContainer"]
+layout_mode = 2
+text = "BROWSE"
+icon = ExtResource("65_qeijr")
+
+[node name="CreateButton" type="Button" parent="UILayer/MenuScreenManager/UserCustomLevelScreen/HBoxContainer"]
+layout_mode = 2
+text = "CREATE!"
+icon = ExtResource("66_ypj2b")
+
+[node name="ImportButton" type="Button" parent="UILayer/MenuScreenManager/UserCustomLevelScreen/HBoxContainer"]
+layout_mode = 2
+text = "IMPORT"
+icon = ExtResource("66_jhsql")
+
+[node name="CustomLevelPanelContainer" type="ScrollContainer" parent="UILayer/MenuScreenManager/UserCustomLevelScreen" node_paths=PackedStringArray("pageNumberLabel", "createButton", "notificationBox", "menuMan")]
+custom_minimum_size = Vector2(228, 126)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -114.0
+offset_top = -64.0
+offset_right = 114.0
+offset_bottom = 79.0
+grow_horizontal = 2
+grow_vertical = 2
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+script = ExtResource("54_vjxh7")
+customLevelPanelPrefab = ExtResource("56_ydk6g")
+pageNumberLabel = NodePath("../PageNumber")
+createButton = NodePath("../HBoxContainer/CreateButton")
+notificationBox = NodePath("../../../NotificationBox")
+menuMan = NodePath("../../../../MenuManager")
+levelList = ExtResource("55_4q5po")
+commonGameSettings = ExtResource("17_7dvs3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/MenuScreenManager/UserCustomLevelScreen/CustomLevelPanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PageNumber" type="Label" parent="UILayer/MenuScreenManager/UserCustomLevelScreen"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 66.0
+offset_top = -25.0
+offset_right = 100.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 0
+text = "0/0"
+horizontal_alignment = 1
+
+[node name="PreviousButton" type="Button" parent="UILayer/MenuScreenManager/UserCustomLevelScreen"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 51.0
+offset_top = -29.0
+offset_right = 67.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "<"
+
+[node name="NextButton" type="Button" parent="UILayer/MenuScreenManager/UserCustomLevelScreen"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 98.0
+offset_top = -29.0
+offset_right = 114.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 0
+text = ">"
+
+[node name="SettingsScreen" parent="UILayer/MenuScreenManager" instance=ExtResource("58_2hgv7")]
+visible = false
+layout_mode = 1
+
+[node name="Button" parent="UILayer/MenuScreenManager/SettingsScreen/TabButtons" index="0"]
+button_group = SubResource("ButtonGroup_3oko3")
+
+[node name="Button2" parent="UILayer/MenuScreenManager/SettingsScreen/TabButtons" index="1"]
+button_group = SubResource("ButtonGroup_3oko3")
+
+[node name="Button3" parent="UILayer/MenuScreenManager/SettingsScreen/TabButtons" index="2"]
+button_group = SubResource("ButtonGroup_3oko3")
+
+[node name="PopUpButton" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel" index="1" node_paths=PackedStringArray("popUpGroup")]
+popUpGroup = NodePath("../../../../../../PopUpGroup")
+
+[node name="OverrideColourContainer" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel" index="2"]
+doIntialSetup = true
+
+[node name="Button" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="0"]
+button_group = SubResource("ButtonGroup_f08ln")
+
+[node name="Button2" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="1"]
+button_group = SubResource("ButtonGroup_f08ln")
+
+[node name="Button3" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="2"]
+button_group = SubResource("ButtonGroup_f08ln")
+
+[node name="Button4" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="3"]
+button_group = SubResource("ButtonGroup_f08ln")
+
+[node name="ModeSingleScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("20_w70yh")
+InitialHoverNode = NodePath("VBoxContainer/ClassicButton")
+
+[node name="Title" type="Label" parent="UILayer/MenuScreenManager/ModeSingleScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -60.0
+offset_top = 25.0
+offset_right = 60.0
+offset_bottom = 48.0
+grow_horizontal = 2
+text = "GAME MODES"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/MenuScreenManager/ModeSingleScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -50.0
+offset_right = 70.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="ClassicButton" type="Button" parent="UILayer/MenuScreenManager/ModeSingleScreen/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "CLASSIC"
+icon = ExtResource("61_ailxn")
+
+[node name="OfficialLevelsButton" type="Button" parent="UILayer/MenuScreenManager/ModeSingleScreen/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "LEVEL PACKS"
+icon = ExtResource("70_y4wno")
+
+[node name="CustomLevelsButton" type="Button" parent="UILayer/MenuScreenManager/ModeSingleScreen/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "CUSTOM LEVELS"
+icon = ExtResource("61_j0n44")
+
+[node name="BackButton" type="Button" parent="UILayer/MenuScreenManager/ModeSingleScreen"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = -29.0
+offset_right = 71.0
+offset_bottom = -7.0
+grow_vertical = 0
+text = "BACK"
+icon = ExtResource("8_3vacb")
+
+[node name="ModeMultiScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("20_w70yh")
+InitialHoverNode = NodePath("VBoxContainer/VersusButton")
+
+[node name="Title" type="Label" parent="UILayer/MenuScreenManager/ModeMultiScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -60.0
+offset_top = 25.0
+offset_right = 60.0
+offset_bottom = 48.0
+grow_horizontal = 2
+text = "GAME MODES"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/MenuScreenManager/ModeMultiScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -70.0
+offset_right = 70.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="VersusButton" type="Button" parent="UILayer/MenuScreenManager/ModeMultiScreen/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "VERSUS"
+icon = ExtResource("63_fred1")
+
+[node name="OfficialLevelsButton" type="Button" parent="UILayer/MenuScreenManager/ModeMultiScreen/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "LEVEL PACKS"
+icon = ExtResource("70_y4wno")
+
+[node name="CustomLevelsButton" type="Button" parent="UILayer/MenuScreenManager/ModeMultiScreen/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "CUSTOM LEVELS"
+icon = ExtResource("61_j0n44")
+
+[node name="RequiredWinsLabel" type="Label" parent="UILayer/MenuScreenManager/ModeMultiScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.0
+offset_top = 41.0
+offset_right = 9.0
+offset_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Best of:"
+
+[node name="RequiredWinsValue" type="Label" parent="UILayer/MenuScreenManager/ModeMultiScreen/RequiredWinsLabel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = -8.0
+offset_right = 104.0
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.27451)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_outline_size = 3
+theme_override_fonts/font = ExtResource("2_paq13")
+theme_override_font_sizes/font_size = 8
+text = "0"
+
+[node name="RequiredWinsSlider" parent="UILayer/MenuScreenManager/ModeMultiScreen" node_paths=PackedStringArray("numberLabel") instance=ExtResource("4_kvqyp")]
+layout_mode = 1
+offset_top = 51.0
+offset_bottom = 69.0
+focus_neighbor_bottom = NodePath("../JunkPillButton")
+min_value = 1.0
+max_value = 10.0
+value = 3.0
+tick_count = 10
+ticks_on_borders = true
+settingName = &"MultiplayerRequiredWinCount"
+isCommonSetting = true
+numberLabel = NodePath("../RequiredWinsLabel/RequiredWinsValue")
+
+[node name="JunkPillLabel" type="Label" parent="UILayer/MenuScreenManager/ModeMultiScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.0
+offset_top = 72.0
+offset_right = 54.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Junk Pills:"
+
+[node name="JunkPillButton" parent="UILayer/MenuScreenManager/ModeMultiScreen" instance=ExtResource("17_03x8y")]
+layout_mode = 1
+offset_left = 56.0
+offset_top = 67.0
+offset_right = 88.0
+offset_bottom = 83.0
+focus_neighbor_top = NodePath("../RequiredWinsSlider")
+focus_neighbor_bottom = NodePath("../BackButton")
+settingName = &"MultiplayerUseJunkPills"
+isCommonSetting = true
+
+[node name="PopUpButton" parent="UILayer/MenuScreenManager/ModeMultiScreen" node_paths=PackedStringArray("popUpGroup") instance=ExtResource("19_utcow")]
+layout_mode = 1
+anchors_preset = 8
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 92.0
+offset_top = 68.0
+offset_right = 104.0
+offset_bottom = 82.0
+grow_vertical = 2
+focus_neighbor_top = NodePath("../RequiredWinsSlider")
+focus_neighbor_bottom = NodePath("../BackButton")
+title = "JUNK PILLS"
+description = "If this setting is enabled, clearing 2 or more lines in a single move will send \"junk pills\" to a rival to clog up their jar.
+
+This is the standard of official Dr. Mario games."
+popUpGroup = NodePath("../../../PopUpGroup")
+
+[node name="BackButton" type="Button" parent="UILayer/MenuScreenManager/ModeMultiScreen"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = -29.0
+offset_right = 71.0
+offset_bottom = -7.0
+grow_vertical = 0
+focus_neighbor_top = NodePath("../JunkPillButton")
+text = "BACK"
+icon = ExtResource("8_3vacb")
+
+[node name="HighScoreScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_ig0jp")
+InitialHoverNode = NodePath("BackButton")
+
+[node name="Title" type="Label" parent="UILayer/MenuScreenManager/HighScoreScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -60.0
+offset_top = 7.0
+offset_right = 60.0
+offset_bottom = 15.0
+grow_horizontal = 2
+text = "HIGH SCORES"
+horizontal_alignment = 1
+
+[node name="GameplayLabel" type="Label" parent="UILayer/MenuScreenManager/HighScoreScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.0
+offset_top = -90.0
+offset_right = 71.0
+offset_bottom = -82.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Gameplay Style"
+
+[node name="GameplayScrollContainer" parent="UILayer/MenuScreenManager/HighScoreScreen" instance=ExtResource("10_3cebr")]
+layout_mode = 1
+offset_left = -120.0
+offset_top = -79.0
+offset_right = 120.0
+offset_bottom = -53.0
+
+[node name="GameplayContainer" parent="UILayer/MenuScreenManager/HighScoreScreen/GameplayScrollContainer/MarginContainer" index="0" node_paths=PackedStringArray("highScorePanel")]
+script = ExtResource("66_5mwtl")
+highScorePanel = NodePath("../../../HighScorePanel")
+
+[node name="SpeedLabel" type="Label" parent="UILayer/MenuScreenManager/HighScoreScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.0
+offset_top = -47.0
+offset_right = -39.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Fall
+Speed"
+
+[node name="SpeedContainer" type="BoxContainer" parent="UILayer/MenuScreenManager/HighScoreScreen" node_paths=PackedStringArray("highScorePanel")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.0
+offset_top = -23.0
+offset_right = -57.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+script = ExtResource("66_5mwtl")
+highScorePanel = NodePath("../HighScorePanel")
+settingName = &"SpeedLevel"
+commonGameSettings = ExtResource("17_7dvs3")
+metadata/_edit_group_ = true
+
+[node name="Button" parent="UILayer/MenuScreenManager/HighScoreScreen/SpeedContainer" instance=ExtResource("7_a10ok")]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+button_pressed = true
+text = "LOW"
+
+[node name="Button2" parent="UILayer/MenuScreenManager/HighScoreScreen/SpeedContainer" instance=ExtResource("7_a10ok")]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "MEDIUM"
+value = 1
+
+[node name="Button3" parent="UILayer/MenuScreenManager/HighScoreScreen/SpeedContainer" instance=ExtResource("7_a10ok")]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "HIGH"
+value = 2
+
+[node name="ScoreKeepLabel" type="Label" parent="UILayer/MenuScreenManager/HighScoreScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.0
+offset_top = 39.0
+offset_right = -39.0
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Score
+Keep"
+
+[node name="PopUpButton" parent="UILayer/MenuScreenManager/HighScoreScreen" node_paths=PackedStringArray("popUpGroup") instance=ExtResource("19_utcow")]
+layout_mode = 1
+anchors_preset = 8
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -83.0
+offset_top = 63.0
+offset_right = -71.0
+offset_bottom = 77.0
+grow_vertical = 2
+title = "SCORE KEEP"
+description = "Score Keep is when your score doesn't reset when progressing onto the next level.
+
+This is how older Dr. Mario games behave, but scores became level-specific since the Wii installment."
+popUpGroup = NodePath("../../../PopUpGroup")
+
+[node name="ScoreKeepButton" parent="UILayer/MenuScreenManager/HighScoreScreen" node_paths=PackedStringArray("highScorePanel") instance=ExtResource("17_03x8y")]
+layout_mode = 1
+offset_left = -119.0
+offset_top = 62.0
+offset_right = -87.0
+offset_bottom = 78.0
+script = ExtResource("67_bnmyu")
+highScorePanel = NodePath("../HighScorePanel")
+settingName = &"UseScoreKeep"
+isCommonSetting = true
+
+[node name="HighScorePanel" type="Panel" parent="UILayer/MenuScreenManager/HighScoreScreen" node_paths=PackedStringArray("scoresLabel", "scrollContainer")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -53.0
+offset_top = -49.0
+offset_right = 120.0
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("66_q4e3w")
+highScoreList = ExtResource("4_jecqt")
+scoresLabel = NodePath("ScrollContainer/LabelContainer/Label")
+scrollContainer = NodePath("ScrollContainer")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UILayer/MenuScreenManager/HighScoreScreen/HighScorePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="LabelContainer" type="Control" parent="UILayer/MenuScreenManager/HighScoreScreen/HighScorePanel/ScrollContainer"]
+custom_minimum_size = Vector2(0, 445)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="UILayer/MenuScreenManager/HighScoreScreen/HighScorePanel/ScrollContainer/LabelContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "1."
+
+[node name="BackButton" type="Button" parent="UILayer/MenuScreenManager/HighScoreScreen"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = -29.0
+offset_right = 71.0
+offset_bottom = -7.0
+grow_vertical = 0
+text = "BACK"
+icon = ExtResource("8_3vacb")
+
+[node name="OfficialCustomLevelScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("20_w70yh")
+InitialHoverNode = NodePath("HBoxContainer/Button")
+
+[node name="Title" type="Label" parent="UILayer/MenuScreenManager/OfficialCustomLevelScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -60.0
+offset_top = 13.0
+offset_right = 60.0
+offset_bottom = 21.0
+grow_horizontal = 2
+text = "LEVEL PACKS"
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="UILayer/MenuScreenManager/OfficialCustomLevelScreen"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = -29.0
+offset_right = 71.0
+offset_bottom = -7.0
+grow_vertical = 0
+text = "BACK"
+icon = ExtResource("8_3vacb")
+
+[node name="CustomLevelPanelContainer" type="ScrollContainer" parent="UILayer/MenuScreenManager/OfficialCustomLevelScreen" node_paths=PackedStringArray("buttonGroup", "menuMan", "notificationBox")]
+custom_minimum_size = Vector2(228, 126)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -114.0
+offset_top = -64.0
+offset_right = 114.0
+offset_bottom = 79.0
+grow_horizontal = 2
+grow_vertical = 2
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+script = ExtResource("73_febh5")
+officialCustomLevelPanelPrefab = ExtResource("75_nsn7q")
+buttonGroup = NodePath("../HBoxContainer")
+menuMan = NodePath("../../../../MenuManager")
+notificationBox = NodePath("../../../NotificationBox")
+levelList = ExtResource("75_8f8n1")
+userLevelList = ExtResource("55_4q5po")
+highScoreList = ExtResource("4_jecqt")
+commonGameSettings = ExtResource("17_7dvs3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/MenuScreenManager/OfficialCustomLevelScreen/CustomLevelPanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/MenuScreenManager/OfficialCustomLevelScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -114.0
+offset_top = -84.0
+offset_right = 114.0
+offset_bottom = -68.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="UILayer/MenuScreenManager/OfficialCustomLevelScreen/HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_5b5yk")
+text = "PACK 1"
+
+[node name="Button2" type="Button" parent="UILayer/MenuScreenManager/OfficialCustomLevelScreen/HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_5b5yk")
+text = "PACK 2"
+
+[node name="NotificationBox" type="Control" parent="UILayer" node_paths=PackedStringArray("aniPlayer", "audioPlayer", "label")]
+visible = false
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 32.0
+grow_horizontal = 2
+mouse_filter = 2
+script = ExtResource("64_nvfqe")
+aniPlayer = NodePath("AnimationPlayer")
+audioPlayer = NodePath("AudioStreamPlayer")
+label = NodePath("Label")
+
+[node name="ColorRect" type="ColorRect" parent="UILayer/NotificationBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.54902)
+
+[node name="Label" type="Label" parent="UILayer/NotificationBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_right = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Hello! I am a notifcation."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UILayer/NotificationBox"]
+libraries = {
+"": SubResource("AnimationLibrary_xglib")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UILayer/NotificationBox"]
+stream = ExtResource("65_2j87m")
+bus = &"SFX"
+
+[node name="PopUpGroup" parent="UILayer" node_paths=PackedStringArray("screenMan") instance=ExtResource("72_3ij4p")]
+screenMan = NodePath("../MenuScreenManager")
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="BackgroundTex" type="TextureRect" parent="BackgroundLayer"]
+material = ExtResource("5_m231i")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_i5e12")
+stretch_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="BackgroundDarken" type="TextureRect" parent="BackgroundLayer"]
+self_modulate = Color(0, 0, 0, 0.27451)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_i5e12")
+stretch_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="TransitionLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="ScreenTransition" parent="TransitionLayer" instance=ExtResource("3_p7paf")]
+nextScene = "GameScene"
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ilmix")
+volume_db = -4.0
+autoplay = true
+bus = &"Music"
+parameters/looping = true
+
+[node name="MusicPreviewPlayer" parent="." node_paths=PackedStringArray("normalMusicPlayer") instance=ExtResource("80_slce4")]
+bus = &"Music"
+normalMusicPlayer = NodePath("../MusicPlayer")
+
+[connection signal="pressed" from="UILayer/MenuScreenManager/MainScreen/VBoxContainer/1PButton" to="MenuManager" method="SetPlayerCount" binds= [1]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MainScreen/VBoxContainer/1PButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [13]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MainScreen/VBoxContainer/2PButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [5]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MainScreen/QuitButton" to="MenuManager" method="SaveAndQuit"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MainScreen/CreditsButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [9]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MainScreen/HelpButton" to="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer" method="UpdateInputVisuals"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MainScreen/HelpButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [8]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MainScreen/SettingsButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [12]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MainScreen/HighScoresButton" to="UILayer/MenuScreenManager/HighScoreScreen/HighScorePanel" method="UpdateVisuals"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MainScreen/HighScoresButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [15]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/GameplayScreen/GameplayScrollContainer/MarginContainer/GameplayContainer/Button4" to="UILayer/MenuScreenManager" method="SetScreen" binds= [3]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/GameplayScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/GameplayScreen/NextButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [2]]
+[connection signal="focus_entered" from="UILayer/MenuScreenManager/VisualsScreen/MusicContainer/Button" to="MusicPreviewPlayer" method="SetPreviewMusic" binds= [-1]]
+[connection signal="focus_entered" from="UILayer/MenuScreenManager/VisualsScreen/MusicContainer/Button2" to="MusicPreviewPlayer" method="SetPreviewMusic" binds= [-2]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/VisualsScreen/MusicContainer/Button3" to="UILayer/MenuScreenManager" method="SetScreen" binds= [4]]
+[connection signal="focus_entered" from="UILayer/MenuScreenManager/VisualsScreen/MusicContainer/Button4" to="MusicPreviewPlayer" method="SetPreviewMusic" binds= [0]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/VisualsScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/VisualsScreen/StartButton" to="MenuManager" method="StartGame"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/AdvancedSettingsScreen/OkButton" to="UILayer/MenuScreenManager" method="GoBack"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MultiplayerCountScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MultiplayerCountScreen/VBoxContainer/Button2" to="UILayer/MenuScreenManager/MultiplayerCountScreen" method="SetPlayerCount" binds= [2]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MultiplayerCountScreen/VBoxContainer/Button3" to="UILayer/MenuScreenManager/MultiplayerCountScreen" method="SetPlayerCount" binds= [3]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MultiplayerCountScreen/VBoxContainer/Button4" to="UILayer/MenuScreenManager/MultiplayerCountScreen" method="SetPlayerCount" binds= [4]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MultiplayerPlayerScreen/GameplayScrollContainer/MarginContainer/GameplayContainer/Button4" to="UILayer/MenuScreenManager" method="SetScreen" binds= [3]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MultiplayerPlayerScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MultiplayerPlayerScreen/NextButton" to="UILayer/MenuScreenManager/MultiplayerPlayerScreen" method="NextPlayer"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MultiplayerPlayerScreen/AllUseP1SettingsButton" to="UILayer/MenuScreenManager/MultiplayerPlayerScreen" method="AllUseP1SettingsAndStart"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MultiplayerPlayerScreen/CopyButton" to="UILayer/MenuScreenManager/MultiplayerPlayerScreen" method="CopyPlayer1Settings"]
+[connection signal="focus_entered" from="UILayer/MenuScreenManager/MultiplayerCommonScreen/MusicContainer/Button" to="MusicPreviewPlayer" method="SetPreviewMusic" binds= [-1]]
+[connection signal="focus_entered" from="UILayer/MenuScreenManager/MultiplayerCommonScreen/MusicContainer/Button2" to="MusicPreviewPlayer" method="SetPreviewMusic" binds= [-2]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MultiplayerCommonScreen/MusicContainer/Button3" to="UILayer/MenuScreenManager" method="SetScreen" binds= [4]]
+[connection signal="focus_entered" from="UILayer/MenuScreenManager/MultiplayerCommonScreen/MusicContainer/Button4" to="MusicPreviewPlayer" method="SetPreviewMusic" binds= [0]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MultiplayerCommonScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MultiplayerCommonScreen/NextButton" to="MusicPreviewPlayer" method="RestoreNormalMusic"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MultiplayerCommonScreen/NextButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [6]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsButton" to="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer" method="SetPage" binds= [0]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsButton2" to="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer" method="SetPage" binds= [1]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsButton3" to="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer" method="SetPage" binds= [2]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PreviousButton" to="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer" method="PreviousPage"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/HelpScreen/HelpPanel/NextButton" to="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer" method="NextPage"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/HelpScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/CreditsScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/CreditsScreen/LinkButton" to="MenuManager" method="OpenURL" binds= ["https://toadfangames.itch.io/"]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MultiplayerInputScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MultiplayerInputScreen/NextButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [14]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MultiplayerInputScreen/ControlContainer/ControlButton" to="UILayer/MenuScreenManager/MultiplayerInputScreen/ControlContainer" method="ToggleControlMethod" binds= [0]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MultiplayerInputScreen/ControlContainer/ControlButton2" to="UILayer/MenuScreenManager/MultiplayerInputScreen/ControlContainer" method="ToggleControlMethod" binds= [1]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MultiplayerInputScreen/ControlContainer/ControlButton3" to="UILayer/MenuScreenManager/MultiplayerInputScreen/ControlContainer" method="ToggleControlMethod" binds= [2]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MultiplayerInputScreen/ControlContainer/ControlButton4" to="UILayer/MenuScreenManager/MultiplayerInputScreen/ControlContainer" method="ToggleControlMethod" binds= [3]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/UserCustomLevelScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/UserCustomLevelScreen/HBoxContainer/BrowseButton" to="MenuManager" method="OpenURL" binds= ["https://toadfangames.itch.io/dr-mario-mania/community"]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/UserCustomLevelScreen/HBoxContainer/CreateButton" to="MenuManager" method="StartEditor" binds= [-1]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/UserCustomLevelScreen/HBoxContainer/ImportButton" to="UILayer/MenuScreenManager/UserCustomLevelScreen/CustomLevelPanelContainer" method="ImportLevel"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/UserCustomLevelScreen/PreviousButton" to="UILayer/MenuScreenManager/UserCustomLevelScreen/CustomLevelPanelContainer" method="PreviousPage"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/UserCustomLevelScreen/NextButton" to="UILayer/MenuScreenManager/UserCustomLevelScreen/CustomLevelPanelContainer" method="NextPage"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/SettingsScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/ModeSingleScreen/VBoxContainer/ClassicButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [1]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/ModeSingleScreen/VBoxContainer/OfficialLevelsButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [16]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/ModeSingleScreen/VBoxContainer/CustomLevelsButton" to="UILayer/MenuScreenManager/UserCustomLevelScreen/CustomLevelPanelContainer" method="UpdateVisuals"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/ModeSingleScreen/VBoxContainer/CustomLevelsButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [11]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/ModeSingleScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/ModeMultiScreen/VBoxContainer/VersusButton" to="UILayer/MenuScreenManager/MultiplayerPlayerScreen" method="InitialisePlayerConfiguring"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/ModeMultiScreen/VBoxContainer/VersusButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [7]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/ModeMultiScreen/VBoxContainer/OfficialLevelsButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [16]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/ModeMultiScreen/VBoxContainer/CustomLevelsButton" to="UILayer/MenuScreenManager/UserCustomLevelScreen/CustomLevelPanelContainer" method="UpdateVisuals"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/ModeMultiScreen/VBoxContainer/CustomLevelsButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [11]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/ModeMultiScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/HighScoreScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/OfficialCustomLevelScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/OfficialCustomLevelScreen/HBoxContainer/Button" to="UILayer/MenuScreenManager/OfficialCustomLevelScreen/CustomLevelPanelContainer" method="SetPage" binds= [0]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/OfficialCustomLevelScreen/HBoxContainer/Button2" to="UILayer/MenuScreenManager/OfficialCustomLevelScreen/CustomLevelPanelContainer" method="SetPage" binds= [1]]
+
+[editable path="UILayer/MenuScreenManager/GameplayScreen/GameplayScrollContainer"]
+[editable path="UILayer/MenuScreenManager/VisualsScreen/ThemeScrollContainer"]
+[editable path="UILayer/MenuScreenManager/AdvancedSettingsScreen"]
+[editable path="UILayer/MenuScreenManager/AdvancedSettingsScreen/SettingsContainer/BoxContainer/Hold"]
+[editable path="UILayer/MenuScreenManager/AdvancedSettingsScreen/SettingsContainer/BoxContainer/LockDelay"]
+[editable path="UILayer/MenuScreenManager/AdvancedSettingsScreen/SettingsContainer/BoxContainer/FixedFallSpeed"]
+[editable path="UILayer/MenuScreenManager/AdvancedSettingsScreen/SettingsContainer/BoxContainer/SingleColourPills"]
+[editable path="UILayer/MenuScreenManager/AdvancedSettingsScreen/SettingsContainer/BoxContainer/SoftDrop"]
+[editable path="UILayer/MenuScreenManager/AdvancedSettingsScreen/SettingsContainer/BoxContainer/SoftDropLock"]
+[editable path="UILayer/MenuScreenManager/AdvancedSettingsScreen/SettingsContainer/BoxContainer/MatchCheck"]
+[editable path="UILayer/MenuScreenManager/AdvancedSettingsScreen/SettingsContainer/BoxContainer/FasterAutoFall"]
+[editable path="UILayer/MenuScreenManager/MusicScreen"]
+[editable path="UILayer/MenuScreenManager/MultiplayerPlayerScreen/GameplayScrollContainer"]
+[editable path="UILayer/MenuScreenManager/MultiplayerCommonScreen/ThemeScrollContainer"]
+[editable path="UILayer/MenuScreenManager/SettingsScreen"]
+[editable path="UILayer/MenuScreenManager/HighScoreScreen/GameplayScrollContainer"]

@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4pwwg8xgiew0"]
+
+[ext_resource type="Texture2D" uid="uid://dvaxhx6heqeew" path="res://Assets/Sprites/UI/ButtonIcons/InfoButton.png" id="1_ny6ib"]
+[ext_resource type="Script" path="res://Scripts/Menu/PopUpButton.cs" id="1_xv271"]
+
+[node name="PopUpButton" type="Button"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 11.0
+offset_top = -64.0
+offset_right = 23.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+icon = ExtResource("1_ny6ib")
+script = ExtResource("1_xv271")
+title = "that's honestly quite"
+description = "incredible"

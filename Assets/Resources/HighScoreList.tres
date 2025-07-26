@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://62i3k0vvpg7q"]
+
+[ext_resource type="Resource" uid="uid://cwkwokd34qh80" path="res://Assets/Resources/CommonGameSettings.tres" id="1_kuapu"]
+[ext_resource type="Script" path="res://Scripts/Resources/HighScoreList.cs" id="1_reet7"]
+[ext_resource type="Resource" uid="uid://31tismb2r7a" path="res://Assets/Resources/UserCustomLevelList.tres" id="3_8fa43"]
+
+[resource]
+script = ExtResource("1_reet7")
+commonGameSettings = ExtResource("1_kuapu")
+userCustomLevelList = ExtResource("3_8fa43")

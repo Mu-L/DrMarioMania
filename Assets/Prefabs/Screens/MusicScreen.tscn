@@ -1,0 +1,678 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwyo15lik8i87"]
+
+[ext_resource type="Script" path="res://Scripts/Menu/Screens/UpdateableSettingScreen.cs" id="1_5cs2x"]
+[ext_resource type="Script" path="res://Scripts/Menu/GameSettingUI/GameSettingMusicButtonGroup.cs" id="2_eyajr"]
+[ext_resource type="Resource" uid="uid://cwkwokd34qh80" path="res://Assets/Resources/CommonGameSettings.tres" id="3_5vpca"]
+[ext_resource type="PackedScene" uid="uid://cg3ssstpw3jum" path="res://Assets/Prefabs/GameSettingsUI/GameSettingButton.tscn" id="4_vsqyw"]
+
+[node name="MusicScreen" type="Control" node_paths=PackedStringArray("InitialHoverNode")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_5cs2x")
+InitialHoverNode = NodePath("SongCategoryContainer/MarginContainer/SongCategories/FlowContainer16/Button")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -92.0
+offset_top = 14.0
+offset_right = 91.0
+offset_bottom = 22.0
+grow_horizontal = 2
+text = "BACKGROUND MUSIC"
+horizontal_alignment = 1
+
+[node name="SongCategoryContainer" type="ScrollContainer" parent="." node_paths=PackedStringArray("musicScreen")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -118.0
+offset_top = 30.0
+offset_right = 122.0
+offset_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 2
+follow_focus = true
+horizontal_scroll_mode = 0
+script = ExtResource("2_eyajr")
+musicScreen = NodePath("..")
+settingName = &"Music"
+isCommonSetting = true
+commonGameSettings = ExtResource("3_5vpca")
+
+[node name="MarginContainer" type="MarginContainer" parent="SongCategoryContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 1
+
+[node name="SongCategories" type="VBoxContainer" parent="SongCategoryContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="AutoLabel" type="Control" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+custom_minimum_size = Vector2(0, 11)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="CategoryLabel" type="Label" parent="SongCategoryContainer/MarginContainer/SongCategories/AutoLabel"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 241.0
+offset_bottom = 9.0
+text = "Auto (theme-based)"
+
+[node name="FlowContainer16" type="FlowContainer" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+layout_mode = 2
+
+[node name="Button" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer16" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+button_pressed = true
+text = "FEVER"
+value = -1
+
+[node name="Button2" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer16" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "CHILL"
+value = -2
+
+[node name="NESLabel" type="Control" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+custom_minimum_size = Vector2(0, 11)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="CategoryLabel" type="Label" parent="SongCategoryContainer/MarginContainer/SongCategories/NESLabel"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 241.0
+offset_bottom = 9.0
+text = "NES"
+
+[node name="FlowContainer" type="FlowContainer" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+layout_mode = 2
+
+[node name="Button" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+button_pressed = true
+text = "FEVER"
+value = 1
+
+[node name="Button2" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "CHILL"
+value = 2
+
+[node name="GBLabel" type="Control" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+custom_minimum_size = Vector2(0, 11)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="CategoryLabel" type="Label" parent="SongCategoryContainer/MarginContainer/SongCategories/GBLabel"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 241.0
+offset_bottom = 9.0
+text = "Game Boy"
+
+[node name="FlowContainer2" type="FlowContainer" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+layout_mode = 2
+
+[node name="Button" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer2" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "FEVER"
+value = 3
+
+[node name="Button2" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer2" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "CHILL"
+value = 4
+
+[node name="SNESLabel" type="Control" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+custom_minimum_size = Vector2(0, 11)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="CategoryLabel" type="Label" parent="SongCategoryContainer/MarginContainer/SongCategories/SNESLabel"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 241.0
+offset_bottom = 9.0
+text = "SNES"
+
+[node name="FlowContainer3" type="FlowContainer" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+layout_mode = 2
+
+[node name="Button" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer3" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "FEVER"
+value = 5
+
+[node name="Button2" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer3" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "CHILL"
+value = 6
+
+[node name="N64Label" type="Control" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+custom_minimum_size = Vector2(0, 11)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="CategoryLabel" type="Label" parent="SongCategoryContainer/MarginContainer/SongCategories/N64Label"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 241.0
+offset_bottom = 9.0
+text = "N64"
+
+[node name="FlowContainer4" type="FlowContainer" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+layout_mode = 2
+
+[node name="Button" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer4" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "FEVER"
+value = 7
+
+[node name="Button2" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer4" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "CHILL"
+value = 8
+
+[node name="Button3" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer4" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "CUBE"
+value = 9
+
+[node name="Button4" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer4" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "QUE QUE"
+value = 10
+
+[node name="GBALabel" type="Control" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+custom_minimum_size = Vector2(0, 11)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="CategoryLabel" type="Label" parent="SongCategoryContainer/MarginContainer/SongCategories/GBALabel"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 241.0
+offset_bottom = 9.0
+text = "GBA"
+
+[node name="FlowContainer5" type="FlowContainer" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+layout_mode = 2
+
+[node name="Button" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer5" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "FEVER"
+value = 23
+
+[node name="Button2" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer5" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "CHILL"
+value = 24
+
+[node name="Button3" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer5" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "COUGH"
+value = 25
+
+[node name="Button4" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer5" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "SNEEZE"
+value = 26
+
+[node name="WiiLabel" type="Control" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+custom_minimum_size = Vector2(0, 11)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="CategoryLabel" type="Label" parent="SongCategoryContainer/MarginContainer/SongCategories/WiiLabel"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 241.0
+offset_bottom = 9.0
+text = "Wii"
+
+[node name="FlowContainer6" type="FlowContainer" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+layout_mode = 2
+
+[node name="Button" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer6" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "FEVER"
+value = 11
+
+[node name="Button2" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer6" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "CHILL"
+value = 12
+
+[node name="Button3" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer6" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "COUGH"
+value = 13
+
+[node name="Button4" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer6" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "SNEEZE"
+value = 14
+
+[node name="Button5" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer6" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "VB FEVER"
+value = 15
+
+[node name="Button6" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer6" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "VB CHILL"
+value = 16
+
+[node name="LuigiLabel" type="Control" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+custom_minimum_size = Vector2(0, 11)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="CategoryLabel" type="Label" parent="SongCategoryContainer/MarginContainer/SongCategories/LuigiLabel"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 241.0
+offset_bottom = 9.0
+text = "Dr. Luigi"
+
+[node name="FlowContainer7" type="FlowContainer" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+layout_mode = 2
+
+[node name="Button" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer7" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "DROWZY"
+value = 17
+
+[node name="Button2" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer7" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "DIZZY"
+value = 18
+
+[node name="Button3" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer7" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "VB FEVER"
+value = 19
+
+[node name="Button4" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer7" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "VB CHILL"
+value = 20
+
+[node name="WorldLabel" type="Control" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+custom_minimum_size = Vector2(0, 11)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="CategoryLabel" type="Label" parent="SongCategoryContainer/MarginContainer/SongCategories/WorldLabel"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 241.0
+offset_bottom = 9.0
+text = "World"
+
+[node name="FlowContainer8" type="FlowContainer" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+layout_mode = 2
+
+[node name="Button" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer8" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "FEVER"
+value = 21
+
+[node name="Button2" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer8" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "CHILL"
+value = 22
+
+[node name="Button3" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer8" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "SNEEZE"
+value = 61
+
+[node name="BrainTrainingLabel" type="Control" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+custom_minimum_size = Vector2(0, 11)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="CategoryLabel" type="Label" parent="SongCategoryContainer/MarginContainer/SongCategories/BrainTrainingLabel"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 241.0
+offset_bottom = 9.0
+text = "Brain Training (Switch)"
+
+[node name="FlowContainer15" type="FlowContainer" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+layout_mode = 2
+
+[node name="Button" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer15" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "FEVER"
+value = 56
+
+[node name="Button2" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer15" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "CHILL"
+value = 57
+
+[node name="SmashLabel" type="Control" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+custom_minimum_size = Vector2(0, 11)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="CategoryLabel" type="Label" parent="SongCategoryContainer/MarginContainer/SongCategories/SmashLabel"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 241.0
+offset_bottom = 9.0
+text = "Super Smash Bros."
+
+[node name="FlowContainer9" type="FlowContainer" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+layout_mode = 2
+
+[node name="Button" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer9" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "FEVER (MELEE)"
+value = 27
+
+[node name="Button5" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer9" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "FEVER (LIVE)"
+value = 59
+
+[node name="Button2" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer9" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "FEVER (BRAWL)"
+value = 28
+
+[node name="Button3" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer9" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "CHILL (BRAWL)"
+value = 29
+
+[node name="Button4" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer9" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "CHILL (4)"
+value = 30
+
+[node name="TetrisLabel" type="Control" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+custom_minimum_size = Vector2(0, 11)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="CategoryLabel" type="Label" parent="SongCategoryContainer/MarginContainer/SongCategories/TetrisLabel"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 241.0
+offset_bottom = 9.0
+text = "Tetris (GB)"
+
+[node name="FlowContainer10" type="FlowContainer" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+layout_mode = 2
+
+[node name="Button" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer10" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "A-TYPE"
+value = 31
+
+[node name="Button2" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer10" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "B-TYPE"
+value = 32
+
+[node name="Button3" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer10" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "C-TYPE"
+value = 33
+
+[node name="Button4" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer10" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "A-TYPE (1.0)"
+value = 34
+
+[node name="Button5" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer10" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "A-TYPE (99)"
+value = 35
+
+[node name="WarioNESLabel" type="Control" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+custom_minimum_size = Vector2(0, 11)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="CategoryLabel" type="Label" parent="SongCategoryContainer/MarginContainer/SongCategories/WarioNESLabel"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 241.0
+offset_bottom = 9.0
+text = "Wario's Woods (NES)"
+
+[node name="FlowContainer11" type="FlowContainer" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+layout_mode = 2
+
+[node name="Button" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer11" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "STAGE (NTSC)"
+value = 36
+
+[node name="Button2" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer11" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "STAGE (PAL)"
+value = 37
+
+[node name="Button3" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer11" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "BOSS (NTSC)"
+value = 38
+
+[node name="Button4" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer11" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "BOSS (PAL)"
+value = 39
+
+[node name="Button5" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer11" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "VERSUS"
+value = 40
+
+[node name="MeanBeanLabel" type="Control" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+custom_minimum_size = Vector2(0, 11)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="CategoryLabel" type="Label" parent="SongCategoryContainer/MarginContainer/SongCategories/MeanBeanLabel"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 241.0
+offset_bottom = 9.0
+text = "Mean Bean Machine (MD/GEN)"
+
+[node name="FlowContainer12" type="FlowContainer" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+layout_mode = 2
+
+[node name="Button" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer12" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "STAGES 1-4"
+value = 41
+
+[node name="Button2" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer12" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "STAGES 5-8"
+value = 42
+
+[node name="Button3" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer12" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "STAGES 9-12"
+value = 43
+
+[node name="Button4" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer12" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "STAGE 13"
+value = 44
+
+[node name="Button5" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer12" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "VERSUS"
+value = 45
+
+[node name="Button6" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer12" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "VERSUS (MANIA)"
+value = 46
+
+[node name="PanelLabel" type="Control" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+custom_minimum_size = Vector2(0, 11)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="CategoryLabel" type="Label" parent="SongCategoryContainer/MarginContainer/SongCategories/PanelLabel"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 241.0
+offset_bottom = 9.0
+text = "Panel de Pon/Tetris Attack"
+
+[node name="FlowContainer13" type="FlowContainer" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+layout_mode = 2
+
+[node name="Button" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer13" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "LIP STAGE"
+value = 47
+
+[node name="Button2" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer13" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "YOSHI STAGE"
+value = 48
+
+[node name="Button3" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer13" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "GLACIAL STAGE"
+value = 49
+
+[node name="MiscLabel" type="Control" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+custom_minimum_size = Vector2(0, 11)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="CategoryLabel" type="Label" parent="SongCategoryContainer/MarginContainer/SongCategories/MiscLabel"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 241.0
+offset_bottom = 9.0
+text = "Misc."
+
+[node name="FlowContainer14" type="FlowContainer" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+layout_mode = 2
+
+[node name="Button7" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer14" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "DEEP FREEZE (DDR)"
+value = 58
+
+[node name="Button8" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer14" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "SNEEZE (MANIA)"
+value = 60
+
+[node name="Button" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer14" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "SUPER PUYO PUYO 2"
+value = 50
+
+[node name="Button2" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer14" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "YOSHI'S COOKIE"
+value = 51
+
+[node name="Button6" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer14" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "WALL SLIDERS"
+value = 55
+
+[node name="Button3" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer14" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "ATHLETIC (SMW)"
+value = 52
+
+[node name="Button4" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer14" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "SLIDER (SM64)"
+value = 53
+
+[node name="Button9" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer14" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "SNIPPERCLIPS"
+value = 62
+
+[node name="Button5" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer14" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../../../../../OkButton")
+text = "NOT FEVER"
+value = 54
+
+[node name="OkButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -35.0
+offset_top = -29.0
+offset_right = 35.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 1
+text = "OK"
+
+[connection signal="pressed" from="OkButton" to="SongCategoryContainer" method="SelectPreviewButton"]

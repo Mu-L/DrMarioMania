@@ -1,0 +1,543 @@
+[gd_scene load_steps=18 format=3 uid="uid://dpdnlbcibdfrl"]
+
+[ext_resource type="PackedScene" uid="uid://bcukequpvinoq" path="res://Assets/Prefabs/JarGroupBase.tscn" id="1_mbkqn"]
+[ext_resource type="FontFile" uid="uid://c2e4sl3d40to5" path="res://Assets/Fonts/PressStart2P.ttf" id="2_f58ao"]
+[ext_resource type="Texture2D" uid="uid://bge0nfe7tma2s" path="res://Assets/Sprites/Themes/Modern/DocBox.png" id="2_pfj4h"]
+[ext_resource type="Texture2D" uid="uid://bf34qlu6u17rf" path="res://Assets/Sprites/Themes/Modern/UIBox.png" id="3_juthm"]
+[ext_resource type="Script" path="res://Scripts/VirusRing.cs" id="3_k5f5i"]
+[ext_resource type="Texture2D" uid="uid://ds0nshd28m4t4" path="res://Assets/Sprites/Themes/Modern/TheDoc.png" id="3_uq4lb"]
+[ext_resource type="Texture2D" uid="uid://bpqhbaen3t3fc" path="res://Assets/Sprites/Themes/Modern/VirusBig.png" id="4_2wb6o"]
+[ext_resource type="Texture2D" uid="uid://bnstb3uvx3mk" path="res://Assets/Sprites/Themes/Modern/HoldGroupBg.png" id="4_oa3av"]
+[ext_resource type="Script" path="res://Scripts/VirusRingVirus.cs" id="5_xlunu"]
+[ext_resource type="Texture2D" uid="uid://cfj2rk1n5bd40" path="res://Assets/Sprites/Themes/Modern/VirusRing.png" id="6_5xdva"]
+[ext_resource type="Texture2D" uid="uid://bschv7l7baa1j" path="res://Assets/Sprites/Themes/SNES/VirusRingOverlay.png" id="9_8shvd"]
+[ext_resource type="Script" path="res://Scripts/JarMario.cs" id="10_q88um"]
+
+[sub_resource type="Animation" id="Animation_j2y8w"]
+resource_name = "Lose"
+length = 0.10001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="Animation" id="Animation_ibvup"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_inw5u"]
+resource_name = "Throw"
+length = 0.10001
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_i3l88"]
+resource_name = "Win"
+length = 0.40001
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [7, 6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fkoxm"]
+_data = {
+"Lose": SubResource("Animation_j2y8w"),
+"RESET": SubResource("Animation_ibvup"),
+"Throw": SubResource("Animation_inw5u"),
+"Win": SubResource("Animation_i3l88")
+}
+
+[node name="JarGroup" instance=ExtResource("1_mbkqn")]
+
+[node name="HUD" type="Control" parent="." index="4"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftGroup" type="Control" parent="HUD" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopLeftHUD" type="Control" parent="HUD/LeftGroup" index="0"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -73.0
+offset_right = -48.0
+offset_bottom = 15.0
+grow_vertical = 2
+
+[node name="UIBoxShadow" type="NinePatchRect" parent="HUD/LeftGroup/TopLeftHUD" index="0"]
+self_modulate = Color(0, 0, 0, 0.403922)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 6.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_juthm")
+region_rect = Rect2(0, 0, 64, 48)
+patch_margin_left = 24
+patch_margin_top = 24
+patch_margin_right = 24
+patch_margin_bottom = 16
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+metadata/_edit_lock_ = true
+
+[node name="UIBox" type="NinePatchRect" parent="HUD/LeftGroup/TopLeftHUD" index="1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_juthm")
+region_rect = Rect2(0, 0, 64, 48)
+patch_margin_left = 24
+patch_margin_top = 24
+patch_margin_right = 24
+patch_margin_bottom = 16
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+metadata/_edit_lock_ = true
+
+[node name="HighScoreTitle" type="Label" parent="HUD/LeftGroup/TopLeftHUD" index="2"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = 24.0
+offset_right = -8.0
+offset_bottom = 32.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("2_f58ao")
+theme_override_font_sizes/font_size = 8
+text = "TOP"
+
+[node name="HighScoreLabel" type="Label" parent="HUD/LeftGroup/TopLeftHUD" index="3"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = 32.0
+offset_right = -8.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("2_f58ao")
+theme_override_font_sizes/font_size = 8
+text = "0"
+horizontal_alignment = 2
+
+[node name="ScoreTitle" type="Label" parent="HUD/LeftGroup/TopLeftHUD" index="4"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = 48.0
+offset_right = -8.0
+offset_bottom = 56.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("2_f58ao")
+theme_override_font_sizes/font_size = 8
+text = "SCORE"
+
+[node name="ScoreLabel" type="Label" parent="HUD/LeftGroup/TopLeftHUD" index="5"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = 56.0
+offset_right = -8.0
+offset_bottom = 64.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("2_f58ao")
+theme_override_font_sizes/font_size = 8
+text = "0"
+horizontal_alignment = 2
+
+[node name="HoldGroup" type="Control" parent="HUD/LeftGroup/TopLeftHUD" index="6"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -18.0
+offset_right = -6.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HoldGroupRect" type="NinePatchRect" parent="HUD/LeftGroup/TopLeftHUD/HoldGroup" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_oa3av")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="HoldTitle" type="Label" parent="HUD/LeftGroup/TopLeftHUD/HoldGroup" index="1"]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 3.0
+offset_right = 34.0
+offset_bottom = 11.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("2_f58ao")
+theme_override_font_sizes/font_size = 8
+text = "HOLD"
+
+[node name="VirusRing" type="Control" parent="HUD/LeftGroup" index="1" node_paths=PackedStringArray("firstVirus", "centreMarker", "ringBg", "ringOverlay", "ringShadow")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = 15.0
+offset_right = -48.0
+offset_bottom = 103.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_k5f5i")
+firstVirus = NodePath("Virus")
+centreMarker = NodePath("CentreMarker")
+ringBg = NodePath("VirusRingBg")
+ringOverlay = NodePath("VirusRingOverlay")
+ringShadow = NodePath("VirusRingShadow")
+
+[node name="VirusRingShadow" type="TextureRect" parent="HUD/LeftGroup/VirusRing" index="0"]
+self_modulate = Color(0, 0, 0, 0.403922)
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 94.0
+offset_bottom = 94.0
+texture = ExtResource("6_5xdva")
+
+[node name="VirusRingBg" type="Sprite2D" parent="HUD/LeftGroup/VirusRing" index="1"]
+position = Vector2(44, 44)
+texture = ExtResource("6_5xdva")
+
+[node name="Virus" type="Sprite2D" parent="HUD/LeftGroup/VirusRing" index="2" node_paths=PackedStringArray("virusRing")]
+position = Vector2(44, 44)
+texture = ExtResource("4_2wb6o")
+hframes = 6
+vframes = 10
+script = ExtResource("5_xlunu")
+virusRing = NodePath("..")
+
+[node name="CentreMarker" type="Marker2D" parent="HUD/LeftGroup/VirusRing" index="3"]
+position = Vector2(44, 40)
+
+[node name="VirusRingOverlay" type="Sprite2D" parent="HUD/LeftGroup/VirusRing" index="4"]
+visible = false
+position = Vector2(44, 44)
+texture = ExtResource("9_8shvd")
+
+[node name="RightGroup" type="Control" parent="HUD" index="1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DocBoxShadow" type="TextureRect" parent="HUD/RightGroup" index="0"]
+self_modulate = Color(0, 0, 0, 0.403922)
+layout_mode = 0
+offset_left = 54.0
+offset_top = -58.0
+offset_right = 110.0
+offset_bottom = -2.0
+texture = ExtResource("2_pfj4h")
+
+[node name="DocBox" type="TextureRect" parent="HUD/RightGroup" index="1"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = -64.0
+offset_right = 104.0
+offset_bottom = -8.0
+texture = ExtResource("2_pfj4h")
+
+[node name="Mario" type="Sprite2D" parent="HUD/RightGroup" index="2" node_paths=PackedStringArray("aniPlayer")]
+position = Vector2(76, -32)
+texture = ExtResource("3_uq4lb")
+hframes = 4
+vframes = 2
+script = ExtResource("10_q88um")
+aniPlayer = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/RightGroup/Mario" index="0"]
+libraries = {
+"": SubResource("AnimationLibrary_fkoxm")
+}
+
+[node name="BottomRightHUD" type="Control" parent="HUD/RightGroup" index="3"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 48.0
+offset_top = -8.0
+offset_right = 112.0
+offset_bottom = 96.0
+grow_vertical = 2
+
+[node name="UIBoxShadow" type="NinePatchRect" parent="HUD/RightGroup/BottomRightHUD" index="0"]
+self_modulate = Color(0, 0, 0, 0.403922)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 6.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_juthm")
+region_rect = Rect2(0, 0, 64, 48)
+patch_margin_left = 24
+patch_margin_top = 24
+patch_margin_right = 24
+patch_margin_bottom = 16
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+metadata/_edit_lock_ = true
+
+[node name="UIBox" type="NinePatchRect" parent="HUD/RightGroup/BottomRightHUD" index="1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_juthm")
+region_rect = Rect2(0, 0, 64, 48)
+patch_margin_left = 24
+patch_margin_top = 24
+patch_margin_right = 24
+patch_margin_bottom = 16
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+metadata/_edit_lock_ = true
+
+[node name="LevelTitle" type="Label" parent="HUD/RightGroup/BottomRightHUD" index="2"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = 24.0
+offset_right = -8.0
+offset_bottom = 32.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("2_f58ao")
+theme_override_font_sizes/font_size = 8
+text = "LEVEL"
+
+[node name="LevelLabel" type="Label" parent="HUD/RightGroup/BottomRightHUD" index="3"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = 32.0
+offset_right = -8.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("2_f58ao")
+theme_override_font_sizes/font_size = 8
+text = "0"
+horizontal_alignment = 2
+
+[node name="SpeedTitle" type="Label" parent="HUD/RightGroup/BottomRightHUD" index="4"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = 48.0
+offset_right = -8.0
+offset_bottom = 56.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("2_f58ao")
+theme_override_font_sizes/font_size = 8
+text = "SPEED"
+
+[node name="SpeedLabel" type="Label" parent="HUD/RightGroup/BottomRightHUD" index="5"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = 56.0
+offset_right = -8.0
+offset_bottom = 64.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("2_f58ao")
+theme_override_font_sizes/font_size = 8
+text = "0"
+horizontal_alignment = 2
+
+[node name="VirusTitle" type="Label" parent="HUD/RightGroup/BottomRightHUD" index="6"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = 72.0
+offset_right = -8.0
+offset_bottom = 80.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("2_f58ao")
+theme_override_font_sizes/font_size = 8
+text = "VIRUS"
+
+[node name="VirusLabel" type="Label" parent="HUD/RightGroup/BottomRightHUD" index="7"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = 80.0
+offset_right = -8.0
+offset_bottom = 88.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("2_f58ao")
+theme_override_font_sizes/font_size = 8
+text = "0"
+horizontal_alignment = 2
+
+[node name="NextPill" parent="." index="6"]
+position = Vector2(66, -54)
+
+[node name="HoldPill" parent="." index="7"]
+position = Vector2(-67, 4)
+
+[node name="PowerUpIcon" parent="." index="9"]
+position = Vector2(32, -66)
+
+[node name="PowerUpPill" parent="." index="10"]
+position = Vector2(32, -66)
+
+[node name="UIManager" parent="." index="12" node_paths=PackedStringArray("scoreLabel", "highScoreLabel", "levelLabel", "speedLabel", "virusLabel", "holdLabel", "uiBoxes", "uiLabels", "uiLightLabels", "uiShadows", "mario", "virusRing", "docBoxTexRec", "holdGroupRect", "hudGroup", "topLeftHud", "holdGroup", "rightHudGroup")]
+scoreLabel = NodePath("../HUD/LeftGroup/TopLeftHUD/ScoreLabel")
+highScoreLabel = NodePath("../HUD/LeftGroup/TopLeftHUD/HighScoreLabel")
+levelLabel = NodePath("../HUD/RightGroup/BottomRightHUD/LevelLabel")
+speedLabel = NodePath("../HUD/RightGroup/BottomRightHUD/SpeedLabel")
+virusLabel = NodePath("../HUD/RightGroup/BottomRightHUD/VirusLabel")
+holdLabel = NodePath("../HUD/LeftGroup/TopLeftHUD/HoldGroup/HoldTitle")
+uiBoxes = [NodePath("../HUD/LeftGroup/TopLeftHUD/UIBox"), NodePath("../HUD/RightGroup/BottomRightHUD/UIBox")]
+uiLabels = [NodePath("../HUD/LeftGroup/TopLeftHUD/ScoreTitle"), NodePath("../HUD/LeftGroup/TopLeftHUD/ScoreLabel"), NodePath("../HUD/RightGroup/BottomRightHUD/LevelTitle"), NodePath("../HUD/RightGroup/BottomRightHUD/LevelLabel"), NodePath("../HUD/RightGroup/BottomRightHUD/SpeedTitle"), NodePath("../HUD/RightGroup/BottomRightHUD/SpeedLabel"), NodePath("../HUD/RightGroup/BottomRightHUD/VirusTitle"), NodePath("../HUD/RightGroup/BottomRightHUD/VirusLabel"), NodePath("../Overlay/OverlayTitle"), NodePath("../HUD/LeftGroup/TopLeftHUD/HighScoreTitle"), NodePath("../HUD/LeftGroup/TopLeftHUD/HighScoreLabel"), NodePath("../HUD/LeftGroup/TopLeftHUD/HoldGroup/HoldTitle")]
+uiLightLabels = [NodePath("../HUD/LeftGroup/TopLeftHUD/HoldGroup/HoldTitle")]
+uiShadows = [NodePath("../JarShadow"), NodePath("../HUD/LeftGroup/TopLeftHUD/UIBoxShadow"), NodePath("../HUD/RightGroup/BottomRightHUD/UIBoxShadow"), NodePath("../HUD/RightGroup/DocBoxShadow"), NodePath("../HUD/LeftGroup/VirusRing/VirusRingShadow")]
+mario = NodePath("../HUD/RightGroup/Mario")
+virusRing = NodePath("../HUD/LeftGroup/VirusRing")
+docBoxTexRec = NodePath("../HUD/RightGroup/DocBox")
+holdGroupRect = NodePath("../HUD/LeftGroup/TopLeftHUD/HoldGroup/HoldGroupRect")
+hudGroup = NodePath("../HUD")
+topLeftHud = NodePath("../HUD/LeftGroup/TopLeftHUD")
+holdGroup = NodePath("../HUD/LeftGroup/TopLeftHUD/HoldGroup")
+rightHudGroup = NodePath("../HUD/RightGroup")
+
+[editable path="PowerUpPill"]

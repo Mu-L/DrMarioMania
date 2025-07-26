@@ -1,0 +1,6 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dpotog8k5cmqr"]
+
+[ext_resource type="Shader" path="res://Assets/Shaders/RainbowPowerUpShader.gdshader" id="1_2vnlf"]
+
+[resource]
+shader = ExtResource("1_2vnlf")

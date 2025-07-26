@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=8 format=3 uid="uid://gnwx1etyo6q7"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/PowerUpPrefabs.cs" id="1_fk5rw"]
+[ext_resource type="PackedScene" uid="uid://rqtlvoynhl0i" path="res://Assets/Prefabs/PowerUps/PowerUpThwomp.tscn" id="1_m8vr0"]
+[ext_resource type="PackedScene" uid="uid://u5pxb75ohj8g" path="res://Assets/Prefabs/PowerUps/PowerUpShell.tscn" id="2_qqa6x"]
+[ext_resource type="PackedScene" uid="uid://cby15vvdhphb1" path="res://Assets/Prefabs/PowerUps/PowerUpPlus.tscn" id="3_v0f0g"]
+[ext_resource type="PackedScene" uid="uid://dkpudomb5rfy8" path="res://Assets/Prefabs/PowerUps/PowerUpBomb.tscn" id="4_l7vyd"]
+[ext_resource type="PackedScene" uid="uid://bygn0hdljn3tw" path="res://Assets/Prefabs/PowerUps/PowerUpPillBlaster.tscn" id="5_xq8vb"]
+[ext_resource type="PackedScene" uid="uid://s3ip5xg0t6f" path="res://Assets/Prefabs/PowerUps/PowerUpVirusBlaster.tscn" id="6_b6dqt"]
+
+[resource]
+script = ExtResource("1_fk5rw")
+powerUpPrefabKeys = Array[int]([0, 1, 2, 3, 4, 5])
+powerUpPrefabs = Array[PackedScene]([ExtResource("1_m8vr0"), ExtResource("2_qqa6x"), ExtResource("3_v0f0g"), ExtResource("4_l7vyd"), ExtResource("5_xq8vb"), ExtResource("6_b6dqt")])

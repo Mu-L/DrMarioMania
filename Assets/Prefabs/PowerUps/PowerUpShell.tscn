@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://u5pxb75ohj8g"]
+
+[ext_resource type="PackedScene" uid="uid://4x81aemi6t00" path="res://Assets/Prefabs/PowerUps/BasePowerUp.tscn" id="1_ykxga"]
+[ext_resource type="Script" path="res://Scripts/PowerUps/PowerUpShell.cs" id="2_kf6yg"]
+
+[node name="PowerUpShell" node_paths=PackedStringArray("previewSprite") instance=ExtResource("1_ykxga")]
+script = ExtResource("2_kf6yg")
+acceleration = 750.0
+maxSpeed = 200.0
+previewSprite = NodePath("")
+powerUp = 1
+
+[node name="Sprite2D" parent="." index="0"]
+frame = 1

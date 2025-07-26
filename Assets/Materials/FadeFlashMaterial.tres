@@ -1,0 +1,6 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cud1aabnmoohr"]
+
+[ext_resource type="Shader" path="res://Assets/Shaders/FadeFlashShader.gdshader" id="1_qcfai"]
+
+[resource]
+shader = ExtResource("1_qcfai")

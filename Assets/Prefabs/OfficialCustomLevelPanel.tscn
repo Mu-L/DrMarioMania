@@ -1,0 +1,92 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfcv2361x0ono"]
+
+[ext_resource type="Script" path="res://Scripts/Menu/OfficialCustomLevelPanel.cs" id="1_rkieo"]
+[ext_resource type="Texture2D" uid="uid://dbhnmma74kqir" path="res://Assets/Sprites/UI/Crown.png" id="2_yxmfa"]
+[ext_resource type="Texture2D" uid="uid://cc2s755kkjml" path="res://Assets/Sprites/UI/ButtonIcons/CopyIcon.png" id="3_lfv5r"]
+[ext_resource type="Texture2D" uid="uid://be6drct25wp0f" path="res://Assets/Sprites/UI/ButtonIcons/PlayIcon.png" id="4_485wv"]
+
+[node name="OfficialCustomLevelPanel" type="Panel" node_paths=PackedStringArray("nameLabel", "clearLabel", "scoreLabel", "playButton", "copyButton")]
+custom_minimum_size = Vector2(220, 28)
+mouse_filter = 2
+script = ExtResource("1_rkieo")
+nameLabel = NodePath("NameLabel")
+clearLabel = NodePath("HBoxContainer2/ClearLabel")
+scoreLabel = NodePath("HBoxContainer2/ScoreLabel")
+playButton = NodePath("HBoxContainer/PlayButton")
+copyButton = NodePath("HBoxContainer/CopyButton")
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 1
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 217.0
+offset_bottom = 13.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 0
+text = "A cool level!!"
+autowrap_mode = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -12.0
+offset_right = 143.0
+offset_bottom = -4.0
+grow_vertical = 0
+theme_override_constants/separation = 2
+
+[node name="ClearLabel" type="Label" parent="HBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.498039, 1, 0.498039, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 0
+text = "CLEARED!"
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("2_yxmfa")
+
+[node name="ScoreLabel" type="Label" parent="HBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 0
+text = "1024"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -9.0
+offset_right = -5.0
+offset_bottom = 9.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 2
+alignment = 2
+
+[node name="CopyButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+focus_neighbor_right = NodePath("../PlayButton")
+mouse_filter = 1
+icon = ExtResource("3_lfv5r")
+
+[node name="PlayButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../CopyButton")
+mouse_filter = 1
+text = "PLAY"
+icon = ExtResource("4_485wv")
+alignment = 0
