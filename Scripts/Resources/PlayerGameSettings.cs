@@ -261,8 +261,8 @@ public partial class PlayerGameSettings : Resource
         {
             fasterAutoRepeat = value;
 
-            firstMoveSpeed = value ? 6 : 3;
-            repeatedMoveSpeed = value ? 20 : 12;
+            firstMoveSpeed = value ? 6 : 3.75f;
+            repeatedMoveSpeed = value ? 20 : 10;
         }
     }
     private bool fasterAutoRepeat = true;

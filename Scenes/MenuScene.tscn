@@ -234,7 +234,6 @@ popUpGroup = NodePath("../PopUpGroup")
 screenContainer = NodePath(".")
 
 [node name="MainScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -276,6 +275,7 @@ grow_vertical = 2
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 focus_neighbor_left = NodePath("../../HelpButton")
+focus_neighbor_top = NodePath("../../ChangeLogButton")
 focus_neighbor_right = NodePath("../../SettingsButton")
 focus_neighbor_bottom = NodePath("../2PButton")
 text = "SINGLE PLAYER"
@@ -297,7 +297,7 @@ offset_left = 7.0
 offset_top = 7.0
 offset_right = 59.0
 offset_bottom = 29.0
-focus_neighbor_right = NodePath("../VBoxContainer/1PButton")
+focus_neighbor_right = NodePath("../ChangeLogButton")
 focus_neighbor_bottom = NodePath("../VBoxContainer/1PButton")
 text = "QUIT"
 icon = ExtResource("8_3vacb")
@@ -361,6 +361,32 @@ offset_bottom = -7.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "SCORES"
+
+[node name="ChangeLogButton" parent="UILayer/MenuScreenManager/MainScreen" node_paths=PackedStringArray("popUpGroup") instance=ExtResource("19_utcow")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -63.0
+offset_top = 7.0
+offset_right = -7.0
+offset_bottom = 29.0
+grow_horizontal = 0
+grow_vertical = 1
+focus_neighbor_left = NodePath("../QuitButton")
+focus_neighbor_bottom = NodePath("../VBoxContainer/1PButton")
+text = "v1.0.1"
+icon = null
+title = "v1.0.1 - CHANGE LOG"
+description = "- Added Faster Auto Repeat setting for custom gameplay style
+
+- All gameplay styles except Classic have Faster Auto Repeat enabled, making them feel more responsive
+
+- The original Auto Repeat speed is now more accurate to NES Dr. Mario."
+alignDescToLeft = true
+popUpGroup = NodePath("../../../PopUpGroup")
 
 [node name="GameplayScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
 visible = false
@@ -3997,6 +4023,7 @@ text = "BACK"
 icon = ExtResource("8_3vacb")
 
 [node name="OfficialCustomLevelScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
