@@ -421,6 +421,35 @@ When ON, the lock delay is slightly longer and its duration will reset whenever 
 When OFF, the lock delay is shorter and won't reset when moved or rotated, behaving like NES Dr. Mario."
 alignDescToLeft = true
 
+[node name="FasterAutoRepeat" parent="SettingsContainer/BoxContainer" instance=ExtResource("4_tr5vp")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" parent="SettingsContainer/BoxContainer/FasterAutoRepeat" index="0"]
+text = "Faster Auto Repeat"
+
+[node name="ToggleButton" parent="SettingsContainer/BoxContainer/FasterAutoRepeat" index="1"]
+settingName = &"FasterAutoRepeat"
+
+[node name="PopUpButton" parent="SettingsContainer/BoxContainer/FasterAutoRepeat" instance=ExtResource("4_utjcu")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -52.0
+offset_top = 1.0
+offset_right = -40.0
+offset_bottom = 15.0
+grow_horizontal = 0
+grow_vertical = 1
+title = "FASTER AUTO REPEAT"
+description = "\"Auto Repeat\" refers to how quickly a pill moves while you keep holding down left or right.
+
+OFF is closer to the speed of NES Dr. Mario, and all modes except classic have this ON."
+alignDescToLeft = true
+
 [node name="FixedFallSpeed" parent="SettingsContainer/BoxContainer" instance=ExtResource("4_tr5vp")]
 layout_mode = 2
 mouse_filter = 2
@@ -621,6 +650,7 @@ text = "OK"
 
 [editable path="SettingsContainer/BoxContainer/Hold"]
 [editable path="SettingsContainer/BoxContainer/LockDelay"]
+[editable path="SettingsContainer/BoxContainer/FasterAutoRepeat"]
 [editable path="SettingsContainer/BoxContainer/FixedFallSpeed"]
 [editable path="SettingsContainer/BoxContainer/SingleColourPills"]
 [editable path="SettingsContainer/BoxContainer/SoftDrop"]

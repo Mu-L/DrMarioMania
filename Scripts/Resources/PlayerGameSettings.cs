@@ -42,6 +42,7 @@ public partial class PlayerGameSettings : Resource
             AvailablePowerUps = new List<PowerUp>(otherPlayer.AvailablePowerUps);
             AvailableSpecialPowerUps = new List<PowerUp>(otherPlayer.AvailableSpecialPowerUps);
             PowerUpMeterMaxLevel = otherPlayer.PowerUpMeterMaxLevel;
+            FasterAutoRepeat = otherPlayer.FasterAutoRepeat;
         }
     }
 
@@ -77,6 +78,7 @@ public partial class PlayerGameSettings : Resource
                     OnlySingleColourPills = false;
                     ClearPowerUps();
                     PowerUpMeterMaxLevel = 16;
+                    FasterAutoRepeat = false;
 
                     break;
                 // quad
@@ -95,6 +97,7 @@ public partial class PlayerGameSettings : Resource
                     OnlySingleColourPills = false;
                     ClearPowerUps();
                     PowerUpMeterMaxLevel = 16;
+                    FasterAutoRepeat = true;
 
                     break;
                 // custom
@@ -117,6 +120,7 @@ public partial class PlayerGameSettings : Resource
                     OnlySingleColourPills = false;
                     ClearPowerUps();
                     PowerUpMeterMaxLevel = 16;
+                    FasterAutoRepeat = true;
 
                     for (int i = 0; i < Enum.GetValues<PowerUp>().Length; i++)
                     {
@@ -144,6 +148,7 @@ public partial class PlayerGameSettings : Resource
                     NoFallSpeedIncrease = false;
                     OnlySingleColourPills = false;
                     PowerUpMeterMaxLevel = 16;
+                    FasterAutoRepeat = true;
                     
                     ClearPowerUps();
                     
@@ -246,6 +251,25 @@ public partial class PlayerGameSettings : Resource
     public List<PowerUp> AvailablePowerUps = new List<PowerUp>();
     public List<PowerUp> AvailableSpecialPowerUps = new List<PowerUp>();
     [Export] public int PowerUpMeterMaxLevel { get; set; }
+    public bool FasterAutoRepeat
+    {
+        get
+        {
+            return fasterAutoRepeat;
+        }
+        set
+        {
+            fasterAutoRepeat = value;
+
+            firstMoveSpeed = value ? 6 : 3;
+            repeatedMoveSpeed = value ? 20 : 12;
+        }
+    }
+    private bool fasterAutoRepeat = true;
+    private float firstMoveSpeed;
+    public float FirstMoveSpeed { get { return firstMoveSpeed; } }
+	private float repeatedMoveSpeed;
+    public float RepeatedMoveSpeed { get { return repeatedMoveSpeed; } }
 
     private void ClearPowerUps()
     {
@@ -314,7 +338,9 @@ public partial class PlayerGameSettings : Resource
 
             code += itemDivider;
 
-            code += PowerUpMeterMaxLevel;
+            code += PowerUpMeterMaxLevel + itemDivider;
+
+            code += BoolToString(FasterAutoRepeat);
 
         }
 
@@ -395,6 +421,11 @@ public partial class PlayerGameSettings : Resource
                 }
 
                 PowerUpMeterMaxLevel = int.Parse(codeChunks[16]);
+
+                if (codeChunks.Length > 17)
+                {
+                    FasterAutoRepeat = StringToBool(codeChunks[17]);
+                }
             }
             // successful
             return true;

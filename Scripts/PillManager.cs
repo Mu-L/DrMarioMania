@@ -19,8 +19,6 @@ public partial class PillManager : Node
 	[Export] private float initialHiFallSpeed;
 	private float fallSpeed;
 	[Export] private float softDropSpeed;
-	[Export] private float firstMoveSpeed;
-	[Export] private float repeatedMoveSpeed;
 	[Export] private int pillsToIncreaseFallSpeed;
 	[Export] private float fallSpeedIncreaseAmount;
 
@@ -556,7 +554,7 @@ public partial class PillManager : Node
 			lockTimer -= delta * lockSpeed;
 		
 		if (IsActionPressed("MoveLeft") || IsActionPressed("MoveRight"))
-			moveTimer -= delta * firstMoveSpeed;
+			moveTimer -= delta * PlayerGameSettings.FirstMoveSpeed;
 		else
 			moveTimer = 1;
 	}
@@ -659,7 +657,7 @@ public partial class PillManager : Node
 				if (IsActionJustPressed("MoveLeft"))
 					moveTimer = 1;
 				else
-					moveTimer = 1.0f * (firstMoveSpeed / (float)repeatedMoveSpeed);
+					moveTimer = 1.0f * (PlayerGameSettings.FirstMoveSpeed / PlayerGameSettings.RepeatedMoveSpeed);
 			}
 			if (IsActionJustPressed("MoveRight") || (moveTimer <= 0 && IsActionPressed("MoveRight")))
 			{
@@ -674,7 +672,7 @@ public partial class PillManager : Node
 				if (IsActionJustPressed("MoveRight"))
 					moveTimer = 1;
 				else
-					moveTimer = 1.0f * (firstMoveSpeed / (float)repeatedMoveSpeed);
+					moveTimer = 1.0f * (PlayerGameSettings.FirstMoveSpeed / PlayerGameSettings.RepeatedMoveSpeed);
 			}
 		}
 

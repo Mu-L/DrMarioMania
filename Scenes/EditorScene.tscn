@@ -1445,6 +1445,7 @@ vframes = 10
 [editable path="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen"]
 [editable path="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer/Hold"]
 [editable path="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer/LockDelay"]
+[editable path="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer/FasterAutoRepeat"]
 [editable path="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer/FixedFallSpeed"]
 [editable path="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer/SingleColourPills"]
 [editable path="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer/SoftDrop"]

@@ -4260,6 +4260,7 @@ normalMusicPlayer = NodePath("../MusicPlayer")
 [editable path="UILayer/MenuScreenManager/AdvancedSettingsScreen"]
 [editable path="UILayer/MenuScreenManager/AdvancedSettingsScreen/SettingsContainer/BoxContainer/Hold"]
 [editable path="UILayer/MenuScreenManager/AdvancedSettingsScreen/SettingsContainer/BoxContainer/LockDelay"]
+[editable path="UILayer/MenuScreenManager/AdvancedSettingsScreen/SettingsContainer/BoxContainer/FasterAutoRepeat"]
 [editable path="UILayer/MenuScreenManager/AdvancedSettingsScreen/SettingsContainer/BoxContainer/FixedFallSpeed"]
 [editable path="UILayer/MenuScreenManager/AdvancedSettingsScreen/SettingsContainer/BoxContainer/SingleColourPills"]
 [editable path="UILayer/MenuScreenManager/AdvancedSettingsScreen/SettingsContainer/BoxContainer/SoftDrop"]

@@ -21,7 +21,9 @@ public partial class AdvancedSettingsScreen : UpdateableSettingScreen
 			return true;
 		}
 		else
+		{
 			return false;
+		}
 
 	}
 }

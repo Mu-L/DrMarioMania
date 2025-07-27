@@ -98,8 +98,8 @@ public partial class UpdateableSettingScreen : BaseScreen
 		else if (node is GameSettingPowerUpContainer)
 			((GameSettingPowerUpContainer)node).UpdateVisuals();
 		else
-			return true;
+			return false;
 
-		return false;
+		return true;
 	}
 }
