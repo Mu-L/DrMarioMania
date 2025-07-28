@@ -377,14 +377,10 @@ grow_horizontal = 0
 grow_vertical = 1
 focus_neighbor_left = NodePath("../QuitButton")
 focus_neighbor_bottom = NodePath("../VBoxContainer/1PButton")
-text = "v1.0.1"
+text = "v1.0.2"
 icon = null
-title = "v1.0.1 - CHANGE LOG"
-description = "- Added Faster Auto Repeat setting for custom gameplay style
-
-- All gameplay styles except Classic have Faster Auto Repeat enabled, making them feel more responsive
-
-- The original Auto Repeat speed is now more accurate to NES Dr. Mario."
+title = "v1.0.2 - CHANGE LOG"
+description = "- Fixed shared controller input bug in multiplayer"
 alignDescToLeft = true
 popUpGroup = NodePath("../../../PopUpGroup")
 

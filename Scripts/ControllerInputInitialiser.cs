@@ -36,7 +36,7 @@ public partial class ControllerInputInitialiser : Node
 						InputEvent newEvent = evnt.Duplicate() as InputEvent;
 						newEvent.Device = j;
 
-						InputMap.ActionAddEvent(newInput, evnt);
+						InputMap.ActionAddEvent(newInput, newEvent);
 					}
 
 				}

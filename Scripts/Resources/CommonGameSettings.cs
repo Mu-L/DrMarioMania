@@ -223,6 +223,10 @@ public partial class CommonGameSettings : Resource
             InputEventJoypadButton acceptButton = new InputEventJoypadButton();
             InputEventJoypadButton cancelButton = new InputEventJoypadButton();
 
+            // allow all controllers to use
+            acceptButton.Device = -1;
+            cancelButton.Device = -1;
+
             acceptButton.ButtonIndex = true ? JoyButton.B : JoyButton.A;
             cancelButton.ButtonIndex = true ? JoyButton.A : JoyButton.B;
 
