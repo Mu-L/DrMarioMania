@@ -105,7 +105,7 @@ anti_aliasing = false
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_3oko3"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_f08ln"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_0cckv"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_5b5yk"]
 
@@ -234,6 +234,7 @@ popUpGroup = NodePath("../PopUpGroup")
 screenContainer = NodePath(".")
 
 [node name="MainScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -377,10 +378,10 @@ grow_horizontal = 0
 grow_vertical = 1
 focus_neighbor_left = NodePath("../QuitButton")
 focus_neighbor_bottom = NodePath("../VBoxContainer/1PButton")
-text = "v1.0.2"
+text = "v1.0.3"
 icon = null
-title = "v1.0.2 - CHANGE LOG"
-description = "- Fixed shared controller input bug in multiplayer"
+title = "v1.0.3 - CHANGE LOG"
+description = "- Added graphics setting to enable/disable the virus tile animations within the jar"
 alignDescToLeft = true
 popUpGroup = NodePath("../../../PopUpGroup")
 
@@ -3528,7 +3529,6 @@ grow_vertical = 0
 text = ">"
 
 [node name="SettingsScreen" parent="UILayer/MenuScreenManager" instance=ExtResource("58_2hgv7")]
-visible = false
 layout_mode = 1
 
 [node name="Button" parent="UILayer/MenuScreenManager/SettingsScreen/TabButtons" index="0"]
@@ -3540,23 +3540,23 @@ button_group = SubResource("ButtonGroup_3oko3")
 [node name="Button3" parent="UILayer/MenuScreenManager/SettingsScreen/TabButtons" index="2"]
 button_group = SubResource("ButtonGroup_3oko3")
 
-[node name="PopUpButton" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel" index="1" node_paths=PackedStringArray("popUpGroup")]
-popUpGroup = NodePath("../../../../../../PopUpGroup")
+[node name="PopUpButton" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel" index="1" node_paths=PackedStringArray("popUpGroup")]
+popUpGroup = NodePath("../../../../../../../PopUpGroup")
 
-[node name="OverrideColourContainer" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel" index="2"]
+[node name="OverrideColourContainer" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel" index="2"]
 doIntialSetup = true
 
-[node name="Button" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="0"]
-button_group = SubResource("ButtonGroup_f08ln")
+[node name="Button" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="0"]
+button_group = SubResource("ButtonGroup_0cckv")
 
-[node name="Button2" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="1"]
-button_group = SubResource("ButtonGroup_f08ln")
+[node name="Button2" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="1"]
+button_group = SubResource("ButtonGroup_0cckv")
 
-[node name="Button3" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="2"]
-button_group = SubResource("ButtonGroup_f08ln")
+[node name="Button3" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="2"]
+button_group = SubResource("ButtonGroup_0cckv")
 
-[node name="Button4" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="3"]
-button_group = SubResource("ButtonGroup_f08ln")
+[node name="Button4" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="3"]
+button_group = SubResource("ButtonGroup_0cckv")
 
 [node name="ModeSingleScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
 visible = false

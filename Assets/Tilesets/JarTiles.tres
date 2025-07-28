@@ -1,16 +1,16 @@
 [gd_resource type="TileSet" load_steps=12 format=3 uid="uid://bpgtxj8v0vrpf"]
 
+[ext_resource type="Texture2D" uid="uid://dlska1epmujlf" path="res://Assets/Sprites/Themes/Modern/PillTiles.png" id="1_d5e6f"]
+[ext_resource type="Texture2D" uid="uid://c0hiufv220hj7" path="res://Assets/Sprites/Themes/Modern/VirusTiles.png" id="2_wttl7"]
 [ext_resource type="Material" uid="uid://dua6x8i1hj8vt" path="res://Assets/Materials/PowerUpMaterial.tres" id="3_ayu0j"]
 [ext_resource type="Material" uid="uid://dpotog8k5cmqr" path="res://Assets/Materials/RainbowPowerUpMaterial.tres" id="3_oit80"]
+[ext_resource type="Texture2D" uid="uid://cb6qr0bqxms7o" path="res://Assets/Sprites/Themes/Modern/PowerUpTiles.png" id="5_kd6ab"]
 [ext_resource type="Material" uid="uid://du3sckml2oyki" path="res://Assets/Materials/RedFlashMaterial.tres" id="6_wp62f"]
 [ext_resource type="Texture2D" uid="uid://i4ji6ee1hdhl" path="res://Assets/Sprites/UI/Editor/DrawToolPreviews.png" id="7_iqq4h"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2tfra"]
-load_path = "res://.godot/imported/PillTiles.png-34d82dbc7551804c3daca8ecb5cee734.ctex"
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7lovr"]
 resource_name = "Pills"
-texture = SubResource("CompressedTexture2D_2tfra")
+texture = ExtResource("1_d5e6f")
 texture_region_size = Vector2i(8, 8)
 0:0/0 = 0
 0:0/0/custom_data_0 = 1
@@ -123,12 +123,9 @@ texture_region_size = Vector2i(8, 8)
 0:9/0 = 0
 0:9/0/custom_data_0 = 10
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tf0xk"]
-load_path = "res://.godot/imported/VirusTiles.png-581b385e142ad6241e1f4dcfab7d9dd1.ctex"
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i35lo"]
 resource_name = "Viruses"
-texture = SubResource("CompressedTexture2D_tf0xk")
+texture = ExtResource("2_wttl7")
 texture_region_size = Vector2i(8, 8)
 0:0/animation_columns = 2
 0:0/animation_speed = 5.0
@@ -201,12 +198,9 @@ texture_region_size = Vector2i(8, 8)
 2:9/0 = 0
 2:8/0 = 0
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_u437j"]
-load_path = "res://.godot/imported/PowerUpTiles.png-45acaf3e4e377272597a55806979d133.ctex"
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vh4vw"]
 resource_name = "PowerUps"
-texture = SubResource("CompressedTexture2D_u437j")
+texture = ExtResource("5_kd6ab")
 texture_region_size = Vector2i(8, 8)
 0:0/0 = 0
 0:0/0/material = ExtResource("3_oit80")

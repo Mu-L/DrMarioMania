@@ -38,7 +38,7 @@
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_bfh0x"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_dlvyy"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_fqxxv"]
 
 [sub_resource type="Animation" id="Animation_fmwac"]
 resource_name = "Hide"
@@ -343,23 +343,29 @@ button_group = SubResource("ButtonGroup_bfh0x")
 [node name="Button3" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/TabButtons" index="2"]
 button_group = SubResource("ButtonGroup_bfh0x")
 
-[node name="Label" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3" index="0"]
-visible = true
-
-[node name="OverrideColoursPanel" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3" index="1"]
+[node name="VirusAniPanel" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3" index="0"]
 visible = false
 
-[node name="Button" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="0"]
-button_group = SubResource("ButtonGroup_dlvyy")
+[node name="ColorRect" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3" index="1"]
+visible = false
 
-[node name="Button2" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="1"]
-button_group = SubResource("ButtonGroup_dlvyy")
+[node name="MenuNotice" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3" index="2"]
+visible = true
 
-[node name="Button3" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="2"]
-button_group = SubResource("ButtonGroup_dlvyy")
+[node name="OverrideColoursPanel" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3" index="3"]
+visible = false
 
-[node name="Button4" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="3"]
-button_group = SubResource("ButtonGroup_dlvyy")
+[node name="Button" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="0"]
+button_group = SubResource("ButtonGroup_fqxxv")
+
+[node name="Button2" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="1"]
+button_group = SubResource("ButtonGroup_fqxxv")
+
+[node name="Button3" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="2"]
+button_group = SubResource("ButtonGroup_fqxxv")
+
+[node name="Button4" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="3"]
+button_group = SubResource("ButtonGroup_fqxxv")
 
 [node name="PauseAniPlayer" type="AnimationPlayer" parent="PauseLayer"]
 libraries = {

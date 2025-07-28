@@ -48,11 +48,11 @@
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_xv70d"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_r6tdw"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_b5h62"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_3u7qh"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_agiio"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_i2lxc"]
 
 [sub_resource type="Animation" id="Animation_fmwac"]
 resource_name = "Hide"
@@ -255,17 +255,17 @@ button_group = SubResource("ButtonGroup_pb8p5")
 [node name="Button3" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/TabButtons" index="2"]
 button_group = SubResource("ButtonGroup_xv70d")
 
-[node name="Button" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="0"]
-button_group = SubResource("ButtonGroup_r6tdw")
+[node name="Button" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="0"]
+button_group = SubResource("ButtonGroup_b5h62")
 
-[node name="Button2" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="1"]
-button_group = SubResource("ButtonGroup_r6tdw")
+[node name="Button2" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="1"]
+button_group = SubResource("ButtonGroup_b5h62")
 
-[node name="Button3" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="2"]
-button_group = SubResource("ButtonGroup_r6tdw")
+[node name="Button3" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="2"]
+button_group = SubResource("ButtonGroup_b5h62")
 
-[node name="Button4" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="3"]
-button_group = SubResource("ButtonGroup_r6tdw")
+[node name="Button4" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="3"]
+button_group = SubResource("ButtonGroup_b5h62")
 
 [node name="EditorPauseLayer" type="CanvasLayer" parent="." index="1"]
 layer = 3
@@ -899,23 +899,29 @@ button_group = SubResource("ButtonGroup_3u7qh")
 [node name="Button3" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/TabButtons" index="2"]
 button_group = SubResource("ButtonGroup_3u7qh")
 
-[node name="Label" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3" index="0"]
-visible = true
-
-[node name="OverrideColoursPanel" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3" index="1"]
+[node name="VirusAniPanel" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3" index="0"]
 visible = false
 
-[node name="Button" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="0"]
-button_group = SubResource("ButtonGroup_agiio")
+[node name="ColorRect" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3" index="1"]
+visible = false
 
-[node name="Button2" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="1"]
-button_group = SubResource("ButtonGroup_agiio")
+[node name="MenuNotice" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3" index="2"]
+visible = true
 
-[node name="Button3" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="2"]
-button_group = SubResource("ButtonGroup_agiio")
+[node name="OverrideColoursPanel" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3" index="3"]
+visible = false
 
-[node name="Button4" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="3"]
-button_group = SubResource("ButtonGroup_agiio")
+[node name="Button" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="0"]
+button_group = SubResource("ButtonGroup_i2lxc")
+
+[node name="Button2" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="1"]
+button_group = SubResource("ButtonGroup_i2lxc")
+
+[node name="Button3" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="2"]
+button_group = SubResource("ButtonGroup_i2lxc")
+
+[node name="Button4" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="3"]
+button_group = SubResource("ButtonGroup_i2lxc")
 
 [node name="PopUpGroup" parent="EditorPauseLayer" index="3" node_paths=PackedStringArray("screenMan") instance=ExtResource("24_ngsmh")]
 screenMan = NodePath("../EditorPauseManager")
@@ -1401,6 +1407,7 @@ texture = ExtResource("3_6i3kl")
 hframes = 3
 vframes = 10
 
+[connection signal="pressed" from="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/BackButton" to="PauseLayer/PauseManager" method="GoBack"]
 [connection signal="text_changed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/LevelNameBox" to="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/LevelNameBox" method="UpdateLevelName"]
 [connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/SaveButton" to="EditorPauseLayer/EditorPauseManager" method="GoBack"]
 [connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/SaveButton" to="EditorManager" method="SaveLevel"]

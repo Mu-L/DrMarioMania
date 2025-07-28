@@ -170,8 +170,22 @@ public partial class JarManager : Node
 		if (CommonGameSettings.PlayerCount == 1)
 			uiMan.SetHighScoreLabel(HighScoreList.GetGameRuleHighScore());
 		SetProcess(false);
+
+		SetVirusTileAnimationState(IsInEditorScene ? false : CommonGameSettings.EnableVirusTileAnimation);
 	}
 
+	// Enables/disables the animation of the virus tiles
+	public void SetVirusTileAnimationState(bool enabled)
+	{
+		TileSetAtlasSource source = (TileSetAtlasSource)jarTiles.TileSet.GetSource(virusSourceID);
+		
+		for (int i = 0; i < GameConstants.noOfColours; i++)
+		{
+			source.SetTileAnimationFramesCount(Vector2I.Zero + Vector2I.Down * i, enabled ? 2 : 1);
+		}
+	}
+
+	// Whether the tile at pos is the same as the target source and atlas (must be an exact match, NOT just the colour)
 	public bool DoesTileMatch(Vector2I pos, int targetSourceID, Vector2I targetAtlas)
     {
         return jarTiles.GetCellSourceId(pos) == targetSourceID && jarTiles.GetCellAtlasCoords(pos) == targetAtlas;

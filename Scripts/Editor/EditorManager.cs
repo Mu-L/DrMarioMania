@@ -91,6 +91,8 @@ public partial class EditorManager : Node
         gameMan.ReplayLevel();
 
         touchControlsMan.ShowTouchControlsIfAvailable(true);
+
+        jarMan.SetVirusTileAnimationState(commonGameSettings.EnableVirusTileAnimation);
     }
 
     public void SaveLevel()
@@ -146,6 +148,8 @@ public partial class EditorManager : Node
         selectionTileMap.Visible = true;
 
         touchControlsMan.ShowTouchControlsIfAvailable(false);
+
+        jarMan.SetVirusTileAnimationState(false);
     }
 
     public bool IsPosOutOfBounds(Vector2I pos)
