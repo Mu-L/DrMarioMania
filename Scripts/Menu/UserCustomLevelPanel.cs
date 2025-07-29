@@ -4,16 +4,23 @@ using System;
 public partial class UserCustomLevelPanel : Panel
 {
     // Represents a custom level panel - a box on the custom level screen contain level details and with buttons for playing, editing, deleting, etc the level
-    
-    [ExportGroup("Local References")]
-    [Export] private Label nameLabel;
-    [Export] private Label dateLabel;
-    [Export] private MenuButton deleteButton;
-    [Export] private MenuButton arrangeButton;
+
+    [ExportGroup("Button References")]
     [Export] private Button playButton;
     public Button PlayButton { get { return playButton; } }
     [Export] private Button editButton;
     public Button EditButton { get { return editButton; } }
+    [Export] private Button exportButton;
+    private Button privateButton;
+    public Button ExportButton { get { return exportButton; } }
+    [Export] private MenuButton deleteButton;
+    public Button DeleteButton { get { return deleteButton; } }
+    [Export] private MenuButton arrangeButton;
+    public Button ArrangeButton { get { return arrangeButton; } }
+    
+    [ExportGroup("Misc References")]
+    [Export] private Label nameLabel;
+    [Export] private Label dateLabel;
 
     [ExportGroup("Resources")]
     [Export] private UserCustomLevelList levelList;
@@ -114,4 +121,22 @@ public partial class UserCustomLevelPanel : Panel
         levelContainer.UpdateCurrentPage();
         levelList.SaveToFile();
     }
+
+    public void SetAboveNeighbour(UserCustomLevelPanel neighbour)
+	{
+		playButton.FocusNeighborTop = neighbour.PlayButton.GetPath();
+		editButton.FocusNeighborTop = neighbour.EditButton.GetPath();
+		exportButton.FocusNeighborTop = neighbour.ExportButton.GetPath();
+		deleteButton.FocusNeighborTop = neighbour.DeleteButton.GetPath();
+		arrangeButton.FocusNeighborTop = neighbour.ArrangeButton.GetPath();
+	}
+
+	public void SetBelowNeighbour(UserCustomLevelPanel neighbour)
+	{
+        playButton.FocusNeighborBottom = neighbour.PlayButton.GetPath();
+		editButton.FocusNeighborBottom = neighbour.EditButton.GetPath();
+		exportButton.FocusNeighborBottom = neighbour.ExportButton.GetPath();
+		deleteButton.FocusNeighborBottom = neighbour.DeleteButton.GetPath();
+		arrangeButton.FocusNeighborBottom = neighbour.ArrangeButton.GetPath();
+	}
 }

@@ -380,9 +380,15 @@ focus_neighbor_bottom = NodePath("../VBoxContainer/1PButton")
 text = "v1.0.3"
 icon = null
 title = "v1.0.3 - CHANGE LOG"
-description = "- Added a visual setting to enable/disable the virus tile animations within the jar
+description = "VISUALS:
+
+- Added a visual setting to enable/disable the virus tile animations within the jar
 
 - Added a visual setting to enlarge the jar, ON by default on mobile (single player only)
+
+FIXES/IMPROVEMENTS:
+
+- Improved arrow key/d-pad navigation in the custom level menu
 
 - Fixed free-drawing in the editor causing unwanted lines on mobile"
 alignDescToLeft = true

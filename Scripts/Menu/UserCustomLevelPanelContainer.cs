@@ -95,6 +95,8 @@ public partial class UserCustomLevelPanelContainer : ScrollContainer
             node.QueueFree();
         }
 
+        UserCustomLevelPanel prevPanel = null;
+
         // make new panels
         for (int i = 0; i < levelsPerPage; i++)
         {
@@ -112,6 +114,14 @@ public partial class UserCustomLevelPanelContainer : ScrollContainer
 
 			levelPanel.PlayButton.Pressed += () => menuMan.StartGame(levelIndex, false);
 			levelPanel.EditButton.Pressed += () => menuMan.StartEditor(levelIndex);
+
+            if (prevPanel != null)
+			{
+				levelPanel.SetAboveNeighbour(prevPanel);
+				prevPanel.SetBelowNeighbour(levelPanel);
+			}
+
+			prevPanel = levelPanel;
         }
 
         if (commonGameSettings.LastUserCustomLevelPage != currentPage)
