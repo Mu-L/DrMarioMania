@@ -19,6 +19,9 @@ public static class GameConstants
 	// no. of tiles making up the width of the power-up tileset
 	public static int PowerUpTileSetWidth { get { return NoOfPowerUps + 1; } }
 
-	// Returns true if on mobile
+	// returns true if on mobile
 	public static bool IsOnMobile { get { return OS.HasFeature("android"); } }
+	
+	// size of camera zoom when "EnableLargerView" common game setting is enabled
+	public const float largerViewZoom = 1.265f;
 }

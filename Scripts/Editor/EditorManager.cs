@@ -92,6 +92,7 @@ public partial class EditorManager : Node
 
         touchControlsMan.ShowTouchControlsIfAvailable(true);
 
+        GetViewport().GetCamera2D().Zoom = Vector2.One * (commonGameSettings.EnableLargerView ? GameConstants.largerViewZoom : 1);
         jarMan.SetVirusTileAnimationState(commonGameSettings.EnableVirusTileAnimation);
     }
 
@@ -129,6 +130,8 @@ public partial class EditorManager : Node
 
     public void EndPlayTest()
     {
+        GetViewport().GetCamera2D().Zoom = Vector2.One;
+
         jarMan.DeleteAllPowerUps();
         jarMan.ResetScore();
         jarMan.ResetVirusCount();

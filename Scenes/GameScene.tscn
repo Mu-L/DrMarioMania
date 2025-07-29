@@ -343,16 +343,10 @@ button_group = SubResource("ButtonGroup_bfh0x")
 [node name="Button3" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/TabButtons" index="2"]
 button_group = SubResource("ButtonGroup_bfh0x")
 
-[node name="VirusAniPanel" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3" index="0"]
-visible = false
-
-[node name="ColorRect" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3" index="1"]
-visible = false
-
-[node name="MenuNotice" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3" index="2"]
+[node name="MenuNotice" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3" index="3"]
 visible = true
 
-[node name="OverrideColoursPanel" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3" index="3"]
+[node name="OverrideColoursPanel" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3" index="4"]
 visible = false
 
 [node name="Button" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="0"]

@@ -84,12 +84,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -90.0
+offset_left = -104.0
 offset_top = -45.0
-offset_right = 90.0
+offset_right = 104.0
 offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("3_u61pd")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PageContainer"]
@@ -97,8 +98,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -14.0
-offset_right = 14.0
 grow_horizontal = 2
 grow_vertical = 2
 follow_focus = true
@@ -423,6 +422,7 @@ custom_minimum_size = Vector2(0, 18)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 
 [node name="Label" type="Label" parent="PageContainer/ScrollContainer/VBoxContainer3/VirusAniPanel"]
 layout_mode = 1
@@ -448,6 +448,37 @@ focus_neighbor_bottom = NodePath("../../OverrideColoursPanel/PopUpButton")
 settingName = &"EnableVirusTileAnimation"
 isCommonSetting = true
 
+[node name="EnableLargerViewPanel" type="Control" parent="PageContainer/ScrollContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 1
+
+[node name="Label" type="Label" parent="PageContainer/ScrollContainer/VBoxContainer3/EnableLargerViewPanel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 1.0
+offset_top = -9.0
+offset_right = 89.0
+offset_bottom = 10.0
+grow_vertical = 2
+text = "Enlarge Jar Size
+(1-player only)"
+
+[node name="ToggleButton" parent="PageContainer/ScrollContainer/VBoxContainer3/EnableLargerViewPanel" instance=ExtResource("3_nagm0")]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -33.0
+offset_right = -1.0
+grow_horizontal = 0
+settingName = &"EnableLargerView"
+isCommonSetting = true
+
 [node name="ColorRect" type="ColorRect" parent="PageContainer/ScrollContainer/VBoxContainer3"]
 custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
@@ -465,14 +496,15 @@ theme_override_constants/margin_bottom = 1
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 text = "
-Visual settings can be configured from the main menu."
+More visual settings can be configured from the main menu."
 autowrap_mode = 2
 
 [node name="OverrideColoursPanel" type="Control" parent="PageContainer/ScrollContainer/VBoxContainer3"]
-custom_minimum_size = Vector2(0, 126)
+custom_minimum_size = Vector2(0, 127)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 
 [node name="Label" type="Label" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel"]
 layout_mode = 1
@@ -596,6 +628,7 @@ text = "WHATSAPP"
 [node name="Panel" type="Panel" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 26)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="ActiveContainer" type="FlowContainer" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/Panel"]
 layout_mode = 1
@@ -631,6 +664,7 @@ texture = ExtResource("13_xpjln")
 [node name="Control" type="Control" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Label" type="Label" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/Control"]
 layout_mode = 1
@@ -651,6 +685,7 @@ offset_top = -2.0
 offset_right = -4.0
 offset_bottom = 12.0
 grow_horizontal = 0
+mouse_filter = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/Control/ClearButton"]
 position = Vector2(7, 7)
@@ -667,6 +702,7 @@ custom_minimum_size = Vector2(17, 14)
 layout_mode = 2
 focus_neighbor_top = NodePath("../../Control/ClearButton")
 focus_neighbor_bottom = NodePath("../../../../../../../../BackButton")
+mouse_filter = 1
 toggle_mode = true
 
 [node name="Sprite2D" type="Sprite2D" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/AddContainer/AddButton"]

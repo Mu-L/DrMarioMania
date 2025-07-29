@@ -234,7 +234,6 @@ popUpGroup = NodePath("../PopUpGroup")
 screenContainer = NodePath(".")
 
 [node name="MainScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -381,7 +380,11 @@ focus_neighbor_bottom = NodePath("../VBoxContainer/1PButton")
 text = "v1.0.3"
 icon = null
 title = "v1.0.3 - CHANGE LOG"
-description = "- Added graphics setting to enable/disable the virus tile animations within the jar"
+description = "- Added a visual setting to enable/disable the virus tile animations within the jar
+
+- Added a visual setting to enlarge the jar, ON by default on mobile (single player only)
+
+- Fixed free-drawing in the editor causing unwanted lines on mobile"
 alignDescToLeft = true
 popUpGroup = NodePath("../../../PopUpGroup")
 
@@ -3529,6 +3532,7 @@ grow_vertical = 0
 text = ">"
 
 [node name="SettingsScreen" parent="UILayer/MenuScreenManager" instance=ExtResource("58_2hgv7")]
+visible = false
 layout_mode = 1
 
 [node name="Button" parent="UILayer/MenuScreenManager/SettingsScreen/TabButtons" index="0"]

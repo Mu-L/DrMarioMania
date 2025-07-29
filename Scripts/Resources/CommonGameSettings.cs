@@ -342,6 +342,7 @@ public partial class CommonGameSettings : Resource
 
     // enables/disables the animation of the virus tiles in the jar (not the viruses under the magnifying glass)
     [Export] public bool EnableVirusTileAnimation { get; set; }
+    [Export] public bool EnableLargerView { get; set; }
 
     // Overrides a custom level's colours with a custom palette while playing them (not used while editing though)
     private Godot.Collections.Dictionary<int, Godot.Collections.Array<int>> overrideCustomLevelColours = new Godot.Collections.Dictionary<int, Godot.Collections.Array<int>>();
@@ -444,6 +445,7 @@ public partial class CommonGameSettings : Resource
         config.SetValue("Graphics Settings", "LastWindowMode", (int)DisplayServer.WindowGetMode());
         config.SetValue("Graphics Settings", "OverrideCustomLevelColours", overrideCustomLevelColours);
         config.SetValue("Graphics Settings", "EnableVirusTileAnimation", EnableVirusTileAnimation);
+        config.SetValue("Graphics Settings", "EnableLargerView", EnableLargerView);
 
         config.SetValue("Audio Settings", "MusicVolume", MusicVolume);
         config.SetValue("Audio Settings", "SFXVolume", SFXVolume);
@@ -519,6 +521,15 @@ public partial class CommonGameSettings : Resource
         if (config.HasSectionKey("Graphics Settings", "EnableVirusTileAnimation"))
         {
             EnableVirusTileAnimation = (bool)config.GetValue("Graphics Settings", "EnableVirusTileAnimation");
+        }
+
+        if (config.HasSectionKey("Graphics Settings", "EnableLargerView"))
+        {
+            EnableLargerView = (bool)config.GetValue("Graphics Settings", "EnableLargerView");
+        }
+        else
+        {
+            EnableLargerView = GameConstants.IsOnMobile ? true : false;
         }
 
         if (config.HasSectionKey("Misc Settings", "HasSeenDisclaimer"))
