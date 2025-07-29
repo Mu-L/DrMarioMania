@@ -514,6 +514,7 @@ public partial class EditorCursor : Node2D
     // First frame of draw
     private void StartDraw(DrawingAction action, string startInput = "EditorDraw")
     {
+        lastGridPos = gridPos;
         drawStartGridPos = gridPos;
         drawingAction = action;
 
