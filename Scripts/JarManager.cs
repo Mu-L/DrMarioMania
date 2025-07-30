@@ -706,12 +706,6 @@ public partial class JarManager : Node
 					newColIndex++;
 				}
 			}
-			/*
-			else
-			{
-				GD.Print("skipping old index " + segColIndex);
-			}
-			*/
 
 			segColIndex++;
 		}
@@ -1016,62 +1010,26 @@ public partial class JarManager : Node
 		return colour;
 	}
 
-	public bool DoesTileCauseRebound(Vector2I pos)
-	{
-		if (jarTiles.GetCellSourceId(pos) == GameConstants.objectSourceID)
-		{
-			TileData data = jarTiles.GetCellTileData(pos);
+	public bool DoesTileCauseRebound(Vector2I pos) { return IsObjectWithAttribute(pos, "CauseRebound"); }
+	public bool IsTileUnbreakable(Vector2I pos) { return IsObjectWithAttribute(pos, "Unbreakable"); }
+	public bool ShouldTileBeForeground(Vector2I pos)  { return IsObjectWithAttribute(pos, "Foreground"); }
+	public bool IsTileHazard(Vector2I pos)  { return IsObjectWithAttribute(pos, "Hazard"); }
 
-			return (bool)jarTiles.GetCellTileData(pos).GetCustomData("CauseRebound");
+	public bool IsObjectWithAttribute(Vector2I pos, string attribute)
+	{
+		if (foregroundTiles.GetCellSourceId(pos) == GameConstants.objectSourceID)
+		{
+			return (bool)foregroundTiles.GetCellTileData(pos).GetCustomData(attribute);
+		}
+		else if (jarTiles.GetCellSourceId(pos) == GameConstants.objectSourceID)
+		{
+			return (bool)jarTiles.GetCellTileData(pos).GetCustomData(attribute);
 		}
 		else
 		{
 			return false;
 		}
 	}
-
-	public bool IsTileUnbreakable(Vector2I pos)
-	{
-		if (jarTiles.GetCellSourceId(pos) == GameConstants.objectSourceID)
-		{
-			return (bool)jarTiles.GetCellTileData(pos).GetCustomData("Unbreakable");
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	public bool ShouldTileBeForeground(Vector2I pos)
-	{
-		if (jarTiles.GetCellSourceId(pos) == GameConstants.objectSourceID)
-		{
-			return (bool)jarTiles.GetCellTileData(pos).GetCustomData("Foreground");
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	/*
-	public void UpdateActiveTileColours()
-	{
-		activeTileColours.Clear();
-
-		for (int y = 0; y < jarSize.Y; y++)
-		{
-			for (int x = 0; x < jarSize.X; x++)
-			{
-				int colour = GetTileColour(jarOrigin + new Vector2I(x, y));
-				if (colour > 0 && !activeTileColours.Contains(colour))
-				{
-					activeTileColours.Add(colour);
-				}
-			}
-		}
-	}
-	*/
 
 	private Vector2I GetConnectedSegment(Vector2I pos)
 	{
@@ -1276,16 +1234,6 @@ public partial class JarManager : Node
 
 		if (!pill.IsPowerUp && jarTiles.GetCellTileData(secondaryPos) != null)
 			CheckForLinesToDestroy(secondaryPos);
-
-		/*
-		if (pill.IsPowerUp && pill.CentreSegmentColour == 0 && !TilesToDestroyContainsPos(centrePos) && pill.PowerUp != PowerUp.PillBlaster && pill.PowerUp != PowerUp.VirusBlaster)
-		{
-			DestroyTile(centrePos);
-
-			SetProcess(true);
-			return;
-		}
-		*/
 
 		if (tilesToDestroy.Count > 0)
 		{
@@ -1552,10 +1500,10 @@ public partial class JarManager : Node
 	}
 
 	// Destroys tile at given position - returns true if pos is not empty, aka something gets destroyed
-	public bool DestroyTile(Vector2I pos)
+	public bool DestroyTile(Vector2I pos, bool forceInsta = false)
 	{
-		// Add pos to destroyedTiles - return if pos is already in destroyedTiles or pos is empty
-		if (jarTiles.GetCellSourceId(pos) == -1 || !AddDestroyedTile(pos))
+		// Add pos to destroyedTiles (if not forceInsta) - return if pos is already in destroyedTiles or pos is empty
+		if (jarTiles.GetCellSourceId(pos) == -1 || (forceInsta ? false : !AddDestroyedTile(pos)))
 			return false;
 
 		Vector2I atlas = jarTiles.GetCellAtlasCoords(pos);
@@ -1563,13 +1511,31 @@ public partial class JarManager : Node
 		int colour = GetTileColour(pos);
 		Vector2I poppedAtlas;
 
-		if (sourceID == GameConstants.pillSourceID)
+		// If tile falling, remove it from fall list
+		if (TilesToFallContainsPos(pos))
+		{
+			tilesToFall[pos.Y].Remove(pos.X);
+		}
+
+		// if forceInsta, just delete cell right away if object, don't bother with "popping" the tile
+		if (forceInsta)
+		{
+			// if this a connect pill segment, change the connected segment to a non-connected one
+			if (sourceID == GameConstants.pillSourceID)
+			{
+				SeparateConnectedSegment(pos, atlas);
+			}
+			
+			jarTiles.SetCell(pos, -1);
+			return true;
+		}
+		else if (sourceID == GameConstants.pillSourceID)
 			poppedAtlas.X = pillPoppedAtlasX;
 		else if (sourceID == GameConstants.virusSourceID)
 			poppedAtlas.X = virusPoppedAtlasX;
 		else if (sourceID == GameConstants.powerUpSourceID)
 			poppedAtlas.X = powerUpPoppedAtlasX;
-		// just delete cell right away if object, don't bother with "popping" the tile
+		// if other sourceID, just delete cell right away if object, don't bother with "popping" the tile
 		else
 		{
 			jarTiles.SetCell(pos, -1);
@@ -1599,20 +1565,25 @@ public partial class JarManager : Node
 
 		// if this a connect pill segment, change the connected segment to a non-connected one
 		if (sourceID == GameConstants.pillSourceID)
-		{
-			Vector2I connectedPos = GetConnectedSegment(pos, atlas.X);
-			
-			if (connectedPos != pos)
-			{
-				jarTiles.SetCell(connectedPos, GameConstants.pillSourceID, new Vector2I(PillConstants.atlasSingle, GetTileColour(connectedPos) - 1));
-				
-				// if pos below is empty or will update, do RecursiveFall for the connected pos
-				if (IsPosEmptyOrWillUpdate(connectedPos + Vector2I.Down))
-					RecursiveFall(connectedPos);
-			}
-		}
+			SeparateConnectedSegment(pos, atlas);
 
 		return true;
+	}
+
+	private void SeparateConnectedSegment(Vector2I pos, Vector2I atlas)
+	{
+		Vector2I connectedPos = GetConnectedSegment(pos, atlas.X);
+
+		if (connectedPos != pos)
+		{
+			jarTiles.SetCell(connectedPos, GameConstants.pillSourceID, new Vector2I(PillConstants.atlasSingle, GetTileColour(connectedPos) - 1));
+			
+			// if pos below is empty or will update, do RecursiveFall for the connected pos
+			if (IsPosEmptyOrWillUpdate(connectedPos + Vector2I.Down))
+			{
+				RecursiveFall(connectedPos);
+			}
+		}
 	}
 
 	public void DestroyAllPillSegments(int colour)
@@ -1779,7 +1750,10 @@ public partial class JarManager : Node
 		int minY = tilesToFall.Keys.Min();
 		int maxY = tilesToFall.Keys.Max();
 		
-		// find landed tiles
+		// tiles to get insta destroyed, any tiles touching a hazard get put here
+		List<Vector2I> tilesToInstaDestroy = new List<Vector2I>();
+
+		// find landed tiles AND tiles about to hit hazard (aka to be insta destroyed)
 		for (int y = maxY; y >= minY; y--)
 		{
 			if (!tilesToFall.ContainsKey(y))
@@ -1788,8 +1762,8 @@ public partial class JarManager : Node
 			for (int i = tilesToFall[y].Count - 1; i >= 0; i--)
 			{
 				Vector2I pos = new Vector2I(tilesToFall[y][i], y);
-
 				Vector2I connectedPos = GetConnectedSegment(pos);
+				bool landed = false;
 				
 				if (connectedPos == pos + Vector2I.Left || connectedPos == pos + Vector2I.Right)
 				{
@@ -1797,17 +1771,39 @@ public partial class JarManager : Node
 					{
 						tilesToFall[y].RemoveAt(i);
 						uncheckedLandedTiles.Add(pos);
+						landed = true;
 					}
 				}
 				else if (IsCellFullAndNotFalling(pos + Vector2I.Down))
 				{
 					tilesToFall[y].RemoveAt(i);
 					uncheckedLandedTiles.Add(pos);
+					landed = true;
+				}
+
+				// if tile would still fall but would hit a hazard, insta-destroy it
+				if (!landed)
+				{
+					// insta-destroy tile if hazard
+					if (IsTileHazard(pos + Vector2I.Down))
+					{
+						tilesToInstaDestroy.Add(pos);
+					}
 				}
 			}
 
 			if (tilesToFall[y].Count == 0)
 				tilesToFall.Remove(y);
+		}
+
+		// insta destroy any tiles hit by hazard
+		if (tilesToInstaDestroy.Count > 0)
+		{
+			SfxMan.Play("VirusStunLand");
+			for (int i = 0; i < tilesToInstaDestroy.Count; i++)
+			{
+				DestroyTile(tilesToInstaDestroy[i], true);
+			}
 		}
 
 		// do line checks for landed tiles
@@ -1847,6 +1843,13 @@ public partial class JarManager : Node
 
 		}
 
+		// do CompleteAutoFallingAndDestruction if no falling/popped tiles present
+		if (tilesToDestroy.Count == 0 && tilesToFall.Count == 0)
+		{
+			CompleteAutoFallingAndDestruction();
+			return;
+		}
+
 		if (IsActionPressed("SoftDrop") && CommonGameSettings.ManualAutoFallSpeedUp)
 			SfxMan.Play("FastFall");
 		else
@@ -1858,11 +1861,12 @@ public partial class JarManager : Node
 			if (!tilesToFall.ContainsKey(y))
 				continue;
 
-			for (int i = 0; i < tilesToFall[y].Count; i++)
+			for (int i = tilesToFall[y].Count - 1; i >= 0; i--)
 			{
 				Vector2I pos = new Vector2I(tilesToFall[y][i], y);
 				Vector2I atlas = jarTiles.GetCellAtlasCoords(pos);
 				int sourceID = jarTiles.GetCellSourceId(pos);
+
 				jarTiles.SetCell(pos, -1);
 				jarTiles.SetCell(pos + Vector2I.Down, sourceID, atlas);
 			}
@@ -1877,7 +1881,7 @@ public partial class JarManager : Node
 			tilesToFall.Add(y + 1, tilesToFall[y]);
 			tilesToFall.Remove(y);
 		}
-
+		
 		autoFallTimer = 1;
 	}
 
