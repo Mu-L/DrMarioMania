@@ -366,8 +366,11 @@ public partial class PillManager : Node
 
 		activePill.Visible = true;
 
+		// Check for hazards, if found disable processing to signal to place the pill right away (if found here, the player's gonna be in a fun loop)
+		if (IsTouchingHazard(activePill.GridPos, activePill.IsVertical))
+			AddPillToTilemap(activePill);
 		// Check if the active pill isn't blocked by anything - proceed if clear, otherwise do a game over
-		if (jarMan.IsCellFree(activePill.GridPos) && jarMan.IsCellFree(activePill.GridPos + Vector2I.Right))
+		else if (jarMan.IsCellFree(activePill.GridPos) && jarMan.IsCellFree(activePill.GridPos + Vector2I.Right))
 		{
 			currentState = pillStates.Controlling;
 			UpdateActivePillPosition();
@@ -417,7 +420,7 @@ public partial class PillManager : Node
 		Vector2I downPos = activePill.GridPos + Vector2I.Down;
 		Vector2I secondaryOffset = activePill.IsVertical ? Vector2I.Up : Vector2I.Right;
 
-		while (jarMan.IsCellFree(downPos) && (activePill.IsPowerUp || activePill.IsVertical || jarMan.IsCellFree(downPos + Vector2I.Right)))
+		while (!DoesPosBlockDrop(downPos) && (activePill.IsPowerUp || activePill.IsVertical || !DoesPosBlockDrop(downPos + Vector2I.Right)))
 		{
 			downwardSteps++;
 			downPos += Vector2I.Down;
@@ -441,6 +444,10 @@ public partial class PillManager : Node
 		bool isVertical = activePill.IsVertical;
 		Vector2I targetPos = activePill.GridPos;
 		bool onlySwap = false;
+
+		// hazard check pre-kicks, if found disable processing to signal to place the pill right away
+		if (IsTouchingHazard(targetPos, !isVertical))
+			SetProcess(false);
 
 		// kicks
 		// vertical -> horizontal
@@ -500,6 +507,9 @@ public partial class PillManager : Node
 			UpdateGhostPillPreview();
 		}
 
+		// hazard check post-kicks, if found disable processing to signal to place the pill right away
+		if (IsTouchingHazard(targetPos, isVertical))
+			SetProcess(false);
 
 		return true;
 	}
@@ -513,6 +523,11 @@ public partial class PillManager : Node
 		{
 			activePill.GridPos = targetPos;
 			UpdateActivePillPosition();
+
+			// check for hazards, if found disable processing to signal to place the pill right away
+			if (IsTouchingHazard(targetPos, activePill.IsVertical))
+				SetProcess(false);
+				
 			return true;
 		}
 
@@ -525,7 +540,7 @@ public partial class PillManager : Node
 
 		Vector2I downPos = activePill.GridPos + Vector2I.Down;
 
-		while (jarMan.IsCellFree(downPos) && (activePill.IsPowerUp || activePill.IsVertical || jarMan.IsCellFree(downPos + Vector2I.Right)))
+		while (!DoesPosBlockDrop(downPos) && (activePill.IsPowerUp || activePill.IsVertical || !DoesPosBlockDrop(downPos + Vector2I.Right)))
 		{
 			downwardSteps++;
 			downPos += Vector2I.Down;
@@ -538,6 +553,16 @@ public partial class PillManager : Node
 	private bool IsGrounded()
 	{
 		return !jarMan.IsCellFree(activePill.GridPos + Vector2I.Down) || (!activePill.IsPowerUp && !activePill.IsVertical && !jarMan.IsCellFree(activePill.GridPos + Vector2I.Right + Vector2I.Down));
+	}
+
+	private bool DoesPosBlockDrop(Vector2I pos)
+	{
+		return !jarMan.IsCellFree(pos) || jarMan.IsTileHazard(pos + Vector2I.Up);
+	}
+
+	private bool IsTouchingHazard(Vector2I pos, bool isVertical)
+	{
+		return jarMan.IsTileHazard(pos) || jarMan.IsTileHazard(pos + (isVertical ? Vector2I.Up : Vector2I.Right));
 	}
 
 	private void UpdateTimers(double delta)
@@ -676,6 +701,13 @@ public partial class PillManager : Node
 			}
 		}
 
+		// if processing has stopped (due to a hazard hit), place pill then return
+		if (!IsProcessing())
+		{
+			AddPillToTilemap(activePill);
+			return;
+		}
+
 		// rotation
 		if (!(IsActionPressed("RotateLeft") && IsActionPressed("RotateRight")))
 		{
@@ -720,7 +752,14 @@ public partial class PillManager : Node
 						}
 					}
 				}
+			}
 		}
+
+		// if processing has stopped (due to a hazard hit), place pill then return
+		if (!IsProcessing())
+		{
+			AddPillToTilemap(activePill);
+			return;
 		}
 
 		// gravity and dropping
@@ -731,8 +770,7 @@ public partial class PillManager : Node
 			if (IsActionJustPressed("HardDrop") && CommonGameSettings.IsHardDropEnabled)
 				HardDrop();
 
-			SetProcess(false);
-			jarMan.AddPillToTilemap(activePill);
+			AddPillToTilemap(activePill);
 		}
 		// dropp down either by soft drop or gravity
 		else if ((IsActionPressed("SoftDrop") && softDropTimer <= 0 && canSoftDrop) || fallTimer <= 0)
@@ -744,6 +782,20 @@ public partial class PillManager : Node
 		{
 			canSoftDrop = true;
 		}
+
+		// if processing has stopped (due to a hazard hit), place pill then return
+		if (!IsProcessing())
+		{
+			AddPillToTilemap(activePill);
+			return;
+		}
+	}
+
+	private void AddPillToTilemap(Pill pill)
+	{
+		SetProcess(false);
+		jarMan.ClearPreviewTiles();
+		jarMan.AddPillToTilemap(pill);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

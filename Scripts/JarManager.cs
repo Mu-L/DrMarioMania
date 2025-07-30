@@ -1033,12 +1033,12 @@ public partial class JarManager : Node
 
 	private Vector2I GetConnectedSegment(Vector2I pos)
 	{
-		return GetConnectedSegment(pos, jarTiles.GetCellAtlasCoords(pos).X);
+		return GetConnectedSegment(pos, jarTiles.GetCellSourceId(pos), jarTiles.GetCellAtlasCoords(pos).X);
 	}
 
-	private Vector2I GetConnectedSegment(Vector2I pos, int atlasX)
+	private Vector2I GetConnectedSegment(Vector2I pos, int sourceID, int atlasX)
 	{
-		if (jarTiles.GetCellSourceId(pos) != GameConstants.pillSourceID)
+		if (sourceID != GameConstants.pillSourceID)
 			return pos;
 			
 		Vector2I connectedPos = pos;
@@ -1203,12 +1203,13 @@ public partial class JarManager : Node
 		Vector2I secondaryPos = pill.SecondaryGridPos;
 
 		int centreColour = pill.CentreSegmentColour;
-		int secondaryColour = pill.SecondarySegmentColour;
+		bool secondSegExists = true;
 
 		// If power-up, only place one tile
 		if (pill.IsPowerUp)
 		{
-			if (pill.CentreSegmentColour == 0 /* && pill.CurrentPowerUp != PowerUp.PillBlaster && pill.CurrentPowerUp != PowerUp.VirusBlaster*/)
+			// If rainbow and not on a hazard, auto-activate power-up
+			if (pill.CentreSegmentColour == 0 && !IsTileHazard(centrePos))
 			{
 				ActivatePowerUp(pill.CurrentPowerUp, pill.CentreSegmentColour, centrePos);
 
@@ -1217,10 +1218,14 @@ public partial class JarManager : Node
 			}
 
 			jarTiles.SetCell(centrePos, GameConstants.powerUpSourceID, pill.CentreTextureCoords);
+			secondSegExists = false;
 		}
-		// if secondary is off the top of the screen, cut if off
+		// if secondary is off the top of the screen, only place centre seg
 		else if (secondaryPos.Y < jarOrigin.Y)
+		{
 			jarTiles.SetCell(centrePos, GameConstants.pillSourceID, new Vector2I(4, (centreColour - 1)));
+			secondSegExists = false;
+		}
 		else
 		{
 			jarTiles.SetCell(centrePos, GameConstants.pillSourceID, pill.CentreTextureCoords);
@@ -1230,25 +1235,28 @@ public partial class JarManager : Node
 		tilesToDestroy.Clear();
 		destroyedTiles.Clear();
 		tilesToFall.Clear();
-		CheckForLinesToDestroy(centrePos);
 
-		if (!pill.IsPowerUp && jarTiles.GetCellTileData(secondaryPos) != null)
+		// check for hazards and destroy segment(s) if needed
+		if (IsTileHazard(centrePos))
+		{
+			SfxMan.Play("VirusStunLand");
+			DestroyTile(centrePos, true);
+		}
+		if (secondSegExists && IsTileHazard(secondaryPos))
+		{
+			SfxMan.Play("VirusStunLand");
+			DestroyTile(secondaryPos, true);
+			secondSegExists = false;
+		}
+
+		// check for lines
+		if (jarTiles.GetCellTileData(centrePos) != null)
+			CheckForLinesToDestroy(centrePos);
+
+		if (secondSegExists)
 			CheckForLinesToDestroy(secondaryPos);
 
-		if (tilesToDestroy.Count > 0)
-		{
-			destroyRow = tilesToDestroy.Keys.Max();
-			
-			if (destructionContainsVirus)
-				SfxMan.Play("VirusMatch");
-			else
-				SfxMan.Play("PillMatch");
-
-			IncrementMatchCombo();
-
-			SetProcess(true);
-		}
-		else
+		if (tilesToDestroy.Count == 0 && tilesToFall.Count == 0)
 		{
 			SfxMan.Play("Land");
 
@@ -1261,6 +1269,24 @@ public partial class JarManager : Node
 			{
 				pillMan.ThrowNextPill();
 			}
+		}
+		else
+		{
+			if (tilesToDestroy.Count != 0)
+			{
+				destroyRow = tilesToDestroy.Keys.Max();
+				
+				if (destructionContainsVirus)
+					SfxMan.Play("VirusMatch");
+				else
+					SfxMan.Play("PillMatch");
+
+				IncrementMatchCombo();
+			}
+			else
+				autoFallTimer = 1;
+
+			SetProcess(true);
 		}
 	}
 
@@ -1520,13 +1546,14 @@ public partial class JarManager : Node
 		// if forceInsta, just delete cell right away if object, don't bother with "popping" the tile
 		if (forceInsta)
 		{
+			jarTiles.SetCell(pos, -1);
+
 			// if this a connect pill segment, change the connected segment to a non-connected one
 			if (sourceID == GameConstants.pillSourceID)
 			{
-				SeparateConnectedSegment(pos, atlas);
+				SeparateConnectedSegment(pos, sourceID, atlas);
 			}
 			
-			jarTiles.SetCell(pos, -1);
 			return true;
 		}
 		else if (sourceID == GameConstants.pillSourceID)
@@ -1565,14 +1592,14 @@ public partial class JarManager : Node
 
 		// if this a connect pill segment, change the connected segment to a non-connected one
 		if (sourceID == GameConstants.pillSourceID)
-			SeparateConnectedSegment(pos, atlas);
+			SeparateConnectedSegment(pos, sourceID, atlas);
 
 		return true;
 	}
 
-	private void SeparateConnectedSegment(Vector2I pos, Vector2I atlas)
+	private void SeparateConnectedSegment(Vector2I pos, int sourceID, Vector2I atlas)
 	{
-		Vector2I connectedPos = GetConnectedSegment(pos, atlas.X);
+		Vector2I connectedPos = GetConnectedSegment(pos, sourceID, atlas.X);
 
 		if (connectedPos != pos)
 		{
