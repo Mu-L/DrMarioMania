@@ -130,7 +130,7 @@ public partial class PillManager : Node
 		// Reset various speeds, states, etc
 		ResetState();
 
-		if (jarMan.PossibleSegmentColours.Count == 0)
+		if (jarMan.PossibleColours.Count == 0)
 			nextPill.Visible = false;
 
 		readyCalled = true;
@@ -175,7 +175,7 @@ public partial class PillManager : Node
 		if (!nextPill.Visible)
 			nextPill.Visible = true;
 			
-		nextPill.SetRandomSegmentColours(jarMan.PossibleSegmentColours, PlayerGameSettings.OnlySingleColourPills, jarMan.LocalRng);
+		nextPill.SetRandomSegmentColours(jarMan.PossibleColours, PlayerGameSettings.OnlySingleColourPills, jarMan.LocalRng);
 	}
 
 	private void ResetAllTimersAndResets()

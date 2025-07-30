@@ -41,7 +41,7 @@ public partial class PowerUpThwomp : BaseShootPowerUp
                     GlobalPosition = GridPosToWorldPos(i != 0 ? positions[i - 1] : positions[i] + (goingUpwards ? Vector2I.Down : Vector2I.Up));
                 }
 
-                if (!jarMan.IsTileUnbreakable(positions[i]) && jarMan.DestroySegment(positions[i]))
+                if (!jarMan.IsTileUnbreakable(positions[i]) && jarMan.DestroyTile(positions[i]))
                     destroyedAnything = true;
 
                 if (doRebound)

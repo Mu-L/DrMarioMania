@@ -613,7 +613,7 @@ public partial class EditorCursor : Node2D
         if (sourceID == -1)
             return;
 
-        int newColour = jarMan.GetSegmentColour(pos);
+        int newColour = jarMan.GetTileColour(pos);
 
         if (newColour != -1)
             SetCursorColour(newColour);
@@ -709,7 +709,7 @@ public partial class EditorCursor : Node2D
                     }
 
                     // dragging stuff
-                    if (jarMan.IsSegmentPresent(gridPos) && drawingTool != DrawingTool.Delete)
+                    if (jarMan.IsTilePresent(gridPos) && drawingTool != DrawingTool.Delete)
                     {
                         if (drawingTool == DrawingTool.Duplicate)
                             StartDrag(true);

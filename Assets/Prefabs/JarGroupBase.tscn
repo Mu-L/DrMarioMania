@@ -249,6 +249,11 @@ position = Vector2(0, 16)
 tile_set = ExtResource("3_0r2ea")
 rendering_quadrant_size = 8
 
+[node name="ForegroundTileLayer" type="TileMapLayer" parent="."]
+position = Vector2(0, 16)
+tile_set = ExtResource("3_0r2ea")
+rendering_quadrant_size = 8
+
 [node name="PreviewTileLayer" type="TileMapLayer" parent="."]
 modulate = Color(1, 1, 1, 0.243137)
 position = Vector2(0, 16)
@@ -440,17 +445,16 @@ themeList = ExtResource("10_pvq4b")
 jarMan = NodePath("../JarManager")
 powerUpMeter = NodePath("../PowerUpMeter")
 
-[node name="JarManager" type="Node" parent="." node_paths=PackedStringArray("jarTiles", "previewTiles", "uiMan", "pillMan")]
+[node name="JarManager" type="Node" parent="." node_paths=PackedStringArray("jarTiles", "previewTiles", "foregroundTiles", "uiMan", "pillMan")]
 script = ExtResource("11_60qpv")
 jarTiles = NodePath("../TileLayer")
 previewTiles = NodePath("../PreviewTileLayer")
+foregroundTiles = NodePath("../ForegroundTileLayer")
 jarOrigin = Vector2i(-4, -8)
 jarSize = Vector2i(8, 16)
 destroyRowSpeed = 60.0
 destroyDisappearSpeed = 4.0
 virusGenerationSpeed = 60
-virusSourceID = 1
-powerUpSourceID = 2
 powerUpPrefabs = ExtResource("13_nwj07")
 uiMan = NodePath("../UIManager")
 pillMan = NodePath("../PillManager")

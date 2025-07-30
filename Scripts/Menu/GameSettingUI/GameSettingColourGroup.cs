@@ -45,15 +45,15 @@ public partial class GameSettingColourGroup : Control
 		SetVirusTextures(commonGameSettings.CurrentTheme);
 	}
 
-	// Updates the size of the SegmentColours array depending on ColourCount's value, either adding additional colours or removing unnessicary ones
+	// Updates the size of the ChosenColours array depending on ColourCount's value, either adding additional colours or removing unnessicary ones
 	private void FixUnequalColourCountss()
 	{
 		PlayerGameSettings settings = commonGameSettings.CurrentPlayerGameSettings;
 
-		if (settings.ColourCount == settings.SegmentColours.Count)
+		if (settings.ColourCount == settings.ChosenColours.Count)
 			return;
 		
-		commonGameSettings.CurrentPlayerGameSettings.FixSegmentColoursList();
+		commonGameSettings.CurrentPlayerGameSettings.FixChosenColoursList();
 	}
 
 	public void UpdateVisuals()
@@ -65,10 +65,10 @@ public partial class GameSettingColourGroup : Control
 		RefreshButtonStates();
 	}
 
-	// Checks whether the count of the SegmentColours array is unequal to the value of ColourCount, updates colourCountLabel accordingly
+	// Checks whether the count of the ChosenColours array is unequal to the value of ColourCount, updates colourCountLabel accordingly
 	private void UpdateColourCountWarning()
 	{
-		int colourArrayCount = commonGameSettings.CurrentPlayerGameSettings.SegmentColours.Count;
+		int colourArrayCount = commonGameSettings.CurrentPlayerGameSettings.ChosenColours.Count;
 		int colourCount = commonGameSettings.CurrentPlayerGameSettings.ColourCount;
 
 		bool unequal = colourArrayCount != colourCount;
@@ -83,7 +83,7 @@ public partial class GameSettingColourGroup : Control
 		for (int i = 0; i < buttons.Count; i++)
 		{
 			// (i + 1) because first colour, red, has the id of 1 (0 is reserved for non-coloured tiles in the jar grid)
-			buttons[i].ButtonPressed = commonGameSettings.CurrentPlayerGameSettings.SegmentColours.Contains(i + 1);
+			buttons[i].ButtonPressed = commonGameSettings.CurrentPlayerGameSettings.ChosenColours.Contains(i + 1);
 
 			// unpressed buttons should have partially-transparent sprites
 			buttonSprites[i].SelfModulate = new Color(1,1,1, buttons[i].ButtonPressed ? 1 : 0.25f);
@@ -91,25 +91,25 @@ public partial class GameSettingColourGroup : Control
 		}
 	}
 
-	// set whether or not the colour "i" is included in the SegmentColours list or not
+	// set whether or not the colour "i" is included in the ChosenColours list or not
 	private void SetColourState(bool state, int colour)
 	{
 		if (state)
 		{
-			if (!commonGameSettings.CurrentPlayerGameSettings.SegmentColours.Contains(colour))
-				commonGameSettings.CurrentPlayerGameSettings.SegmentColours.Add(colour);
+			if (!commonGameSettings.CurrentPlayerGameSettings.ChosenColours.Contains(colour))
+				commonGameSettings.CurrentPlayerGameSettings.ChosenColours.Add(colour);
 		}
 		else
 		{
-			if (commonGameSettings.CurrentPlayerGameSettings.SegmentColours.Contains(colour))
-				commonGameSettings.CurrentPlayerGameSettings.SegmentColours.Remove(colour);
+			if (commonGameSettings.CurrentPlayerGameSettings.ChosenColours.Contains(colour))
+				commonGameSettings.CurrentPlayerGameSettings.ChosenColours.Remove(colour);
 		}
 		
 		buttonSprites[colour - 1].SelfModulate = new Color(1,1,1, state ? 1 : 0.25f);
 		buttonSprites[colour - 1].Position = new Vector2(11, state ? 12 : 11);
 
 		// Sort order of colours
-		commonGameSettings.CurrentPlayerGameSettings.SegmentColours.Sort();
+		commonGameSettings.CurrentPlayerGameSettings.ChosenColours.Sort();
 		
 		UpdateColourCountWarning();
 	}

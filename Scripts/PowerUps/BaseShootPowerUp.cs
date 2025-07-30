@@ -13,11 +13,11 @@ public partial class BaseShootPowerUp : BasePowerUp
 
     }
 
-    // tries to destroy segment unless its indestructable, returns success of destruction
+    // tries to destroy tile unless its indestructable, returns success of destruction
     protected bool AttemptToDestroySegment(Vector2I pos)
     {
         if (!jarMan.IsTileUnbreakable(pos))
-            return jarMan.DestroySegment(pos);
+            return jarMan.DestroyTile(pos);
         else
             return false;
     }

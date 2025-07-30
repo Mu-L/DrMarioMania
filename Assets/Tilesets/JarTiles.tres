@@ -457,6 +457,7 @@ texture_region_size = Vector2i(8, 8)
 0:3/0/custom_data_0 = -1
 0:3/0/custom_data_1 = true
 0:3/0/custom_data_3 = true
+0:3/0/custom_data_4 = true
 0:2/0 = 0
 0:2/0/custom_data_2 = true
 
@@ -476,14 +477,16 @@ texture_region_size = Vector2i(8, 8)
 
 [resource]
 tile_size = Vector2i(8, 8)
-custom_data_layer_0/name = "SegmentColour"
+custom_data_layer_0/name = "Colour"
 custom_data_layer_0/type = 2
 custom_data_layer_1/name = "Unbreakable"
 custom_data_layer_1/type = 1
 custom_data_layer_2/name = "CauseRebound"
 custom_data_layer_2/type = 1
-custom_data_layer_3/name = "Fire"
+custom_data_layer_3/name = "Hazard"
 custom_data_layer_3/type = 1
+custom_data_layer_4/name = "Foreground"
+custom_data_layer_4/type = 1
 sources/0 = SubResource("TileSetAtlasSource_7lovr")
 sources/1 = SubResource("TileSetAtlasSource_i35lo")
 sources/2 = SubResource("TileSetAtlasSource_vh4vw")

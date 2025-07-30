@@ -52,7 +52,7 @@ public partial class MenuManager : Node
 	{
 		screenMan.UpdateLastMenuScreenAndHistory();
 
-		commonGameSettings.CurrentPlayerGameSettings.FixSegmentColoursList();
+		commonGameSettings.CurrentPlayerGameSettings.FixChosenColoursList();
 		SaveSettings();
 		
 		commonGameSettings.CustomLevelID = levelID;

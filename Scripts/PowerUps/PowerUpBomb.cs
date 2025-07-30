@@ -13,7 +13,7 @@ public partial class PowerUpBomb : BasePowerUp
         sfxMan.Play("Explode");
 	}
 
-    private void DestroySegments()
+    private void DestroyTiles()
     {
         for (int y = -radius; y < radius + 1; y++)
         {
@@ -23,7 +23,7 @@ public partial class PowerUpBomb : BasePowerUp
 
                 if (Mathf.Abs(x) + Mathf.Abs(y) < 3 && pos != InitialGridPos && !jarMan.IsTileUnbreakable(pos))
                 {
-                    jarMan.DestroySegment(pos);
+                    jarMan.DestroyTile(pos);
                 }
             }
         }

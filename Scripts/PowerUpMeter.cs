@@ -123,7 +123,7 @@ public partial class PowerUpMeter : Control
         else
         {
             nextPowerUp = availablePowerUps[GD.RandRange(0, availablePowerUps.Count - 1)];
-            nextColour = jarMan.PossibleSegmentColours[GD.RandRange(0, jarMan.PossibleSegmentColours.Count - 1)];
+            nextColour = jarMan.PossibleColours[GD.RandRange(0, jarMan.PossibleColours.Count - 1)];
         }
 
         UpdateVisuals();

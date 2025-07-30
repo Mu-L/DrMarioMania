@@ -146,6 +146,7 @@ public partial class GameManager : Node
             else
             {
                 jar.JarTiles.Clear();
+                jar.ForegroundTiles.Clear();
                 jar.PrepareLevel(sharedSeed);
             }
 

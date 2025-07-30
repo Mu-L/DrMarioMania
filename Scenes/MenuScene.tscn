@@ -377,9 +377,9 @@ grow_horizontal = 0
 grow_vertical = 1
 focus_neighbor_left = NodePath("../QuitButton")
 focus_neighbor_bottom = NodePath("../VBoxContainer/1PButton")
-text = "v1.0.3"
+text = "v1.1.0"
 icon = null
-title = "v1.0.3 - CHANGE LOG"
+title = "v1.1.0 - CHANGE LOG"
 description = "VISUALS:
 
 - Added a visual setting to enable/disable the virus tile animations within the jar
