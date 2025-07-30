@@ -17,6 +17,7 @@ public partial class ThemeList : Resource
     public Texture2D GetPillTileTexture(int theme) { return ResourceLoader.Load<Texture2D>(themePath + themeFolderNames[theme] + "/PillTiles.png"); }
     public Texture2D GetVirusTileTexture(int theme) { return ResourceLoader.Load<Texture2D>(themePath + themeFolderNames[theme] + "/VirusTiles.png"); }
     public Texture2D GetPowerUpTileTexture(int theme) { return ResourceLoader.Load<Texture2D>(themePath + themeFolderNames[theme] + "/PowerUpTiles.png"); }
+    public Texture2D GetObjectTileTexture(int theme) { return ResourceLoader.Load<Texture2D>(themePath + themeFolderNames[theme] + "/ObjectTiles.png"); }
     public Texture2D GetPowerUpIconTexture(int theme) { return ResourceLoader.Load<Texture2D>(themePath + themeFolderNames[theme] + "/PowerUpIcons.png"); }
     public Texture2D GetUIBoxTexture(int theme) { return ResourceLoader.Load<Texture2D>(themePath + themeFolderNames[theme] + "/UIBox.png"); }
     public Texture2D GetUIBoxSmallTexture(int theme) { return ResourceLoader.Load<Texture2D>(themePath + themeFolderNames[theme] + "/UIBoxSmall.png"); }

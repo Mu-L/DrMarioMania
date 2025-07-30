@@ -8,9 +8,6 @@ public partial class EditorBaseSelector : FlowContainer
     protected List<Sprite2D> buttonSprites = new List<Sprite2D>();
     protected List<bool> shiftedSprites = new List<bool>();
 
-    protected Vector2I virusAtlasSize;
-    protected Vector2I powerUpAtlasSize;
-
     protected int buttonCount = 1;
     protected int selectedButton = 0;
 

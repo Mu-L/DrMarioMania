@@ -39,8 +39,6 @@ public partial class EditorManager : Node
     private Vector2I grabbedSelectionGridOffset;
     private Vector2I lastGrabbedSelectionGridOffset;
 
-    private int toolPreviewSourceID = 3;
-    public int ToolPreviewSourceID { get { return toolPreviewSourceID; } }
     public bool CanPressButtons { get { return !isPaused && !cursor.IsBusy && editorUILayer.Visible; } }
     private bool isPaused = false;
 
@@ -82,6 +80,7 @@ public partial class EditorManager : Node
         GetViewport().GuiReleaseFocus();
         editorUILayer.Visible = false;
         selectionTileMap.Visible = false;
+        jarMan.DisablePowerUpSpawning = false;
 
         jarMan.UIMan.SetHUDVisibility(true);
         gameThemer.UpdateHoldGroup();
@@ -132,6 +131,7 @@ public partial class EditorManager : Node
     {
         GetViewport().GetCamera2D().Zoom = Vector2.One;
 
+        jarMan.DisablePowerUpSpawning = true;
         jarMan.DeleteAllPowerUps();
         jarMan.ResetScore();
         jarMan.ResetVirusCount();
@@ -140,19 +140,18 @@ public partial class EditorManager : Node
 
         jarMan.UIMan.SetHUDVisibility(false);
         jarMan.UIMan.PowerUpMeter.SetVisibility(false);
+        jarMan.SetVirusTileAnimationState(false);
         
         musicMan.Stop();
 
-        cursor.SetProcess(true);
         SetProcess(true);
+        cursor.SetProcess(true);
 
         GetViewport().GuiReleaseFocus();
         editorUILayer.Visible = true;
         selectionTileMap.Visible = true;
 
         touchControlsMan.ShowTouchControlsIfAvailable(false);
-
-        jarMan.SetVirusTileAnimationState(false);
     }
 
     public bool IsPosOutOfBounds(Vector2I pos)
@@ -180,7 +179,7 @@ public partial class EditorManager : Node
         }
 
         selectedTiles.Add(pos);
-        selectionTileMap.SetCell(pos, toolPreviewSourceID, new Vector2I(1, 0));
+        selectionTileMap.SetCell(pos, GameConstants.toolPreviewSourceID, new Vector2I(1, 0));
     }
 
     public void RemoveSelectedTile(Vector2I pos, bool logChanges)
@@ -283,7 +282,7 @@ public partial class EditorManager : Node
             Vector2I offsetPos = pos + grabbedSelectionGridOffset;
 
             if (!IsPosOutOfBounds(offsetPos))
-                previewTiles.SetCell(offsetPos, toolPreviewSourceID, new Vector2I(1, 0));
+                previewTiles.SetCell(offsetPos, GameConstants.toolPreviewSourceID, new Vector2I(1, 0));
         }
     }
 

@@ -6,28 +6,6 @@ using static PowerUpEnums;
 public partial class EditorCursor : Node2D
 {
     [ExportGroup("Textures")]
-    [Export] private Texture2D virusTexture;
-    [Export] private Texture2D powerUpTexture;
-    public Texture2D VirusTexture
-    {
-        set
-        {
-            if (sprite.Texture == virusTexture)
-                sprite.Texture = value;
-
-            virusTexture = value;
-        }
-    }
-    public Texture2D PowerUpTexture
-    {
-        set
-        {
-            if (sprite.Texture == powerUpTexture)
-                sprite.Texture = value;
-
-            powerUpTexture = value;
-        }
-    }
     [Export] private Texture2D toolPreviewTexture;
 
     [ExportGroup("Internal References")]
@@ -50,10 +28,10 @@ public partial class EditorCursor : Node2D
     // Variables representing current tile type
     private int currentColour = 1;
     public int CurrentColour { get { return currentColour; } }
-    private bool isPowerUp = false;
-    public bool IsPowerUp { get { return isPowerUp; } }
-    private PowerUp currentPowerUp = PowerUp.Thwomp;
-    public PowerUp CurrentPowerUp { get { return currentPowerUp; } }
+    private int tileType = 1;
+    public int TileType { get { return tileType; } }
+    private int tileID = 0;
+    public int TileID { get { return tileID; } }
 
     // Variables used to place current tile
     private int currentSourceID;
@@ -101,33 +79,48 @@ public partial class EditorCursor : Node2D
                 return SelectTile;
         }
     }
-
-    private Vector2I virusAtlasSize;
-    public Vector2I VirusAtlasSize { get { return virusAtlasSize; } }
-    private Vector2I powerUpAtlasSize;
-    public Vector2I PowerUpAtlasSize { get { return powerUpAtlasSize; } }
     private Vector2I toolPreviewAtlasSize;
-
-    private int virusSourceID;
-    private int powerUpSourceID;
 
     private Vector2 initialDragMousePos;
     private StringName drawStartInput;
+
+    private List<Vector2I> tileTypeAtlasSizes = new List<Vector2I>();
+    private List<Texture2D> tileTypeTextures = new List<Texture2D>();
+
+    public void SetTileTypeTextures(int typ, Texture2D tex)
+    {
+        if (tileTypeTextures.Count - 1 < typ)
+            tileTypeTextures.Add(tex);
+
+        if (sprite.Texture == tileTypeTextures[typ])
+            sprite.Texture = tex;
+        else if (sprite.Texture == null && typ == tileType)
+            sprite.Texture = tex;
+
+        tileTypeTextures[typ] = tex;
+    }
+    public Texture2D GetTileTypeTexture(int typ)
+    {
+        return tileTypeTextures[typ];
+    }
+    public Vector2I GetTileTypeAtlasSize(int typ)
+    {
+        return tileTypeAtlasSizes[typ];
+    }
 
     // Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
         jarMan = gameMan.Jars[0];
         jarTiles = jarMan.JarTiles;
-
-        virusSourceID = jarMan.VirusSourceID;
-        powerUpSourceID = jarMan.PowerUpSourceID;
         
-        currentSourceID = virusSourceID;
+        currentSourceID = GameConstants.virusSourceID;
 
-        virusAtlasSize = ((TileSetAtlasSource)jarTiles.TileSet.GetSource(virusSourceID)).GetAtlasGridSize();
-        powerUpAtlasSize = ((TileSetAtlasSource)jarTiles.TileSet.GetSource(powerUpSourceID)).GetAtlasGridSize();
-        toolPreviewAtlasSize = ((TileSetAtlasSource)jarTiles.TileSet.GetSource(editorMan.ToolPreviewSourceID)).GetAtlasGridSize();
+        tileTypeAtlasSizes.Add(((TileSetAtlasSource)jarTiles.TileSet.GetSource(GameConstants.pillSourceID)).GetAtlasGridSize());
+        tileTypeAtlasSizes.Add(((TileSetAtlasSource)jarTiles.TileSet.GetSource(GameConstants.virusSourceID)).GetAtlasGridSize());
+        tileTypeAtlasSizes.Add(((TileSetAtlasSource)jarTiles.TileSet.GetSource(GameConstants.powerUpSourceID)).GetAtlasGridSize());
+        tileTypeAtlasSizes.Add(((TileSetAtlasSource)jarTiles.TileSet.GetSource(GameConstants.objectSourceID)).GetAtlasGridSize());
+        toolPreviewAtlasSize = ((TileSetAtlasSource)jarTiles.TileSet.GetSource(GameConstants.toolPreviewSourceID)).GetAtlasGridSize();
 
         toolDrawingStyles.Add(DrawingTool.Place, DrawingStyle.Free);
         toolDrawingStyles.Add(DrawingTool.Delete, DrawingStyle.Free);
@@ -153,27 +146,21 @@ public partial class EditorCursor : Node2D
     {
         if (IsBusy || colour == currentColour)
             return;
-        
+
         currentColour = colour;
         UpdateCursorSprite();
     }
-    public void SetCursorToVirus()
-    {
-        if (IsBusy || !isPowerUp)
-            return;
 
-        isPowerUp = false;
+    public void SetCursorType(int typ, int id)
+    {
+        if (IsBusy || (tileType == typ && tileID == id))
+            return;
+        
+        tileType = typ;
+        tileID = id;
         UpdateCursorSprite();
     }
-    public void SetCursorToPowerUp(PowerUp powerUp)
-    {
-        if (IsBusy || (powerUp == currentPowerUp && isPowerUp))
-            return;
 
-        isPowerUp = true;
-        currentPowerUp = powerUp;
-        UpdateCursorSprite();
-    }
     public void SetDrawingTool(int tool)
     {
         if (IsBusy || (DrawingTool)tool == drawingTool)
@@ -203,11 +190,9 @@ public partial class EditorCursor : Node2D
     private void UpdateSourceIDAndAtlas()
     {
         if (sprite.Texture == toolPreviewTexture)
-            currentSourceID = editorMan.ToolPreviewSourceID;
-        else if (sprite.Texture == powerUpTexture)
-            currentSourceID = powerUpSourceID;
+            currentSourceID = GameConstants.toolPreviewSourceID;
         else
-            currentSourceID = virusSourceID;
+            currentSourceID = tileType;
 
         currentAtlas = new Vector2I(sprite.Frame % sprite.Hframes, sprite.Frame / sprite.Hframes);
     }
@@ -239,31 +224,37 @@ public partial class EditorCursor : Node2D
 
             sprite.Frame = (int)drawingTool - 1;
         }
-        else if (isPowerUp)
-        {
-            if (sprite.Texture != powerUpTexture)
-            {
-                sprite.Frame = 0;
-                sprite.Texture = powerUpTexture;
-
-                sprite.Hframes = powerUpAtlasSize.X;
-                sprite.Vframes = powerUpAtlasSize.Y;
-            }
-
-            sprite.Frame = sprite.Hframes * currentColour + (int)currentPowerUp;
-        }
         else
         {
-            if (sprite.Texture != virusTexture)
+            // tile sprites
+
+            if (sprite.Texture != tileTypeTextures[tileType])
             {
                 sprite.Frame = 0;
-                sprite.Texture = virusTexture;
+                sprite.Texture = tileTypeTextures[tileType];
 
-                sprite.Hframes = virusAtlasSize.X;
-                sprite.Vframes = virusAtlasSize.Y;
+                sprite.Hframes = tileTypeAtlasSizes[tileType].X;
+                sprite.Vframes = tileTypeAtlasSizes[tileType].Y;
             }
 
-            sprite.Frame = sprite.Hframes * (currentColour - 1);
+            // object
+            if (tileType == 3)
+            {
+                sprite.Frame = sprite.Hframes * tileID;
+            }
+            // power-up
+            else if (tileType == 2)
+            {
+                sprite.Frame = sprite.Hframes * currentColour + tileID;
+            }
+            // pill/virus
+            else
+            {
+                sprite.Frame = sprite.Hframes * (currentColour - 1);
+
+                if (tileType == 0)
+                    sprite.Frame += 4;
+            }
         }
 
         UpdateSourceIDAndAtlas();
@@ -622,19 +613,27 @@ public partial class EditorCursor : Node2D
         if (sourceID == -1)
             return;
 
-        SetCursorColour(jarMan.GetSegmentColour(pos));
+        int newColour = jarMan.GetSegmentColour(pos);
+
+        if (newColour != -1)
+            SetCursorColour(newColour);
+
         editorMan.ColourSelector.PressButton(currentColour - 1);
         
-        if (sourceID == powerUpSourceID)
+        if (sourceID == GameConstants.objectSourceID)
         {
-            SetCursorToPowerUp((PowerUp)jarTiles.GetCellAtlasCoords(pos).X);
-            editorMan.TileTypeSelector.PressButton((int)currentPowerUp + 1);
+            SetCursorType(sourceID, jarTiles.GetCellAtlasCoords(pos).Y);
+        }
+        else if (sourceID == GameConstants.powerUpSourceID)
+        {
+            SetCursorType(sourceID, jarTiles.GetCellAtlasCoords(pos).X);
         }
         else
         {
-            SetCursorToVirus();
-            editorMan.TileTypeSelector.PressButton(0);
+            SetCursorType(sourceID, 0);
         }
+
+        editorMan.TileTypeSelector.PressButton(tileType, tileID);
 
         SetDrawingTool(0);
         toolSelector.PressButton(0);

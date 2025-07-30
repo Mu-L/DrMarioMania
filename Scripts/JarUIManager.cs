@@ -266,9 +266,9 @@ public partial class JarUIManager : Node
 		Texture2D powerUpTileTex = themeList.GetPowerUpTileTexture(theme);
 
 		// Get tilesets
-		TileSetAtlasSource pillSource = (TileSetAtlasSource)jarTiles.TileSet.GetSource(jarMan.PillSourceID);
-		TileSetAtlasSource virusSource = (TileSetAtlasSource)jarTiles.TileSet.GetSource(jarMan.VirusSourceID);
-		TileSetAtlasSource powerUpSource = (TileSetAtlasSource)jarTiles.TileSet.GetSource(jarMan.PowerUpSourceID);
+		TileSetAtlasSource pillSource = (TileSetAtlasSource)jarTiles.TileSet.GetSource(GameConstants.pillSourceID);
+		TileSetAtlasSource virusSource = (TileSetAtlasSource)jarTiles.TileSet.GetSource(GameConstants.virusSourceID);
+		TileSetAtlasSource powerUpSource = (TileSetAtlasSource)jarTiles.TileSet.GetSource(GameConstants.powerUpSourceID);
 		
 		// Update visuals for...
 

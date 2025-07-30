@@ -89,7 +89,6 @@ public partial class GameManager : Node
     private void UpdateCameraZoom()
     {
         bool enableZoom = commonGameSettings.EnableLargerView && !isInEditorScene && commonGameSettings.PlayerCount == 1;
-        GD.Print("zoom: " + enableZoom);
         GetViewport().GetCamera2D().Zoom = Vector2.One * (enableZoom ? GameConstants.largerViewZoom : 1);
     }
 

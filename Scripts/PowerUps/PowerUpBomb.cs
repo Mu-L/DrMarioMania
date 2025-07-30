@@ -21,7 +21,7 @@ public partial class PowerUpBomb : BasePowerUp
             {
                 Vector2I pos = InitialGridPos + new Vector2I(x, y);
 
-                if (Mathf.Abs(x) + Mathf.Abs(y) < 3 && pos != InitialGridPos)
+                if (Mathf.Abs(x) + Mathf.Abs(y) < 3 && pos != InitialGridPos && !jarMan.IsTileUnbreakable(pos))
                 {
                     jarMan.DestroySegment(pos);
                 }

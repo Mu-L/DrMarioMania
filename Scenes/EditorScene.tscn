@@ -899,10 +899,10 @@ button_group = SubResource("ButtonGroup_3u7qh")
 [node name="Button3" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/TabButtons" index="2"]
 button_group = SubResource("ButtonGroup_3u7qh")
 
-[node name="MenuNotice" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3" index="2"]
+[node name="MenuNotice" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3" index="3"]
 visible = true
 
-[node name="OverrideColoursPanel" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3" index="3"]
+[node name="OverrideColoursPanel" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3" index="4"]
 visible = false
 
 [node name="Button" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="0"]
@@ -1349,9 +1349,9 @@ vframes = 10
 [node name="SaveButton" type="Button" parent="EditorUILayer/TopToolbar" index="3"]
 custom_minimum_size = Vector2(14, 15)
 layout_mode = 1
-offset_left = 7.0
+offset_left = 4.0
 offset_top = 8.0
-offset_right = 47.0
+offset_right = 44.0
 offset_bottom = 24.0
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_styles/pressed = SubResource("StyleBoxFlat_7hvga")
@@ -1385,8 +1385,6 @@ hframes = 4
 [node name="EditorCursor" type="Node2D" parent="GameLayer" index="1" node_paths=PackedStringArray("sprite", "gameMan", "editorMan", "undoRedoMan", "toolSelector", "styleSelector")]
 z_index = 1
 script = ExtResource("2_gugl5")
-virusTexture = ExtResource("3_6i3kl")
-powerUpTexture = ExtResource("40_s6gkj")
 toolPreviewTexture = ExtResource("14_tpaje")
 sprite = NodePath("Sprite2D")
 gameMan = NodePath("../../GameManager")
@@ -1401,7 +1399,6 @@ texture = ExtResource("3_6i3kl")
 hframes = 3
 vframes = 10
 
-[connection signal="pressed" from="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/BackButton" to="PauseLayer/PauseManager" method="GoBack"]
 [connection signal="text_changed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/LevelNameBox" to="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/LevelNameBox" method="UpdateLevelName"]
 [connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/SaveButton" to="EditorPauseLayer/EditorPauseManager" method="GoBack"]
 [connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/SaveButton" to="EditorManager" method="SaveLevel"]

@@ -4145,7 +4145,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0, 0, 0, 0.54902)
+color = Color(0, 0, 0, 0.666667)
 
 [node name="Label" type="Label" parent="UILayer/NotificationBox"]
 layout_mode = 1

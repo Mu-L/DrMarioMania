@@ -49,7 +49,27 @@ public partial class UserCustomLevelPanelContainer : ScrollContainer
         string code = DisplayServer.ClipboardGet();
 
         bool attemptedCode = code.Length > 16;
-        bool success = attemptedCode && levelList.ImportLevel(code);
+
+        bool skipImport = false;
+
+        if (attemptedCode)
+        {
+            int codeVer = -1;
+            bool parsed = int.TryParse(code[0].ToString(), out codeVer);
+
+            if (!parsed)
+                skipImport = true;
+            else if (codeVer > GameConstants.levelCodeVer)
+            {
+                notificationBox.ShowMessage("This level requires a newer version of the game!", 3000);
+                return;
+            }
+        }
+
+        bool success = false;
+
+        if (!skipImport)
+            success = attemptedCode && levelList.ImportLevel(code);
 
         if (success)
         {

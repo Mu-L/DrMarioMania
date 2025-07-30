@@ -80,20 +80,26 @@ public partial class GameThemer : Node
 	{
 		if (editorCursor != null)
 		{
-			editorCursor.VirusTexture = themeList.GetVirusTileTexture(commonGameSettings.CurrentTheme);
-			editorCursor.PowerUpTexture = themeList.GetPowerUpTileTexture(commonGameSettings.CurrentTheme);
+			editorCursor.SetTileTypeTextures(0, themeList.GetPillTileTexture(commonGameSettings.CurrentTheme));
+			editorCursor.SetTileTypeTextures(1, themeList.GetVirusTileTexture(commonGameSettings.CurrentTheme));
+			editorCursor.SetTileTypeTextures(2, themeList.GetPowerUpTileTexture(commonGameSettings.CurrentTheme));
+			editorCursor.SetTileTypeTextures(3, themeList.GetObjectTileTexture(commonGameSettings.CurrentTheme));
 		}
 
 		if (tileTypeSelector != null)
 		{
+			tileTypeSelector.PillTexture = themeList.GetPillTileTexture(commonGameSettings.CurrentTheme);
 			tileTypeSelector.VirusTexture = themeList.GetVirusTileTexture(commonGameSettings.CurrentTheme);
 			tileTypeSelector.PowerUpTexture = themeList.GetPowerUpTileTexture(commonGameSettings.CurrentTheme);
+			tileTypeSelector.ObjectTexture = themeList.GetObjectTileTexture(commonGameSettings.CurrentTheme);
 		}
 		
 		if (colourSelector != null)
 		{
+			colourSelector.PillTexture = themeList.GetPillTileTexture(commonGameSettings.CurrentTheme);
 			colourSelector.VirusTexture = themeList.GetVirusTileTexture(commonGameSettings.CurrentTheme);
 			colourSelector.PowerUpTexture = themeList.GetPowerUpTileTexture(commonGameSettings.CurrentTheme);
+			colourSelector.ObjectTexture = themeList.GetObjectTileTexture(commonGameSettings.CurrentTheme);
 		}
 	}
 }
