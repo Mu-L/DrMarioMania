@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/MultiWin.ogg-fab8a2b0c56b94d3a70db2a1c8f549de
 [params]
 
 loop=true
-loop_offset=2.04
+loop_offset=1.545
 bpm=0.0
 beat_count=0
 bar_beats=4
