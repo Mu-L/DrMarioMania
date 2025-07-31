@@ -1280,7 +1280,7 @@ public partial class JarManager : Node
 					SfxMan.Play("VirusMatch");
 				else
 					SfxMan.Play("PillMatch");
-
+				
 				IncrementMatchCombo();
 			}
 			else

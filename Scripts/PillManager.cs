@@ -771,6 +771,7 @@ public partial class PillManager : Node
 				HardDrop();
 
 			AddPillToTilemap(activePill);
+			return;
 		}
 		// dropp down either by soft drop or gravity
 		else if ((IsActionPressed("SoftDrop") && softDropTimer <= 0 && canSoftDrop) || fallTimer <= 0)
