@@ -401,9 +401,11 @@ VISUALS:
 
 FIXES/IMPROVEMENTS:
 
-- Improved arrow key/d-pad navigation in the custom level menu
+- Fixed inconsistent auto repeat when holding left or right while a pill enters the jar
 
-- Fixed free-drawing in the editor causing unwanted lines on mobile"
+- Fixed free-drawing in the editor causing unwanted lines on mobile
+
+- Improved arrow key/d-pad navigation in the custom level menu"
 alignDescToLeft = true
 popUpGroup = NodePath("../../../PopUpGroup")
 

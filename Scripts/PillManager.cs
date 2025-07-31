@@ -298,6 +298,10 @@ public partial class PillManager : Node
 		if (!CommonGameSettings.IsMultiplayer)
 			Mario.ResetFrame();
 
+		// if holding left or right, auto set moveTimer to zero so it starts auto repeat right away
+		if (IsActionPressed("MoveLeft") || IsActionPressed("MoveRight"))
+			moveTimer = 0;
+
 		// increase fall speed 
 		if (!PlayerGameSettings.NoFallSpeedIncrease && pillsUsed % pillsToIncreaseFallSpeed == 0 && fallSpeed < softDropSpeed)
 		{
