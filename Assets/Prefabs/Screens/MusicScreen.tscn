@@ -92,6 +92,58 @@ layout_mode = 2
 text = "CHILL"
 value = -2
 
+[node name="ModernLabel" type="Control" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+custom_minimum_size = Vector2(0, 11)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="CategoryLabel" type="Label" parent="SongCategoryContainer/MarginContainer/SongCategories/ModernLabel"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 241.0
+offset_bottom = 9.0
+text = "Mania (OST)"
+
+[node name="FlowContainer17" type="FlowContainer" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+layout_mode = 2
+
+[node name="Button" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer17" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "FEVER"
+value = 63
+
+[node name="Button2" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer17" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "CHILL"
+value = 64
+
+[node name="Button3" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer17" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "VS FEVER"
+value = 65
+
+[node name="Button4" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer17" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "VS CHILL"
+value = 66
+
+[node name="Button5" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer17" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "CHILLTRIS"
+value = 67
+
+[node name="Button6" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer17" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "SUGAR PLUM PILLS"
+value = 68
+
+[node name="Button7" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer17" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "CREDITS"
+value = 69
+
 [node name="NESLabel" type="Control" parent="SongCategoryContainer/MarginContainer/SongCategories"]
 custom_minimum_size = Vector2(0, 11)
 layout_mode = 2
@@ -111,7 +163,6 @@ layout_mode = 2
 
 [node name="Button" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer" instance=ExtResource("4_vsqyw")]
 layout_mode = 2
-button_pressed = true
 text = "FEVER"
 value = 1
 
@@ -173,6 +224,21 @@ value = 5
 layout_mode = 2
 text = "CHILL"
 value = 6
+
+[node name="Button3" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer3" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "MIXED 1"
+value = 70
+
+[node name="Button4" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer3" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "MIXED 2"
+value = 71
+
+[node name="Button5" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer3" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "MIXED 3"
+value = 72
 
 [node name="N64Label" type="Control" parent="SongCategoryContainer/MarginContainer/SongCategories"]
 custom_minimum_size = Vector2(0, 11)

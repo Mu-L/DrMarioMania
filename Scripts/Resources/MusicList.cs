@@ -21,10 +21,10 @@ public partial class MusicList : Resource
 
         // fever based on theme
         if (id == -1)
-            path = themeList.GetFeverMusicPath(commonGameSettings.CurrentTheme);
+            path = themeList.GetFeverMusicPath(commonGameSettings.CurrentTheme, commonGameSettings.IsMultiplayer);
         // chill based on theme
         else if (id == -2)
-            path = themeList.GetChillMusicPath(commonGameSettings.CurrentTheme);
+            path = themeList.GetChillMusicPath(commonGameSettings.CurrentTheme, commonGameSettings.IsMultiplayer);
         // random
         else if (id == -4)
             path = pathPrefix + musicPaths[GD.RandRange(0, musicPaths.Count - 1)];

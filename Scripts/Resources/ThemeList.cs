@@ -93,8 +93,20 @@ public partial class ThemeList : Resource
     public int GetRightHudGroupOffset(int theme) { return GetThemeAttributes(theme).RightHudGroupOffset; }
     public int GetVirusRingOffset(int theme) { return GetThemeAttributes(theme).VirusRingOffset; }
     public int GetPillPreviewOffset(int theme) { return GetThemeAttributes(theme).PillPreviewOffset; }
-    public string GetFeverMusicPath(int theme) { return GetThemeAttributes(theme).FeverMusicPath; }
-    public string GetChillMusicPath(int theme) { return GetThemeAttributes(theme).ChillMusicPath; }
+    public string GetFeverMusicPath(int theme, bool isMultiplayer)
+    {
+        if (isMultiplayer && GetThemeAttributes(theme).HasMultiMusicVariants)
+            return GetThemeAttributes(theme).MultiFeverMusicPath;
+        else
+            return GetThemeAttributes(theme).FeverMusicPath;
+    }
+    public string GetChillMusicPath(int theme, bool isMultiplayer)
+    {
+        if (isMultiplayer && GetThemeAttributes(theme).HasMultiMusicVariants)
+            return GetThemeAttributes(theme).MultiChillMusicPath;
+        else
+            return GetThemeAttributes(theme).ChillMusicPath;
+    }
     public string GetMusicFolderPath(int theme) { return GetThemeAttributes(theme).MusicFolderPath; }
     public string GetSfxFolderPath(int theme) { return GetThemeAttributes(theme).SfxFolderPath; }
     public Color GetLabelColour(int theme) { return GetThemeAttributes(theme).LabelColour; }

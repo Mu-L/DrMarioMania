@@ -102,12 +102,12 @@ public partial class MenuScreenManager : BaseHistoryScreenManager
 				multiControlCon.RefreshVisuals();
 			}
 		}
-		// if backing out of visuals/sound screen, revert background music to standard menu music
-		else if (currentScreen == 2 || currentScreen == 7)
+		// if backing out of visuals/sound (single and multi) or credits screen, revert background music to standard menu music
+		else if (currentScreen == 2 || currentScreen == 7 || currentScreen == 9)
 		{
 			musicPreviewPlayer.RestoreNormalMusic();
 		}
-		// if backing out of music menu, update ui values on visuals/sound screen to update the selected music button
+		// if backing out of music menu, set preview music to the selected music button
 		else if (currentScreen == 4)
 		{
 			musicPreviewPlayer.SetPreviewMusicToCurrent();

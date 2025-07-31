@@ -234,6 +234,7 @@ popUpGroup = NodePath("../PopUpGroup")
 screenContainer = NodePath(".")
 
 [node name="MainScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -380,7 +381,19 @@ focus_neighbor_bottom = NodePath("../VBoxContainer/1PButton")
 text = "v1.1.0"
 icon = null
 title = "v1.1.0 - CHANGE LOG"
-description = "VISUALS:
+description = "GAMEPLAY:
+
+- Added new brick, hard brick, solid block and fire tiles to the editor
+
+- Single pill segments can now be placed in the editor
+
+AUDIO:
+
+- Added original remixes by gameboi64 for the Mania theme + credits menu
+
+- Added the 3 Mixed Match songs under the SNES category
+
+VISUALS:
 
 - Added a visual setting to enable/disable the virus tile animations within the jar
 
@@ -395,7 +408,6 @@ alignDescToLeft = true
 popUpGroup = NodePath("../../../PopUpGroup")
 
 [node name="GameplayScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3216,6 +3228,8 @@ Original concept, characters, etc created by Nintendo
 
 Music from Nintendo and SEGA
 
+Original music by
+
 Dr. Mario gameplay documented by harddrop.com, wiki.drmar.io and Mario Wiki
 
 \"Press Start 2P\" font by Codeman38
@@ -3227,6 +3241,15 @@ WhatsApp theme inspired by the \"Dr. WhatsApp\" Smash Bros mod by TheHaya
 
 Game created with the Godot game engine"
 autowrap_mode = 2
+
+[node name="LinkButton" type="Button" parent="UILayer/MenuScreenManager/CreditsScreen/Panel/ScrollContainer/MarginContainer/Credits"]
+layout_mode = 1
+offset_left = 140.0
+offset_top = 84.0
+offset_right = 220.0
+offset_bottom = 100.0
+mouse_filter = 1
+text = "gameboi64"
 
 [node name="BackButton" type="Button" parent="UILayer/MenuScreenManager/CreditsScreen"]
 layout_mode = 1
@@ -4220,6 +4243,7 @@ normalMusicPlayer = NodePath("../MusicPlayer")
 [connection signal="pressed" from="UILayer/MenuScreenManager/MainScreen/VBoxContainer/2PButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [5]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/MainScreen/QuitButton" to="MenuManager" method="SaveAndQuit"]
 [connection signal="pressed" from="UILayer/MenuScreenManager/MainScreen/CreditsButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [9]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MainScreen/CreditsButton" to="MusicPreviewPlayer" method="SetPreviewMusic" binds= [69]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/MainScreen/HelpButton" to="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer" method="UpdateInputVisuals"]
 [connection signal="pressed" from="UILayer/MenuScreenManager/MainScreen/HelpButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [8]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/MainScreen/SettingsButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [12]]
@@ -4257,6 +4281,7 @@ normalMusicPlayer = NodePath("../MusicPlayer")
 [connection signal="pressed" from="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PreviousButton" to="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer" method="PreviousPage"]
 [connection signal="pressed" from="UILayer/MenuScreenManager/HelpScreen/HelpPanel/NextButton" to="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer" method="NextPage"]
 [connection signal="pressed" from="UILayer/MenuScreenManager/HelpScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/CreditsScreen/Panel/ScrollContainer/MarginContainer/Credits/LinkButton" to="MenuManager" method="OpenURL" binds= ["https://www.youtube.com/playlist?list=PLU9I-camw_oumYQtTt8-ne2AAKMnG50Fk"]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/CreditsScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
 [connection signal="pressed" from="UILayer/MenuScreenManager/CreditsScreen/LinkButton" to="MenuManager" method="OpenURL" binds= ["https://toadfangames.itch.io/"]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/MultiplayerInputScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
