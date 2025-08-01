@@ -23,6 +23,8 @@ public partial class PauseManager : BaseHistoryScreenManager
 
     public override void GoBack()
     {
+        backFrame = Engine.GetFramesDrawn();
+        
         PopHistory();
 
         if (screenHistory.Count < 1)

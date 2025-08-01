@@ -48,6 +48,9 @@ public partial class MenuScreenManager : BaseHistoryScreenManager
 
 	public override void SetScreen(int nextScreen)
 	{
+		if (backFrame == Engine.GetFramesDrawn())
+            return;
+
 		base.SetScreen(nextScreen);
 
 		if (IsScreenUpdateableSettingScreen(currentScreen))
@@ -61,6 +64,8 @@ public partial class MenuScreenManager : BaseHistoryScreenManager
 
 	public override void GoBack()
 	{
+		backFrame = Engine.GetFramesDrawn();
+		
 		if (popUpGroup.IsOpen)
 		{
 			popUpGroup.HidePopUp();

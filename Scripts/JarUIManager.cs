@@ -269,6 +269,7 @@ public partial class JarUIManager : Node
 		TileSetAtlasSource pillSource = (TileSetAtlasSource)jarTiles.TileSet.GetSource(GameConstants.pillSourceID);
 		TileSetAtlasSource virusSource = (TileSetAtlasSource)jarTiles.TileSet.GetSource(GameConstants.virusSourceID);
 		TileSetAtlasSource powerUpSource = (TileSetAtlasSource)jarTiles.TileSet.GetSource(GameConstants.powerUpSourceID);
+		TileSetAtlasSource objectSource = (TileSetAtlasSource)jarTiles.TileSet.GetSource(GameConstants.objectSourceID);
 		
 		// Update visuals for...
 
@@ -276,6 +277,7 @@ public partial class JarUIManager : Node
 		virusSource.Texture = themeList.GetVirusTileTexture(theme);
 		pillSource.Texture = pillTileTex;
 		powerUpSource.Texture = powerUpTileTex;
+		objectSource.Texture = themeList.GetObjectTileTexture(theme);
 
 		// Pills
 		activePill.SetPillTexture(pillTileTex);

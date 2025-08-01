@@ -10,6 +10,9 @@ public partial class BaseHistoryScreenManager : BaseScreenManager
 
     public override void SetScreen(int nextScreen)
 	{
+        if (backFrame == Engine.GetFramesDrawn())
+            return;
+            
         screenHistory.Add(nextScreen);
 
 		base.SetScreen(nextScreen);

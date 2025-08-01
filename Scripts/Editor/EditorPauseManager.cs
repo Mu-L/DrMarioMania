@@ -9,6 +9,8 @@ public partial class EditorPauseManager : PauseManager
     
     public override void GoBack()
     {
+        backFrame = Engine.GetFramesDrawn();
+        
         if (popUpGroup.IsOpen)
 		{
 			popUpGroup.HidePopUp();
