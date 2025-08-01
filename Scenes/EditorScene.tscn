@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://dhy6fjq1xc4w2"]
+[gd_scene load_steps=60 format=3 uid="uid://dhy6fjq1xc4w2"]
 
 [ext_resource type="PackedScene" uid="uid://up7l7b7sr6ch" path="res://Scenes/GameScene.tscn" id="1_s5m0s"]
 [ext_resource type="Script" path="res://Scripts/Editor/EditorBaseSelector.cs" id="2_g5ukp"]
@@ -42,6 +42,7 @@
 [ext_resource type="PackedScene" uid="uid://ciycvm6fh6cel" path="res://Assets/Prefabs/PopUpGroup.tscn" id="24_ngsmh"]
 [ext_resource type="PackedScene" uid="uid://dejlotb7w8jno" path="res://Assets/Prefabs/MusicPreviewPlayer.tscn" id="29_pwdah"]
 [ext_resource type="Texture2D" uid="uid://be6drct25wp0f" path="res://Assets/Sprites/UI/ButtonIcons/PlayIcon.png" id="35_fosab"]
+[ext_resource type="Texture2D" uid="uid://bafh73vcs08cv" path="res://Assets/Sprites/UI/Editor/SaveButton.png" id="40_rnsc5"]
 [ext_resource type="Texture2D" uid="uid://cb6qr0bqxms7o" path="res://Assets/Sprites/Themes/Modern/PowerUpTiles.png" id="40_s6gkj"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_pb8p5"]
@@ -1349,13 +1350,14 @@ vframes = 10
 [node name="SaveButton" type="Button" parent="EditorUILayer/TopToolbar" index="3"]
 custom_minimum_size = Vector2(14, 15)
 layout_mode = 1
-offset_left = 4.0
+offset_left = 6.0
 offset_top = 8.0
-offset_right = 44.0
-offset_bottom = 24.0
+offset_right = 32.0
+offset_bottom = 25.0
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_styles/pressed = SubResource("StyleBoxFlat_7hvga")
-text = "SAVE"
+icon = ExtResource("40_rnsc5")
+icon_alignment = 1
 metadata/_edit_group_ = true
 
 [node name="ResetButton" type="Button" parent="EditorUILayer/TopToolbar" index="4" node_paths=PackedStringArray("sprite", "gameMan", "editorMan", "undoRedoMan")]
@@ -1364,10 +1366,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -27.0
+offset_left = -32.0
 offset_top = 8.0
-offset_right = -7.0
-offset_bottom = 23.0
+offset_right = -6.0
+offset_bottom = 25.0
 grow_horizontal = 0
 theme_override_styles/pressed = SubResource("StyleBoxFlat_7hvga")
 script = ExtResource("8_pskj7")
@@ -1378,7 +1380,7 @@ undoRedoMan = NodePath("../../../UndoRedoManager")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="EditorUILayer/TopToolbar/ResetButton" index="0"]
-position = Vector2(10, 7)
+position = Vector2(13, 8)
 texture = ExtResource("9_nsotx")
 hframes = 4
 
@@ -1399,6 +1401,7 @@ texture = ExtResource("3_6i3kl")
 hframes = 3
 vframes = 10
 
+[connection signal="pressed" from="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/BackButton" to="PauseLayer/PauseManager" method="GoBack"]
 [connection signal="text_changed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/LevelNameBox" to="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/LevelNameBox" method="UpdateLevelName"]
 [connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/SaveButton" to="EditorPauseLayer/EditorPauseManager" method="GoBack"]
 [connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/SaveButton" to="EditorManager" method="SaveLevel"]
@@ -1412,7 +1415,6 @@ vframes = 10
 [connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/GameplayStyle/GameplayScrollContainer/MarginContainer/GameplayContainer/Button4" to="EditorPauseLayer/EditorPauseManager" method="SetScreen" binds= [4]]
 [connection signal="focus_entered" from="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Music/MusicContainer/Button" to="MusicPreviewPlayer" method="SetPreviewMusic" binds= [-1]]
 [connection signal="focus_entered" from="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Music/MusicContainer/Button2" to="MusicPreviewPlayer" method="SetPreviewMusic" binds= [-2]]
-[connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Music/MusicContainer/Button3" to="EditorPauseLayer/ScreenCentre/ScreenContainer/MusicScreen/SongCategoryContainer" method="UpdateVisuals"]
 [connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Music/MusicContainer/Button3" to="EditorPauseLayer/EditorPauseManager" method="SetScreen" binds= [2]]
 [connection signal="focus_entered" from="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Music/MusicContainer/Button4" to="MusicPreviewPlayer" method="SetPreviewMusic" binds= [0]]
 [connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/BackButton" to="EditorPauseLayer/EditorPauseManager" method="GoBack"]

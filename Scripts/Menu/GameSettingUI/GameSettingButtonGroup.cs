@@ -40,21 +40,21 @@ public partial class GameSettingButtonGroup : Control
 		UpdateVisuals();
 	}
 
-	public void UpdateVisuals()
+	public virtual void UpdateVisuals()
 	{
 		int settingValue = (int)GetSettingValue();
-		bool found = false;
+		bool foundSelected = false;
 
 		for (int i = 0; i < buttons.Count; i++)
 		{
 			bool state = buttons[i].GetValue() == settingValue;
 			buttons[i].ButtonPressed = state;
 
-			if (!found && state)
-				found = true;
+			if (!foundSelected && state)
+				foundSelected = true;
 		}
 
-		if (!found && fallBackHighlightButton != null)
+		if (!foundSelected && fallBackHighlightButton != null)
 			fallBackHighlightButton.ButtonPressed = true;
 	}
 

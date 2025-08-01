@@ -7,6 +7,11 @@ public static class GameConstants
 
 	// level code format version
 	public const int levelCodeVer = 2;
+	public static string UserFolderPath { get { return ProjectSettings.GlobalizePath("user://"); } }
+
+	// music id used to declare than a custom song is being used (customMusicFile in common game settings)
+	public const int customMusicID = -5;
+	public const string forbiddenLevelNameChars = "/;,\"";
 
 	// source IDs
 	public const int pillSourceID = 0;

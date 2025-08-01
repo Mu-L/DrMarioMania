@@ -5,8 +5,6 @@ public partial class EditorLevelNameBox : LineEdit
 {
     [Export] private CommonGameSettings commonGameSettings;
 
-    private string forbiddenChars = "/;,\"";
-
     // Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -18,7 +16,7 @@ public partial class EditorLevelNameBox : LineEdit
         int oldColumn = CaretColumn;
         int oldLength = newText.Length;
 
-        foreach (char forbiddenChar in forbiddenChars)
+        foreach (char forbiddenChar in GameConstants.forbiddenLevelNameChars)
         {
             if (newText.Contains(forbiddenChar))
             {

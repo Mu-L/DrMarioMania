@@ -142,6 +142,7 @@ public partial class CommonGameSettings : Resource
     // -2 = chill-based on selected theme
     // -3 = "more" button (doesn't set if passed)
     // -4 = random
+    // -5 = custom song
     {
         get
         {
@@ -154,6 +155,8 @@ public partial class CommonGameSettings : Resource
         }
     }
     private int music;
+    // user-stored song
+    public string CustomMusicFile { get; set; } = "";
     // background music for the current custom level
     [Export] public int CustomLevelMusic
     {
