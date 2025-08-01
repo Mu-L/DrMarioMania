@@ -383,6 +383,8 @@ icon = null
 title = "v1.1.0 - CHANGE LOG"
 description = "GAMEPLAY:
 
+- Level pack 3 added with 8 new levels
+
 - Added new brick, hard brick, solid block and fire tiles to the editor
 
 - Single pill segments can now be placed in the editor
@@ -394,6 +396,8 @@ AUDIO:
 - Added custom music option for loading MP3/OGGs
 
 - Added the 3 Mixed Match songs under the SNES category
+
+- Added a setting to make a custom level's music play throughout the editor (ON by default)
 
 VISUALS:
 
@@ -4151,6 +4155,12 @@ toggle_mode = true
 button_group = SubResource("ButtonGroup_5b5yk")
 text = "PACK 2"
 
+[node name="Button3" type="Button" parent="UILayer/MenuScreenManager/OfficialCustomLevelScreen/HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_5b5yk")
+text = "PACK 3"
+
 [node name="NotificationBox" type="Control" parent="UILayer" node_paths=PackedStringArray("aniPlayer", "audioPlayer", "label")]
 visible = false
 layout_mode = 3
@@ -4316,6 +4326,7 @@ normalMusicPlayer = NodePath("../MusicPlayer")
 [connection signal="pressed" from="UILayer/MenuScreenManager/OfficialCustomLevelScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
 [connection signal="pressed" from="UILayer/MenuScreenManager/OfficialCustomLevelScreen/HBoxContainer/Button" to="UILayer/MenuScreenManager/OfficialCustomLevelScreen/CustomLevelPanelContainer" method="SetPage" binds= [0]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/OfficialCustomLevelScreen/HBoxContainer/Button2" to="UILayer/MenuScreenManager/OfficialCustomLevelScreen/CustomLevelPanelContainer" method="SetPage" binds= [1]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/OfficialCustomLevelScreen/HBoxContainer/Button3" to="UILayer/MenuScreenManager/OfficialCustomLevelScreen/CustomLevelPanelContainer" method="SetPage" binds= [2]]
 
 [editable path="UILayer/MenuScreenManager/GameplayScreen/GameplayScrollContainer"]
 [editable path="UILayer/MenuScreenManager/VisualsScreen/ThemeScrollContainer"]
