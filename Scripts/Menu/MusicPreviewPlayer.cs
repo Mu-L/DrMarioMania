@@ -20,8 +20,6 @@ public partial class MusicPreviewPlayer : AudioStreamPlayer
         previewedCustomMusic = name;
     }
 
-
-
     // sets music player stream to the music with id "music"
 	public void SetPreviewMusic(int music)
 	{
@@ -43,9 +41,6 @@ public partial class MusicPreviewPlayer : AudioStreamPlayer
     // same as above, but sets to currently selected music in commonGameSettings ONLY IF CURRENTLY PLAYING PREVIEW MUSIC
 	public void SetPreviewMusicToCurrent()
 	{
-        if (!Playing)
-            return;
-        
         previewedCustomMusic = commonGameSettings.CustomMusicFile;
         SetPreviewMusic(commonGameSettings.CurrentMusic);
 	}

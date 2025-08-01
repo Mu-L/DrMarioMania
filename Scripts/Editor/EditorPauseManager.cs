@@ -6,6 +6,7 @@ public partial class EditorPauseManager : PauseManager
     [Export] private EditorManager editorMan;
     [Export] private PopUpGroup popUpGroup;
     [Export] private MusicPreviewPlayer musicPreviewPlayer;
+    [Export] private CommonGameSettings commonGameSettings;
     
     public override void GoBack()
     {
@@ -19,11 +20,22 @@ public partial class EditorPauseManager : PauseManager
         
         PopHistory();
 
-        // if backing out of level settings screen, revert background music
+        // if backing out of level settings screen AND editor music disabled, revert background music
 		if (currentScreen == 3)
 		{
-			musicPreviewPlayer.RestoreNormalMusic();
+            if (!commonGameSettings.EnableEditorMusic)
+			    musicPreviewPlayer.RestoreNormalMusic();
 		}
+        else if (currentScreen == 5)
+        {
+            if (commonGameSettings.EnableEditorMusic)
+            {
+                if (!musicPreviewPlayer.Playing)
+			        musicPreviewPlayer.SetPreviewMusicToCurrent();
+            }
+            else if (musicPreviewPlayer.Playing)
+                musicPreviewPlayer.Stop();
+        }
 
         if (screenHistory.Count < 1)
         {

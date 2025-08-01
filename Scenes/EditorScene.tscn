@@ -277,6 +277,7 @@ script = ExtResource("2_v05gp")
 editorMan = NodePath("../../EditorManager")
 popUpGroup = NodePath("../PopUpGroup")
 musicPreviewPlayer = NodePath("../../MusicPreviewPlayer")
+commonGameSettings = ExtResource("9_ljri1")
 pauseAni = NodePath("../EditorPauseAniPlayer")
 gameMan = NodePath("../../GameManager")
 screenContainer = NodePath("../ScreenCentre/ScreenContainer")
@@ -934,7 +935,7 @@ colourSelector = NodePath("../EditorUILayer/TopToolbar/ColourSelector")
 [node name="GameManager" parent="." index="6" node_paths=PackedStringArray("editorMan")]
 editorMan = NodePath("../EditorManager")
 
-[node name="EditorManager" type="Node" parent="." index="7" node_paths=PackedStringArray("editorPauseMan", "undoRedoMan", "cursor", "drawingToolSelector", "editorUILayer", "colourSelector", "tileTypeSelector", "gameMan", "gameThemer", "sfxMan", "musicMan", "touchControlsMan")]
+[node name="EditorManager" type="Node" parent="." index="7" node_paths=PackedStringArray("editorPauseMan", "undoRedoMan", "cursor", "drawingToolSelector", "editorUILayer", "colourSelector", "tileTypeSelector", "gameMan", "gameThemer", "sfxMan", "musicMan", "touchControlsMan", "musicPreviewPlayer")]
 script = ExtResource("2_tonjn")
 editorPauseMan = NodePath("../EditorPauseLayer/EditorPauseManager")
 undoRedoMan = NodePath("../UndoRedoManager")
@@ -950,6 +951,7 @@ musicMan = NodePath("../MusicPlayer")
 touchControlsMan = NodePath("../TouchLayer")
 commonGameSettings = ExtResource("9_ljri1")
 userCustomLevelList = ExtResource("22_h7pql")
+musicPreviewPlayer = NodePath("../MusicPreviewPlayer")
 
 [node name="UndoRedoManager" type="Node" parent="." index="8" node_paths=PackedStringArray("gameMan", "editorMan", "cursor")]
 script = ExtResource("3_lu7lp")
@@ -1401,6 +1403,7 @@ texture = ExtResource("3_6i3kl")
 hframes = 3
 vframes = 10
 
+[connection signal="pressed" from="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/BackButton" to="PauseLayer/PauseManager" method="GoBack"]
 [connection signal="text_changed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/LevelNameBox" to="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/LevelNameBox" method="UpdateLevelName"]
 [connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/SaveButton" to="EditorPauseLayer/EditorPauseManager" method="GoBack"]
 [connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/SaveButton" to="EditorManager" method="SaveLevel"]

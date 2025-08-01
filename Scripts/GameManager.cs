@@ -273,7 +273,8 @@ public partial class GameManager : Node
 
         isGameOngoing = false;
         jarsLeftToFill = jars.Count;
-        musicMan.PlayGameMusic();
+        if (!(isInEditorScene && commonGameSettings.EnableEditorMusic))
+            musicMan.PlayGameMusic();
         hasSavedScore = false;
     }
 

@@ -24,6 +24,7 @@ public partial class EditorManager : Node
     [Export] private TouchControlsManager touchControlsMan;
     [Export] private CommonGameSettings commonGameSettings;
     [Export] private UserCustomLevelList userCustomLevelList;
+    [Export] private MusicPreviewPlayer musicPreviewPlayer;
 
     private JarManager jarMan;
     private TileMapLayer jarTiles;
@@ -64,6 +65,9 @@ public partial class EditorManager : Node
 
         jarMan.UIMan.SetHUDVisibility(false);
         jarMan.UIMan.PowerUpMeter.SetVisibility(false);
+
+        if (commonGameSettings.EnableEditorMusic)
+            musicPreviewPlayer.SetPreviewMusicToCurrent();
 	}
 
     public void PlayTest()

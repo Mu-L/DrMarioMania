@@ -330,6 +330,7 @@ public partial class CommonGameSettings : Resource
         }
     }
     private int sfxVolume = 100;
+    public bool EnableEditorMusic { get; set; } = true;
 
     private void SetBusVolume(int index, int vol)
     {
@@ -340,12 +341,11 @@ public partial class CommonGameSettings : Resource
         AudioServer.SetBusMute(index, vol == 0);
     }
 
-    [ExportGroup("Graphics Settings")]
     // graphics settings ======================================
 
     // enables/disables the animation of the virus tiles in the jar (not the viruses under the magnifying glass)
-    [Export] public bool EnableVirusTileAnimation { get; set; }
-    [Export] public bool EnableLargerView { get; set; }
+    public bool EnableVirusTileAnimation { get; set; } = true;
+    public bool EnableLargerView { get; set; } = false;
 
     // Overrides a custom level's colours with a custom palette while playing them (not used while editing though)
     private Godot.Collections.Dictionary<int, Godot.Collections.Array<int>> overrideCustomLevelColours = new Godot.Collections.Dictionary<int, Godot.Collections.Array<int>>();
@@ -452,6 +452,7 @@ public partial class CommonGameSettings : Resource
 
         config.SetValue("Audio Settings", "MusicVolume", MusicVolume);
         config.SetValue("Audio Settings", "SFXVolume", SFXVolume);
+        config.SetValue("Audio Settings", "EnableEditorMusic", EnableEditorMusic);
 
 
         config.SetValue("Misc Settings", "HasSeenDisclaimer", HasSeenDisclaimer);
@@ -542,6 +543,11 @@ public partial class CommonGameSettings : Resource
         {
             MusicVolume = (int)config.GetValue("Audio Settings", "MusicVolume");
             SFXVolume = (int)config.GetValue("Audio Settings", "SFXVolume");
+
+            if (config.HasSectionKey("Audio Settings", "EnableEditorMusic"))
+            {
+                EnableEditorMusic = (bool)config.GetValue("Audio Settings", "EnableEditorMusic");
+            }
         }
 
         HasLoadedSettings = true;
