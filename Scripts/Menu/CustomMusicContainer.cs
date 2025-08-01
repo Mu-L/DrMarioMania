@@ -89,7 +89,7 @@ public partial class CustomMusicContainer : FlowContainer
 			button.Text = name.ToUpper();
 			button.ButtonGroup = musicGroup.MusicButtonGroup;
 
-			button.SetValue(-5);
+			button.SetValue(GameConstants.customMusicID);
 			int buttonValue = button.GetValue();
 			
 			button.FocusEntered += () => musicGroup.MusicPreviewPlayer.SetPreviewedCustomMusic(name);
@@ -106,7 +106,11 @@ public partial class CustomMusicContainer : FlowContainer
 
 	private void SetCustomMusic(string name)
 	{
-		commonGameSettings.Music = GameConstants.customMusicID;
-		commonGameSettings.CustomMusicFile = name;
+		commonGameSettings.Set(musicGroup.SettingName, GameConstants.customMusicID);
+
+		if (commonGameSettings.IsCustomLevel)
+			commonGameSettings.CustomLevelCustomMusicFile = name;
+		else
+			commonGameSettings.CustomMusicFile = name;
 	}
 }

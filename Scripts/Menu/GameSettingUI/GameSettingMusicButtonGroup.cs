@@ -62,8 +62,7 @@ public partial class GameSettingMusicButtonGroup : GameSettingButtonGroup
 
 		int previewButtonValue = previewButton.GetValue();
 
-		// -5 = custom song
-		if ((int)GetSettingValue() != previewButtonValue || (previewButtonValue == GameConstants.customMusicID && musicPreviewPlayer.PreviewedCustomMusic != commonGameSettings.CustomMusicFile))
+		if ((int)GetSettingValue() != previewButtonValue || (previewButtonValue == GameConstants.customMusicID && musicPreviewPlayer.PreviewedCustomMusic != commonGameSettings.CurrentCustomMusicFile))
 		{
 			SetSettingValue(previewButtonValue);
 		}
@@ -104,7 +103,7 @@ public partial class GameSettingMusicButtonGroup : GameSettingButtonGroup
 				buttonToFocus = buttons[i];
 		}
 
-		string secondSettingValue = commonGameSettings.CustomMusicFile;
+		string secondSettingValue = commonGameSettings.CurrentCustomMusicFile;
 		List<GameSettingButtonInGroup> extraButtons = customMusicContainer.Buttons;
 		
 		for (int i = 0; i < extraButtons.Count; i++)

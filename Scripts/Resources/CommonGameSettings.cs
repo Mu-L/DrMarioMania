@@ -157,6 +157,8 @@ public partial class CommonGameSettings : Resource
     private int music;
     // user-stored song
     public string CustomMusicFile { get; set; } = "";
+    public string CustomLevelCustomMusicFile { get; set; } = "";
+
     // background music for the current custom level
     [Export] public int CustomLevelMusic
     {
@@ -175,6 +177,7 @@ public partial class CommonGameSettings : Resource
     // auto get the correct theme and music depending on whether in a custom level or not
     public int CurrentTheme { get { return IsCustomLevel ? CustomLevelTheme : Theme; } }
 	public int CurrentMusic { get { return IsCustomLevel ? CustomLevelMusic : Music; } }
+	public string CurrentCustomMusicFile { get { return IsCustomLevel ? CustomLevelCustomMusicFile : CustomMusicFile; } }
     public int MultiplayerRequiredWinCount { get; set; } = 3;
     public bool MultiplayerUseJunkPills { get; set; } = true;
     
@@ -453,7 +456,7 @@ public partial class CommonGameSettings : Resource
         config.SetValue("Audio Settings", "MusicVolume", MusicVolume);
         config.SetValue("Audio Settings", "SFXVolume", SFXVolume);
         config.SetValue("Audio Settings", "EnableEditorMusic", EnableEditorMusic);
-
+        config.SetValue("Audio Settings", "CustomMusicFile", CustomMusicFile);
 
         config.SetValue("Misc Settings", "HasSeenDisclaimer", HasSeenDisclaimer);
 
@@ -545,9 +548,10 @@ public partial class CommonGameSettings : Resource
             SFXVolume = (int)config.GetValue("Audio Settings", "SFXVolume");
 
             if (config.HasSectionKey("Audio Settings", "EnableEditorMusic"))
-            {
                 EnableEditorMusic = (bool)config.GetValue("Audio Settings", "EnableEditorMusic");
-            }
+
+            if (config.HasSectionKey("Audio Settings", "CustomMusicFile"))
+                CustomMusicFile = (string)config.GetValue("Audio Settings", "CustomMusicFile");
         }
 
         HasLoadedSettings = true;

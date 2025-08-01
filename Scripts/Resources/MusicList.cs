@@ -49,7 +49,7 @@ public partial class MusicList : Resource
         if (id == GameConstants.customMusicID)
         {
             if (customMusicFile == "")
-                customMusicFile = commonGameSettings.CustomMusicFile;
+                customMusicFile = commonGameSettings.CurrentCustomMusicFile;
 
             path = GameConstants.UserFolderPath + "music/" + customMusicFile;
 

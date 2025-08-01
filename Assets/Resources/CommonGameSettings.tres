@@ -31,5 +31,3 @@ CustomLevelMusic = -1
 IsGhostPillEnabled = true
 IsHardDropEnabled = true
 ManualAutoFallSpeedUp = true
-EnableVirusTileAnimation = true
-EnableLargerView = false

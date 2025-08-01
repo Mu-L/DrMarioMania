@@ -20,12 +20,17 @@ public partial class EditorPauseManager : PauseManager
         
         PopHistory();
 
-        // if backing out of level settings screen AND editor music disabled, revert background music
+        // if backing out of level settings screen...
 		if (currentScreen == 3)
 		{
-            if (!commonGameSettings.EnableEditorMusic)
+            //  if editor music enabled, update preview background music
+            if (commonGameSettings.EnableEditorMusic)
+                musicPreviewPlayer.SetPreviewMusicToCurrent();
+            //  if editor music disabled, revert background music
+            else
 			    musicPreviewPlayer.RestoreNormalMusic();
 		}
+        // if backing out of settings, stop or start preview music depending on EnableEditorMusic
         else if (currentScreen == 5)
         {
             if (commonGameSettings.EnableEditorMusic)

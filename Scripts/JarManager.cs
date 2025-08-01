@@ -216,7 +216,7 @@ public partial class JarManager : Node
 		code += CommonGameSettings.CustomLevelTheme + itemDivider;
 		code += CommonGameSettings.CustomLevelMusic + itemDivider;
 		code += jarSize.X + subItemDivider + jarSize.Y + itemDivider;
-		code += (CommonGameSettings.CustomLevelMusic == GameConstants.customMusicID ? CommonGameSettings.CustomMusicFile : "") + sectionDivider;
+		code += (CommonGameSettings.CustomLevelMusic == GameConstants.customMusicID ? CommonGameSettings.CustomLevelCustomMusicFile : "") + sectionDivider;
 
 		// Jar tile data ==================================================================================================
 		for (int y = 0; y < JarSize.Y; y++)
@@ -294,7 +294,7 @@ public partial class JarManager : Node
 				CommonGameSettings.CustomLevelMusic = int.Parse(basicSettingChunks[3]);
 
 				if (CommonGameSettings.CustomLevelMusic == GameConstants.customMusicID)
-					CommonGameSettings.CustomMusicFile = basicSettingChunks[5];
+					CommonGameSettings.CustomLevelCustomMusicFile = basicSettingChunks[5];
 			}
 
 			string[] jarSizeData = basicSettingChunks[4].Split(subItemDivider);

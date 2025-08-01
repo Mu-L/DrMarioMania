@@ -24,9 +24,17 @@ public partial class MusicPreviewPlayer : AudioStreamPlayer
 	public void SetPreviewMusic(int music)
 	{
 		AudioStream newStream = musicList.GetMusicStream(music, previewedCustomMusic);
-	
-		if (Playing && music == lastPreviewedMusic && (music != GameConstants.customMusicID || previewedCustomMusic == lastPreviewedCustomMusic))
-			return;
+
+        if (music == GameConstants.customMusicID)
+        {
+            if (Playing && music == lastPreviewedMusic && previewedCustomMusic == lastPreviewedCustomMusic)
+                return;
+        }
+        else
+        {
+            if (Playing && Stream == newStream)
+		    	return;
+        }
 		
         if (normalMusicPlayer != null)
             normalMusicPlayer.Stop();
@@ -38,10 +46,10 @@ public partial class MusicPreviewPlayer : AudioStreamPlayer
         lastPreviewedCustomMusic = previewedCustomMusic;
 	}
 
-    // same as above, but sets to currently selected music in commonGameSettings ONLY IF CURRENTLY PLAYING PREVIEW MUSIC
+    // same as above, but sets to currently selected music in commonGameSettings
 	public void SetPreviewMusicToCurrent()
 	{
-        previewedCustomMusic = commonGameSettings.CustomMusicFile;
+        previewedCustomMusic = commonGameSettings.CurrentCustomMusicFile;
         SetPreviewMusic(commonGameSettings.CurrentMusic);
 	}
 

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public partial class GameSettingButtonGroup : Control
 {
 	[Export] protected StringName settingName;
+	public StringName SettingName { get { return settingName; } }
 	// whether setting is shared between all players or not
 	[Export] protected bool isCommonSetting;
 	[Export] protected CommonGameSettings commonGameSettings;
