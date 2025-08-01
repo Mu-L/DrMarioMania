@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 
 public partial class PowerUpPlus : BaseShootPowerUp
@@ -59,10 +60,27 @@ public partial class PowerUpPlus : BaseShootPowerUp
 
             if (gridPositions[i] != lastGridPositions[i])
             {
-                if (DestroyTilesBetweenPositions(lastGridPositions[i], gridPositions[i], true))
+                List<Vector2I> positions = GetPositionsBetweenPositions(lastGridPositions[i], gridPositions[i], true);
+                bool destroyedAnything = false;
+                bool doRebound = false;
+
+                for (int j = 0; j < positions.Count; j++)
                 {
-                    sfxMan.Play("SingleHit");
+                    if (jarMan.DoesTileCauseRebound(positions[j]))
+                    {
+                        doRebound = true;
+                        finishedProjectiles[i] = true;
+                    }
+
+                    if (AttemptToDestroySegment(positions[j]))
+                        destroyedAnything = true;
+
+                    if (doRebound)
+                        break;
                 }
+
+                if (destroyedAnything)
+                    sfxMan.Play("SingleHit");
             }
             
             lastGridPositions[i] = gridPositions[i];
@@ -108,6 +126,5 @@ public partial class PowerUpPlus : BaseShootPowerUp
         {
             FinishPowerUp();
         }
-        
     }
 }

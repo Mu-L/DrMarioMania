@@ -142,6 +142,7 @@ public partial class CommonGameSettings : Resource
     // -2 = chill-based on selected theme
     // -3 = "more" button (doesn't set if passed)
     // -4 = random
+    // -5 = custom song
     {
         get
         {
@@ -154,6 +155,10 @@ public partial class CommonGameSettings : Resource
         }
     }
     private int music;
+    // user-stored song
+    public string CustomMusicFile { get; set; } = "";
+    public string CustomLevelCustomMusicFile { get; set; } = "";
+
     // background music for the current custom level
     [Export] public int CustomLevelMusic
     {
@@ -172,6 +177,7 @@ public partial class CommonGameSettings : Resource
     // auto get the correct theme and music depending on whether in a custom level or not
     public int CurrentTheme { get { return IsCustomLevel ? CustomLevelTheme : Theme; } }
 	public int CurrentMusic { get { return IsCustomLevel ? CustomLevelMusic : Music; } }
+	public string CurrentCustomMusicFile { get { return IsCustomLevel ? CustomLevelCustomMusicFile : CustomMusicFile; } }
     public int MultiplayerRequiredWinCount { get; set; } = 3;
     public bool MultiplayerUseJunkPills { get; set; } = true;
     
@@ -327,6 +333,7 @@ public partial class CommonGameSettings : Resource
         }
     }
     private int sfxVolume = 100;
+    public bool EnableEditorMusic { get; set; } = true;
 
     private void SetBusVolume(int index, int vol)
     {
@@ -338,6 +345,10 @@ public partial class CommonGameSettings : Resource
     }
 
     // graphics settings ======================================
+
+    // enables/disables the animation of the virus tiles in the jar (not the viruses under the magnifying glass)
+    public bool EnableVirusTileAnimation { get; set; } = true;
+    public bool EnableLargerView { get; set; } = false;
 
     // Overrides a custom level's colours with a custom palette while playing them (not used while editing though)
     private Godot.Collections.Dictionary<int, Godot.Collections.Array<int>> overrideCustomLevelColours = new Godot.Collections.Dictionary<int, Godot.Collections.Array<int>>();
@@ -439,10 +450,13 @@ public partial class CommonGameSettings : Resource
 
         config.SetValue("Graphics Settings", "LastWindowMode", (int)DisplayServer.WindowGetMode());
         config.SetValue("Graphics Settings", "OverrideCustomLevelColours", overrideCustomLevelColours);
+        config.SetValue("Graphics Settings", "EnableVirusTileAnimation", EnableVirusTileAnimation);
+        config.SetValue("Graphics Settings", "EnableLargerView", EnableLargerView);
 
         config.SetValue("Audio Settings", "MusicVolume", MusicVolume);
         config.SetValue("Audio Settings", "SFXVolume", SFXVolume);
-
+        config.SetValue("Audio Settings", "EnableEditorMusic", EnableEditorMusic);
+        config.SetValue("Audio Settings", "CustomMusicFile", CustomMusicFile);
 
         config.SetValue("Misc Settings", "HasSeenDisclaimer", HasSeenDisclaimer);
 
@@ -511,6 +525,20 @@ public partial class CommonGameSettings : Resource
             overrideCustomLevelColours = new Godot.Collections.Dictionary<int, Godot.Collections.Array<int>>((Godot.Collections.Dictionary)config.GetValue("Graphics Settings", "OverrideCustomLevelColours"));
         }
 
+        if (config.HasSectionKey("Graphics Settings", "EnableVirusTileAnimation"))
+        {
+            EnableVirusTileAnimation = (bool)config.GetValue("Graphics Settings", "EnableVirusTileAnimation");
+        }
+
+        if (config.HasSectionKey("Graphics Settings", "EnableLargerView"))
+        {
+            EnableLargerView = (bool)config.GetValue("Graphics Settings", "EnableLargerView");
+        }
+        else
+        {
+            EnableLargerView = GameConstants.IsOnMobile ? true : false;
+        }
+
         if (config.HasSectionKey("Misc Settings", "HasSeenDisclaimer"))
             HasSeenDisclaimer = (bool)config.GetValue("Misc Settings", "HasSeenDisclaimer");
 
@@ -518,6 +546,12 @@ public partial class CommonGameSettings : Resource
         {
             MusicVolume = (int)config.GetValue("Audio Settings", "MusicVolume");
             SFXVolume = (int)config.GetValue("Audio Settings", "SFXVolume");
+
+            if (config.HasSectionKey("Audio Settings", "EnableEditorMusic"))
+                EnableEditorMusic = (bool)config.GetValue("Audio Settings", "EnableEditorMusic");
+
+            if (config.HasSectionKey("Audio Settings", "CustomMusicFile"))
+                CustomMusicFile = (string)config.GetValue("Audio Settings", "CustomMusicFile");
         }
 
         HasLoadedSettings = true;

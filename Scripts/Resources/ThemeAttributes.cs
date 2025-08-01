@@ -13,6 +13,7 @@ public partial class ThemeAttributes : Resource
     [Export] public int PillPreviewOffset { get; set; }
 
     [ExportGroup("Audio")]
+    [Export] public bool HasMultiMusicVariants { get; set; }
     [Export] public string MusicFolder { get; set; }
     [Export] public string SfxFolder { get; set; }
 
@@ -43,20 +44,10 @@ public partial class ThemeAttributes : Resource
     // The ring/magnifying glass have a separate overlay sprite to be used on top of the viruses
     [Export] public bool HasRingOverlay { get; set; }
 
-    public string FeverMusicPath
-    {
-        get
-        {
-            return MusicFolderPath + "/Fever.ogg";
-        }
-    }
-    public string ChillMusicPath
-    {
-        get
-        {
-            return MusicFolderPath + "/Chill.ogg";
-        }
-    }
+    public string FeverMusicPath { get { return MusicFolderPath + "/Fever.ogg"; } }
+    public string ChillMusicPath { get { return MusicFolderPath + "/Chill.ogg"; } }
+    public string MultiFeverMusicPath { get { return MusicFolderPath + "/VSFever.ogg"; } }
+    public string MultiChillMusicPath { get { return MusicFolderPath + "/VSChill.ogg"; } }
     public string MusicFolderPath
     {
         get

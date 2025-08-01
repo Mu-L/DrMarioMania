@@ -10,7 +10,7 @@ public partial class PlayerGameSettings : Resource
 
     public void Reset()
     {
-        SegmentColours.Clear();
+        ChosenColours.Clear();
         ColourCount = 3;
 
         GameplayStyle = 0;
@@ -20,7 +20,7 @@ public partial class PlayerGameSettings : Resource
 
     public void CopySettings(PlayerGameSettings otherPlayer)
     {
-        SegmentColours = new Godot.Collections.Array<int>(otherPlayer.SegmentColours);
+        ChosenColours = new Godot.Collections.Array<int>(otherPlayer.ChosenColours);
 
         GameplayStyle = otherPlayer.gameplayStyle;
         InitialVirusLevel = otherPlayer.InitialVirusLevel;
@@ -160,7 +160,7 @@ public partial class PlayerGameSettings : Resource
     [Export] public int InitialVirusLevel { get; set; }
 	[Export] public int SpeedLevel { get; set; }
 	// the pill/virus colours used by this player
-	[Export] public Godot.Collections.Array<int> SegmentColours { get; set; }
+	[Export] public Godot.Collections.Array<int> ChosenColours { get; set; }
 
     [ExportGroup("Advanced")]
     // advanced gameplay settings ======================================
@@ -175,42 +175,42 @@ public partial class PlayerGameSettings : Resource
         {
             colourCount = value;
 
-            // if SegmentColours doesn't match colourCount, fix it
-            if (SegmentColours != null && SegmentColours.Count != colourCount)
+            // if ChosenColours doesn't match colourCount, fix it
+            if (ChosenColours != null && ChosenColours.Count != colourCount)
             {
-                FixSegmentColoursList();
+                FixChosenColoursList();
             }
         }
     }
     private int colourCount;
-    // If SegmentColours list doesn't match colourCount, add or remove colours so its count matches colourCount
-    public void FixSegmentColoursList()
+    // If ChosenColours list doesn't match colourCount, add or remove colours so its count matches colourCount
+    public void FixChosenColoursList()
     {
-        if (SegmentColours.Count > colourCount)
+        if (ChosenColours.Count > colourCount)
         {
             for (int i = 10; i > 0; i--)
             {
-                if (SegmentColours.Contains(i))
-                    SegmentColours.Remove(i);
+                if (ChosenColours.Contains(i))
+                    ChosenColours.Remove(i);
                 
-                if (SegmentColours.Count == colourCount)
+                if (ChosenColours.Count == colourCount)
                     break;
             }
         }
-        else if (SegmentColours.Count < colourCount)
+        else if (ChosenColours.Count < colourCount)
         {
             for (int i = 1; i <= 10; i++)
             {
-                if (!SegmentColours.Contains(i))
-                    SegmentColours.Add(i);
+                if (!ChosenColours.Contains(i))
+                    ChosenColours.Add(i);
                 
-                if (SegmentColours.Count == colourCount)
+                if (ChosenColours.Count == colourCount)
                     break;
             }
         }
 
         // Sort order of colours
-        SegmentColours.Sort();
+        ChosenColours.Sort();
     }
     [Export] public int MinStreakLength { get; set; }
     [Export] public bool IsHoldEnabled { get; set; }
@@ -293,10 +293,10 @@ public partial class PlayerGameSettings : Resource
         
         string code = "";
 
-        for (int i = 0; i < SegmentColours.Count; i++)
+        for (int i = 0; i < ChosenColours.Count; i++)
         {
-            code += SegmentColours[i];
-            if (i < SegmentColours.Count - 1)
+            code += ChosenColours[i];
+            if (i < ChosenColours.Count - 1)
                 code += subItemDivider;
         }
         code += itemDivider;
@@ -363,13 +363,13 @@ public partial class PlayerGameSettings : Resource
 
             {
                 string[] segmentColData = codeChunks[0].Split(subItemDivider);
-                SegmentColours.Clear();
+                ChosenColours.Clear();
 
                 if (segmentColData[0] != "")
                 {
                     for (int i = 0; i < segmentColData.Length; i++)
                     {
-                        SegmentColours.Add(int.Parse(segmentColData[i]));
+                        ChosenColours.Add(int.Parse(segmentColData[i]));
                     }
                 }
             }
@@ -380,7 +380,7 @@ public partial class PlayerGameSettings : Resource
 
             if (gameplayStyle == 3)
             {
-                ColourCount = SegmentColours.Count;
+                ColourCount = ChosenColours.Count;
                 IsHoldEnabled = StringToBool(codeChunks[4]);
                 MinStreakLength = int.Parse(codeChunks[5]);
                 GenerousLockDelay = StringToBool(codeChunks[6]);

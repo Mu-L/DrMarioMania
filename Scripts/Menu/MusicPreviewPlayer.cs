@@ -10,27 +10,46 @@ public partial class MusicPreviewPlayer : AudioStreamPlayer
     [ExportGroup("Optional")]
     [Export] private AudioStreamPlayer normalMusicPlayer;
 
+    public string PreviewedCustomMusic { get { return previewedCustomMusic; } }
+    private string previewedCustomMusic;
+    private string lastPreviewedCustomMusic;
+    private int lastPreviewedMusic;
+
+    public void SetPreviewedCustomMusic(string name)
+    {
+        previewedCustomMusic = name;
+    }
+
     // sets music player stream to the music with id "music"
 	public void SetPreviewMusic(int music)
 	{
-		AudioStream newStream = musicList.GetMusicStream(music);
-	
-		if (Playing && Stream == newStream)
-			return;
+		AudioStream newStream = musicList.GetMusicStream(music, previewedCustomMusic);
+
+        if (music == GameConstants.customMusicID)
+        {
+            if (Playing && music == lastPreviewedMusic && previewedCustomMusic == lastPreviewedCustomMusic)
+                return;
+        }
+        else
+        {
+            if (Playing && Stream == newStream)
+		    	return;
+        }
 		
         if (normalMusicPlayer != null)
             normalMusicPlayer.Stop();
         
 		Stream = newStream;
 		Play();
+        
+        lastPreviewedMusic = music;
+        lastPreviewedCustomMusic = previewedCustomMusic;
 	}
 
-    // same as above, but sets to currently selected music in commonGameSettings ONLY IF CURRENTLY PLAYING PREVIEW MUSIC
+    // same as above, but sets to currently selected music in commonGameSettings
 	public void SetPreviewMusicToCurrent()
 	{
-        if (!Playing)
-            return;
-
+        previewedCustomMusic = commonGameSettings.CurrentCustomMusicFile;
         SetPreviewMusic(commonGameSettings.CurrentMusic);
 	}
 

@@ -35,31 +35,26 @@ public partial class BasePowerUp : Node2D
         QueueFree();
     }
 
-    // Destroyes all jar tiles between start and end positions given
-    // returns true if successfully destroyed at least one tile, false if nothing was destroyed
-    protected bool DestroyTilesBetweenPositions(Vector2I startPos, Vector2I endPos, bool skipFirstTile)
+    // Returns a list of tile tile positions between given start and end positions
+    protected List<Vector2I> GetPositionsBetweenPositions(Vector2I startPos, Vector2I endPos, bool skipFirstTile)
     {
         Vector2I diff = endPos - startPos;
-        bool destroyedSomething = false;
+        List<Vector2I> positions = new List<Vector2I>();
         
         if (startPos == endPos)
         {
-            if (!skipFirstTile && jarMan.DestroySegment(startPos))
-                destroyedSomething = true;
+            if (!skipFirstTile)
+                positions.Add(startPos);
         }
         else if (diff.Length() == 1)
         {
-            if (!skipFirstTile && jarMan.DestroySegment(startPos))
-                destroyedSomething = true;
+            if (!skipFirstTile)
+                positions.Add(startPos);
 
-            if (jarMan.DestroySegment(endPos))
-                destroyedSomething = true;
+            positions.Add(endPos);
         }
         else
         {
-            // create array for storing positions
-            List<Vector2I> positions = new List<Vector2I>();
-
             // size of x and y box area
             Vector2I areaSize;
             areaSize.X = Mathf.Abs(diff.X) + 1;
@@ -77,16 +72,9 @@ public partial class BasePowerUp : Node2D
 
                 positions.Add(interpolatedPos);
             }
-
-            // destroy tiles at each position
-            foreach (Vector2I pos in positions)
-            {
-                if (jarMan.DestroySegment(pos))
-                    destroyedSomething = true;
-            }
         }
 
-        return destroyedSomething;
+        return positions;
     }
 
     protected Vector2I WorldPosToGridPos(Vector2 worldPos)
@@ -95,5 +83,13 @@ public partial class BasePowerUp : Node2D
         Vector2I gridPos = new Vector2I(Mathf.RoundToInt(scaledPos.X), Mathf.RoundToInt(scaledPos.Y));
         
         return gridPos;
+    }
+
+    protected Vector2 GridPosToWorldPos(Vector2I gridPos)
+    {
+        Vector2 worldPos = jarMan.TilemapGlobalPos + gridPos * jarMan.JarCellSize;
+		worldPos += jarMan.JarCellSize / 2;
+
+        return worldPos;
     }
 }

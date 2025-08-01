@@ -8,6 +8,8 @@ public partial class BaseScreenManager : Node
     [Export] protected Node screenContainer;
     protected List<BaseScreen> screens = new List<BaseScreen>();
     protected int currentScreen = 0;
+	// frame at which GoBack was called
+	protected int backFrame;
 
 	// Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -47,6 +49,9 @@ public partial class BaseScreenManager : Node
 
     public virtual void SetScreen(int nextScreen)
 	{
+		if (backFrame == Engine.GetFramesDrawn())
+            return;
+
 		screens[currentScreen].LastHoverNode = GetViewport().GuiGetFocusOwner();
 		screens[currentScreen].Visible = false;
 		screens[nextScreen].Visible = true;
@@ -58,6 +63,6 @@ public partial class BaseScreenManager : Node
 
     public virtual void GoBack()
 	{
-        
+        backFrame = Engine.GetFramesDrawn();
     }
 }

@@ -13,18 +13,19 @@
 [ext_resource type="Texture2D" uid="uid://bs4f1buh07q7t" path="res://Assets/Sprites/UI/ButtonIcons/MoveDownIcon.png" id="8_kbgf6"]
 [ext_resource type="Texture2D" uid="uid://grww7ye3863w" path="res://Assets/Sprites/UI/ButtonIcons/MoveToBottomIcon.png" id="10_agm8m"]
 
-[node name="CustomLevelPanel" type="Panel" node_paths=PackedStringArray("nameLabel", "dateLabel", "deleteButton", "arrangeButton", "playButton", "editButton")]
+[node name="CustomLevelPanel" type="Panel" node_paths=PackedStringArray("playButton", "editButton", "exportButton", "deleteButton", "arrangeButton", "nameLabel", "dateLabel")]
 custom_minimum_size = Vector2(220, 45)
 offset_right = 220.0
 offset_bottom = 45.0
 mouse_filter = 2
 script = ExtResource("1_kp6o3")
-nameLabel = NodePath("NameLabel")
-dateLabel = NodePath("DataLabel")
-deleteButton = NodePath("HBoxContainer/DeleteButton")
-arrangeButton = NodePath("HBoxContainer/ArrangeButton")
 playButton = NodePath("HBoxContainer/PlayButton")
 editButton = NodePath("HBoxContainer/EditButton")
+exportButton = NodePath("HBoxContainer/ExportButton")
+deleteButton = NodePath("HBoxContainer/DeleteButton")
+arrangeButton = NodePath("HBoxContainer/ArrangeButton")
+nameLabel = NodePath("NameLabel")
+dateLabel = NodePath("DataLabel")
 levelList = ExtResource("2_kroqh")
 commonGameSettings = ExtResource("3_75tpe")
 

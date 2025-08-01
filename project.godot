@@ -11,7 +11,8 @@ config_version=5
 [application]
 
 config/name="Dr. Mario Mania"
-config/version="1.0.2"
+config/description="A fan-made Dr. Mario game"
+config/version="1.1.0"
 run/main_scene="res://Scenes/TitleScene.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="DrMarioMania"

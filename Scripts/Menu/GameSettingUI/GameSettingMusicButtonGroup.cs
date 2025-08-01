@@ -1,28 +1,30 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class GameSettingMusicButtonGroup : GameSettingButtonGroup
 {
 	[Export] protected BaseScreen musicScreen;
 	[Export] protected BaseScreenManager screenMan;
 	[Export] protected MusicPreviewPlayer musicPreviewPlayer;
-	private int lastButtonPressed = -1;
-	private int previewButton = -1;
+	public MusicPreviewPlayer MusicPreviewPlayer { get { return musicPreviewPlayer; } }
+	[Export] protected CustomMusicContainer customMusicContainer;
+	private GameSettingButtonInGroup lastButtonPressed = null;
+	private GameSettingButtonInGroup previewButton = null;
+
+	public ButtonGroup MusicButtonGroup { get { return buttonGroup; } }
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		// Get the value of the setting associated with this group
-		int settingValue = (int)GetSettingValue();
-
 		// Find each button, add to buttons list, add the button group to each button, and assign signals
 		FindButtonsUnderNode(this);
 
-		// Update visuals for each button
 		UpdateVisuals();
 	}
 
 	// Recursive function to find every button under a node
+	// EXCLUDES CUSTOM SONG BUTTONS
 	private void FindButtonsUnderNode(Node node)
 	{
 		Godot.Collections.Array<Node> nodes = node.GetChildren();
@@ -38,62 +40,82 @@ public partial class GameSettingMusicButtonGroup : GameSettingButtonGroup
 				button.ButtonGroup = buttonGroup;
 
 				int buttonValue = button.GetValue();
-				int buttonIndex = buttons.Count - 1;
+
 				button.Pressed += () => SetSettingValue(buttonValue);
-				button.Pressed += () => ButtonPressed(buttonIndex);
+				button.Pressed += () => ButtonPressed(button);
 				
 				button.FocusEntered += () => musicPreviewPlayer.SetPreviewMusic(buttonValue);
-
-				button.FocusEntered += () => SetPreviewButton(buttonIndex);
+				button.FocusEntered += () => SetPreviewButton(button);
 			}
-			else if (nodes[i].GetChildCount() > 0)
+			else if (nodes[i].GetChildCount() > 0 && nodes[i] != customMusicContainer)
 				FindButtonsUnderNode(nodes[i]);
 		}
 	}
 
-	private void SelectPreviewButton()
+	public void SelectPreviewButton()
 	{
-		int previewButtonValue = buttons[previewButton].GetValue();
+		if (previewButton == null)
+		{
+			screenMan.GoBack();
+			return;
+		}
 
-		if ((int)GetSettingValue() != previewButtonValue)
+		int previewButtonValue = previewButton.GetValue();
+
+		if ((int)GetSettingValue() != previewButtonValue || (previewButtonValue == GameConstants.customMusicID && musicPreviewPlayer.PreviewedCustomMusic != commonGameSettings.CurrentCustomMusicFile))
 		{
 			SetSettingValue(previewButtonValue);
-			musicScreen.InitialHoverNode = buttons[previewButton];
 		}
 
 		screenMan.GoBack();
 	}
 
-	private void SetPreviewButton(int index)
+	public void SetPreviewButton(GameSettingButtonInGroup index)
 	{
 		previewButton = index;
 	}
 
-	private void ButtonPressed(int index)
+	public void ButtonPressed(GameSettingButtonInGroup button)
 	{
 		// Go back is pressing the already selected button
-		if (lastButtonPressed == index)
+		if (lastButtonPressed == button)
 			screenMan.GoBack();
 		else
 		{
-			lastButtonPressed = index;
-			musicScreen.InitialHoverNode = buttons[index];
+			lastButtonPressed = button;
 		}
 	}
 
-	private void RefreshLastButtonPressed()
+	public override void UpdateVisuals()
 	{
-		lastButtonPressed = -1;
+		customMusicContainer.UpdateVisuals();
 
 		int settingValue = (int)GetSettingValue();
 
+		Button buttonToFocus = buttons[0];
+
 		for (int i = 0; i < buttons.Count; i++)
 		{
-			if (buttons[i].GetValue() == settingValue)
-			{
-				lastButtonPressed = i;
-				break;
-			}
+			bool state = buttons[i].GetValue() == settingValue && settingValue != GameConstants.customMusicID;
+			buttons[i].ButtonPressed = state;
+
+			if (state)
+				buttonToFocus = buttons[i];
 		}
+
+		string secondSettingValue = commonGameSettings.CurrentCustomMusicFile;
+		List<GameSettingButtonInGroup> extraButtons = customMusicContainer.Buttons;
+		
+		for (int i = 0; i < extraButtons.Count; i++)
+		{
+			bool state = settingValue == GameConstants.customMusicID && secondSettingValue.ToUpper() == extraButtons[i].Text;
+			extraButtons[i].ButtonPressed = state;
+
+			if (state)
+				buttonToFocus = extraButtons[i];
+		}
+
+		if (musicScreen.Visible)
+			buttonToFocus.GrabFocus();
 	}
 }

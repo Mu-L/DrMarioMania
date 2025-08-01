@@ -5,6 +5,21 @@ public static class GameConstants
 {
 	// common constant values used across multiple other classes
 
+	// level code format version
+	public const int levelCodeVer = 2;
+	public static string UserFolderPath { get { return ProjectSettings.GlobalizePath("user://"); } }
+
+	// music id used to declare than a custom song is being used (customMusicFile in common game settings)
+	public const int customMusicID = -5;
+	public const string forbiddenLevelNameChars = "/;,\"";
+
+	// source IDs
+	public const int pillSourceID = 0;
+	public const int virusSourceID = 1;
+	public const int powerUpSourceID = 2;
+	public const int objectSourceID = 3;
+	public const int toolPreviewSourceID = 4;
+
 	// number of different colours in the game (excluding rainbow variant)
 	public const int noOfColours = 10;
 
@@ -14,11 +29,17 @@ public static class GameConstants
 	// no. of tiles making up the width of the virus tileset
 	public const int virusTileSetWidth = 3;
 
-	// number of different power-up types
+	// number of different power-up types AND no. of tiles making up the width of the power-up tileset
 	public static int NoOfPowerUps { get { return Enum.GetValues(typeof(PowerUpEnums.PowerUp)).Length; } }
-	// no. of tiles making up the width of the power-up tileset
 	public static int PowerUpTileSetWidth { get { return NoOfPowerUps + 1; } }
 
-	// Returns true if on mobile
+	// number of object tiles AND no. of tiles making up the width of the object tileset
+	public const int noOfObjects = 4;
+	public const int objectTileSetWidth = 3;
+
+	// returns true if on mobile
 	public static bool IsOnMobile { get { return OS.HasFeature("android"); } }
+	
+	// size of camera zoom when "EnableLargerView" common game setting is enabled
+	public const float largerViewZoom = 1.265f;
 }

@@ -14,7 +14,7 @@ public struct JarTileData
 		if (data == null)
 			colour = 0;
         else
-            colour = (int)data.GetCustomData("SegmentColour");
+            colour = (int)data.GetCustomData("Colour");
     }
     
     public int sourceID;

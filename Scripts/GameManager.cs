@@ -82,7 +82,15 @@ public partial class GameManager : Node
         
         if (!isInEditorScene)
             musicMan.PlayGameMusic();
+        
+        UpdateCameraZoom();
 	}
+
+    private void UpdateCameraZoom()
+    {
+        bool enableZoom = commonGameSettings.EnableLargerView && !isInEditorScene && commonGameSettings.PlayerCount == 1;
+        GetViewport().GetCamera2D().Zoom = Vector2.One * (enableZoom ? GameConstants.largerViewZoom : 1);
+    }
 
     private void CreateJars()
     {
@@ -138,6 +146,7 @@ public partial class GameManager : Node
             else
             {
                 jar.JarTiles.Clear();
+                jar.ForegroundTiles.Clear();
                 jar.PrepareLevel(sharedSeed);
             }
 
@@ -264,7 +273,8 @@ public partial class GameManager : Node
 
         isGameOngoing = false;
         jarsLeftToFill = jars.Count;
-        musicMan.PlayGameMusic();
+        if (!(isInEditorScene && commonGameSettings.EnableEditorMusic))
+            musicMan.PlayGameMusic();
         hasSavedScore = false;
     }
 
@@ -314,6 +324,7 @@ public partial class GameManager : Node
         isPaused = b;
 
         musicMan.StreamPaused = b;
+
         if (b)
         {
             pauseMan.SetScreen(0);
@@ -321,7 +332,7 @@ public partial class GameManager : Node
         }
 
         touchControlsMan.ShowTouchControlsIfAvailable(!b);
-            
+        UpdateCameraZoom();
         pauseMan.SetPauseMenuVisibility(b);
 
         foreach (JarManager jar in jars)
@@ -338,6 +349,8 @@ public partial class GameManager : Node
 
             if (jar.PillMan.IsProcessing())
                 jar.PillMan.ActivePill.Visible = !b && !jar.PillMan.IsThrowingPill;
+
+            jar.SetVirusTileAnimationState(commonGameSettings.EnableVirusTileAnimation);
         }
     }
 

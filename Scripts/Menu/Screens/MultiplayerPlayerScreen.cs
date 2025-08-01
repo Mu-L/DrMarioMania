@@ -54,7 +54,7 @@ public partial class MultiplayerPlayerScreen : UpdateableSettingScreen
 
     public void NextPlayer()
 	{
-        commonGameSettings.CurrentPlayerGameSettings.FixSegmentColoursList();
+        commonGameSettings.CurrentPlayerGameSettings.FixChosenColoursList();
 
 		if (commonGameSettings.PlayerConfiguring == commonGameSettings.PlayerCount)
         {

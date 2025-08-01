@@ -84,56 +84,57 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -90.0
+offset_left = -104.0
 offset_top = -45.0
-offset_right = 90.0
+offset_right = 104.0
 offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("3_u61pd")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PageContainer"]
-visible = false
+[node name="ScrollContainer" type="ScrollContainer" parent="PageContainer"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+follow_focus = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PageContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 2
 script = ExtResource("4_a3pvq")
 title = "General"
 metadata/_edit_group_ = true
 
-[node name="MusicPanel" type="Control" parent="PageContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 16)
+[node name="MusicPanel" type="Control" parent="PageContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 17)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="PageContainer/VBoxContainer/MusicPanel"]
+[node name="Label" type="Label" parent="PageContainer/ScrollContainer/VBoxContainer/MusicPanel"]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
 offset_left = 1.0
-offset_top = -4.0
-offset_right = 128.0
-offset_bottom = 4.0
-grow_vertical = 2
+offset_top = 5.0
+offset_right = 81.0
+offset_bottom = 13.0
 text = "Music Vol."
 
-[node name="Slider" parent="PageContainer/VBoxContainer/MusicPanel" instance=ExtResource("3_i2vfg")]
+[node name="Slider" parent="PageContainer/ScrollContainer/VBoxContainer/MusicPanel" instance=ExtResource("3_i2vfg")]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -87.0
-offset_top = -1.0
-offset_right = 0.0
-offset_bottom = 1.0
+offset_left = -88.0
+offset_top = 0.0
+offset_right = -1.0
+offset_bottom = 2.0
 grow_horizontal = 0
 max_value = 100.0
 step = 5.0
@@ -143,34 +144,34 @@ ticks_on_borders = true
 settingName = &"MusicVolume"
 isCommonSetting = true
 
-[node name="SFXPanel" type="Control" parent="PageContainer/VBoxContainer"]
+[node name="SFXPanel" type="Control" parent="PageContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="PageContainer/VBoxContainer/SFXPanel"]
+[node name="Label" type="Label" parent="PageContainer/ScrollContainer/VBoxContainer/SFXPanel"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 1.0
 offset_top = -4.0
-offset_right = 128.0
+offset_right = 81.0
 offset_bottom = 4.0
 grow_vertical = 2
 text = "SFX Volume"
 
-[node name="Slider2" parent="PageContainer/VBoxContainer/SFXPanel" instance=ExtResource("3_i2vfg")]
+[node name="Slider2" parent="PageContainer/ScrollContainer/VBoxContainer/SFXPanel" instance=ExtResource("3_i2vfg")]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -87.0
+offset_left = -88.0
 offset_top = -1.0
-offset_right = 0.0
+offset_right = -1.0
 offset_bottom = 1.0
 grow_horizontal = 0
 max_value = 100.0
@@ -181,114 +182,140 @@ ticks_on_borders = true
 settingName = &"SFXVolume"
 isCommonSetting = true
 
-[node name="GhostPanel" type="Control" parent="PageContainer/VBoxContainer"]
+[node name="EditorMusicPanel" type="Control" parent="PageContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="PageContainer/VBoxContainer/GhostPanel"]
+[node name="Label" type="Label" parent="PageContainer/ScrollContainer/VBoxContainer/EditorMusicPanel"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 1.0
 offset_top = -4.0
-offset_right = 128.0
+offset_right = 73.0
+offset_bottom = 4.0
+grow_vertical = 2
+text = "Play Music in Editor"
+
+[node name="ToggleButton" parent="PageContainer/ScrollContainer/VBoxContainer/EditorMusicPanel" instance=ExtResource("3_nagm0")]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -33.0
+offset_right = -1.0
+grow_horizontal = 0
+settingName = &"EnableEditorMusic"
+isCommonSetting = true
+
+[node name="GhostPanel" type="Control" parent="PageContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="PageContainer/ScrollContainer/VBoxContainer/GhostPanel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 1.0
+offset_top = -4.0
+offset_right = 81.0
 offset_bottom = 4.0
 grow_vertical = 2
 text = "Ghost Pill"
 
-[node name="ToggleButton" parent="PageContainer/VBoxContainer/GhostPanel" instance=ExtResource("3_nagm0")]
+[node name="ToggleButton" parent="PageContainer/ScrollContainer/VBoxContainer/GhostPanel" instance=ExtResource("3_nagm0")]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -32.0
-offset_right = 0.0
+offset_left = -33.0
+offset_right = -1.0
 grow_horizontal = 0
 settingName = &"IsGhostPillEnabled"
 isCommonSetting = true
 
-[node name="HardDropPanel" type="Control" parent="PageContainer/VBoxContainer"]
+[node name="HardDropPanel" type="Control" parent="PageContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="PageContainer/VBoxContainer/HardDropPanel"]
+[node name="Label" type="Label" parent="PageContainer/ScrollContainer/VBoxContainer/HardDropPanel"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 1.0
 offset_top = -4.0
-offset_right = 128.0
+offset_right = 73.0
 offset_bottom = 4.0
 grow_vertical = 2
 text = "Hard Drop"
 
-[node name="ToggleButton" parent="PageContainer/VBoxContainer/HardDropPanel" instance=ExtResource("3_nagm0")]
+[node name="ToggleButton" parent="PageContainer/ScrollContainer/VBoxContainer/HardDropPanel" instance=ExtResource("3_nagm0")]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -32.0
-offset_right = 0.0
+offset_left = -33.0
+offset_right = -1.0
 grow_horizontal = 0
 settingName = &"IsHardDropEnabled"
 isCommonSetting = true
 
-[node name="FullScreenPanel" type="Control" parent="PageContainer/VBoxContainer"]
+[node name="FullScreenPanel" type="Control" parent="PageContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="PageContainer/VBoxContainer/FullScreenPanel"]
+[node name="Label" type="Label" parent="PageContainer/ScrollContainer/VBoxContainer/FullScreenPanel"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 1.0
 offset_top = -4.0
-offset_right = 128.0
+offset_right = 81.0
 offset_bottom = 4.0
 grow_vertical = 2
 text = "Fullscreen"
 
-[node name="FullScreenButton" type="Button" parent="PageContainer/VBoxContainer/FullScreenPanel"]
+[node name="FullScreenButton" type="Button" parent="PageContainer/ScrollContainer/VBoxContainer/FullScreenPanel"]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -56.0
+offset_left = -57.0
+offset_right = -1.0
 grow_horizontal = 0
 grow_vertical = 2
 text = "TOGGLE"
 script = ExtResource("7_yjwfc")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="PageContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="PageContainer/ScrollContainer"]
 visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 2
 script = ExtResource("4_a3pvq")
 title = "Controls"
 metadata/_edit_group_ = true
 
-[node name="AutoFallPanel" type="Control" parent="PageContainer/VBoxContainer2"]
+[node name="AutoFallPanel" type="Control" parent="PageContainer/ScrollContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="PageContainer/VBoxContainer2/AutoFallPanel"]
+[node name="Label" type="Label" parent="PageContainer/ScrollContainer/VBoxContainer2/AutoFallPanel"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -301,26 +328,26 @@ grow_vertical = 2
 text = "Manual Avalanche
 Speedup"
 
-[node name="ToggleButton" parent="PageContainer/VBoxContainer2/AutoFallPanel" instance=ExtResource("3_nagm0")]
+[node name="ToggleButton" parent="PageContainer/ScrollContainer/VBoxContainer2/AutoFallPanel" instance=ExtResource("3_nagm0")]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -32.0
+offset_left = -33.0
 offset_top = -7.0
-offset_right = 0.0
+offset_right = -1.0
 offset_bottom = 9.0
 grow_horizontal = 0
 settingName = &"ManualAutoFallSpeedUp"
 isCommonSetting = true
 
-[node name="UpActionKeyboardPanel" type="Control" parent="PageContainer/VBoxContainer2"]
+[node name="UpActionKeyboardPanel" type="Control" parent="PageContainer/ScrollContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="PageContainer/VBoxContainer2/UpActionKeyboardPanel"]
+[node name="Label" type="Label" parent="PageContainer/ScrollContainer/VBoxContainer2/UpActionKeyboardPanel"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -333,26 +360,26 @@ grow_vertical = 2
 text = "Up Action
 (Keyboard)"
 
-[node name="ToggleButton" parent="PageContainer/VBoxContainer2/UpActionKeyboardPanel" instance=ExtResource("3_nagm0")]
+[node name="ToggleButton" parent="PageContainer/ScrollContainer/VBoxContainer2/UpActionKeyboardPanel" instance=ExtResource("3_nagm0")]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -80.0
-offset_right = 0.0
+offset_left = -81.0
+offset_right = -1.0
 grow_horizontal = 0
 onString = "HARD DROP"
 offString = "ROTATE"
 settingName = &"IsUpHardDropKeyboard"
 isCommonSetting = true
 
-[node name="UpActionControllerPanel" type="Control" parent="PageContainer/VBoxContainer2"]
+[node name="UpActionControllerPanel" type="Control" parent="PageContainer/ScrollContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="PageContainer/VBoxContainer2/UpActionControllerPanel"]
+[node name="Label" type="Label" parent="PageContainer/ScrollContainer/VBoxContainer2/UpActionControllerPanel"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -365,26 +392,26 @@ grow_vertical = 2
 text = "Up Action
 (Controller)"
 
-[node name="ToggleButton" parent="PageContainer/VBoxContainer2/UpActionControllerPanel" instance=ExtResource("3_nagm0")]
+[node name="ToggleButton" parent="PageContainer/ScrollContainer/VBoxContainer2/UpActionControllerPanel" instance=ExtResource("3_nagm0")]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -80.0
-offset_right = 0.0
+offset_left = -81.0
+offset_right = -1.0
 grow_horizontal = 0
 onString = "HARD DROP"
 offString = "NONE"
 settingName = &"IsUpHardDropController"
 isCommonSetting = true
 
-[node name="SwapABButtonsPanel" type="Control" parent="PageContainer/VBoxContainer2"]
+[node name="SwapABButtonsPanel" type="Control" parent="PageContainer/ScrollContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="PageContainer/VBoxContainer2/SwapABButtonsPanel"]
+[node name="Label" type="Label" parent="PageContainer/ScrollContainer/VBoxContainer2/SwapABButtonsPanel"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -396,13 +423,13 @@ offset_bottom = 4.0
 grow_vertical = 2
 text = "Swap A/B"
 
-[node name="ToggleButton" parent="PageContainer/VBoxContainer2/SwapABButtonsPanel" instance=ExtResource("3_nagm0")]
+[node name="ToggleButton" parent="PageContainer/ScrollContainer/VBoxContainer2/SwapABButtonsPanel" instance=ExtResource("3_nagm0")]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -104.0
-offset_right = 0.0
+offset_left = -105.0
+offset_right = -1.0
 grow_horizontal = 0
 text = "SWITCH-STYLE"
 onString = "SWITCH-STYLE"
@@ -410,33 +437,105 @@ offString = "XBOX-STYLE"
 settingName = &"SwapABButtons"
 isCommonSetting = true
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="PageContainer"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="VBoxContainer3" type="VBoxContainer" parent="PageContainer/ScrollContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 2
 script = ExtResource("4_a3pvq")
 title = "Visuals"
 metadata/_edit_group_ = true
 
-[node name="Label" type="Label" parent="PageContainer/VBoxContainer3"]
-visible = false
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 2
-text = "
-Visual settings can be configured from the main menu."
-autowrap_mode = 2
-
-[node name="OverrideColoursPanel" type="Control" parent="PageContainer/VBoxContainer3"]
-custom_minimum_size = Vector2(0, 87.28)
+[node name="VirusAniPanel" type="Control" parent="PageContainer/ScrollContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(0, 18)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 
-[node name="Label" type="Label" parent="PageContainer/VBoxContainer3/OverrideColoursPanel"]
+[node name="Label" type="Label" parent="PageContainer/ScrollContainer/VBoxContainer3/VirusAniPanel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 1.0
+offset_top = -4.0
+offset_right = 153.0
+offset_bottom = 4.0
+grow_vertical = 2
+text = "Virus Tile Animation"
+
+[node name="ToggleButton" parent="PageContainer/ScrollContainer/VBoxContainer3/VirusAniPanel" instance=ExtResource("3_nagm0")]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -33.0
+offset_right = -1.0
+grow_horizontal = 0
+focus_neighbor_bottom = NodePath("../../OverrideColoursPanel/PopUpButton")
+settingName = &"EnableVirusTileAnimation"
+isCommonSetting = true
+
+[node name="EnableLargerViewPanel" type="Control" parent="PageContainer/ScrollContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 1
+
+[node name="Label" type="Label" parent="PageContainer/ScrollContainer/VBoxContainer3/EnableLargerViewPanel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 1.0
+offset_top = -9.0
+offset_right = 89.0
+offset_bottom = 10.0
+grow_vertical = 2
+text = "Enlarge Jar Size
+(1-player only)"
+
+[node name="ToggleButton" parent="PageContainer/ScrollContainer/VBoxContainer3/EnableLargerViewPanel" instance=ExtResource("3_nagm0")]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -33.0
+offset_right = -1.0
+grow_horizontal = 0
+settingName = &"EnableLargerView"
+isCommonSetting = true
+
+[node name="ColorRect" type="ColorRect" parent="PageContainer/ScrollContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+color = Color(0, 0, 0, 0.396078)
+
+[node name="MenuNotice" type="MarginContainer" parent="PageContainer/ScrollContainer/VBoxContainer3"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 1
+
+[node name="Label" type="Label" parent="PageContainer/ScrollContainer/VBoxContainer3/MenuNotice"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+text = "
+More visual settings can be configured from the main menu."
+autowrap_mode = 2
+
+[node name="OverrideColoursPanel" type="Control" parent="PageContainer/ScrollContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(0, 127)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 1
+
+[node name="Label" type="Label" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel"]
 layout_mode = 1
 offset_left = 1.0
 offset_top = 2.0
@@ -445,19 +544,20 @@ offset_bottom = 21.0
 text = "Override Level
 Colours"
 
-[node name="PopUpButton" parent="PageContainer/VBoxContainer3/OverrideColoursPanel" instance=ExtResource("8_nmiub")]
+[node name="PopUpButton" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel" instance=ExtResource("8_nmiub")]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 0.0
-offset_left = -12.0
+offset_left = -16.0
 offset_top = 4.0
-offset_right = 0.0
+offset_right = -4.0
 offset_bottom = 18.0
 grow_horizontal = 0
 grow_vertical = 1
+focus_neighbor_top = NodePath("../../VirusAniPanel/ToggleButton")
 title = "Override Level Colours"
 description = "If playing a pre-made level (either in a level pack or a custom one), you can override the colours they use here.
 
@@ -466,12 +566,12 @@ Adding colours below will prioritise them over other colours in levels, with col
 Since some themes have unique colour orders, you can also specify colour overrides per theme."
 alignDescToLeft = true
 
-[node name="OverrideColourContainer" type="Control" parent="PageContainer/VBoxContainer3/OverrideColoursPanel" node_paths=PackedStringArray("firstButton", "themeContainer", "firstActiveIcon")]
+[node name="OverrideColourContainer" type="Control" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel" node_paths=PackedStringArray("firstButton", "themeContainer", "firstActiveIcon")]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_top = 26.0
-offset_bottom = 156.0
+offset_bottom = 126.0
 grow_horizontal = 2
 mouse_filter = 1
 script = ExtResource("9_ymv8w")
@@ -482,7 +582,7 @@ previewThemes = Array[int]([0, 1, 6, 9])
 themeList = ExtResource("10_1k6cy")
 commonGameSettings = ExtResource("11_dmxr5")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -490,103 +590,76 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label2" type="Label" parent="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer"]
 layout_mode = 2
 text = "Theme to edit:"
 
-[node name="MarginContainer" type="MarginContainer" parent="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 theme_override_constants/margin_bottom = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 follow_focus = true
 
-[node name="MarginContainer" type="MarginContainer" parent="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 1
 theme_override_constants/margin_top = 1
 theme_override_constants/margin_right = 1
 theme_override_constants/margin_bottom = 1
 
-[node name="ThemeContainer" type="HBoxContainer" parent="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer"]
+[node name="ThemeContainer" type="HBoxContainer" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer"]
+[node name="Button" type="Button" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer"]
 custom_minimum_size = Vector2(13, 14)
 layout_mode = 2
+focus_neighbor_top = NodePath("../../../../../../../PopUpButton")
+focus_neighbor_bottom = NodePath("../../../../../Control/ClearButton")
 mouse_filter = 1
 toggle_mode = true
 button_pressed = true
 button_group = SubResource("ButtonGroup_g80eo")
 text = "MODERN"
 
-[node name="Button2" type="Button" parent="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer"]
+[node name="Button2" type="Button" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer"]
 custom_minimum_size = Vector2(13, 14)
 layout_mode = 2
+focus_neighbor_top = NodePath("../../../../../../../PopUpButton")
+focus_neighbor_bottom = NodePath("../../../../../Control/ClearButton")
 mouse_filter = 1
 toggle_mode = true
 button_group = SubResource("ButtonGroup_g80eo")
 text = "NES/SNES"
 
-[node name="Button3" type="Button" parent="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer"]
+[node name="Button3" type="Button" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer"]
 custom_minimum_size = Vector2(13, 14)
 layout_mode = 2
+focus_neighbor_top = NodePath("../../../../../../../PopUpButton")
+focus_neighbor_bottom = NodePath("../../../../../Control/ClearButton")
 mouse_filter = 1
 toggle_mode = true
 button_group = SubResource("ButtonGroup_g80eo")
 text = "GAMEBOY"
 
-[node name="Button4" type="Button" parent="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer"]
+[node name="Button4" type="Button" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer"]
 custom_minimum_size = Vector2(13, 14)
 layout_mode = 2
+focus_neighbor_top = NodePath("../../../../../../../PopUpButton")
+focus_neighbor_bottom = NodePath("../../../../../Control/ClearButton")
 mouse_filter = 1
 toggle_mode = true
 button_group = SubResource("ButtonGroup_g80eo")
 text = "WHATSAPP"
 
-[node name="Label" type="Label" parent="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer"]
-layout_mode = 2
-text = "Click to toggle:"
-
-[node name="ClearButton" type="Button" parent="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/Label"]
-custom_minimum_size = Vector2(13, 14)
-layout_mode = 2
-offset_left = 166.0
-offset_top = -4.0
-offset_right = 179.0
-offset_bottom = 10.0
-grow_horizontal = 0
-
-[node name="Sprite2D" type="Sprite2D" parent="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/Label/ClearButton"]
-position = Vector2(7, 7)
-texture = ExtResource("12_a3nmb")
-
-[node name="AddContainer" type="HBoxContainer" parent="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 1
-alignment = 1
-
-[node name="AddButton" type="Button" parent="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/AddContainer"]
-custom_minimum_size = Vector2(17, 14)
-layout_mode = 2
-focus_neighbor_top = NodePath("../../Label/ClearButton")
-focus_neighbor_bottom = NodePath("../../../../../../../BackButton")
-toggle_mode = true
-
-[node name="Sprite2D" type="Sprite2D" parent="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/AddContainer/AddButton"]
-position = Vector2(9, 7)
-texture = ExtResource("12_hga4x")
-hframes = 6
-vframes = 10
-frame = 4
-
-[node name="Panel" type="Panel" parent="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer"]
+[node name="Panel" type="Panel" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 26)
 layout_mode = 2
+mouse_filter = 1
 
-[node name="ActiveContainer" type="FlowContainer" parent="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/Panel"]
+[node name="ActiveContainer" type="FlowContainer" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/Panel"]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -599,26 +672,74 @@ grow_vertical = 2
 theme_override_constants/v_separation = 0
 alignment = 1
 
-[node name="ActiveColour" type="Control" parent="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/Panel/ActiveContainer" node_paths=PackedStringArray("pillSprite", "arrowSprite")]
+[node name="ActiveColour" type="Control" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/Panel/ActiveContainer" node_paths=PackedStringArray("pillSprite", "arrowSprite")]
 custom_minimum_size = Vector2(16, 13)
 layout_mode = 2
 script = ExtResource("13_sdsow")
 pillSprite = NodePath("PillSprite")
 arrowSprite = NodePath("ArrowSprite")
 
-[node name="PillSprite" type="Sprite2D" parent="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/Panel/ActiveContainer/ActiveColour"]
+[node name="PillSprite" type="Sprite2D" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/Panel/ActiveContainer/ActiveColour"]
 position = Vector2(5, 7)
 texture = ExtResource("12_hga4x")
 hframes = 6
 vframes = 10
 frame = 4
 
-[node name="ArrowSprite" type="Sprite2D" parent="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/Panel/ActiveContainer/ActiveColour"]
+[node name="ArrowSprite" type="Sprite2D" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/Panel/ActiveContainer/ActiveColour"]
 position = Vector2(14, 7)
 texture = ExtResource("13_xpjln")
 
-[node name="Control" type="Control" parent="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
+mouse_filter = 1
+
+[node name="Label" type="Label" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/Control"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 129.0
+offset_bottom = 9.0
+text = "Click to toggle:"
+
+[node name="ClearButton" type="Button" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/Control"]
+custom_minimum_size = Vector2(13, 14)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -17.0
+offset_top = -2.0
+offset_right = -4.0
+offset_bottom = 12.0
+grow_horizontal = 0
+mouse_filter = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/Control/ClearButton"]
+position = Vector2(7, 7)
+texture = ExtResource("12_a3nmb")
+
+[node name="AddContainer" type="HBoxContainer" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+theme_override_constants/separation = 1
+alignment = 1
+
+[node name="AddButton" type="Button" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/AddContainer"]
+custom_minimum_size = Vector2(17, 14)
+layout_mode = 2
+focus_neighbor_top = NodePath("../../Control/ClearButton")
+focus_neighbor_bottom = NodePath("../../../../../../../../BackButton")
+mouse_filter = 1
+toggle_mode = true
+
+[node name="Sprite2D" type="Sprite2D" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/AddContainer/AddButton"]
+position = Vector2(9, 7)
+texture = ExtResource("12_hga4x")
+hframes = 6
+vframes = 10
+frame = 4
 
 [node name="BackButton" type="Button" parent="."]
 layout_mode = 1
@@ -636,9 +757,9 @@ icon = ExtResource("4_o54ul")
 [connection signal="pressed" from="TabButtons/Button" to="PageContainer" method="SetPage" binds= [0]]
 [connection signal="pressed" from="TabButtons/Button2" to="PageContainer" method="SetPage" binds= [1]]
 [connection signal="pressed" from="TabButtons/Button3" to="PageContainer" method="SetPage" binds= [2]]
-[connection signal="pressed" from="PageContainer/VBoxContainer/FullScreenPanel/FullScreenButton" to="PageContainer/VBoxContainer/FullScreenPanel/FullScreenButton" method="ToggleFullScreen"]
-[connection signal="pressed" from="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer/Button" to="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer" method="SetColourOrder" binds= [0]]
-[connection signal="pressed" from="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer/Button2" to="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer" method="SetColourOrder" binds= [1]]
-[connection signal="pressed" from="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer/Button3" to="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer" method="SetColourOrder" binds= [2]]
-[connection signal="pressed" from="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer/Button4" to="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer" method="SetColourOrder" binds= [3]]
-[connection signal="pressed" from="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/Label/ClearButton" to="PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer" method="ClearOverrideColours"]
+[connection signal="pressed" from="PageContainer/ScrollContainer/VBoxContainer/FullScreenPanel/FullScreenButton" to="PageContainer/ScrollContainer/VBoxContainer/FullScreenPanel/FullScreenButton" method="ToggleFullScreen"]
+[connection signal="pressed" from="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer/Button" to="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer" method="SetColourOrder" binds= [0]]
+[connection signal="pressed" from="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer/Button2" to="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer" method="SetColourOrder" binds= [1]]
+[connection signal="pressed" from="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer/Button3" to="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer" method="SetColourOrder" binds= [2]]
+[connection signal="pressed" from="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer/Button4" to="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer" method="SetColourOrder" binds= [3]]
+[connection signal="pressed" from="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/Control/ClearButton" to="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer" method="ClearOverrideColours"]

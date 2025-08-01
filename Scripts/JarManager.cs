@@ -7,7 +7,7 @@ using static PowerUpEnums;
 
 public partial class JarManager : Node
 {
-	// handles an individual player's jar, including checking for matching colours, destroyign segments, causing segments to fall, etc AND scoring
+	// handles an individual player's jar, including checking for matching colours, destroying segments, causing tiles to fall, etc AND scoring
 	// basically a player-spefific game manager rather than the entire game
 
 	[ExportGroup("Tilemap")]
@@ -15,6 +15,9 @@ public partial class JarManager : Node
 	public TileMapLayer JarTiles { get { return jarTiles; } }
 	[Export] private TileMapLayer previewTiles;
 	public TileMapLayer PreviewTiles { get { return previewTiles; } }
+	[Export] private TileMapLayer foregroundTiles;
+	public TileMapLayer ForegroundTiles { get { return foregroundTiles; } }
+
 	// Top-left tile of jar
 	[Export] private Vector2I jarOrigin;
 	public Vector2I JarOrigin { get	{ return jarOrigin; } }
@@ -26,14 +29,6 @@ public partial class JarManager : Node
 	[Export] private float destroyDisappearSpeed;
 	public float DestroyDisappearSpeed { get { return destroyDisappearSpeed; } }
 	[Export] private int virusGenerationSpeed;
-
-	[ExportGroup("Other")]
-	[Export] private int pillSourceID;
-	public int PillSourceID { get { return pillSourceID; } }
-	[Export] private int virusSourceID;
-	public int VirusSourceID { get { return virusSourceID; } }
-	[Export] private int powerUpSourceID;
-	public int PowerUpSourceID { get { return powerUpSourceID; } }
 
 	[ExportGroup("References")]
 	[Export] private PowerUpPrefabs powerUpPrefabs;
@@ -82,15 +77,15 @@ public partial class JarManager : Node
 
 	// key = y pos
 	// value = x pos list
-	// Segments to be destroyed (turned into "popped" tiles)
-	private Dictionary<int, List<int>> segmentsToDestroy = new Dictionary<int, List<int>>();
-	// Destroyed/popped segments that need to be cleared
-	private Dictionary<int, List<int>> destroyedSegments = new Dictionary<int, List<int>>();
-	// Segments to be shifted downwards
-	private Dictionary<int, List<int>> segmentsToFall = new Dictionary<int, List<int>>();
+	// Tiles to be destroyed (turned into "popped" tiles)
+	private Dictionary<int, List<int>> tilesToDestroy = new Dictionary<int, List<int>>();
+	// Destroyed/popped tiles that need to be cleared
+	private Dictionary<int, List<int>> destroyedTiles = new Dictionary<int, List<int>>();
+	// Tiles to be shifted downwards
+	private Dictionary<int, List<int>> tilesToFall = new Dictionary<int, List<int>>();
 
-	// segments that have landed after auto-falling that will be checked if any matches are present at them
-	private List<Vector2I> uncheckedLandedSegments = new List<Vector2I>();
+	// Tiles that have landed after auto-falling that will be checked if any matches are present at them
+	private List<Vector2I> uncheckedLandedTiles = new List<Vector2I>();
 
 	private bool destructionContainsVirus = false;
 	private double destroyTimer = 0;
@@ -99,13 +94,13 @@ public partial class JarManager : Node
 	// key = pos, value = colour
 	private Dictionary<Vector2I, int> virusesRemaining = new Dictionary<Vector2I, int>();
 
-	// possible colours pill segments can be
-	private List<int> possibleSegmentColours = new List<int>();
-	public List<int> PossibleSegmentColours { get { return possibleSegmentColours; } }
+	// possible colours pill/power-ups can be
+	private List<int> possibleColours = new List<int>();
+	public List<int> PossibleColours { get { return possibleColours; } }
 
 	// if overrideCustomLevelColours exist, the original colours prior to being replaced are added here
-	private List<int> originalPossibleSegmentColours = new List<int>();
-	private bool HaveColoursBeenReplaced { get { return originalPossibleSegmentColours.Count > 0; } }
+	private List<int> originalPossibleColours = new List<int>();
+	private bool HaveColoursBeenReplaced { get { return originalPossibleColours.Count > 0; } }
 
 
 	// power-up tiles which are forced to not fall - used for power-ups place in the level editor, which shouldn't fall unlike obtained power-ups
@@ -150,6 +145,7 @@ public partial class JarManager : Node
 	private int powerUpPoppedAtlasX;
 	private Dictionary<Vector2I, JarTileData> customLevelTiles;
 	public bool IsInEditorScene { get; set; } = false;
+	public bool DisablePowerUpSpawning { get; set; } = false;
 
 	// Jar-specific random number generator
 	RandomNumberGenerator localRng = new RandomNumberGenerator();
@@ -170,8 +166,31 @@ public partial class JarManager : Node
 		if (CommonGameSettings.PlayerCount == 1)
 			uiMan.SetHighScoreLabel(HighScoreList.GetGameRuleHighScore());
 		SetProcess(false);
+
+		SetVirusTileAnimationState(IsInEditorScene ? false : CommonGameSettings.EnableVirusTileAnimation);
+	}
+ 
+	// Enables/disables the animation of the virus tiles AND animated object tiles
+	public void SetVirusTileAnimationState(bool enabled)
+	{
+		TileSetAtlasSource virusSource = (TileSetAtlasSource)jarTiles.TileSet.GetSource(GameConstants.virusSourceID);
+		TileSetAtlasSource objectSource = (TileSetAtlasSource)jarTiles.TileSet.GetSource(GameConstants.objectSourceID);
+		
+		for (int i = 0; i < GameConstants.noOfColours; i++)
+		{
+			virusSource.SetTileAnimationFramesCount(Vector2I.Zero + Vector2I.Down * i, enabled ? 2 : 1);
+		}
+
+		for (int i = 0; i < GameConstants.noOfObjects; i++)
+		{
+			Vector2I atlas = Vector2I.Zero + Vector2I.Down * i;
+
+			if (objectSource.GetTileAnimationSpeed(atlas) > 1)
+				objectSource.SetTileAnimationFramesCount(atlas, enabled ? 3 : 1);
+		}
 	}
 
+	// Whether the tile at pos is the same as the target source and atlas (must be an exact match, NOT just the colour)
 	public bool DoesTileMatch(Vector2I pos, int targetSourceID, Vector2I targetAtlas)
     {
         return jarTiles.GetCellSourceId(pos) == targetSourceID && jarTiles.GetCellAtlasCoords(pos) == targetAtlas;
@@ -179,8 +198,6 @@ public partial class JarManager : Node
 
     public string ExportLevelToString()
     {
-		int codeVersion = 1;
-
 		string sectionDivider = "/";
 		string itemDivider = ";";
         string subItemDivider = ",";
@@ -194,11 +211,12 @@ public partial class JarManager : Node
 
 		// Basic settings ==================================================================================================
 		// level format version
-		code += codeVersion + itemDivider;
+		code += GameConstants.levelCodeVer + itemDivider;
 		code += CommonGameSettings.CustomLevelName + itemDivider;
 		code += CommonGameSettings.CustomLevelTheme + itemDivider;
 		code += CommonGameSettings.CustomLevelMusic + itemDivider;
-		code += jarSize.X + subItemDivider + jarSize.Y + sectionDivider;
+		code += jarSize.X + subItemDivider + jarSize.Y + itemDivider;
+		code += (CommonGameSettings.CustomLevelMusic == GameConstants.customMusicID ? CommonGameSettings.CustomLevelCustomMusicFile : "") + sectionDivider;
 
 		// Jar tile data ==================================================================================================
 		for (int y = 0; y < JarSize.Y; y++)
@@ -274,6 +292,9 @@ public partial class JarManager : Node
 				CommonGameSettings.CustomLevelName = basicSettingChunks[1];
 				CommonGameSettings.CustomLevelTheme = int.Parse(basicSettingChunks[2]);
 				CommonGameSettings.CustomLevelMusic = int.Parse(basicSettingChunks[3]);
+
+				if (CommonGameSettings.CustomLevelMusic == GameConstants.customMusicID)
+					CommonGameSettings.CustomLevelCustomMusicFile = basicSettingChunks[5];
 			}
 
 			string[] jarSizeData = basicSettingChunks[4].Split(subItemDivider);
@@ -282,6 +303,7 @@ public partial class JarManager : Node
 
 			// Jar tile data ==================================================================================================
 			jarTiles.Clear();
+			foregroundTiles.Clear();
 
 			if (codeSections[1] != "")
 			{
@@ -357,9 +379,9 @@ public partial class JarManager : Node
 
 	private void UpdatePoppedAtlasPositions()
 	{
-		pillPoppedAtlasX = ((TileSetAtlasSource)jarTiles.TileSet.GetSource(PillSourceID)).GetAtlasGridSize().X - 1;
-		virusPoppedAtlasX =((TileSetAtlasSource)jarTiles.TileSet.GetSource(virusSourceID)).GetAtlasGridSize().X - 1;
-		powerUpPoppedAtlasX = ((TileSetAtlasSource)jarTiles.TileSet.GetSource(powerUpSourceID)).GetAtlasGridSize().X - 1;
+		pillPoppedAtlasX = ((TileSetAtlasSource)jarTiles.TileSet.GetSource(GameConstants.pillSourceID)).GetAtlasGridSize().X - 1;
+		virusPoppedAtlasX =((TileSetAtlasSource)jarTiles.TileSet.GetSource(GameConstants.virusSourceID)).GetAtlasGridSize().X - 1;
+		powerUpPoppedAtlasX = ((TileSetAtlasSource)jarTiles.TileSet.GetSource(GameConstants.powerUpSourceID)).GetAtlasGridSize().X - 1;
 	}
 
 	public bool IsActionJustPressed(string action)
@@ -440,6 +462,9 @@ public partial class JarManager : Node
 			GameMan.EndPlayTest();
 
 		GameMan.EndGame();
+
+		DisablePowerUpSpawning = true;
+		DeleteAllPowerUps();
 	}
 
 	public void GameOver()
@@ -476,6 +501,9 @@ public partial class JarManager : Node
 			// only hide the next pill (aka the one mario is holding) in singleplayer, since he's not there in multiplayer
 			pillMan.HideNextPill();
 		}
+
+		DisablePowerUpSpawning = true;
+		DeleteAllPowerUps();
 	}
 
 	public void ResetState(bool resetScore, bool resetWinCount)
@@ -498,10 +526,10 @@ public partial class JarManager : Node
 
 		uiMan.SetVirusLabel(0);
 
-		segmentsToDestroy.Clear();
-		destroyedSegments.Clear();
-		segmentsToFall.Clear();
-		uncheckedLandedSegments.Clear();
+		tilesToDestroy.Clear();
+		destroyedTiles.Clear();
+		tilesToFall.Clear();
+		uncheckedLandedTiles.Clear();
 
 		destructionContainsVirus = false;
 
@@ -514,6 +542,7 @@ public partial class JarManager : Node
 		isPlayerOut = false;
 		
 		jarTiles.Clear();
+		foregroundTiles.Clear();
 
 		previewTiles.Clear();
 
@@ -562,6 +591,7 @@ public partial class JarManager : Node
 	public void PrepareLevel(ulong seed)
 	{
 		localRng.Seed = seed;
+		DisablePowerUpSpawning = false;
 		PowerUpMeter.SetVisibility(PlayerGameSettings.IsUsingPowerUps);
 		uiMan.SetSpeedLabel(PlayerGameSettings.SpeedLevel);
 		
@@ -599,13 +629,14 @@ public partial class JarManager : Node
 	public void RestoreCustomLevelTilesForEditor()
 	{
 		jarTiles.Clear();
+		foregroundTiles.Clear();
 		foreach (Vector2I pos in customLevelTiles.Keys)
 		{
 			jarTiles.SetCell(pos, customLevelTiles[pos].sourceID, customLevelTiles[pos].atlas);
 		}
 	}
 
-	// Scan tiles for colours and update PlayerGameSettings' SegmentColours and ColourCount accordingly
+	// Scan tiles for colours and update PlayerGameSettings' ChosenColours and ColourCount accordingly
 	public void SavePresentColoursToGameSettings()
 	{
 		List<int> presentColours = new List<int>();
@@ -616,7 +647,7 @@ public partial class JarManager : Node
 			{
 				Vector2I pos = new Vector2I(x, y);
 
-				int colour = GetSegmentColour(pos);
+				int colour = GetTileColour(pos);
 
 				if (colour > 0 && !presentColours.Contains(colour))
 					presentColours.Add(colour);
@@ -627,40 +658,40 @@ public partial class JarManager : Node
 		if (presentColours.Count == 0)
 			presentColours.Add(1);
 
-		PlayerGameSettings.SegmentColours = new Godot.Collections.Array<int>(presentColours);
+		PlayerGameSettings.ChosenColours = new Godot.Collections.Array<int>(presentColours);
 		PlayerGameSettings.ColourCount = presentColours.Count;
 	}
 
-	// Replace possibleSegmentColours with newColours
+	// Replace possibleColours with newColours
 	public void ReplacePossibleColours(Godot.Collections.Array<int> newColours)
 	{
-		// Backup original colours into originalPossibleSegmentColours
-		if (originalPossibleSegmentColours.Count == 0)
-			originalPossibleSegmentColours = new List<int>(possibleSegmentColours);
+		// Backup original colours into originalPossibleColours
+		if (originalPossibleColours.Count == 0)
+			originalPossibleColours = new List<int>(possibleColours);
 
-		// Indexes in originalPossibleSegmentColours/possibleSegmentColours to skip since they already exist in newColours
+		// Indexes in originalPossibleColours/possibleColours to skip since they already exist in newColours
 		List<int> segColIndexesToSkip = new List<int>();
-		// Colours in newColours that don't need to be used as they're already in originalPossibleSegmentColours
+		// Colours in newColours that don't need to be used as they're already in originalPossibleColours
 		List<int> newColoursToSkip = new List<int>();
 		
 		// Fill in segColIndexesToSkip and newColoursToSkip
 		foreach (var newCol in newColours)
 		{
-			if (originalPossibleSegmentColours.Contains(newCol))
+			if (originalPossibleColours.Contains(newCol))
 			{
 				//GD.Print("this col already exists:" + newCol);
-				segColIndexesToSkip.Add(originalPossibleSegmentColours.IndexOf(newCol));
+				segColIndexesToSkip.Add(originalPossibleColours.IndexOf(newCol));
 				newColoursToSkip.Add(newCol);
 			}
 		}
 
-		// No. of colours to change (smallest of newColours and possibleSegmentColours count, minus any colours to be skipped)
-		int remainingChanges = Mathf.Min(newColours.Count, possibleSegmentColours.Count) - newColoursToSkip.Count;
+		// No. of colours to change (smallest of newColours and possibleColours count, minus any colours to be skipped)
+		int remainingChanges = Mathf.Min(newColours.Count, possibleColours.Count) - newColoursToSkip.Count;
 
 		int segColIndex = 0;
 		int newColIndex = 0;
 
-		// Replace colours in possibleSegmentColours with newColours, skipping possibleSegmentColours that don't need changed (as exist in newColours) and skipping newColours that don't need to be used (as exist in possibleSegmentColours)
+		// Replace colours in possibleColours with newColours, skipping possibleColours that don't need changed (as exist in newColours) and skipping newColours that don't need to be used (as exist in possibleColours)
 		while (remainingChanges > 0)
 		{
 			if (!segColIndexesToSkip.Contains(segColIndex))
@@ -673,18 +704,12 @@ public partial class JarManager : Node
 				}
 				else
 				{
-					//GD.Print("replacing " + possibleSegmentColours[segColIndex] + " with " + newColours[newColIndex]);
-					possibleSegmentColours[segColIndex] = newColours[newColIndex];
+					//GD.Print("replacing " + possibleColours[segColIndex] + " with " + newColours[newColIndex]);
+					possibleColours[segColIndex] = newColours[newColIndex];
 					remainingChanges--;
 					newColIndex++;
 				}
 			}
-			/*
-			else
-			{
-				GD.Print("skipping old index " + segColIndex);
-			}
-			*/
 
 			segColIndex++;
 		}
@@ -693,48 +718,44 @@ public partial class JarManager : Node
 	public async void GenerateCustomLevel()
 	{
 		virusesRemaining.Clear();
-		possibleSegmentColours.Clear();
-		originalPossibleSegmentColours.Clear();
+		possibleColours.Clear();
+		originalPossibleColours.Clear();
 
 		List<int> virusColours = new List<int>();
 		
-		// Find possible segment and virus colours
+		// Find possible colours that pills/power-ups should come in
 		foreach (JarTileData tile in customLevelTiles.Values)
 		{
-			int colour;
-			if (tile.sourceID == powerUpSourceID)
-				colour = tile.atlas.Y;
-			else
-				colour = tile.atlas.Y + 1;
+			int colour = tile.colour;
 			
-			// if any instance of this colour appears, add to possibleSegmentColours
-			if (!possibleSegmentColours.Contains(colour))
+			// if any instance of this colour appears, add to possibleColours
+			if (colour > 0 && !possibleColours.Contains(colour))
 			{
-				possibleSegmentColours.Add(colour);
+				possibleColours.Add(colour);
 			}
 
 			// if a virus of this colour appears, add to virusColours
-			if (tile.sourceID == virusSourceID && !virusColours.Contains(colour))
+			if (tile.sourceID == GameConstants.virusSourceID && !virusColours.Contains(colour))
 				virusColours.Add(colour);
 		}
 
 		// Fallback possible colour if level is empty
-		if (possibleSegmentColours.Count == 0)
-			possibleSegmentColours.Add(1);
+		if (possibleColours.Count == 0)
+			possibleColours.Add(1);
 
 		// Fallback virus colour if virusColours is empty
 		if (virusColours.Count == 0)
 		{
-			if (possibleSegmentColours.Count == 0)
+			if (possibleColours.Count == 0)
 				virusColours.Add(1);
 			else
-				virusColours.Add(possibleSegmentColours[0]);
+				virusColours.Add(possibleColours[0]);
 		}
 
-		possibleSegmentColours.Sort();
+		possibleColours.Sort();
 		virusColours.Sort();
 
-		// replace virusColours and possibleSegmentColours values with overrideCustomLevelColours if present
+		// replace virusColours and possibleColours values with overrideCustomLevelColours if present
 		if (CommonGameSettings.CurrentThemeHasOverrideCustomLevelColours)
 		{
 			Godot.Collections.Array<int> newColours = CommonGameSettings.CurrentThemeOverrideCustomLevelColours;
@@ -743,12 +764,12 @@ public partial class JarManager : Node
 
 			for (int i = 0; i < virusColours.Count; i++)
 			{
-				if (originalPossibleSegmentColours.Contains(virusColours[i]))
-					virusColours[i] = possibleSegmentColours[originalPossibleSegmentColours.IndexOf(virusColours[i])];
+				if (originalPossibleColours.Contains(virusColours[i]))
+					virusColours[i] = possibleColours[originalPossibleColours.IndexOf(virusColours[i])];
 			}
 		}
 
-		// randomise next pill colours based of possibleSegmentColours
+		// randomise next pill colours based of possibleColours
 		pillMan.RandomiseNextPillColours();
 		if (PlayerGameSettings.IsUsingPowerUps)
 			PowerUpMeter.QueueNewPowerUp();
@@ -775,9 +796,9 @@ public partial class JarManager : Node
 			Vector2I atlas = customLevelTiles[pos].atlas;
 
 			// if possible colours have been replaced, change tile colour
-			if (HaveColoursBeenReplaced)
+			if (HaveColoursBeenReplaced && colour > 0)
 			{
-				int newColour = possibleSegmentColours[originalPossibleSegmentColours.IndexOf(colour)];
+				int newColour = possibleColours[originalPossibleColours.IndexOf(colour)];
 				atlas += Vector2I.Down * (newColour - colour);
 				colour = newColour;
 			}
@@ -786,14 +807,19 @@ public partial class JarManager : Node
 
 			int sourceID = jarTiles.GetCellSourceId(pos);
 
-			if (sourceID == virusSourceID)
+			if (sourceID == GameConstants.virusSourceID)
 			{
 				virusesRemaining.Add(pos, colour);
 				uiMan.SetVirusLabel(virusesRemaining.Count);
 			}
-			else if (sourceID == powerUpSourceID)
+			else if (sourceID == GameConstants.powerUpSourceID)
 			{
 				frozenPowerUps.Add(pos);
+			}
+			else if (sourceID == GameConstants.objectSourceID && ShouldTileBeForeground(pos))
+			{
+				jarTiles.SetCell(pos, -1);
+				foregroundTiles.SetCell(pos, customLevelTiles[pos].sourceID, atlas);
 			}
 
 			remainingTilePositions.RemoveAt(index);
@@ -820,7 +846,7 @@ public partial class JarManager : Node
 		List<int> virusColours = new List<int>();
 
 		virusesRemaining.Clear();
-		possibleSegmentColours.Clear();
+		possibleColours.Clear();
 
 		int gap = 6;
 		if (virusLevel > 18)
@@ -844,21 +870,21 @@ public partial class JarManager : Node
 		int firstVirus = localRng.RandiRange(0, PlayerGameSettings.ColourCount - 1);
 		for (int i = 0; i < virusCount; i++)
 		{
-			int colour = PlayerGameSettings.SegmentColours[(firstVirus + i) % PlayerGameSettings.ColourCount];
+			int colour = PlayerGameSettings.ChosenColours[(firstVirus + i) % PlayerGameSettings.ColourCount];
 			virusColours.Add(colour);
 
-			if (!possibleSegmentColours.Contains(colour))
-				possibleSegmentColours.Add(colour);
+			if (!possibleColours.Contains(colour))
+				possibleColours.Add(colour);
 		}
 
-		// randomise next pill colours based of possibleSegmentColours
+		// randomise next pill colours based of possibleColours
 		pillMan.RandomiseNextPillColours();
 		if (PlayerGameSettings.IsUsingPowerUps)
 			PowerUpMeter.QueueNewPowerUp();
 
 		// Create viruses of each possible colour in the virus ring/magnifying glass
 		if (VirusRing != null)
-			VirusRing.CreateViruses(possibleSegmentColours);
+			VirusRing.CreateViruses(possibleColours);
 
 		for (int i = 0; i < virusCount; i++)
 		{
@@ -933,7 +959,7 @@ public partial class JarManager : Node
 
 			virusColours.RemoveAt(virusIndex);
 			
-			jarTiles.SetCell(pos, virusSourceID, Vector2I.Down * (virusColour - 1));
+			jarTiles.SetCell(pos, GameConstants.virusSourceID, Vector2I.Down * (virusColour - 1));
 
 			virusesRemaining.Add(pos, virusColour);
 
@@ -963,58 +989,60 @@ public partial class JarManager : Node
 		return streakLeft + streakRight + 1 < 3 && streakUp + streakDown + 1 < 3;
 	}
 
-	private bool IsSegmentSingle(Vector2I pos)
+	private bool IsTileSingle(Vector2I pos)
 	{
-		return jarTiles.GetCellSourceId(pos) == powerUpSourceID || jarTiles.GetCellAtlasCoords(pos).X == PillConstants.atlasSingle;
+		return jarTiles.GetCellSourceId(pos) != GameConstants.pillSourceID || jarTiles.GetCellAtlasCoords(pos).X == PillConstants.atlasSingle;
 	}
 
-	public bool IsSegmentPresent(Vector2I pos)
+	public bool IsTilePresent(Vector2I pos)
 	{
 		return jarTiles.GetCellSourceId(pos) != -1;
 	}
 
-	public int GetSegmentColour(Vector2I pos)
+	public int GetTileColour(Vector2I pos)
 	{
 		TileData data = jarTiles.GetCellTileData(pos);
 
 		if (data == null)
 			return -1;
 
-		int colour = (int)data.GetCustomData("SegmentColour");
+		int colour = (int)data.GetCustomData("Colour");
 
-		if (jarTiles.GetCellSourceId(pos) != powerUpSourceID && colour == 0)
+		if (jarTiles.GetCellSourceId(pos) != GameConstants.powerUpSourceID && colour == 0)
 			return -1;
 
 		return colour;
 	}
 
-	/*
-	public void UpdateActiveSegmentColours()
-	{
-		activeSegmentColours.Clear();
+	public bool DoesTileCauseRebound(Vector2I pos) { return IsObjectWithAttribute(pos, "CauseRebound"); }
+	public bool IsTileUnbreakable(Vector2I pos) { return IsObjectWithAttribute(pos, "Unbreakable"); }
+	public bool ShouldTileBeForeground(Vector2I pos)  { return IsObjectWithAttribute(pos, "Foreground"); }
+	public bool IsTileHazard(Vector2I pos)  { return IsObjectWithAttribute(pos, "Hazard"); }
 
-		for (int y = 0; y < jarSize.Y; y++)
+	public bool IsObjectWithAttribute(Vector2I pos, string attribute)
+	{
+		if (foregroundTiles.GetCellSourceId(pos) == GameConstants.objectSourceID)
 		{
-			for (int x = 0; x < jarSize.X; x++)
-			{
-				int colour = GetSegmentColour(jarOrigin + new Vector2I(x, y));
-				if (colour > 0 && !activeSegmentColours.Contains(colour))
-				{
-					activeSegmentColours.Add(colour);
-				}
-			}
+			return (bool)foregroundTiles.GetCellTileData(pos).GetCustomData(attribute);
+		}
+		else if (jarTiles.GetCellSourceId(pos) == GameConstants.objectSourceID)
+		{
+			return (bool)jarTiles.GetCellTileData(pos).GetCustomData(attribute);
+		}
+		else
+		{
+			return false;
 		}
 	}
-	*/
 
 	private Vector2I GetConnectedSegment(Vector2I pos)
 	{
-		return GetConnectedSegment(pos, jarTiles.GetCellAtlasCoords(pos).X);
+		return GetConnectedSegment(pos, jarTiles.GetCellSourceId(pos), jarTiles.GetCellAtlasCoords(pos).X);
 	}
 
-	private Vector2I GetConnectedSegment(Vector2I pos, int atlasX)
+	private Vector2I GetConnectedSegment(Vector2I pos, int sourceID, int atlasX)
 	{
-		if (jarTiles.GetCellSourceId(pos) != pillSourceID)
+		if (sourceID != GameConstants.pillSourceID)
 			return pos;
 			
 		Vector2I connectedPos = pos;
@@ -1033,26 +1061,26 @@ public partial class JarManager : Node
 		return connectedPos;
 	}
 
-	private void AddSegmentToFall(Vector2I pos)
+	private void AddTileToFall(Vector2I pos)
 	{
-		if (!segmentsToFall.ContainsKey(pos.Y))
-			segmentsToFall.Add(pos.Y, new List<int>());
+		if (!tilesToFall.ContainsKey(pos.Y))
+			tilesToFall.Add(pos.Y, new List<int>());
 
-		if (!segmentsToFall[pos.Y].Contains(pos.X))
-			segmentsToFall[pos.Y].Add(pos.X);
+		if (!tilesToFall[pos.Y].Contains(pos.X))
+			tilesToFall[pos.Y].Add(pos.X);
 	}
 
-	// adds segment to segmentsToDestroy - returns true or false depending on whether the position given was already present in segmentsToDestroy or not
+	// adds tile to tilesToDestroy - returns true or false depending on whether the position given was already present in tilesToDestroy or not
 	// (true = was added, didn't already exist)
 	// (false = already exists)
-	private bool AddSegmentToDestroy(Vector2I pos)
+	private bool AddTileToDestroy(Vector2I pos)
 	{
-		if (!segmentsToDestroy.ContainsKey(pos.Y))
-			segmentsToDestroy.Add(pos.Y, new List<int>());
+		if (!tilesToDestroy.ContainsKey(pos.Y))
+			tilesToDestroy.Add(pos.Y, new List<int>());
 
-		if (!segmentsToDestroy[pos.Y].Contains(pos.X))
+		if (!tilesToDestroy[pos.Y].Contains(pos.X))
 		{
-			segmentsToDestroy[pos.Y].Add(pos.X);
+			tilesToDestroy[pos.Y].Add(pos.X);
 
 			if (virusesRemaining.ContainsKey(pos))
 				destructionContainsVirus = true;
@@ -1063,17 +1091,17 @@ public partial class JarManager : Node
 		return false;
 	}
 
-	// adds segment to destroyedSegments - returns true or false depending on whether the position given was already present in destroyedSegments or not
+	// adds tile to destroyedTiles - returns true or false depending on whether the position given was already present in destroyedTiles or not
 	// (true = was added, didn't already exist)
 	// (false = already exists)
-	private bool AddDestroyedSegment(Vector2I pos)
+	private bool AddDestroyedTile(Vector2I pos)
 	{
-		if (!destroyedSegments.ContainsKey(pos.Y))
-			destroyedSegments.Add(pos.Y, new List<int>());
+		if (!destroyedTiles.ContainsKey(pos.Y))
+			destroyedTiles.Add(pos.Y, new List<int>());
 
-		if (!destroyedSegments[pos.Y].Contains(pos.X))
+		if (!destroyedTiles[pos.Y].Contains(pos.X))
 		{
-			destroyedSegments[pos.Y].Add(pos.X);
+			destroyedTiles[pos.Y].Add(pos.X);
 
 			if (virusesRemaining.ContainsKey(pos))
 				destructionContainsVirus = true;
@@ -1091,7 +1119,7 @@ public partial class JarManager : Node
 		// if colour is 0, then origPos is a rainbow tile which can be matched with any colour, so set it to match the colour beside it in this streak check
 		if (checkColour == 0)
 		{
-			int neighbourColour = GetSegmentColour(origPos + dir);
+			int neighbourColour = GetTileColour(origPos + dir);
 			if (neighbourColour != -1)
 				checkColour = neighbourColour;
 		}
@@ -1103,13 +1131,13 @@ public partial class JarManager : Node
 		{
 			neighbourPos += dir;
 
-			int neighbourColour = GetSegmentColour(neighbourPos);
+			int neighbourColour = GetTileColour(neighbourPos);
 
 			// If still checking for rainbow colour and neightbouring isn't rainbow, update checkColour to match it
 			if (checkColour == 0 && neighbourColour > 0)
 				checkColour = neighbourColour;
 
-			if ((neighbourColour == checkColour || neighbourColour == 0) && (segmentsToFall.Count == 0 || !SegmentsToFallContainsPos(neighbourPos)))
+			if ((neighbourColour == checkColour || neighbourColour == 0) && (tilesToFall.Count == 0 || !TilesToFallContainsPos(neighbourPos)))
 				streak++;
 			else
 				break;
@@ -1120,7 +1148,7 @@ public partial class JarManager : Node
 
 	private void CheckForLinesToDestroy(Vector2I origPos)
 	{
-		int origColour = GetSegmentColour(origPos);
+		int origColour = GetTileColour(origPos);
 		
 		int streakLeft = CheckForStreakFromPos(origPos, Vector2I.Left, origColour);
 		int streakRight = CheckForStreakFromPos(origPos, Vector2I.Right, origColour);
@@ -1132,16 +1160,16 @@ public partial class JarManager : Node
 		{
 			bool isNewLine = false;
 
-			if (!segmentsToDestroy.ContainsKey(origPos.Y))
-				segmentsToDestroy.Add(origPos.Y, new List<int>());
+			if (!tilesToDestroy.ContainsKey(origPos.Y))
+				tilesToDestroy.Add(origPos.Y, new List<int>());
 
 			for (int i = -streakLeft; i <= streakRight; i++)
 			{
 				Vector2I pos = origPos + Vector2I.Right * i;
 
-				if (!segmentsToDestroy[pos.Y].Contains(pos.X))
+				if (!tilesToDestroy[pos.Y].Contains(pos.X))
 				{
-					segmentsToDestroy[pos.Y].Add(pos.X);
+					tilesToDestroy[pos.Y].Add(pos.X);
 					isNewLine = true;
 
 					if (virusesRemaining.ContainsKey(pos))
@@ -1161,7 +1189,7 @@ public partial class JarManager : Node
 			{
 				Vector2I pos = origPos + Vector2I.Down * i;
 
-				if (AddSegmentToDestroy(pos))
+				if (AddTileToDestroy(pos))
 					isNewLine = true;
 			}
 
@@ -1179,12 +1207,13 @@ public partial class JarManager : Node
 		Vector2I secondaryPos = pill.SecondaryGridPos;
 
 		int centreColour = pill.CentreSegmentColour;
-		int secondaryColour = pill.SecondarySegmentColour;
+		bool secondSegExists = true;
 
 		// If power-up, only place one tile
 		if (pill.IsPowerUp)
 		{
-			if (pill.CentreSegmentColour == 0 /* && pill.CurrentPowerUp != PowerUp.PillBlaster && pill.CurrentPowerUp != PowerUp.VirusBlaster*/)
+			// If rainbow and not on a hazard, auto-activate power-up
+			if (pill.CentreSegmentColour == 0 && !IsTileHazard(centrePos))
 			{
 				ActivatePowerUp(pill.CurrentPowerUp, pill.CentreSegmentColour, centrePos);
 
@@ -1192,49 +1221,46 @@ public partial class JarManager : Node
 				return;
 			}
 
-			jarTiles.SetCell(centrePos, powerUpSourceID, pill.CentreTextureCoords);
+			jarTiles.SetCell(centrePos, GameConstants.powerUpSourceID, pill.CentreTextureCoords);
+			secondSegExists = false;
 		}
-		// if secondary is off the top of the screen, cut if off
+		// if secondary is off the top of the screen, only place centre seg
 		else if (secondaryPos.Y < jarOrigin.Y)
-			jarTiles.SetCell(centrePos, pillSourceID, new Vector2I(4, (centreColour - 1)));
+		{
+			jarTiles.SetCell(centrePos, GameConstants.pillSourceID, new Vector2I(4, (centreColour - 1)));
+			secondSegExists = false;
+		}
 		else
 		{
-			jarTiles.SetCell(centrePos, pillSourceID, pill.CentreTextureCoords);
-			jarTiles.SetCell(secondaryPos, pillSourceID, pill.SecondaryTextureCoords);
+			jarTiles.SetCell(centrePos, GameConstants.pillSourceID, pill.CentreTextureCoords);
+			jarTiles.SetCell(secondaryPos, GameConstants.pillSourceID, pill.SecondaryTextureCoords);
 		}
 		
-		segmentsToDestroy.Clear();
-		destroyedSegments.Clear();
-		segmentsToFall.Clear();
-		CheckForLinesToDestroy(centrePos);
+		tilesToDestroy.Clear();
+		destroyedTiles.Clear();
+		tilesToFall.Clear();
 
-		if (!pill.IsPowerUp && jarTiles.GetCellTileData(secondaryPos) != null)
+		// check for hazards and destroy segment(s) if needed
+		if (IsTileHazard(centrePos))
+		{
+			SfxMan.Play("VirusStunLand");
+			DestroyTile(centrePos, true);
+		}
+		if (secondSegExists && IsTileHazard(secondaryPos))
+		{
+			SfxMan.Play("VirusStunLand");
+			DestroyTile(secondaryPos, true);
+			secondSegExists = false;
+		}
+
+		// check for lines
+		if (jarTiles.GetCellTileData(centrePos) != null)
+			CheckForLinesToDestroy(centrePos);
+
+		if (secondSegExists)
 			CheckForLinesToDestroy(secondaryPos);
 
-		/*
-		if (pill.IsPowerUp && pill.CentreSegmentColour == 0 && !SegmentsToDestroyContainsPos(centrePos) && pill.PowerUp != PowerUp.PillBlaster && pill.PowerUp != PowerUp.VirusBlaster)
-		{
-			DestroySegment(centrePos);
-
-			SetProcess(true);
-			return;
-		}
-		*/
-
-		if (segmentsToDestroy.Count > 0)
-		{
-			destroyRow = segmentsToDestroy.Keys.Max();
-			
-			if (destructionContainsVirus)
-				SfxMan.Play("VirusMatch");
-			else
-				SfxMan.Play("PillMatch");
-
-			IncrementMatchCombo();
-
-			SetProcess(true);
-		}
-		else
+		if (tilesToDestroy.Count == 0 && tilesToFall.Count == 0)
 		{
 			SfxMan.Play("Land");
 
@@ -1248,33 +1274,51 @@ public partial class JarManager : Node
 				pillMan.ThrowNextPill();
 			}
 		}
+		else
+		{
+			if (tilesToDestroy.Count != 0)
+			{
+				destroyRow = tilesToDestroy.Keys.Max();
+				
+				if (destructionContainsVirus)
+					SfxMan.Play("VirusMatch");
+				else
+					SfxMan.Play("PillMatch");
+				
+				IncrementMatchCombo();
+			}
+			else
+				autoFallTimer = 1;
+
+			SetProcess(true);
+		}
 	}
 
-	private bool SegmentsToDestroyContainsPos(Vector2I pos)
+	private bool TilesToDestroyContainsPos(Vector2I pos)
 	{
-		if (segmentsToDestroy.ContainsKey(pos.Y) && segmentsToDestroy[pos.Y].Contains(pos.X))
+		if (tilesToDestroy.ContainsKey(pos.Y) && tilesToDestroy[pos.Y].Contains(pos.X))
 			return true;
 		else
 			return false;
 	}
 
-	private bool DestroyedSegmentsContainsPos(Vector2I pos)
+	private bool DestroyedTilesContainsPos(Vector2I pos)
 	{
-		if (destroyedSegments.ContainsKey(pos.Y) && destroyedSegments[pos.Y].Contains(pos.X))
+		if (destroyedTiles.ContainsKey(pos.Y) && destroyedTiles[pos.Y].Contains(pos.X))
 			return true;
 		else
 			return false;
 	}
 
-	private bool SegmentsToFallContainsPos(Vector2I pos)
+	private bool TilesToFallContainsPos(Vector2I pos)
 	{
-		return segmentsToFall.ContainsKey(pos.Y) && segmentsToFall[pos.Y].Contains(pos.X);
+		return tilesToFall.ContainsKey(pos.Y) && tilesToFall[pos.Y].Contains(pos.X);
 	}
 
 	// whether the position given is empty, or will be updated (e.g. will fall, be destroyed or is already destroyed/popped) 
 	private bool IsPosEmptyOrWillUpdate(Vector2I pos)
 	{
-		return IsCellFree(pos) || SegmentsToDestroyContainsPos(pos) || DestroyedSegmentsContainsPos(pos) || SegmentsToFallContainsPos(pos);
+		return IsCellFree(pos) || TilesToDestroyContainsPos(pos) || DestroyedTilesContainsPos(pos) || TilesToFallContainsPos(pos);
 	}
 	
 	// recursive function to make the segement at pos fall, as well as any connecting segments (aka is double) and any on top of the segment(s)
@@ -1283,15 +1327,15 @@ public partial class JarManager : Node
 	{
 		int sourceID = jarTiles.GetCellSourceId(pos);
 
-		// if tile is not nothing, not updating (falling, destroyed, to-be-destroyed) and not a virus or frozen power-up, check if it can fall and make it fall is so
-		if (!IsPosEmptyOrWillUpdate(pos) && sourceID != virusSourceID && !(sourceID == powerUpSourceID && frozenPowerUps.Contains(pos)))
+		// if tile is not nothing, not updating (falling, destroyed, to-be-destroyed) and either a pill segment or non-frozen power-up, check if it can fall and make it fall is so
+		if (!IsPosEmptyOrWillUpdate(pos) && (sourceID == GameConstants.pillSourceID || (sourceID == GameConstants.powerUpSourceID && !frozenPowerUps.Contains(pos))))
 		{
 			Vector2I connectedPos = GetConnectedSegment(pos);
 
 			// will always fall if its a single or vertical segment
-			if (IsSegmentSingle(pos) || pos.X == connectedPos.X)
+			if (IsTileSingle(pos) || pos.X == connectedPos.X)
 			{
-				AddSegmentToFall(pos);
+				AddTileToFall(pos);
 				RecursiveFall(pos + Vector2I.Up);
 			}
 			// if its a double horizontal segment, only fall if not grounded on the connected segment
@@ -1301,9 +1345,9 @@ public partial class JarManager : Node
 
 				if (pos.X != connectedPos.X && IsPosEmptyOrWillUpdate(conDownPos))
 				{
-					AddSegmentToFall(pos);
+					AddTileToFall(pos);
 					RecursiveFall(pos + Vector2I.Up);
-					AddSegmentToFall(connectedPos);
+					AddTileToFall(connectedPos);
 					RecursiveFall(connectedPos + Vector2I.Up);
 				}
 			}
@@ -1366,7 +1410,7 @@ public partial class JarManager : Node
 			for (int i = 0; i < Mathf.Min(lineComboColours.Count, maxJunkSegments); i++)
 			{
 				int colour = lineComboColours[i];
-				junkColourIndexes.Add(possibleSegmentColours.IndexOf(colour));
+				junkColourIndexes.Add(possibleColours.IndexOf(colour));
 			}
 
 			// Send junk colours to receiving player
@@ -1392,13 +1436,16 @@ public partial class JarManager : Node
 
 	private void ActivatePowerUp(PowerUp pwr, int colour, Vector2I pos)
 	{
+		if (DisablePowerUpSpawning)
+			return;
+		
 		BasePowerUp powerUp = powerUpPrefabs.GetPowerUpPrefab(pwr).Instantiate<BasePowerUp>();
 
 		powerUp.InitialGridPos = pos;
 		powerUp.Colour = colour;
 		powerUp.JarMan = this;
 		powerUp.SfxMan = SfxMan;
-		powerUp.Texture = ((TileSetAtlasSource)jarTiles.TileSet.GetSource(powerUpSourceID)).Texture;
+		powerUp.Texture = ((TileSetAtlasSource)jarTiles.TileSet.GetSource(GameConstants.powerUpSourceID)).Texture;
 
 		jarTiles.GetParent().AddChild(powerUp);
 		powerUp.GetParent().MoveChild(powerUp, previewTiles.GetIndex());
@@ -1442,7 +1489,7 @@ public partial class JarManager : Node
 		{
 			Vector2I pos = jarOrigin + Vector2I.Right * i;
 
-			if (!IsSegmentPresent(pos))
+			if (!IsTilePresent(pos))
 				possiblePositions.Add(pos.X);
 
 		}
@@ -1465,45 +1512,70 @@ public partial class JarManager : Node
 			// Get index of colour (not the colour itself as colours could vary between players)
 			int colourIndex = segmentsToCreate[i];
 
-			// if the colour index is out of range of this player's possibleSegmentColours, fix it to it is
-			if (colourIndex > possibleSegmentColours.Count - 1)
+			// if the colour index is out of range of this player's possibleColours, fix it to it is
+			if (colourIndex > possibleColours.Count - 1)
 			{
-				colourIndex = colourIndex % possibleSegmentColours.Count;
+				colourIndex = colourIndex % possibleColours.Count;
 			}
 
 			// Set cell at pos to single pill segment of colour based on colourIndex
-			jarTiles.SetCell(pos, pillSourceID, new Vector2I(PillConstants.atlasSingle, possibleSegmentColours[colourIndex] - 1));
+			jarTiles.SetCell(pos, GameConstants.pillSourceID, new Vector2I(PillConstants.atlasSingle, possibleColours[colourIndex] - 1));
 
 			// Add segment to fall list
-			AddSegmentToFall(pos);
+			AddTileToFall(pos);
 		}
 
 		// Remove group of junk segments just created from queuedJunkSegments
 		queuedJunkSegments.RemoveAt(0);
 	}
 
-	// Destroys segment at given position - returns true if pos is not empty, aka something gets destroyed
-	public bool DestroySegment(Vector2I pos)
+	// Destroys tile at given position - returns true if pos is not empty, aka something gets destroyed
+	public bool DestroyTile(Vector2I pos, bool forceInsta = false)
 	{
-		// Add pos to destroyedSegments - return if pos is already in destroyedSegments or pos is empty
-		if (jarTiles.GetCellSourceId(pos) == -1 || !AddDestroyedSegment(pos))
+		// Add pos to destroyedTiles (if not forceInsta) - return if pos is already in destroyedTiles or pos is empty
+		if (jarTiles.GetCellSourceId(pos) == -1 || (forceInsta ? false : !AddDestroyedTile(pos)))
 			return false;
 
 		Vector2I atlas = jarTiles.GetCellAtlasCoords(pos);
 		int sourceID = jarTiles.GetCellSourceId(pos);
-		int colour = GetSegmentColour(pos);
+		int colour = GetTileColour(pos);
 		Vector2I poppedAtlas;
 
-		if (sourceID == pillSourceID)
-			poppedAtlas.X = pillPoppedAtlasX;
-		else if (sourceID == virusSourceID)
-			poppedAtlas.X = virusPoppedAtlasX;
-		else
-			poppedAtlas.X = powerUpPoppedAtlasX;
-			
-		poppedAtlas.Y = sourceID == powerUpSourceID ? colour : colour - 1;
+		// If tile falling, remove it from fall list
+		if (TilesToFallContainsPos(pos))
+		{
+			tilesToFall[pos.Y].Remove(pos.X);
+		}
 
-		if (sourceID == virusSourceID)
+		// if forceInsta, just delete cell right away if object, don't bother with "popping" the tile
+		if (forceInsta)
+		{
+			jarTiles.SetCell(pos, -1);
+
+			// if this a connect pill segment, change the connected segment to a non-connected one
+			if (sourceID == GameConstants.pillSourceID)
+			{
+				SeparateConnectedSegment(pos, sourceID, atlas);
+			}
+			
+			return true;
+		}
+		else if (sourceID == GameConstants.pillSourceID)
+			poppedAtlas.X = pillPoppedAtlasX;
+		else if (sourceID == GameConstants.virusSourceID)
+			poppedAtlas.X = virusPoppedAtlasX;
+		else if (sourceID == GameConstants.powerUpSourceID)
+			poppedAtlas.X = powerUpPoppedAtlasX;
+		// if other sourceID, just delete cell right away if object, don't bother with "popping" the tile
+		else
+		{
+			jarTiles.SetCell(pos, -1);
+			return true;
+		}
+			
+		poppedAtlas.Y = sourceID == GameConstants.powerUpSourceID ? colour : colour - 1;
+
+		if (sourceID == GameConstants.virusSourceID)
 		{
 			virusesRemaining.Remove(pos);
 			uiMan.SetVirusLabel(virusesRemaining.Count);
@@ -1512,7 +1584,7 @@ public partial class JarManager : Node
 
 			IncrementVirusCombo();
 		}
-		else if (sourceID == powerUpSourceID)
+		else if (sourceID == GameConstants.powerUpSourceID)
 		{
 			if (frozenPowerUps.Contains(pos))
 				frozenPowerUps.Remove(pos);
@@ -1523,21 +1595,26 @@ public partial class JarManager : Node
 		jarTiles.SetCell(pos, sourceID, poppedAtlas);
 
 		// if this a connect pill segment, change the connected segment to a non-connected one
-		if (sourceID == pillSourceID)
-		{
-			Vector2I connectedPos = GetConnectedSegment(pos, atlas.X);
-			
-			if (connectedPos != pos)
-			{
-				jarTiles.SetCell(connectedPos, pillSourceID, new Vector2I(PillConstants.atlasSingle, GetSegmentColour(connectedPos) - 1));
-				
-				// if pos below is empty or will update, do RecursiveFall for the connected pos
-				if (IsPosEmptyOrWillUpdate(connectedPos + Vector2I.Down))
-					RecursiveFall(connectedPos);
-			}
-		}
+		if (sourceID == GameConstants.pillSourceID)
+			SeparateConnectedSegment(pos, sourceID, atlas);
 
 		return true;
+	}
+
+	private void SeparateConnectedSegment(Vector2I pos, int sourceID, Vector2I atlas)
+	{
+		Vector2I connectedPos = GetConnectedSegment(pos, sourceID, atlas.X);
+
+		if (connectedPos != pos)
+		{
+			jarTiles.SetCell(connectedPos, GameConstants.pillSourceID, new Vector2I(PillConstants.atlasSingle, GetTileColour(connectedPos) - 1));
+			
+			// if pos below is empty or will update, do RecursiveFall for the connected pos
+			if (IsPosEmptyOrWillUpdate(connectedPos + Vector2I.Down))
+			{
+				RecursiveFall(connectedPos);
+			}
+		}
 	}
 
 	public void DestroyAllPillSegments(int colour)
@@ -1550,9 +1627,9 @@ public partial class JarManager : Node
 			{
 				Vector2I pos = new Vector2I(x, y);
 
-				if (jarTiles.GetCellSourceId(pos) == pillSourceID && (destroyAll || GetSegmentColour(pos) == colour))
+				if (jarTiles.GetCellSourceId(pos) == GameConstants.pillSourceID && (destroyAll || GetTileColour(pos) == colour))
 				{
-					DestroySegment(pos);
+					DestroyTile(pos);
 				}
 			}
 		}
@@ -1575,7 +1652,7 @@ public partial class JarManager : Node
 
 			for (int i = 0; i < halfCount; i++)
 			{
-				DestroySegment(viruses[i]);
+				DestroyTile(viruses[i]);
 			}
 		}
 		// Else, destroy all viruses of given colour
@@ -1587,7 +1664,7 @@ public partial class JarManager : Node
 			{
 				if (virusesRemaining[pos] == colour)
 				{
-					DestroySegment(pos);
+					DestroyTile(pos);
 				}
 			}
 		}
@@ -1595,8 +1672,8 @@ public partial class JarManager : Node
 
 	private void UpdateDestruction(double delta)
 	{
-		// if there were no segments to be destroyed or they have all been destroyed, remove all the "popped" tiles
-		if (segmentsToDestroy.Count == 0 || destroyRow < segmentsToDestroy.Keys.Min())
+		// if there were no tiles to be destroyed or they have all been destroyed, remove all the "popped" tiles
+		if (tilesToDestroy.Count == 0 || destroyRow < tilesToDestroy.Keys.Min())
 		{
 			if (activePowerUps.Count != 0 && virusesRemaining.Count != 0)
 			{
@@ -1626,40 +1703,40 @@ public partial class JarManager : Node
 
 			if (destroyTimer <= 0 && activePowerUps.Count == 0)
 			{
-				int minY = destroyedSegments.Keys.Min();
-				int maxY = destroyedSegments.Keys.Max();
+				int minY = destroyedTiles.Keys.Min();
+				int maxY = destroyedTiles.Keys.Max();
 
 				for (int y = maxY; y >= minY; y--)
 				{
-					if (!destroyedSegments.ContainsKey(y))
+					if (!destroyedTiles.ContainsKey(y))
 						continue;
 
-					for (int i = 0; i < destroyedSegments[y].Count; i++)
+					for (int i = 0; i < destroyedTiles[y].Count; i++)
 					{
-						Vector2I pos = new Vector2I(destroyedSegments[y][i], y);
+						Vector2I pos = new Vector2I(destroyedTiles[y][i], y);
 						jarTiles.SetCell(pos, -1);
 						
-						// if pos is in segmentsToFall, remove it from there - otherwise an empty tile will fall
-						if (SegmentsToFallContainsPos(pos))
+						// if pos is in tilesToFall, remove it from there - otherwise an empty tile will fall
+						if (TilesToFallContainsPos(pos))
 						{
-							segmentsToFall[pos.Y].Remove(pos.X);
+							tilesToFall[pos.Y].Remove(pos.X);
 
-							if (segmentsToFall[pos.Y].Count == 0)
-								segmentsToFall.Remove(pos.Y);
+							if (tilesToFall[pos.Y].Count == 0)
+								tilesToFall.Remove(pos.Y);
 						}
 
 						Vector2I abovePos = pos + Vector2I.Up;
 						
 						// do RecursiveFall for the position above if isn't destroyed
-						if (!DestroyedSegmentsContainsPos(abovePos))
+						if (!DestroyedTilesContainsPos(abovePos))
 							RecursiveFall(abovePos);
 					}
 				}
-				segmentsToDestroy.Clear();
-				destroyedSegments.Clear();
+				tilesToDestroy.Clear();
+				destroyedTiles.Clear();
 				autoFallTimer = 0;
 				
-				if (segmentsToFall.Count == 0)
+				if (tilesToFall.Count == 0)
 					CompleteAutoFallingAndDestruction();
 			}
 			return;
@@ -1671,28 +1748,28 @@ public partial class JarManager : Node
 			return;
 		}
 		// destroy row specified by destroyRow
-		for (int i = 0; i < segmentsToDestroy[destroyRow].Count; i++)
+		for (int i = 0; i < tilesToDestroy[destroyRow].Count; i++)
 		{
-			Vector2I pos = new Vector2I(segmentsToDestroy[destroyRow][i], destroyRow);
-			DestroySegment(pos);
+			Vector2I pos = new Vector2I(tilesToDestroy[destroyRow][i], destroyRow);
+			DestroyTile(pos);
 		}
 		destroyRow--;
-		if (!segmentsToDestroy.ContainsKey(destroyRow) && destroyRow >= segmentsToDestroy.Keys.Min())
+		if (!tilesToDestroy.ContainsKey(destroyRow) && destroyRow >= tilesToDestroy.Keys.Min())
 		{
 			do
 			{
 				destroyRow--;
-			} while (!segmentsToDestroy.ContainsKey(destroyRow)); 
+			} while (!tilesToDestroy.ContainsKey(destroyRow)); 
 		}
 		destroyTimer = 1;
 	}
 
 	private bool IsCellFullAndNotFalling(Vector2I pos)
 	{
-		return !IsCellFree(pos) && !SegmentsToFallContainsPos(pos);
+		return !IsCellFree(pos) && !TilesToFallContainsPos(pos);
 	}
 
-	private void UpdateSegmentsToFall(double delta)
+	private void UpdateTilesToFall(double delta)
 	{
 		// wait if autoFallTimer hasn't finished
 		if (autoFallTimer > 0)
@@ -1701,59 +1778,84 @@ public partial class JarManager : Node
 			return;
 		}
 
-		int minY = segmentsToFall.Keys.Min();
-		int maxY = segmentsToFall.Keys.Max();
+		int minY = tilesToFall.Keys.Min();
+		int maxY = tilesToFall.Keys.Max();
 		
-		// find landed segments
+		// tiles to get insta destroyed, any tiles touching a hazard get put here
+		List<Vector2I> tilesToInstaDestroy = new List<Vector2I>();
+
+		// find landed tiles AND tiles about to hit hazard (aka to be insta destroyed)
 		for (int y = maxY; y >= minY; y--)
 		{
-			if (!segmentsToFall.ContainsKey(y))
+			if (!tilesToFall.ContainsKey(y))
 				continue;
 			
-			for (int i = segmentsToFall[y].Count - 1; i >= 0; i--)
+			for (int i = tilesToFall[y].Count - 1; i >= 0; i--)
 			{
-				Vector2I pos = new Vector2I(segmentsToFall[y][i], y);
-
+				Vector2I pos = new Vector2I(tilesToFall[y][i], y);
 				Vector2I connectedPos = GetConnectedSegment(pos);
+				bool landed = false;
 				
 				if (connectedPos == pos + Vector2I.Left || connectedPos == pos + Vector2I.Right)
 				{
 					if (IsCellFullAndNotFalling(pos + Vector2I.Down) || IsCellFullAndNotFalling(connectedPos + Vector2I.Down))
 					{
-						segmentsToFall[y].RemoveAt(i);
-						uncheckedLandedSegments.Add(pos);
+						tilesToFall[y].RemoveAt(i);
+						uncheckedLandedTiles.Add(pos);
+						landed = true;
 					}
 				}
 				else if (IsCellFullAndNotFalling(pos + Vector2I.Down))
 				{
-					segmentsToFall[y].RemoveAt(i);
-					uncheckedLandedSegments.Add(pos);
+					tilesToFall[y].RemoveAt(i);
+					uncheckedLandedTiles.Add(pos);
+					landed = true;
+				}
+
+				// if tile would still fall but would hit a hazard, insta-destroy it
+				if (!landed)
+				{
+					// insta-destroy tile if hazard
+					if (IsTileHazard(pos + Vector2I.Down))
+					{
+						tilesToInstaDestroy.Add(pos);
+					}
 				}
 			}
 
-			if (segmentsToFall[y].Count == 0)
-				segmentsToFall.Remove(y);
+			if (tilesToFall[y].Count == 0)
+				tilesToFall.Remove(y);
 		}
 
-		// do line checks for landed segments
-		if (uncheckedLandedSegments.Count > 0 && PlayerGameSettings.ImpatientMatching || segmentsToFall.Count == 0)
+		// insta destroy any tiles hit by hazard
+		if (tilesToInstaDestroy.Count > 0)
 		{
-			segmentsToDestroy.Clear();
-			destroyedSegments.Clear();
+			SfxMan.Play("VirusStunLand");
+			for (int i = 0; i < tilesToInstaDestroy.Count; i++)
+			{
+				DestroyTile(tilesToInstaDestroy[i], true);
+			}
+		}
 
-			foreach (Vector2I pos in uncheckedLandedSegments)
+		// do line checks for landed tiles
+		if (uncheckedLandedTiles.Count > 0 && PlayerGameSettings.ImpatientMatching || tilesToFall.Count == 0)
+		{
+			tilesToDestroy.Clear();
+			destroyedTiles.Clear();
+
+			foreach (Vector2I pos in uncheckedLandedTiles)
 			{
 				if (jarTiles.GetCellTileData(pos) != null)
 					CheckForLinesToDestroy(pos);
 			}
 
-			uncheckedLandedSegments.Clear();
+			uncheckedLandedTiles.Clear();
 
-			if (segmentsToDestroy.Count > 0)
+			if (tilesToDestroy.Count > 0)
 			{
 				autoFallTimer = 0;
 				destroyTimer = 0;
-				destroyRow = segmentsToDestroy.Keys.Max();
+				destroyRow = tilesToDestroy.Keys.Max();
 
 				if (destructionContainsVirus)
 					SfxMan.Play("VirusMatch");
@@ -1764,7 +1866,7 @@ public partial class JarManager : Node
 
 				return;
 			}
-			else if (segmentsToFall.Count == 0)
+			else if (tilesToFall.Count == 0)
 			{
 				CompleteAutoFallingAndDestruction();
 				return;
@@ -1772,22 +1874,30 @@ public partial class JarManager : Node
 
 		}
 
+		// do CompleteAutoFallingAndDestruction if no falling/popped tiles present
+		if (tilesToDestroy.Count == 0 && tilesToFall.Count == 0)
+		{
+			CompleteAutoFallingAndDestruction();
+			return;
+		}
+
 		if (IsActionPressed("SoftDrop") && CommonGameSettings.ManualAutoFallSpeedUp)
 			SfxMan.Play("FastFall");
 		else
 			SfxMan.Play("Fall");
 
-		// move mid-air segments down
+		// move mid-air tiles down
 		for (int y = maxY; y >= minY; y--)
 		{
-			if (!segmentsToFall.ContainsKey(y))
+			if (!tilesToFall.ContainsKey(y))
 				continue;
 
-			for (int i = 0; i < segmentsToFall[y].Count; i++)
+			for (int i = tilesToFall[y].Count - 1; i >= 0; i--)
 			{
-				Vector2I pos = new Vector2I(segmentsToFall[y][i], y);
+				Vector2I pos = new Vector2I(tilesToFall[y][i], y);
 				Vector2I atlas = jarTiles.GetCellAtlasCoords(pos);
 				int sourceID = jarTiles.GetCellSourceId(pos);
+
 				jarTiles.SetCell(pos, -1);
 				jarTiles.SetCell(pos + Vector2I.Down, sourceID, atlas);
 			}
@@ -1796,13 +1906,13 @@ public partial class JarManager : Node
 		// shift dictonary y positions
 		for (int y = maxY; y >= minY; y--)
 		{
-			if (!segmentsToFall.ContainsKey(y))
+			if (!tilesToFall.ContainsKey(y))
 				continue;
 
-			segmentsToFall.Add(y + 1, segmentsToFall[y]);
-			segmentsToFall.Remove(y);
+			tilesToFall.Add(y + 1, tilesToFall[y]);
+			tilesToFall.Remove(y);
 		}
-
+		
 		autoFallTimer = 1;
 	}
 
@@ -1819,15 +1929,15 @@ public partial class JarManager : Node
 
 		if (pill.IsPowerUp)
 		{
-			previewTiles.SetCell(pos, powerUpSourceID, centreAtlas);
+			previewTiles.SetCell(pos, GameConstants.powerUpSourceID, centreAtlas);
 		}
 		else
 		{
 			Vector2I secondaryAtlas = pill.SecondaryTextureCoords;
 			Vector2I secondaryOffset = pill.IsVertical ? Vector2I.Up : Vector2I.Right;
 
-			previewTiles.SetCell(pos, pillSourceID, centreAtlas);
-			previewTiles.SetCell(pos + secondaryOffset, pillSourceID, secondaryAtlas);
+			previewTiles.SetCell(pos, GameConstants.pillSourceID, centreAtlas);
+			previewTiles.SetCell(pos + secondaryOffset, GameConstants.pillSourceID, secondaryAtlas);
 		}
 	}
 
@@ -1839,10 +1949,10 @@ public partial class JarManager : Node
 
 	public override void _Process(double delta)
 	{
-		if (segmentsToDestroy.Count > 0 || destroyedSegments.Count > 0)
+		if (tilesToDestroy.Count > 0 || destroyedTiles.Count > 0)
 			UpdateDestruction(delta);
-		else if (segmentsToFall.Count > 0)
-			UpdateSegmentsToFall(delta);
+		else if (tilesToFall.Count > 0)
+			UpdateTilesToFall(delta);
 		else if (activePowerUps.Count == 0)
 			CompleteAutoFallingAndDestruction();
 	}

@@ -4,14 +4,29 @@ using System;
 public partial class EditorBaseTileSelector : EditorBaseInputSelector
 {
     [ExportGroup("Textures")]
+    [Export] protected Texture2D pillTexture;
     [Export] protected Texture2D virusTexture;
     [Export] protected Texture2D powerUpTexture;
+    [Export] protected Texture2D objectTexture;
 
     [ExportGroup("References")]
     [Export] protected Button firstButton;
     [Export] protected EditorCursor cursor;
     [Export] protected EditorBaseSelector drawingToolSelector;
     
+    public Texture2D PillTexture
+    {
+        set
+        {
+            foreach (Sprite2D sprite in buttonSprites)
+            {
+                if (sprite.Texture == pillTexture)
+                    sprite.Texture = value;
+            }
+
+            pillTexture = value;
+        }
+    }
     public Texture2D VirusTexture
     {
         set
@@ -38,12 +53,32 @@ public partial class EditorBaseTileSelector : EditorBaseInputSelector
             powerUpTexture = value;
         }
     }
+    public Texture2D ObjectTexture
+    {
+        set
+        {
+            foreach (Sprite2D sprite in buttonSprites)
+            {
+                if (sprite.Texture == objectTexture)
+                    sprite.Texture = value;
+            }
+
+            objectTexture = value;
+        }
+    }
+
+    protected Vector2I pillAtlasSize;
+    protected Vector2I virusAtlasSize;
+    protected Vector2I powerUpAtlasSize;
+    protected Vector2I objectAtlasSize;
 
     // Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-        virusAtlasSize = cursor.VirusAtlasSize;
-        powerUpAtlasSize = cursor.PowerUpAtlasSize;
+        pillAtlasSize = cursor.GetTileTypeAtlasSize(0);
+        virusAtlasSize = cursor.GetTileTypeAtlasSize(1);
+        powerUpAtlasSize = cursor.GetTileTypeAtlasSize(2);
+        objectAtlasSize = cursor.GetTileTypeAtlasSize(3);
 
         for (int i = 0; i < buttonCount; i++)
         {

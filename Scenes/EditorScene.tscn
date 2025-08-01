@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://dhy6fjq1xc4w2"]
+[gd_scene load_steps=60 format=3 uid="uid://dhy6fjq1xc4w2"]
 
 [ext_resource type="PackedScene" uid="uid://up7l7b7sr6ch" path="res://Scenes/GameScene.tscn" id="1_s5m0s"]
 [ext_resource type="Script" path="res://Scripts/Editor/EditorBaseSelector.cs" id="2_g5ukp"]
@@ -42,17 +42,18 @@
 [ext_resource type="PackedScene" uid="uid://ciycvm6fh6cel" path="res://Assets/Prefabs/PopUpGroup.tscn" id="24_ngsmh"]
 [ext_resource type="PackedScene" uid="uid://dejlotb7w8jno" path="res://Assets/Prefabs/MusicPreviewPlayer.tscn" id="29_pwdah"]
 [ext_resource type="Texture2D" uid="uid://be6drct25wp0f" path="res://Assets/Sprites/UI/ButtonIcons/PlayIcon.png" id="35_fosab"]
+[ext_resource type="Texture2D" uid="uid://bafh73vcs08cv" path="res://Assets/Sprites/UI/Editor/SaveButton.png" id="40_rnsc5"]
 [ext_resource type="Texture2D" uid="uid://cb6qr0bqxms7o" path="res://Assets/Sprites/Themes/Modern/PowerUpTiles.png" id="40_s6gkj"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_pb8p5"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_xv70d"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_r6tdw"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_b5h62"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_3u7qh"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_agiio"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_i2lxc"]
 
 [sub_resource type="Animation" id="Animation_fmwac"]
 resource_name = "Hide"
@@ -255,17 +256,17 @@ button_group = SubResource("ButtonGroup_pb8p5")
 [node name="Button3" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/TabButtons" index="2"]
 button_group = SubResource("ButtonGroup_xv70d")
 
-[node name="Button" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="0"]
-button_group = SubResource("ButtonGroup_r6tdw")
+[node name="Button" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="0"]
+button_group = SubResource("ButtonGroup_b5h62")
 
-[node name="Button2" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="1"]
-button_group = SubResource("ButtonGroup_r6tdw")
+[node name="Button2" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="1"]
+button_group = SubResource("ButtonGroup_b5h62")
 
-[node name="Button3" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="2"]
-button_group = SubResource("ButtonGroup_r6tdw")
+[node name="Button3" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="2"]
+button_group = SubResource("ButtonGroup_b5h62")
 
-[node name="Button4" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="3"]
-button_group = SubResource("ButtonGroup_r6tdw")
+[node name="Button4" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="3"]
+button_group = SubResource("ButtonGroup_b5h62")
 
 [node name="EditorPauseLayer" type="CanvasLayer" parent="." index="1"]
 layer = 3
@@ -276,6 +277,7 @@ script = ExtResource("2_v05gp")
 editorMan = NodePath("../../EditorManager")
 popUpGroup = NodePath("../PopUpGroup")
 musicPreviewPlayer = NodePath("../../MusicPreviewPlayer")
+commonGameSettings = ExtResource("9_ljri1")
 pauseAni = NodePath("../EditorPauseAniPlayer")
 gameMan = NodePath("../../GameManager")
 screenContainer = NodePath("../ScreenCentre/ScreenContainer")
@@ -899,23 +901,23 @@ button_group = SubResource("ButtonGroup_3u7qh")
 [node name="Button3" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/TabButtons" index="2"]
 button_group = SubResource("ButtonGroup_3u7qh")
 
-[node name="Label" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3" index="0"]
+[node name="MenuNotice" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3" index="3"]
 visible = true
 
-[node name="OverrideColoursPanel" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3" index="1"]
+[node name="OverrideColoursPanel" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3" index="4"]
 visible = false
 
-[node name="Button" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="0"]
-button_group = SubResource("ButtonGroup_agiio")
+[node name="Button" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="0"]
+button_group = SubResource("ButtonGroup_i2lxc")
 
-[node name="Button2" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="1"]
-button_group = SubResource("ButtonGroup_agiio")
+[node name="Button2" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="1"]
+button_group = SubResource("ButtonGroup_i2lxc")
 
-[node name="Button3" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="2"]
-button_group = SubResource("ButtonGroup_agiio")
+[node name="Button3" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="2"]
+button_group = SubResource("ButtonGroup_i2lxc")
 
-[node name="Button4" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="3"]
-button_group = SubResource("ButtonGroup_agiio")
+[node name="Button4" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="3"]
+button_group = SubResource("ButtonGroup_i2lxc")
 
 [node name="PopUpGroup" parent="EditorPauseLayer" index="3" node_paths=PackedStringArray("screenMan") instance=ExtResource("24_ngsmh")]
 screenMan = NodePath("../EditorPauseManager")
@@ -933,7 +935,7 @@ colourSelector = NodePath("../EditorUILayer/TopToolbar/ColourSelector")
 [node name="GameManager" parent="." index="6" node_paths=PackedStringArray("editorMan")]
 editorMan = NodePath("../EditorManager")
 
-[node name="EditorManager" type="Node" parent="." index="7" node_paths=PackedStringArray("editorPauseMan", "undoRedoMan", "cursor", "drawingToolSelector", "editorUILayer", "colourSelector", "tileTypeSelector", "gameMan", "gameThemer", "sfxMan", "musicMan", "touchControlsMan")]
+[node name="EditorManager" type="Node" parent="." index="7" node_paths=PackedStringArray("editorPauseMan", "undoRedoMan", "cursor", "drawingToolSelector", "editorUILayer", "colourSelector", "tileTypeSelector", "gameMan", "gameThemer", "sfxMan", "musicMan", "touchControlsMan", "musicPreviewPlayer")]
 script = ExtResource("2_tonjn")
 editorPauseMan = NodePath("../EditorPauseLayer/EditorPauseManager")
 undoRedoMan = NodePath("../UndoRedoManager")
@@ -949,6 +951,7 @@ musicMan = NodePath("../MusicPlayer")
 touchControlsMan = NodePath("../TouchLayer")
 commonGameSettings = ExtResource("9_ljri1")
 userCustomLevelList = ExtResource("22_h7pql")
+musicPreviewPlayer = NodePath("../MusicPreviewPlayer")
 
 [node name="UndoRedoManager" type="Node" parent="." index="8" node_paths=PackedStringArray("gameMan", "editorMan", "cursor")]
 script = ExtResource("3_lu7lp")
@@ -1349,13 +1352,14 @@ vframes = 10
 [node name="SaveButton" type="Button" parent="EditorUILayer/TopToolbar" index="3"]
 custom_minimum_size = Vector2(14, 15)
 layout_mode = 1
-offset_left = 7.0
+offset_left = 6.0
 offset_top = 8.0
-offset_right = 47.0
-offset_bottom = 24.0
+offset_right = 32.0
+offset_bottom = 25.0
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_styles/pressed = SubResource("StyleBoxFlat_7hvga")
-text = "SAVE"
+icon = ExtResource("40_rnsc5")
+icon_alignment = 1
 metadata/_edit_group_ = true
 
 [node name="ResetButton" type="Button" parent="EditorUILayer/TopToolbar" index="4" node_paths=PackedStringArray("sprite", "gameMan", "editorMan", "undoRedoMan")]
@@ -1364,10 +1368,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -27.0
+offset_left = -32.0
 offset_top = 8.0
-offset_right = -7.0
-offset_bottom = 23.0
+offset_right = -6.0
+offset_bottom = 25.0
 grow_horizontal = 0
 theme_override_styles/pressed = SubResource("StyleBoxFlat_7hvga")
 script = ExtResource("8_pskj7")
@@ -1378,15 +1382,13 @@ undoRedoMan = NodePath("../../../UndoRedoManager")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="EditorUILayer/TopToolbar/ResetButton" index="0"]
-position = Vector2(10, 7)
+position = Vector2(13, 8)
 texture = ExtResource("9_nsotx")
 hframes = 4
 
 [node name="EditorCursor" type="Node2D" parent="GameLayer" index="1" node_paths=PackedStringArray("sprite", "gameMan", "editorMan", "undoRedoMan", "toolSelector", "styleSelector")]
 z_index = 1
 script = ExtResource("2_gugl5")
-virusTexture = ExtResource("3_6i3kl")
-powerUpTexture = ExtResource("40_s6gkj")
 toolPreviewTexture = ExtResource("14_tpaje")
 sprite = NodePath("Sprite2D")
 gameMan = NodePath("../../GameManager")
@@ -1401,6 +1403,7 @@ texture = ExtResource("3_6i3kl")
 hframes = 3
 vframes = 10
 
+[connection signal="pressed" from="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/BackButton" to="PauseLayer/PauseManager" method="GoBack"]
 [connection signal="text_changed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/LevelNameBox" to="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/LevelNameBox" method="UpdateLevelName"]
 [connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/SaveButton" to="EditorPauseLayer/EditorPauseManager" method="GoBack"]
 [connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/SaveButton" to="EditorManager" method="SaveLevel"]
@@ -1414,7 +1417,6 @@ vframes = 10
 [connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/GameplayStyle/GameplayScrollContainer/MarginContainer/GameplayContainer/Button4" to="EditorPauseLayer/EditorPauseManager" method="SetScreen" binds= [4]]
 [connection signal="focus_entered" from="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Music/MusicContainer/Button" to="MusicPreviewPlayer" method="SetPreviewMusic" binds= [-1]]
 [connection signal="focus_entered" from="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Music/MusicContainer/Button2" to="MusicPreviewPlayer" method="SetPreviewMusic" binds= [-2]]
-[connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Music/MusicContainer/Button3" to="EditorPauseLayer/ScreenCentre/ScreenContainer/MusicScreen/SongCategoryContainer" method="UpdateVisuals"]
 [connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Music/MusicContainer/Button3" to="EditorPauseLayer/EditorPauseManager" method="SetScreen" binds= [2]]
 [connection signal="focus_entered" from="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Music/MusicContainer/Button4" to="MusicPreviewPlayer" method="SetPreviewMusic" binds= [0]]
 [connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/BackButton" to="EditorPauseLayer/EditorPauseManager" method="GoBack"]

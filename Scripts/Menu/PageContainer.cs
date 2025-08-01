@@ -13,7 +13,13 @@ public partial class PageContainer : Control
     // Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-        Godot.Collections.Array<Node> nodes = GetChildren();
+        Godot.Collections.Array<Node> nodes;
+
+        if (GetChildCount() == 1 && !(GetChild(0) is Page))
+            nodes = GetChild(0).GetChildren();
+        else
+            nodes = GetChildren();
+            
 
 		for (int i = 0; i < nodes.Count; i++)
 		{

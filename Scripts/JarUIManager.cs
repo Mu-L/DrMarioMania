@@ -266,9 +266,10 @@ public partial class JarUIManager : Node
 		Texture2D powerUpTileTex = themeList.GetPowerUpTileTexture(theme);
 
 		// Get tilesets
-		TileSetAtlasSource pillSource = (TileSetAtlasSource)jarTiles.TileSet.GetSource(jarMan.PillSourceID);
-		TileSetAtlasSource virusSource = (TileSetAtlasSource)jarTiles.TileSet.GetSource(jarMan.VirusSourceID);
-		TileSetAtlasSource powerUpSource = (TileSetAtlasSource)jarTiles.TileSet.GetSource(jarMan.PowerUpSourceID);
+		TileSetAtlasSource pillSource = (TileSetAtlasSource)jarTiles.TileSet.GetSource(GameConstants.pillSourceID);
+		TileSetAtlasSource virusSource = (TileSetAtlasSource)jarTiles.TileSet.GetSource(GameConstants.virusSourceID);
+		TileSetAtlasSource powerUpSource = (TileSetAtlasSource)jarTiles.TileSet.GetSource(GameConstants.powerUpSourceID);
+		TileSetAtlasSource objectSource = (TileSetAtlasSource)jarTiles.TileSet.GetSource(GameConstants.objectSourceID);
 		
 		// Update visuals for...
 
@@ -276,6 +277,7 @@ public partial class JarUIManager : Node
 		virusSource.Texture = themeList.GetVirusTileTexture(theme);
 		pillSource.Texture = pillTileTex;
 		powerUpSource.Texture = powerUpTileTex;
+		objectSource.Texture = themeList.GetObjectTileTexture(theme);
 
 		// Pills
 		activePill.SetPillTexture(pillTileTex);

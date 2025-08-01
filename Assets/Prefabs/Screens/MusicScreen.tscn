@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwyo15lik8i87"]
+[gd_scene load_steps=8 format=3 uid="uid://cwyo15lik8i87"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/Screens/UpdateableSettingScreen.cs" id="1_5cs2x"]
 [ext_resource type="Script" path="res://Scripts/Menu/GameSettingUI/GameSettingMusicButtonGroup.cs" id="2_eyajr"]
 [ext_resource type="Resource" uid="uid://cwkwokd34qh80" path="res://Assets/Resources/CommonGameSettings.tres" id="3_5vpca"]
 [ext_resource type="PackedScene" uid="uid://cg3ssstpw3jum" path="res://Assets/Prefabs/GameSettingsUI/GameSettingButton.tscn" id="4_vsqyw"]
+[ext_resource type="Script" path="res://Scripts/Menu/CustomMusicContainer.cs" id="5_7650x"]
+[ext_resource type="Texture2D" uid="uid://cj5h0x7520ayk" path="res://Assets/Sprites/UI/ButtonIcons/RefreshIcon.png" id="6_3gqld"]
+[ext_resource type="Texture2D" uid="uid://bw6btowveyc02" path="res://Assets/Sprites/UI/ButtonIcons/FolderIcon.png" id="6_5hswk"]
 
-[node name="MusicScreen" type="Control" node_paths=PackedStringArray("InitialHoverNode")]
+[node name="MusicScreen" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,7 +17,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_5cs2x")
-InitialHoverNode = NodePath("SongCategoryContainer/MarginContainer/SongCategories/FlowContainer16/Button")
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 1
@@ -29,7 +31,7 @@ grow_horizontal = 2
 text = "BACKGROUND MUSIC"
 horizontal_alignment = 1
 
-[node name="SongCategoryContainer" type="ScrollContainer" parent="." node_paths=PackedStringArray("musicScreen")]
+[node name="SongCategoryContainer" type="ScrollContainer" parent="." node_paths=PackedStringArray("musicScreen", "customMusicContainer", "fallBackHighlightButton")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -45,9 +47,11 @@ follow_focus = true
 horizontal_scroll_mode = 0
 script = ExtResource("2_eyajr")
 musicScreen = NodePath("..")
+customMusicContainer = NodePath("MarginContainer/SongCategories/CustomMusicContainer")
 settingName = &"Music"
 isCommonSetting = true
 commonGameSettings = ExtResource("3_5vpca")
+fallBackHighlightButton = NodePath("MarginContainer/SongCategories/FlowContainer16/Button")
 
 [node name="MarginContainer" type="MarginContainer" parent="SongCategoryContainer"]
 layout_mode = 2
@@ -92,6 +96,89 @@ layout_mode = 2
 text = "CHILL"
 value = -2
 
+[node name="CustomLabel" type="Control" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+custom_minimum_size = Vector2(0, 11)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="CategoryLabel" type="Label" parent="SongCategoryContainer/MarginContainer/SongCategories/CustomLabel"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 241.0
+offset_bottom = 9.0
+text = "Custom (MP3 or OGG)"
+
+[node name="CustomMusicContainer" type="FlowContainer" parent="SongCategoryContainer/MarginContainer/SongCategories" node_paths=PackedStringArray("musicGroup")]
+layout_mode = 2
+script = ExtResource("5_7650x")
+buttonPrefab = ExtResource("4_vsqyw")
+commonGameSettings = ExtResource("3_5vpca")
+musicGroup = NodePath("../../..")
+
+[node name="OpenButton" type="Button" parent="SongCategoryContainer/MarginContainer/SongCategories/CustomMusicContainer"]
+layout_mode = 2
+mouse_filter = 1
+icon = ExtResource("6_5hswk")
+
+[node name="RefreshButton" type="Button" parent="SongCategoryContainer/MarginContainer/SongCategories/CustomMusicContainer"]
+layout_mode = 2
+mouse_filter = 1
+icon = ExtResource("6_3gqld")
+
+[node name="ModernLabel" type="Control" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+custom_minimum_size = Vector2(0, 11)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="CategoryLabel" type="Label" parent="SongCategoryContainer/MarginContainer/SongCategories/ModernLabel"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 241.0
+offset_bottom = 9.0
+text = "Mania (OST)"
+
+[node name="FlowContainer17" type="FlowContainer" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+layout_mode = 2
+
+[node name="Button" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer17" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "FEVER"
+value = 63
+
+[node name="Button2" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer17" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "CHILL"
+value = 64
+
+[node name="Button3" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer17" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "VS FEVER"
+value = 65
+
+[node name="Button4" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer17" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "VS CHILL"
+value = 66
+
+[node name="Button5" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer17" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "CHILLTRIS"
+value = 67
+
+[node name="Button6" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer17" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "SUGAR PLUM PILLS"
+value = 68
+
+[node name="Button7" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer17" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "CREDITS"
+value = 69
+
 [node name="NESLabel" type="Control" parent="SongCategoryContainer/MarginContainer/SongCategories"]
 custom_minimum_size = Vector2(0, 11)
 layout_mode = 2
@@ -111,7 +198,6 @@ layout_mode = 2
 
 [node name="Button" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer" instance=ExtResource("4_vsqyw")]
 layout_mode = 2
-button_pressed = true
 text = "FEVER"
 value = 1
 
@@ -173,6 +259,21 @@ value = 5
 layout_mode = 2
 text = "CHILL"
 value = 6
+
+[node name="Button3" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer3" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "MIXED 1"
+value = 70
+
+[node name="Button4" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer3" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "MIXED 2"
+value = 71
+
+[node name="Button5" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer3" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "MIXED 3"
+value = 72
 
 [node name="N64Label" type="Control" parent="SongCategoryContainer/MarginContainer/SongCategories"]
 custom_minimum_size = Vector2(0, 11)
@@ -675,4 +776,6 @@ grow_vertical = 0
 focus_mode = 1
 text = "OK"
 
+[connection signal="pressed" from="SongCategoryContainer/MarginContainer/SongCategories/CustomMusicContainer/OpenButton" to="SongCategoryContainer/MarginContainer/SongCategories/CustomMusicContainer" method="OpenMusicFolder"]
+[connection signal="pressed" from="SongCategoryContainer/MarginContainer/SongCategories/CustomMusicContainer/RefreshButton" to="SongCategoryContainer/MarginContainer/SongCategories/CustomMusicContainer" method="Refresh"]
 [connection signal="pressed" from="OkButton" to="SongCategoryContainer" method="SelectPreviewButton"]

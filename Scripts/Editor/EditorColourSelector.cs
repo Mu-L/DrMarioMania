@@ -19,23 +19,44 @@ public partial class EditorColourSelector : EditorBaseTileSelector
 
     public override void UpdateVisuals()
     {
+        if (cursor.TileType == 3)
+        {
+            Visible = false;
+            return;
+        }
+        else
+            Visible = true;
+
         for (int i = 0; i < buttons.Count; i++)
         {
-            if (cursor.IsPowerUp)
+            // tile buttonSprites[i]s
+            
+            if (buttonSprites[i].Texture != cursor.GetTileTypeTexture(cursor.TileType))
             {
-                buttonSprites[i].Hframes = powerUpAtlasSize.X;
-                buttonSprites[i].Vframes = powerUpAtlasSize.Y;
+                buttonSprites[i].Frame = 0;
+                buttonSprites[i].Texture = cursor.GetTileTypeTexture(cursor.TileType);
 
-                buttonSprites[i].Texture = powerUpTexture;
-                buttonSprites[i].Frame = buttonSprites[i].Hframes * (i + 1) + (int)cursor.CurrentPowerUp;
+                buttonSprites[i].Hframes = cursor.GetTileTypeAtlasSize(cursor.TileType).X;
+                buttonSprites[i].Vframes = cursor.GetTileTypeAtlasSize(cursor.TileType).Y;
             }
+
+            // object
+            if (cursor.TileType == 3)
+            {
+                buttonSprites[i].Frame = buttonSprites[i].Hframes * cursor.TileID;
+            }
+            // power-up
+            else if (cursor.TileType == 2)
+            {
+                buttonSprites[i].Frame = buttonSprites[i].Hframes * (i + 1) + cursor.TileID;
+            }
+            // pill/virus
             else
             {
-                buttonSprites[i].Hframes = virusAtlasSize.X;
-                buttonSprites[i].Vframes = virusAtlasSize.Y;
-
-                buttonSprites[i].Texture = virusTexture;
                 buttonSprites[i].Frame = buttonSprites[i].Hframes * i;
+
+                if (cursor.TileType == 0)
+                    buttonSprites[i].Frame += 4;
             }
         }
     }

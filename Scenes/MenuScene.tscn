@@ -105,7 +105,7 @@ anti_aliasing = false
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_3oko3"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_f08ln"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_0cckv"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_5b5yk"]
 
@@ -234,6 +234,7 @@ popUpGroup = NodePath("../PopUpGroup")
 screenContainer = NodePath(".")
 
 [node name="MainScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -377,15 +378,44 @@ grow_horizontal = 0
 grow_vertical = 1
 focus_neighbor_left = NodePath("../QuitButton")
 focus_neighbor_bottom = NodePath("../VBoxContainer/1PButton")
-text = "v1.0.2"
+text = "v1.1.0"
 icon = null
-title = "v1.0.2 - CHANGE LOG"
-description = "- Fixed shared controller input bug in multiplayer"
+title = "v1.1.0 - CHANGE LOG"
+description = "GAMEPLAY:
+
+- Level pack 3 added with 8 new levels
+
+- Added new brick, hard brick, solid block and fire tiles to the editor
+
+- Single pill segments can now be placed in the editor
+
+AUDIO:
+
+- Added original remixes by gameboi64 for the Mania theme and credits menu (thank you!)
+
+- Added custom music option for loading MP3/OGGs
+
+- Added the 3 Mixed Match songs under the SNES category
+
+- Added a setting to make a custom level's music play throughout the editor (ON by default)
+
+VISUALS:
+
+- Added a visual setting to enable/disable the virus tile animations within the jar
+
+- Added a visual setting to enlarge the jar, ON by default on mobile (single player only)
+
+FIXES/IMPROVEMENTS:
+
+- Fixed inconsistent auto repeat when holding left or right while a pill enters the jar
+
+- Fixed free-drawing in the editor causing unwanted lines on mobile
+
+- Improved arrow key/d-pad navigation in the custom level menu"
 alignDescToLeft = true
 popUpGroup = NodePath("../../../PopUpGroup")
 
 [node name="GameplayScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3206,6 +3236,8 @@ Original concept, characters, etc created by Nintendo
 
 Music from Nintendo and SEGA
 
+Original music by
+
 Dr. Mario gameplay documented by harddrop.com, wiki.drmar.io and Mario Wiki
 
 \"Press Start 2P\" font by Codeman38
@@ -3217,6 +3249,15 @@ WhatsApp theme inspired by the \"Dr. WhatsApp\" Smash Bros mod by TheHaya
 
 Game created with the Godot game engine"
 autowrap_mode = 2
+
+[node name="LinkButton" type="Button" parent="UILayer/MenuScreenManager/CreditsScreen/Panel/ScrollContainer/MarginContainer/Credits"]
+layout_mode = 1
+offset_left = 140.0
+offset_top = 84.0
+offset_right = 220.0
+offset_bottom = 100.0
+mouse_filter = 1
+text = "gameboi64"
 
 [node name="BackButton" type="Button" parent="UILayer/MenuScreenManager/CreditsScreen"]
 layout_mode = 1
@@ -3540,23 +3581,23 @@ button_group = SubResource("ButtonGroup_3oko3")
 [node name="Button3" parent="UILayer/MenuScreenManager/SettingsScreen/TabButtons" index="2"]
 button_group = SubResource("ButtonGroup_3oko3")
 
-[node name="PopUpButton" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel" index="1" node_paths=PackedStringArray("popUpGroup")]
-popUpGroup = NodePath("../../../../../../PopUpGroup")
+[node name="PopUpButton" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel" index="1" node_paths=PackedStringArray("popUpGroup")]
+popUpGroup = NodePath("../../../../../../../PopUpGroup")
 
-[node name="OverrideColourContainer" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel" index="2"]
+[node name="OverrideColourContainer" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel" index="2"]
 doIntialSetup = true
 
-[node name="Button" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="0"]
-button_group = SubResource("ButtonGroup_f08ln")
+[node name="Button" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="0"]
+button_group = SubResource("ButtonGroup_0cckv")
 
-[node name="Button2" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="1"]
-button_group = SubResource("ButtonGroup_f08ln")
+[node name="Button2" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="1"]
+button_group = SubResource("ButtonGroup_0cckv")
 
-[node name="Button3" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="2"]
-button_group = SubResource("ButtonGroup_f08ln")
+[node name="Button3" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="2"]
+button_group = SubResource("ButtonGroup_0cckv")
 
-[node name="Button4" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="3"]
-button_group = SubResource("ButtonGroup_f08ln")
+[node name="Button4" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="3"]
+button_group = SubResource("ButtonGroup_0cckv")
 
 [node name="ModeSingleScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
 visible = false
@@ -4114,6 +4155,12 @@ toggle_mode = true
 button_group = SubResource("ButtonGroup_5b5yk")
 text = "PACK 2"
 
+[node name="Button3" type="Button" parent="UILayer/MenuScreenManager/OfficialCustomLevelScreen/HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_5b5yk")
+text = "PACK 3"
+
 [node name="NotificationBox" type="Control" parent="UILayer" node_paths=PackedStringArray("aniPlayer", "audioPlayer", "label")]
 visible = false
 layout_mode = 3
@@ -4135,7 +4182,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0, 0, 0, 0.54902)
+color = Color(0, 0, 0, 0.666667)
 
 [node name="Label" type="Label" parent="UILayer/NotificationBox"]
 layout_mode = 1
@@ -4210,6 +4257,7 @@ normalMusicPlayer = NodePath("../MusicPlayer")
 [connection signal="pressed" from="UILayer/MenuScreenManager/MainScreen/VBoxContainer/2PButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [5]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/MainScreen/QuitButton" to="MenuManager" method="SaveAndQuit"]
 [connection signal="pressed" from="UILayer/MenuScreenManager/MainScreen/CreditsButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [9]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MainScreen/CreditsButton" to="MusicPreviewPlayer" method="SetPreviewMusic" binds= [69]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/MainScreen/HelpButton" to="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer/PageLabel/ControlsContainer" method="UpdateInputVisuals"]
 [connection signal="pressed" from="UILayer/MenuScreenManager/MainScreen/HelpButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [8]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/MainScreen/SettingsButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [12]]
@@ -4247,6 +4295,7 @@ normalMusicPlayer = NodePath("../MusicPlayer")
 [connection signal="pressed" from="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PreviousButton" to="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer" method="PreviousPage"]
 [connection signal="pressed" from="UILayer/MenuScreenManager/HelpScreen/HelpPanel/NextButton" to="UILayer/MenuScreenManager/HelpScreen/HelpPanel/PageContainer" method="NextPage"]
 [connection signal="pressed" from="UILayer/MenuScreenManager/HelpScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/CreditsScreen/Panel/ScrollContainer/MarginContainer/Credits/LinkButton" to="MenuManager" method="OpenURL" binds= ["https://www.youtube.com/playlist?list=PLU9I-camw_oumYQtTt8-ne2AAKMnG50Fk"]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/CreditsScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
 [connection signal="pressed" from="UILayer/MenuScreenManager/CreditsScreen/LinkButton" to="MenuManager" method="OpenURL" binds= ["https://toadfangames.itch.io/"]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/MultiplayerInputScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
@@ -4277,6 +4326,7 @@ normalMusicPlayer = NodePath("../MusicPlayer")
 [connection signal="pressed" from="UILayer/MenuScreenManager/OfficialCustomLevelScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
 [connection signal="pressed" from="UILayer/MenuScreenManager/OfficialCustomLevelScreen/HBoxContainer/Button" to="UILayer/MenuScreenManager/OfficialCustomLevelScreen/CustomLevelPanelContainer" method="SetPage" binds= [0]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/OfficialCustomLevelScreen/HBoxContainer/Button2" to="UILayer/MenuScreenManager/OfficialCustomLevelScreen/CustomLevelPanelContainer" method="SetPage" binds= [1]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/OfficialCustomLevelScreen/HBoxContainer/Button3" to="UILayer/MenuScreenManager/OfficialCustomLevelScreen/CustomLevelPanelContainer" method="SetPage" binds= [2]]
 
 [editable path="UILayer/MenuScreenManager/GameplayScreen/GameplayScrollContainer"]
 [editable path="UILayer/MenuScreenManager/VisualsScreen/ThemeScrollContainer"]
