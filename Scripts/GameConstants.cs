@@ -7,7 +7,10 @@ public static class GameConstants
 
 	// level code format version
 	public const int levelCodeVer = 2;
-	public static string UserFolderPath { get { return ProjectSettings.GlobalizePath("user://"); } }
+	// path for external user files (e.g. music). This is just the user path, except on android where its documents instead because android file management is pain
+	public static string ExternalFolderPath { get { return IsOnMobile ? OS.GetSystemDir(OS.SystemDir.Documents) + "/" : ProjectSettings.GlobalizePath("user://"); }	}
+	public static string MusicFolderPath { get { return ExternalFolderPath + MusicFolder + "/"; } }
+	public static string MusicFolder { get { return IsOnMobile ? "DrMarioMania/Music" : "music"; } }
 
 	// music id used to declare than a custom song is being used (customMusicFile in common game settings)
 	public const int customMusicID = -5;

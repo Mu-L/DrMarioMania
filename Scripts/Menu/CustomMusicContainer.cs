@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public partial class CustomMusicContainer : FlowContainer
 {
+	[Export] private Button desktopFolderButton;
+	[Export] private Button mobileFolderButton;
 	[Export] private PackedScene buttonPrefab;
 	[Export] private CommonGameSettings commonGameSettings;
 	[Export] private GameSettingMusicButtonGroup musicGroup;
@@ -12,26 +14,39 @@ public partial class CustomMusicContainer : FlowContainer
 
 	public void OpenMusicFolder()
 	{
-		DirAccess dir = DirAccess.Open(GameConstants.UserFolderPath);
+		MakeMusicFolder();
 
+		OS.ShellShowInFileManager(GameConstants.MusicFolderPath);
+	}
+
+	private void MakeMusicFolder()
+	{
+		if (GameConstants.IsOnMobile)
+		{	
+			if (OS.RequestPermissions())
+				GD.Print("storage permission granted");
+			else
+				GD.Print("storage permission NOT granted");
+		}
+
+		DirAccess dir = DirAccess.Open(GameConstants.ExternalFolderPath);
+			
 		// if user folder exists but not the music folder, make it
-		if (dir != null && !dir.DirExists("music"))
-			dir.MakeDir("music");
-
-		OS.ShellShowInFileManager(GameConstants.UserFolderPath + "music");
+		if (dir != null && !dir.DirExists(GameConstants.MusicFolder))
+			dir.MakeDirRecursive(GameConstants.MusicFolder);
 	}
 
 	private List<string> GetCustomMusic()
 	{
 		List<string> customMusicList = new List<string>();
 
-		DirAccess dir = DirAccess.Open(GameConstants.UserFolderPath);
+		DirAccess dir = DirAccess.Open(GameConstants.ExternalFolderPath);
 
 		// return if folder doesnt exist
-		if (dir == null || !dir.DirExists("music"))
+		if (dir == null || !dir.DirExists(GameConstants.MusicFolder))
 			return customMusicList;
 
-		dir.ChangeDir("music");
+		dir.ChangeDir(GameConstants.MusicFolder);
 
 		string[] files = dir.GetFiles();
 
@@ -61,6 +76,10 @@ public partial class CustomMusicContainer : FlowContainer
 
 	private void Refresh()
 	{
+		GD.Print("refresh custom music");
+
+		MakeMusicFolder();
+
 		Control lastFocus = GetViewport().GuiGetFocusOwner();
 
 		musicGroup.UpdateVisuals();
@@ -71,6 +90,9 @@ public partial class CustomMusicContainer : FlowContainer
 
 	public void UpdateVisuals()
 	{
+		desktopFolderButton.Visible = !GameConstants.IsOnMobile;
+		mobileFolderButton.Visible = GameConstants.IsOnMobile;
+
 		// Remove old song buttons
 		foreach (var button in buttons)
 		{

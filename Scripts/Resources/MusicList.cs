@@ -51,7 +51,7 @@ public partial class MusicList : Resource
             if (customMusicFile == "")
                 customMusicFile = commonGameSettings.CurrentCustomMusicFile;
 
-            path = GameConstants.UserFolderPath + "music/" + customMusicFile;
+            path = GameConstants.MusicFolderPath + customMusicFile;
 
             AudioStream audio = LoadCustomMusic(path);
             

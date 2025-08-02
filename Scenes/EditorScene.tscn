@@ -517,6 +517,9 @@ screenMan = NodePath("../../../../EditorPauseManager")
 musicPreviewPlayer = NodePath("../../../../../MusicPreviewPlayer")
 settingName = &"CustomLevelMusic"
 
+[node name="PopUpButton" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/MusicScreen/SongCategoryContainer/MarginContainer/SongCategories/CustomMusicContainer" index="1" node_paths=PackedStringArray("popUpGroup")]
+popUpGroup = NodePath("../../../../../../../../PopUpGroup")
+
 [node name="LevelSettingsScreen" type="Control" parent="EditorPauseLayer/ScreenCentre/ScreenContainer" index="3" node_paths=PackedStringArray("InitialHoverNode")]
 layout_mode = 1
 anchors_preset = 15

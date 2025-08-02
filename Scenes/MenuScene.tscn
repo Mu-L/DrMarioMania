@@ -380,7 +380,11 @@ focus_neighbor_bottom = NodePath("../VBoxContainer/1PButton")
 text = "v1.1.1"
 icon = null
 title = "v1.1.1 - CHANGE LOG"
-description = "- Android hotfix to fix low scroll deadzone
+description = "Basically just a hotfix for Android
+
+- Fixed low scroll deadzone, which made certain buttons hard to press
+
+- Fixed custom music for Android
 
 v1.1.0 CHANGES:
 
@@ -986,6 +990,9 @@ layout_mode = 1
 [node name="SongCategoryContainer" parent="UILayer/MenuScreenManager/MusicScreen" index="1" node_paths=PackedStringArray("screenMan", "musicPreviewPlayer")]
 screenMan = NodePath("../..")
 musicPreviewPlayer = NodePath("../../../../MusicPreviewPlayer")
+
+[node name="PopUpButton" parent="UILayer/MenuScreenManager/MusicScreen/SongCategoryContainer/MarginContainer/SongCategories/CustomMusicContainer" index="1" node_paths=PackedStringArray("popUpGroup")]
+popUpGroup = NodePath("../../../../../../../PopUpGroup")
 
 [node name="MultiplayerCountScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("menuMan", "screenMan", "multiControlCon", "InitialHoverNode")]
 visible = false
