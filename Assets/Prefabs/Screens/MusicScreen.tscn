@@ -45,6 +45,7 @@ grow_horizontal = 2
 grow_vertical = 2
 follow_focus = true
 horizontal_scroll_mode = 0
+scroll_deadzone = 10
 script = ExtResource("2_eyajr")
 musicScreen = NodePath("..")
 customMusicContainer = NodePath("MarginContainer/SongCategories/CustomMusicContainer")

@@ -556,6 +556,7 @@ grow_horizontal = 2
 grow_vertical = 2
 follow_focus = true
 horizontal_scroll_mode = 0
+scroll_deadzone = 10
 
 [node name="BoxContainer" type="BoxContainer" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer" index="0"]
 layout_mode = 2
@@ -1403,7 +1404,6 @@ texture = ExtResource("3_6i3kl")
 hframes = 3
 vframes = 10
 
-[connection signal="pressed" from="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/BackButton" to="PauseLayer/PauseManager" method="GoBack"]
 [connection signal="text_changed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/LevelNameBox" to="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/LevelNameBox" method="UpdateLevelName"]
 [connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/SaveButton" to="EditorPauseLayer/EditorPauseManager" method="GoBack"]
 [connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/SaveButton" to="EditorManager" method="SaveLevel"]

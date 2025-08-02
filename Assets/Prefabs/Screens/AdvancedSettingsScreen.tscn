@@ -64,6 +64,7 @@ grow_horizontal = 2
 grow_vertical = 2
 follow_focus = true
 horizontal_scroll_mode = 0
+scroll_deadzone = 10
 
 [node name="BoxContainer" type="BoxContainer" parent="SettingsContainer"]
 layout_mode = 2

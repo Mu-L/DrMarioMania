@@ -234,7 +234,6 @@ popUpGroup = NodePath("../PopUpGroup")
 screenContainer = NodePath(".")
 
 [node name="MainScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -378,10 +377,14 @@ grow_horizontal = 0
 grow_vertical = 1
 focus_neighbor_left = NodePath("../QuitButton")
 focus_neighbor_bottom = NodePath("../VBoxContainer/1PButton")
-text = "v1.1.0"
+text = "v1.1.1"
 icon = null
-title = "v1.1.0 - CHANGE LOG"
-description = "GAMEPLAY:
+title = "v1.1.1 - CHANGE LOG"
+description = "- Android hotfix to fix low scroll deadzone
+
+v1.1.0 CHANGES:
+
+GAMEPLAY:
 
 - Level pack 3 added with 8 new levels
 
@@ -416,6 +419,7 @@ alignDescToLeft = true
 popUpGroup = NodePath("../../../PopUpGroup")
 
 [node name="GameplayScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3215,6 +3219,7 @@ offset_right = -1.0
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
+scroll_deadzone = 10
 
 [node name="MarginContainer" type="MarginContainer" parent="UILayer/MenuScreenManager/CreditsScreen/Panel/ScrollContainer"]
 layout_mode = 2
@@ -3505,6 +3510,7 @@ grow_vertical = 2
 follow_focus = true
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
+scroll_deadzone = 10
 script = ExtResource("54_vjxh7")
 customLevelPanelPrefab = ExtResource("56_ydk6g")
 pageNumberLabel = NodePath("../PageNumber")
@@ -4024,6 +4030,7 @@ grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
+scroll_deadzone = 10
 
 [node name="LabelContainer" type="Control" parent="UILayer/MenuScreenManager/HighScoreScreen/HighScorePanel/ScrollContainer"]
 custom_minimum_size = Vector2(0, 445)
@@ -4114,6 +4121,7 @@ grow_vertical = 2
 follow_focus = true
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
+scroll_deadzone = 10
 script = ExtResource("73_febh5")
 officialCustomLevelPanelPrefab = ExtResource("75_nsn7q")
 buttonGroup = NodePath("../HBoxContainer")
