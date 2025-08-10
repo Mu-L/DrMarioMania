@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bh1ol4li58slp"]
+
+[ext_resource type="Shader" path="res://Assets/Shaders/ScrollAdditiveShader.gdshader" id="1_vvbox"]
+
+[resource]
+shader = ExtResource("1_vvbox")
+shader_parameter/speed = Vector2(-0.02, 0)
+shader_parameter/opacity = 0.12
