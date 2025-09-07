@@ -2,32 +2,48 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using static PowerUpEnums;
+using static PillTypeEnums;
 
 public partial class Pill : Node2D
 {
-	[Export] protected Sprite2D centreSegmentSprite;
-	[Export] protected Sprite2D secondarySegmentSprite;
+	[Export] protected TileMapLayer pillTiles;
 	[Export] protected Material rainbowMat;
 	[Export] protected bool isRotationCentred;
 
-	protected int centreSegmentColour = 1;
-	public int CentreSegmentColour { get { return centreSegmentColour; } }
-	protected int secondarySegmentColour = 2;
-	public int SecondarySegmentColour { get { return secondarySegmentColour; } }
-	public Vector2I GridPos { get; set; }
-	protected bool isVertical = false;
-	public bool IsVertical { get { return isVertical; } }
-	protected bool areSegmentsSwapped = false;
-	public bool AreSegmentsSwapped { get { return areSegmentsSwapped; } }
-	protected bool isPowerUp = false;
-	public bool IsPowerUp { get { return isPowerUp; } }
-	public PowerUp CurrentPowerUp { get { return isPowerUp ? (PowerUp)(centreSegmentSprite.Frame % GameConstants.PowerUpTileSetWidth) : (PowerUp)(-1) ; } }
+    protected PillType pillType = PillType.Double;
+    public PillType PillType { get { return pillType; } }
+    public Vector2I GridPos { get; set; }
+	// 0-3 (clockwise)
+	protected int pillRotation = 0;
+    public int PillRotation { get { return pillRotation; } }
+    public bool IsVertical { get { return pillRotation % 2 == 1; } }
+	public bool IsFlipped { get { return pillRotation > 1; } }
+	public bool IsPowerUp { get { return pillType == PillType.PowerUp; } }
+	public PowerUp CurrentPowerUp { get { return IsPowerUp ? (PowerUp)GetTileAtlasCoords(Vector2I.Zero).X : (PowerUp)0; } }
+    public int CentreSegmentColour { get { return rotatedTiles[Vector2I.Zero].colour; } }
+    public Vector2I CentreTextureCoords { get { return rotatedTiles[Vector2I.Zero].atlas; } }
 
-	public Vector2I SecondaryGridPos { get { return GridPos + (isVertical ? Vector2I.Up : Vector2I.Right); } }
-	public Vector2I CentreTextureCoords { get { return centreSegmentSprite.FrameCoords; } }
-	public Vector2I SecondaryTextureCoords { get { return secondarySegmentSprite.FrameCoords; } }
+    // formation of the pills without any pillRotation
+    protected Dictionary<Vector2I, JarTileData> unrotatedTiles = new Dictionary<Vector2I, JarTileData>();
+    public Dictionary<Vector2I, JarTileData> UnrotatedTiles { get { return unrotatedTiles; } }
+    protected Dictionary<Vector2I, JarTileData> rotatedTiles = new Dictionary<Vector2I, JarTileData>();
+    public Dictionary<Vector2I, JarTileData> RotatedTiles { get { return rotatedTiles; } }
 
-	protected Vector2 origPos = Vector2.Zero;
+	// pill tile atlas pillRotations
+	// 1st row = pillRotation 0
+	// 2nd row = pillRotation 0 -> 1
+	// 3rd row = pillRotation 0 -> 2
+	// 4th row = pillRotation 0 -> 3
+    protected int[] atlasRotations =
+	{ 
+		0, 1, 2, 3,
+		2, 3, 1, 0,
+		1, 0, 3, 2,
+		3, 2, 0, 1
+	};
+
+    protected Vector2 origPos = Vector2.Zero;
+    protected Vector2 origPillTilesPos;
 	public Vector2 OrigPos
 	{
 		get
@@ -52,7 +68,50 @@ public partial class Pill : Node2D
 	public override void _Ready()
 	{
 		origPos = Position;
-		UpdateTextures();
+        origPillTilesPos = pillTiles.Position;
+    }
+
+	public PillAttributes GetAttributes()
+	{
+        PillAttributes atts;
+
+        atts.pillType = PillType;
+        atts.pillRotation = PillRotation;
+
+        atts.unrotatedTiles = UnrotatedTiles;
+        atts.rotatedTiles = RotatedTiles;
+
+        return atts;
+    }
+	public void SetAttributes(PillAttributes atts)
+	{
+        pillType = atts.pillType;
+        pillRotation = atts.pillRotation;
+
+        unrotatedTiles = new Dictionary<Vector2I, JarTileData>(atts.unrotatedTiles);
+        rotatedTiles = new Dictionary<Vector2I, JarTileData>(atts.rotatedTiles);
+
+        UpdateTileMap();
+    }
+
+	public int GetTileColour(Vector2I pos)
+	{
+		TileData data = pillTiles.GetCellTileData(pos);
+
+		if (data == null)
+			return -1;
+
+		int colour = (int)data.GetCustomData("Colour");
+
+		if (pillTiles.GetCellSourceId(pos) != GameConstants.powerUpSourceID && colour == 0)
+			return -1;
+
+		return colour;
+	}
+
+	public Vector2I GetTileAtlasCoords(Vector2I pos)
+	{
+		return pillTiles.GetCellAtlasCoords(pos);
 	}
 
 	public void ResetState()
@@ -60,39 +119,14 @@ public partial class Pill : Node2D
 		if (origPos != Vector2.Zero)
 			Position = origPos;
 
-		areSegmentsSwapped = false;
-		SetOrientation(false);
-	}
+        SetRotation(0);
+    }
 
-	public void SetPillTexture(Texture2D tex)
+	public virtual void SetRandomColours(List<int> possibleColours, bool guaranteeSingleColour, RandomNumberGenerator rng)
 	{
-		pillTex = tex;
+        SetPillType(PillType.Double);
 
-		if (isPowerUp)
-			return;
-
-		centreSegmentSprite.Texture = tex;
-		secondarySegmentSprite.Texture = tex;
-	}
-	public void SetPowerUpTexture(Texture2D tex)
-	{
-		powerUpTex = tex;
-
-		if (!isPowerUp)
-			return;
-
-		centreSegmentSprite.Texture = tex;
-		secondarySegmentSprite.Texture = null;
-	}
-	public virtual void SetRandomSegmentColours(List<int> possibleColours, bool guaranteeSingleColour, RandomNumberGenerator rng)
-	{
-		if (isPowerUp)
-		{
-			isPowerUp = false;
-			UpdateTextures();
-		}
-
-		int colourCount  = possibleColours.Count;
+        int colourCount  = possibleColours.Count;
 		bool bothSame = guaranteeSingleColour || rng.RandiRange(0, 2) == 0 || colourCount < 2;
 
 		int centreColourIndex = rng.RandiRange(0, colourCount - 1);
@@ -109,124 +143,145 @@ public partial class Pill : Node2D
 				secondaryColourIndex = (secondaryColourIndex + rng.RandiRange(1, colourCount - 1)) % colourCount;
 		}
 		
-		centreSegmentColour = possibleColours[centreColourIndex];
-		secondarySegmentColour = possibleColours[secondaryColourIndex];
-		UpdateTextureFrame();
+		// to-do temp: for each tile, set colour
+
+
+		UpdateTileMap();
 	}
-	public virtual void SetSegmentColours(int centreColour, int secondaryColour)
+	public virtual void SetDoubleColours(int centreColour, int secondaryColour)
 	{
-		centreSegmentColour = centreColour;
-		secondarySegmentColour = secondaryColour;
+		SetPillType(PillType.Double);
 
-		if (isPowerUp)
-		{
-			isPowerUp = false;
-			UpdateTextures();
-		}
+		// to-do temp: set two tiles to the given colours
 
-		UpdateTextureFrame();
+		UpdateTileMap();
 	}
 	public virtual void SetPowerUp(PowerUp powerUp, int colour)
 	{
-		centreSegmentColour = colour;
-		secondarySegmentColour = 0;
+		// to-do temp: only make single tile to given power-up/colour
+		SetPillType(PillType.PowerUp);
+
+		// to-do texcoord: centreSegmentSprite.Frame = (int)powerUp + GameConstants.PowerUpTileSetWidth * centreSegmentColour;
+	}
+
+	protected void SetPillType(PillType pType)
+	{
+		if (pillType == pType && unrotatedTiles.Count != 0)
+            return;
 		
-		isPowerUp = true;
-		UpdateTextures();
+        pillType = pType;
 
-		centreSegmentSprite.Frame = (int)powerUp + GameConstants.PowerUpTileSetWidth * centreSegmentColour;
+        unrotatedTiles.Clear();
+
+        int sourceID = pType == PillType.PowerUp ? GameConstants.powerUpSourceID :  GameConstants.pillSourceID;
+
+		if (pType == PillType.Single || pType == PillType.PowerUp)
+		{
+            unrotatedTiles.Add(Vector2I.Zero, new JarTileData(sourceID, Vector2I.Zero));
+        }
+		else if (pType == PillType.Double)
+		{
+            unrotatedTiles.Add(Vector2I.Zero, new JarTileData(sourceID, new Vector2I(PillConstants.atlasLeft, 0)));
+            unrotatedTiles.Add(Vector2I.Right, new JarTileData(sourceID, new Vector2I(PillConstants.atlasRight, 1)));
+        }
+		else if (pType == PillType.Luigi)
+		{
+			
+        }
+
+        UpdateRotatedTiles();
+    }
+
+	public void SetRotation(int r)
+	{
+		pillRotation = r;
+
+        UpdateRotatedTiles();
+        UpdateTileMap();
 	}
 
-	protected void SwapSegmentPositions()
+	public void Rotate(bool right)
 	{
-		secondarySegmentSprite.Position = new Vector2(-secondarySegmentSprite.Position.Y, -secondarySegmentSprite.Position.X);
+        int newRot = pillRotation + (right ? 1 : -1);
+
+		if (newRot > 3)
+            newRot -= 4;
+		else if (newRot < 0)
+            newRot += 4;
+
+        SetRotation(newRot);
+    }
+
+	public void Flip()
+	{
+		int newRot = pillRotation + 2;
+
+		if (newRot > 3)
+            newRot -= 4;
+
+        SetRotation(newRot);
 	}
 
-	public void SetOrientation(bool vertical)
+	protected void UpdateRotatedTiles()
 	{
-		if (isPowerUp)
-			return;
+        rotatedTiles.Clear();
+		
+        foreach (Vector2I ogPos in unrotatedTiles.Keys)
+		{
+            JarTileData tileData = unrotatedTiles[ogPos];
+            Vector2I newPos = ogPos;
 
-		// Return if already same orientation
-		if (isVertical == vertical)
-			return;
+			// turned 90 right
+			if (pillRotation == 1)
+			{
+                newPos = new Vector2I(-newPos.Y, newPos.X);
 
-		isVertical = vertical;
+				// if double, ensure the bottom-left-most pill stays as the centre
+				// so move y up one tile
+				if (pillType == PillType.Double)
+                    newPos.Y--;
+            }
+			// flipped 180
+			else if (pillRotation == 2)
+			{
+                newPos = new Vector2I(-newPos.X, -newPos.Y);
+
+				// if double, ensure the bottom-left-most pill stays as the centre
+				// so move x to the right one tile
+				if (pillType == PillType.Double)
+                    newPos.X++;
+            }
+			// turned 90 left / 270 right
+			else if (pillRotation == 3)
+			{
+                newPos = new Vector2I(newPos.Y, -newPos.X);
+            }
+
+			if (tileData.sourceID == GameConstants.pillSourceID && tileData.atlas.X != PillConstants.atlasSingle)
+            	tileData.atlas.X = atlasRotations[tileData.atlas.X + 4 * pillRotation];
+
+            rotatedTiles.Add(newPos, tileData);
+        }
 
 		if (isRotationCentred)
 		{
-			if (!vertical)
+			if (pillType == PillType.Double && IsVertical)
 			{
-				centreSegmentSprite.Position -= Vector2.One * 4.0f;
-				secondarySegmentSprite.Position -= Vector2.One * 4.0f;
-				SwapSegmentPositions();
+				pillTiles.Position = origPillTilesPos + Vector2.One * 4.0f;
 			}
 			else
-			{
-				SwapSegmentPositions();
-				centreSegmentSprite.Position += Vector2.One * 4.0f;
-				secondarySegmentSprite.Position += Vector2.One * 4.0f;
-			}
-		}
-		else
-			SwapSegmentPositions();
-
-		UpdateTextureFrame();
+                pillTiles.Position = origPillTilesPos;
+        }
 	}
 
-	public void SwapOrientation()
+    protected void UpdateTileMap()
 	{
-		if (isPowerUp)
-			return;
-
-		SetOrientation(!isVertical);
-	}
-
-	public void SwapSegments()
-	{
-		if (isPowerUp)
-			return;
-
-		int oldCentreColour = centreSegmentColour;
-
-		centreSegmentColour = secondarySegmentColour;
-		secondarySegmentColour = oldCentreColour;
-
-		UpdateTextureFrame();
-
-		areSegmentsSwapped = !areSegmentsSwapped;
-	}
-
-	public void ResetSwappedState()
-	{
-		areSegmentsSwapped = false;
-	}
-
-	protected void UpdateTextures()
-	{
-		if (isPowerUp)
-		{
-			centreSegmentSprite.Texture = powerUpTex;
-			centreSegmentSprite.Hframes = GameConstants.PowerUpTileSetWidth;
-			centreSegmentSprite.Vframes = GameConstants.noOfColours + 1;
-			secondarySegmentSprite.Texture = null;
-			centreSegmentSprite.Material = centreSegmentColour == 0 ? rainbowMat : null;
-		}
-		else
-		{
-			centreSegmentSprite.Texture = pillTex;
-			centreSegmentSprite.Hframes = GameConstants.pillTileSetWidth;
-			centreSegmentSprite.Vframes = GameConstants.noOfColours;
-			secondarySegmentSprite.Texture = pillTex;
-			centreSegmentSprite.Material = null;
-		}
-	}
-	protected void UpdateTextureFrame()
-	{
-		if (isPowerUp)
-			return;
+        pillTiles.Clear();
 		
-		centreSegmentSprite.Frame = (isVertical ? PillConstants.atlasBottom : PillConstants.atlasLeft) + centreSegmentSprite.Hframes * (centreSegmentColour - 1);
-		secondarySegmentSprite.Frame = (isVertical ? PillConstants.atlasTop : PillConstants.atlasRight) + centreSegmentSprite.Hframes * (secondarySegmentColour - 1);
-	}
+		foreach (Vector2I pos in rotatedTiles.Keys)
+		{
+            JarTileData tileData = rotatedTiles[pos];
+            pillTiles.SetCell(pos, tileData.sourceID, tileData.atlas);
+        }
+    }
 }

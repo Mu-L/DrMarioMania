@@ -52,17 +52,17 @@ public partial class PillActive : Pill
         UpdateGhostPowerUpPreviewVisibility();
     }
 
-    public override void SetRandomSegmentColours(List<int> possibleColours, bool guaranteeSingleColour, RandomNumberGenerator rng)
+    public override void SetRandomColours(List<int> possibleColours, bool guaranteeSingleColour, RandomNumberGenerator rng)
 	{
         SetPowerUpPreviewVisibility(false);
         
-        base.SetRandomSegmentColours(possibleColours, guaranteeSingleColour, rng);
+        base.SetRandomColours(possibleColours, guaranteeSingleColour, rng);
 	}
-	public override void SetSegmentColours(int centreColour, int secondaryColour)
+	public override void SetDoubleColours(int centreColour, int secondaryColour)
 	{
         SetPowerUpPreviewVisibility(false);
 
-        base.SetSegmentColours(centreColour, secondaryColour);
+        base.SetDoubleColours(centreColour, secondaryColour);
 	}
 
     public override void SetPowerUp(PowerUp powerUp, int colour)

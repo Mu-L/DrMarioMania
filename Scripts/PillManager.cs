@@ -168,14 +168,14 @@ public partial class PillManager : Node
 
 		throwSpeed = 60.0f / (slowThrow ? 42.0f : 21.0f);
 		throwRotateSpeed = 60.0f / (slowThrow ? 8.0f : 4.0f);
-	}
+    }
 
 	public void RandomiseNextPillColours()
 	{
 		if (!nextPill.Visible)
 			nextPill.Visible = true;
 			
-		nextPill.SetRandomSegmentColours(jarMan.PossibleColours, PlayerGameSettings.OnlySingleColourPills, jarMan.LocalRng);
+		nextPill.SetRandomColours(jarMan.PossibleColours, PlayerGameSettings.OnlySingleColourPills, jarMan.LocalRng);
 	}
 
 	private void ResetAllTimersAndResets()
@@ -264,7 +264,7 @@ public partial class PillManager : Node
 			throwHoldEndPos = holdPill.OrigPos;
 
 			throwingPill2 = activePill;
-			throwingPill2.ResetSwappedState();
+			throwingPill2.SetRotation(0);
 		}
 		else
 		{
@@ -272,14 +272,12 @@ public partial class PillManager : Node
 			wasHoldUsed = false;
 		}
 
-		// Set throwing pill(s) to vertical and swap their segments
-		throwingPill.SetOrientation(true);
-		throwingPill.SwapSegments();
+        // Set throwing pill(s) to vertical
+        throwingPill.SetRotation(1);
 
-		if (wasHoldUsed)
+        if (wasHoldUsed)
 		{
-			throwingPill2.SetOrientation(true);
-			throwingPill2.SwapSegments();
+			throwingPill2.SetRotation(1);
 		}
 
 		throwStartPos = throwingPill.Position;
@@ -333,33 +331,22 @@ public partial class PillManager : Node
 			powerUpPill.Visible = false;
 			powerUpPill.ResetState();
 		}
-		
-		// Store old active pill state before changing it
-		int activeCentreColour = activePill.CentreSegmentColour;
-		int activeSecondaryColour = activePill.SecondarySegmentColour;
-		PowerUp activePowerUp = activePill.CurrentPowerUp;
-		bool wasActivePowerUp = activePill.IsPowerUp;
 
-		// Set active pill to match the pill that was thrown
-		if (throwingPill.IsPowerUp)
-			activePill.SetPowerUp(throwingPill.CurrentPowerUp, throwingPill.CentreSegmentColour);
-		else
-			activePill.SetSegmentColours(throwingPill.CentreSegmentColour, throwingPill.SecondarySegmentColour);
+        // Store old active pill state before changing it
+        PillAttributes activePillAttributes = activePill.GetAttributes();
+
+        // Set active pill to match the pill that was thrown
+        activePill.SetAttributes(throwingPill.GetAttributes());
 
 		// If hold was used, set the hold pill to match the last active pill
 		if (wasHoldUsed)
 		{
-			if (wasActivePowerUp)
-				holdPill.SetPowerUp(activePowerUp, activeCentreColour);
-			else
-				holdPill.SetSegmentColours(activeCentreColour, activeSecondaryColour);
-		}
-			
-		// If activePill is vertical, swap orientation to horizontal
-		if (activePill.IsVertical)
-			activePill.SwapOrientation();
+			holdPill.SetAttributes(activePillAttributes);
+            holdPill.SetRotation(0);
+        }
 
-		// Reset activePill's grid position
+		// Reset activePill's rotation and grid position
+		activePill.SetRotation(0);
 		activePill.GridPos = startGridPos;
 
 		// If pill thrown was the pill thrown from mario, randomise its segments
@@ -494,14 +481,18 @@ public partial class PillManager : Node
 			}
 		}
 
+        int newRot = activePill.PillRotation;
 
-		if ((dir == 1 ? !activePill.IsVertical : activePill.IsVertical) || onlySwap)
-			activePill.SwapSegments();
+        if (onlySwap)
+			newRot += 2;
+		else
+            newRot += dir;
 
-		if (!onlySwap)
-			activePill.SwapOrientation();
+        newRot = (newRot + 4) % 4;
 
-		if (activePill.GridPos != targetPos)
+        activePill.SetRotation(newRot);
+
+        if (activePill.GridPos != targetPos)
 		{
 			activePill.GridPos = targetPos;
 			UpdateActivePillPosition();
@@ -608,15 +599,9 @@ public partial class PillManager : Node
 		if (throwProgress >= 1)
 		{
 			throwingPill.Position = throwStartPos;
-			throwingPill.SetOrientation(false);
+            throwingPill.SetRotation(0);
 
-			if (throwingPill.AreSegmentsSwapped)
-				throwingPill.SwapSegments();
-
-			if (throwingPill2 != null && throwingPill2.AreSegmentsSwapped)
-				throwingPill2.SwapSegments();
-
-			ActivateNextPill();
+            ActivateNextPill();
 			return;
 		}
 
@@ -645,15 +630,11 @@ public partial class PillManager : Node
 		{
 			throwSpinProgress -= 1;
 
-			if (throwingPill.IsVertical)
-				throwingPill.SwapSegments();
-			throwingPill.SwapOrientation();
+            throwingPill.Rotate(true);
 
-			if (throwingPill2 != null)
+            if (throwingPill2 != null)
 			{
-				if (throwingPill2.IsVertical)
-					throwingPill2.SwapSegments();
-				throwingPill2.SwapOrientation();
+				throwingPill2.Rotate(true);
 			}
 		}
 	}
@@ -832,5 +813,5 @@ public partial class PillManager : Node
 			TickThrow((float)delta);
 		else
 			TickControl((float)delta);
-	}
+    }
 }

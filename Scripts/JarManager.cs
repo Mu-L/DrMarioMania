@@ -1204,13 +1204,13 @@ public partial class JarManager : Node
 		destroyTimer = 0;
 
 		Vector2I centrePos = pill.GridPos;
-		Vector2I secondaryPos = pill.SecondaryGridPos;
 
 		int centreColour = pill.CentreSegmentColour;
-		bool secondSegExists = true;
 
-		// If power-up, only place one tile
-		if (pill.IsPowerUp)
+        List<Vector2I> positions;
+
+        // If power-up, only place one tile
+        if (pill.IsPowerUp)
 		{
 			// If rainbow and not on a hazard, auto-activate power-up
 			if (pill.CentreSegmentColour == 0 && !IsTileHazard(centrePos))
@@ -1222,18 +1222,39 @@ public partial class JarManager : Node
 			}
 
 			jarTiles.SetCell(centrePos, GameConstants.powerUpSourceID, pill.CentreTextureCoords);
-			secondSegExists = false;
-		}
-		// if secondary is off the top of the screen, only place centre seg
-		else if (secondaryPos.Y < jarOrigin.Y)
-		{
-			jarTiles.SetCell(centrePos, GameConstants.pillSourceID, new Vector2I(4, (centreColour - 1)));
-			secondSegExists = false;
-		}
+
+            positions = new List<Vector2I> { centrePos };
+        }
 		else
 		{
-			jarTiles.SetCell(centrePos, GameConstants.pillSourceID, pill.CentreTextureCoords);
-			jarTiles.SetCell(secondaryPos, GameConstants.pillSourceID, pill.SecondaryTextureCoords);
+            positions = new List<Vector2I>();
+            Dictionary<Vector2I, JarTileData> tilesToAdd = new Dictionary<Vector2I, JarTileData>();
+
+			// only add in-bounds tiles to tilesToAdd
+            foreach (Vector2I localPos in pill.RotatedTiles.Keys)
+            {
+                Vector2I realPos = localPos + pill.GridPos;
+                // if position is at or below the top of the jar...
+                if (realPos.Y >= jarOrigin.Y)
+                {
+                    JarTileData tileData = pill.RotatedTiles[localPos];
+
+					// if in the top row of jar AND bottom pill segment, change to single pill segment, since connected segment won't exist
+					if (realPos.Y == jarOrigin.Y && tileData.atlas.X == PillConstants.atlasBottom)
+					{
+                        tileData.atlas.X = PillConstants.atlasSingle;
+                    }
+
+                    tilesToAdd.Add(realPos, tileData);
+                    positions.Add(realPos);
+                }
+            }
+
+			// place tiles from tilesToAdd
+            foreach (Vector2I pos in tilesToAdd.Keys)
+            {
+				jarTiles.SetCell(pos, tilesToAdd[pos].sourceID, tilesToAdd[pos].atlas);
+            }
 		}
 		
 		tilesToDestroy.Clear();
@@ -1241,24 +1262,22 @@ public partial class JarManager : Node
 		tilesToFall.Clear();
 
 		// check for hazards and destroy segment(s) if needed
-		if (IsTileHazard(centrePos))
+		for (int i = positions.Count - 1; i >= 0; i--)
 		{
-			SfxMan.Play("VirusStunLand");
-			DestroyTile(centrePos, true);
-		}
-		if (secondSegExists && IsTileHazard(secondaryPos))
-		{
-			SfxMan.Play("VirusStunLand");
-			DestroyTile(secondaryPos, true);
-			secondSegExists = false;
+			if (IsTileHazard(positions[i]))
+			{
+				SfxMan.Play("VirusStunLand");
+				DestroyTile(positions[i], true);
+                positions.RemoveAt(i);
+            }
 		}
 
 		// check for lines
-		if (jarTiles.GetCellTileData(centrePos) != null)
-			CheckForLinesToDestroy(centrePos);
-
-		if (secondSegExists)
-			CheckForLinesToDestroy(secondaryPos);
+		foreach (Vector2I pos in positions)
+		{
+			if (jarTiles.GetCellTileData(pos) != null)
+				CheckForLinesToDestroy(pos);
+		}
 
 		if (tilesToDestroy.Count == 0 && tilesToFall.Count == 0)
 		{
@@ -1921,23 +1940,21 @@ public partial class JarManager : Node
 		previewTiles.Clear();
 	}
 
-	public void CreateGhostPill(Pill pill, Vector2I pos)
+	public void CreateGhostPill(Pill pill, Vector2I centrePos)
 	{
 		previewTiles.Clear();
 
-		Vector2I centreAtlas = pill.CentreTextureCoords;
-
 		if (pill.IsPowerUp)
 		{
-			previewTiles.SetCell(pos, GameConstants.powerUpSourceID, centreAtlas);
+			previewTiles.SetCell(centrePos, GameConstants.powerUpSourceID, pill.CentreTextureCoords);
 		}
 		else
 		{
-			Vector2I secondaryAtlas = pill.SecondaryTextureCoords;
-			Vector2I secondaryOffset = pill.IsVertical ? Vector2I.Up : Vector2I.Right;
-
-			previewTiles.SetCell(pos, GameConstants.pillSourceID, centreAtlas);
-			previewTiles.SetCell(pos + secondaryOffset, GameConstants.pillSourceID, secondaryAtlas);
+			// place tiles from tilesToAdd
+            foreach (Vector2I pos in pill.RotatedTiles.Keys)
+            {
+				previewTiles.SetCell(pos + centrePos, pill.RotatedTiles[pos].sourceID, pill.RotatedTiles[pos].atlas);
+            }
 		}
 	}
 
