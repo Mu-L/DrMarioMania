@@ -64,12 +64,25 @@ public partial class Pill : Node2D
 	protected Texture2D pillTex;
 	protected Texture2D powerUpTex;
 
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+    private bool hasSetOrigPos = false;
+
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
 	{
-		origPos = Position;
-        origPillTilesPos = pillTiles.Position;
+		if (!hasSetOrigPos)
+        	SetOrigPosToCurrent();
     }
+
+	public void SetOrigPosToCurrent()
+	{
+		if (hasSetOrigPos)
+            return;
+		
+        hasSetOrigPos = true;
+
+        origPos = Position;
+        origPillTilesPos = pillTiles.Position;
+	}
 
 	public PillAttributes GetAttributes()
 	{
@@ -122,62 +135,83 @@ public partial class Pill : Node2D
         SetRotation(0);
     }
 
-	public virtual void SetRandomColours(List<int> possibleColours, bool guaranteeSingleColour, RandomNumberGenerator rng)
+	public virtual void SetRandomPillColours(List<int> possibleColours, bool guaranteeSingleColour, PillType pType, RandomNumberGenerator rng)
 	{
-        SetPillType(PillType.Double);
-
         int colourCount  = possibleColours.Count;
 		bool bothSame = guaranteeSingleColour || rng.RandiRange(0, 2) == 0 || colourCount < 2;
 
-		int centreColourIndex = rng.RandiRange(0, colourCount - 1);
+		int mainColourIndex = rng.RandiRange(0, colourCount - 1);
 		int secondaryColourIndex;
 
 		if (bothSame)
 		{
-			secondaryColourIndex = centreColourIndex;
+			secondaryColourIndex = mainColourIndex;
 		}
 		else
 		{
 			secondaryColourIndex = rng.RandiRange(0, colourCount - 1);
-			if (secondaryColourIndex == centreColourIndex)
+			if (secondaryColourIndex == mainColourIndex)
 				secondaryColourIndex = (secondaryColourIndex + rng.RandiRange(1, colourCount - 1)) % colourCount;
 		}
-		
-		// to-do temp: for each tile, set colour
 
-
-		UpdateTileMap();
-	}
-	public virtual void SetDoubleColours(int centreColour, int secondaryColour)
+        SetPillColours(possibleColours[mainColourIndex], possibleColours[secondaryColourIndex], pType);
+    }
+	public virtual void SetPillColours(int mainColour, int secondaryColour, PillType pType, bool skipTileMapUpdate = false)
 	{
-		SetPillType(PillType.Double);
+		// set pill type to unrotatedTiles 
+        SetPillType(pType, true);
 
-		// to-do temp: set two tiles to the given colours
+        // update colours in 
+		foreach (Vector2I pos in unrotatedTiles.Keys)
+		{
+            JarTileData tile = unrotatedTiles[pos];
 
-		UpdateTileMap();
+            int col = tile.colour == 1 ? secondaryColour : mainColour;
+            tile.colour = col;
+			tile.atlas.Y = col;
+
+			if (tile.sourceID != GameConstants.powerUpSourceID)
+                tile.atlas.Y--;
+
+            unrotatedTiles[pos] = tile;
+        }
+
+		// update rotatedTiles andtile map
+		UpdateRotatedTiles();
+
+		if (!skipTileMapUpdate)
+        	UpdateTileMap();
 	}
 	public virtual void SetPowerUp(PowerUp powerUp, int colour)
 	{
-		// to-do temp: only make single tile to given power-up/colour
-		SetPillType(PillType.PowerUp);
+        SetPillColours(colour, colour, PillType.PowerUp, true);
 
-		// to-do texcoord: centreSegmentSprite.Frame = (int)powerUp + GameConstants.PowerUpTileSetWidth * centreSegmentColour;
-	}
+        JarTileData tileData = unrotatedTiles[Vector2I.Zero];
+        tileData.atlas.X = (int)powerUp;
 
-	protected void SetPillType(PillType pType)
-	{
-		if (pillType == pType && unrotatedTiles.Count != 0)
-            return;
-		
+        unrotatedTiles[Vector2I.Zero] = tileData;
+        rotatedTiles[Vector2I.Zero] = tileData;
+
+		UpdateTileMap();
+    }
+
+	protected void SetPillType(PillType pType, bool skipRotatedTiles)
+	{		
         pillType = pType;
 
         unrotatedTiles.Clear();
 
         int sourceID = pType == PillType.PowerUp ? GameConstants.powerUpSourceID :  GameConstants.pillSourceID;
 
-		if (pType == PillType.Single || pType == PillType.PowerUp)
+		// tiles with colour 0 will use main colour
+		// tiles with colour 1 will use main secondary colour
+		if (pType == PillType.Single)
 		{
-            unrotatedTiles.Add(Vector2I.Zero, new JarTileData(sourceID, Vector2I.Zero));
+            unrotatedTiles.Add(Vector2I.Zero, new JarTileData(sourceID, new Vector2I(PillConstants.atlasSingle, 0)));
+        }
+		else if (pType == PillType.PowerUp)
+		{
+            unrotatedTiles.Add(Vector2I.Zero, new JarTileData(sourceID, new Vector2I(0, 0)));
         }
 		else if (pType == PillType.Double)
 		{
@@ -186,10 +220,17 @@ public partial class Pill : Node2D
         }
 		else if (pType == PillType.Luigi)
 		{
-			
+			// upper/vertical pill
+			unrotatedTiles.Add(Vector2I.Up, new JarTileData(sourceID, new Vector2I(PillConstants.atlasTop, 0)));
+			unrotatedTiles.Add(Vector2I.Zero, new JarTileData(sourceID, new Vector2I(PillConstants.atlasBottom, 0)));
+
+			// lower/horizontal pill
+			unrotatedTiles.Add(Vector2I.Down, new JarTileData(sourceID, new Vector2I(PillConstants.atlasLeft, 0)));
+            unrotatedTiles.Add(Vector2I.Down + Vector2I.Right, new JarTileData(sourceID, new Vector2I(PillConstants.atlasRight, 1)));
         }
 
-        UpdateRotatedTiles();
+		if (!skipRotatedTiles)
+        	UpdateRotatedTiles();
     }
 
 	public void SetRotation(int r)
@@ -222,6 +263,39 @@ public partial class Pill : Node2D
         SetRotation(newRot);
 	}
 
+	private Vector2I RotatePosition(Vector2I ogPos, int newRotation)
+	{
+		Vector2I newPos = ogPos;
+
+		// turned 90 right
+		if (newRotation == 1)
+		{
+			newPos = new Vector2I(-newPos.Y, newPos.X);
+
+			// if double, ensure the bottom-left-most pill stays as the centre
+			// so move y up one tile
+			if (pillType == PillType.Double)
+				newPos.Y--;
+		}
+		// flipped 180
+		else if (newRotation == 2)
+		{
+			newPos = new Vector2I(-newPos.X, -newPos.Y);
+
+			// if double, ensure the bottom-left-most pill stays as the centre
+			// so move x to the right one tile
+			if (pillType == PillType.Double)
+				newPos.X++;
+		}
+		// turned 90 left / 270 right
+		else if (newRotation == 3)
+		{
+			newPos = new Vector2I(newPos.Y, -newPos.X);
+		}
+
+        return newPos;
+    }
+
 	protected void UpdateRotatedTiles()
 	{
         rotatedTiles.Clear();
@@ -229,50 +303,30 @@ public partial class Pill : Node2D
         foreach (Vector2I ogPos in unrotatedTiles.Keys)
 		{
             JarTileData tileData = unrotatedTiles[ogPos];
-            Vector2I newPos = ogPos;
-
-			// turned 90 right
-			if (pillRotation == 1)
-			{
-                newPos = new Vector2I(-newPos.Y, newPos.X);
-
-				// if double, ensure the bottom-left-most pill stays as the centre
-				// so move y up one tile
-				if (pillType == PillType.Double)
-                    newPos.Y--;
-            }
-			// flipped 180
-			else if (pillRotation == 2)
-			{
-                newPos = new Vector2I(-newPos.X, -newPos.Y);
-
-				// if double, ensure the bottom-left-most pill stays as the centre
-				// so move x to the right one tile
-				if (pillType == PillType.Double)
-                    newPos.X++;
-            }
-			// turned 90 left / 270 right
-			else if (pillRotation == 3)
-			{
-                newPos = new Vector2I(newPos.Y, -newPos.X);
-            }
+            Vector2I newPos = RotatePosition(ogPos, pillRotation);
 
 			if (tileData.sourceID == GameConstants.pillSourceID && tileData.atlas.X != PillConstants.atlasSingle)
             	tileData.atlas.X = atlasRotations[tileData.atlas.X + 4 * pillRotation];
 
             rotatedTiles.Add(newPos, tileData);
         }
-
-		if (isRotationCentred)
-		{
-			if (pillType == PillType.Double && IsVertical)
-			{
-				pillTiles.Position = origPillTilesPos + Vector2.One * 4.0f;
-			}
-			else
-                pillTiles.Position = origPillTilesPos;
-        }
 	}
+
+	public Vector2I[] GetRotatedTilePositions(int newRotation)
+	{
+        Vector2I[] positions = new Vector2I[unrotatedTiles.Count];
+
+        int i = 0;
+        foreach (Vector2I ogPos in unrotatedTiles.Keys)
+		{
+            Vector2I newPos = RotatePosition(ogPos, newRotation);
+
+            positions[i] = newPos;
+            i++;
+        }
+
+        return positions;
+    }
 
     protected void UpdateTileMap()
 	{
@@ -282,6 +336,16 @@ public partial class Pill : Node2D
 		{
             JarTileData tileData = rotatedTiles[pos];
             pillTiles.SetCell(pos, tileData.sourceID, tileData.atlas);
+        }
+
+		if (isRotationCentred)
+		{
+            if (pillType == PillType.Double && IsVertical)
+			{
+				pillTiles.Position = origPillTilesPos + Vector2.One * 4.0f;
+			}
+			else
+                pillTiles.Position = origPillTilesPos;
         }
     }
 }

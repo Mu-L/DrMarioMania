@@ -594,8 +594,10 @@ public partial class JarManager : Node
 		DisablePowerUpSpawning = false;
 		PowerUpMeter.SetVisibility(PlayerGameSettings.IsUsingPowerUps);
 		uiMan.SetSpeedLabel(PlayerGameSettings.SpeedLevel);
-		
-		if (customLevelTiles != null)
+
+        pillMan.UpdateNextPillOrigPos();
+
+        if (customLevelTiles != null)
 			GenerateCustomLevel();
 		else
 			GenerateViruses();

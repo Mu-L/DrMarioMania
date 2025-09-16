@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using static PowerUpEnums;
 
@@ -107,9 +108,9 @@ public partial class PillManager : Node
 	{
 		if (readyCalled)
 			return;
-		
-		// Get tile size and jar's width
-		tileSize = jarMan.JarCellSize;
+			
+        // Get tile size and jar's width
+        tileSize = jarMan.JarCellSize;
 		jarWidth = jarMan.JarSize.X;
 
 		// Get the starting position in jar grid tile units (top-middle of jar)
@@ -170,12 +171,17 @@ public partial class PillManager : Node
 		throwRotateSpeed = 60.0f / (slowThrow ? 8.0f : 4.0f);
     }
 
+	public void UpdateNextPillOrigPos()
+	{
+        nextPill.SetOrigPosToCurrent();
+    }
+
 	public void RandomiseNextPillColours()
 	{
 		if (!nextPill.Visible)
 			nextPill.Visible = true;
 			
-		nextPill.SetRandomColours(jarMan.PossibleColours, PlayerGameSettings.OnlySingleColourPills, jarMan.LocalRng);
+		nextPill.SetRandomPillColours(jarMan.PossibleColours, PlayerGameSettings.OnlySingleColourPills, PillTypeEnums.PillType.Luigi, jarMan.LocalRng);
 	}
 
 	private void ResetAllTimersAndResets()
@@ -358,10 +364,10 @@ public partial class PillManager : Node
 		activePill.Visible = true;
 
 		// Check for hazards, if found disable processing to signal to place the pill right away (if found here, the player's gonna be in a fun loop)
-		if (IsTouchingHazard(activePill.GridPos, activePill.IsVertical))
+		if (ArePillTilesTouchingHazard(activePill.GridPos))
 			AddPillToTilemap(activePill);
 		// Check if the active pill isn't blocked by anything - proceed if clear, otherwise do a game over
-		else if (jarMan.IsCellFree(activePill.GridPos) && jarMan.IsCellFree(activePill.GridPos + Vector2I.Right))
+		else if (AreTargetPosCellsFree(activePill.GridPos))
 		{
 			currentState = pillStates.Controlling;
 			UpdateActivePillPosition();
@@ -409,9 +415,8 @@ public partial class PillManager : Node
 		int downwardSteps = 0;
 		
 		Vector2I downPos = activePill.GridPos + Vector2I.Down;
-		Vector2I secondaryOffset = activePill.IsVertical ? Vector2I.Up : Vector2I.Right;
 
-		while (!DoesPosBlockDrop(downPos) && (activePill.IsPowerUp || activePill.IsVertical || !DoesPosBlockDrop(downPos + Vector2I.Right)))
+		while (!DoesTargetPosBlockDrop(downPos))
 		{
 			downwardSteps++;
 			downPos += Vector2I.Down;
@@ -427,17 +432,24 @@ public partial class PillManager : Node
 		activePill.LandPos = ghostPos;
 	}
 
-	private bool Rotate(int dir, bool bypassCollisions = false)
+	private bool Rotate(int dir)
 	{
 		if (activePill.IsPowerUp)
 			return false;
-		
-		bool isVertical = activePill.IsVertical;
+
+		// the potential new rotation for if the pill successfully rotates
+        int potentialRotation = activePill.PillRotation + dir;
+		if (potentialRotation > 3)
+            potentialRotation -= 4;
+		else if (potentialRotation < 0)
+            potentialRotation += 4;
+
+        bool isVertical = activePill.IsVertical;
 		Vector2I targetPos = activePill.GridPos;
 		bool onlySwap = false;
 
 		// hazard check pre-kicks, if found disable processing to signal to place the pill right away
-		if (IsTouchingHazard(targetPos, !isVertical))
+		if (ArePillTilesTouchingHazard(targetPos, potentialRotation))
 			SetProcess(false);
 
 		// kicks
@@ -503,7 +515,7 @@ public partial class PillManager : Node
 		}
 
 		// hazard check post-kicks, if found disable processing to signal to place the pill right away
-		if (IsTouchingHazard(targetPos, isVertical))
+		if (ArePillTilesTouchingHazard(targetPos))
 			SetProcess(false);
 
 		return true;
@@ -512,15 +524,16 @@ public partial class PillManager : Node
 	private bool Move(Vector2I dir, bool bypassCollisions = false)
 	{
 		Vector2I targetPos = activePill.GridPos + dir;
-		Vector2I secondaryTargetPos = targetPos + (activePill.IsVertical ? Vector2I.Up : Vector2I.Right);
 
-		if (bypassCollisions || (jarMan.IsCellFree(targetPos) && (activePill.IsPowerUp || jarMan.IsCellFree(secondaryTargetPos))))
+        bool areCellsFree = AreTargetPosCellsFree(targetPos);
+
+        if (bypassCollisions || areCellsFree)
 		{
 			activePill.GridPos = targetPos;
 			UpdateActivePillPosition();
 
 			// check for hazards, if found disable processing to signal to place the pill right away
-			if (IsTouchingHazard(targetPos, activePill.IsVertical))
+			if (ArePillTilesTouchingHazard(targetPos))
 				SetProcess(false);
 				
 			return true;
@@ -535,7 +548,7 @@ public partial class PillManager : Node
 
 		Vector2I downPos = activePill.GridPos + Vector2I.Down;
 
-		while (!DoesPosBlockDrop(downPos) && (activePill.IsPowerUp || activePill.IsVertical || !DoesPosBlockDrop(downPos + Vector2I.Right)))
+		while (!DoesTargetPosBlockDrop(downPos))
 		{
 			downwardSteps++;
 			downPos += Vector2I.Down;
@@ -547,18 +560,54 @@ public partial class PillManager : Node
 
 	private bool IsGrounded()
 	{
-		return !jarMan.IsCellFree(activePill.GridPos + Vector2I.Down) || (!activePill.IsPowerUp && !activePill.IsVertical && !jarMan.IsCellFree(activePill.GridPos + Vector2I.Right + Vector2I.Down));
+        return !AreTargetPosCellsFree(activePill.GridPos + Vector2I.Down);
 	}
 
-	private bool DoesPosBlockDrop(Vector2I pos)
+	// Whether or not the active pill's tiles relative to targetPos are already occupied any existing cells
+	// rotation -1 = just use current rotation
+	private bool AreTargetPosCellsFree(Vector2I targetPos, int newRotation = -1)
 	{
-		return !jarMan.IsCellFree(pos) || jarMan.IsTileHazard(pos + Vector2I.Up);
+		bool areCellsFree = true;
+
+        Vector2I[] poses = newRotation == -1 ? activePill.RotatedTiles.Keys.ToArray() : activePill.GetRotatedTilePositions(newRotation);
+
+        foreach (Vector2I tilePos in poses)
+		{
+            if (!jarMan.IsCellFree(targetPos + tilePos))
+			{
+                areCellsFree = false;
+                break;
+            }
+        }
+
+        return areCellsFree;
+    }
+
+	// Whether or not the active pill's tiles relative to targetPos are already occupied any existing cells
+	// rotation -1 = just use current rotation
+	private bool ArePillTilesTouchingHazard(Vector2I targetPos, int newRotation = -1)
+	{
+		bool touchingHazard = false;
+
+        Vector2I[] poses = newRotation == -1 ? activePill.RotatedTiles.Keys.ToArray() : activePill.GetRotatedTilePositions(newRotation);
+
+        foreach (Vector2I tilePos in poses)
+		{
+            if (jarMan.IsTileHazard(targetPos + tilePos))
+			{
+                touchingHazard = true;
+                break;
+            }
+        }
+
+        return touchingHazard;
+    }
+
+	private bool DoesTargetPosBlockDrop(Vector2I targetPos)
+	{
+		return !AreTargetPosCellsFree(targetPos) || ArePillTilesTouchingHazard(targetPos + Vector2I.Up);
 	}
 
-	private bool IsTouchingHazard(Vector2I pos, bool isVertical)
-	{
-		return jarMan.IsTileHazard(pos) || jarMan.IsTileHazard(pos + (isVertical ? Vector2I.Up : Vector2I.Right));
-	}
 
 	private void UpdateTimers(double delta)
 	{
@@ -787,7 +836,7 @@ public partial class PillManager : Node
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (canUseDebugMode && Input.IsActionJustPressed("ToggleDebugMode"))
+        if (canUseDebugMode && Input.IsActionJustPressed("ToggleDebugMode"))
 			debugMode = !debugMode;
 
 		if (debugMode)
