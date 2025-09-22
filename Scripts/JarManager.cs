@@ -1207,8 +1207,6 @@ public partial class JarManager : Node
 
 		Vector2I centrePos = pill.GridPos;
 
-		int centreColour = pill.CentreSegmentColour;
-
         List<Vector2I> positions;
 
         // If power-up, only place one tile
@@ -1279,6 +1277,34 @@ public partial class JarManager : Node
 		{
 			if (jarTiles.GetCellTileData(pos) != null)
 				CheckForLinesToDestroy(pos);
+		}
+
+		// check for segments which should fall (ignoring ones to destroy)
+		foreach (Vector2I pos in positions)
+		{
+			// continue if cell below is solid OR tile already going to fall
+			if (!IsCellFree(pos + Vector2I.Down) || TilesToFallContainsPos(pos))
+                continue;
+
+			// get connected segment pos (same as current pos is single)
+            Vector2I connectedPos = GetConnectedSegment(pos);
+
+			// will always fall if its a single
+			if (pos == connectedPos)
+			{
+				AddTileToFall(pos);
+			}
+			// if its a double horizontal segment, only fall if not grounded on the connected segment and the segment below isn't itself
+			else
+			{
+				Vector2I conDownPos = connectedPos + Vector2I.Down;
+
+				if (conDownPos == pos || IsCellFree(connectedPos + Vector2I.Down))
+				{
+					AddTileToFall(pos);
+					AddTileToFall(connectedPos);
+				}
+			}
 		}
 
 		if (tilesToDestroy.Count == 0 && tilesToFall.Count == 0)

@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using static PowerUpEnums;
+using static PillEnums;
 
 public partial class PillManager : Node
 {
@@ -181,7 +182,7 @@ public partial class PillManager : Node
 		if (!nextPill.Visible)
 			nextPill.Visible = true;
 			
-		nextPill.SetRandomPillColours(jarMan.PossibleColours, PlayerGameSettings.OnlySingleColourPills, PillTypeEnums.PillType.Luigi, jarMan.LocalRng);
+		nextPill.SetRandomPillColours(jarMan.PossibleColours, PlayerGameSettings.OnlySingleColourPills, PillType.Regular, PillShape.Quad, jarMan.LocalRng);
 	}
 
 	private void ResetAllTimersAndResets()
@@ -434,7 +435,8 @@ public partial class PillManager : Node
 
 	private bool Rotate(int dir)
 	{
-		if (activePill.IsPowerUp)
+		// if pill only has one position, it doesnt need to be rotated
+		if (activePill.UnrotatedTiles.Count() == 1)
 			return false;
 
 		// the potential new rotation for if the pill successfully rotates
@@ -444,71 +446,30 @@ public partial class PillManager : Node
 		else if (potentialRotation < 0)
             potentialRotation += 4;
 
-        bool isVertical = activePill.IsVertical;
-		Vector2I targetPos = activePill.GridPos;
-		bool onlySwap = false;
+        Vector2I targetPos = activePill.GridPos;
 
 		// hazard check pre-kicks, if found disable processing to signal to place the pill right away
 		if (ArePillTilesTouchingHazard(targetPos, potentialRotation))
 			SetProcess(false);
 
-		// kicks
-		// vertical -> horizontal
-		if (isVertical)
-		{
-			// right of centre blocked - more target to left
-			if (!jarMan.IsCellFree(activePill.GridPos + Vector2I.Right))
-			{
-				// if left of centre is blocked, cancel rotation
-				if (!jarMan.IsCellFree(activePill.GridPos + Vector2I.Left))
-					onlySwap = true;
-				else
-					targetPos += Vector2I.Left;
+		// kicks - set targetPos and rotation based on kick result
+        Vector3I kickResult = PillKicks.DoKickChecks(dir, activePill, jarMan);
+        targetPos = new Vector2I(kickResult.X, kickResult.Y);
 
-			}
-		}
-		// horizontal -> vertical
-		else
-		{
-			// top of centre blocked - more target to right
-			if (!jarMan.IsCellFree(activePill.GridPos + Vector2I.Up))
-			{
-				// if right + up of centre is blocked, move target down
-				if (!jarMan.IsCellFree(activePill.GridPos + Vector2I.Right + Vector2I.Up))
-				{
-					// if down from centre is blocked, move target to right and down
-					if (!jarMan.IsCellFree(activePill.GridPos + Vector2I.Down))
-					{
-						// if right and down from centre is blocked, cancel rotation
-						if (!jarMan.IsCellFree(activePill.GridPos + Vector2I.Right + Vector2I.Down))
-							onlySwap = true;
-						else
-							targetPos += Vector2I.Right + Vector2I.Down;
-					}
-					else
-						targetPos += Vector2I.Down;
-				}
-				else
-					targetPos += Vector2I.Right;
-			}
-		}
+        // return false is rotation could occur
+        if (kickResult.Z == activePill.PillRotation)
+            return false;
 
-        int newRot = activePill.PillRotation;
+		// update activePill's rotation 
+        activePill.SetRotation(kickResult.Z);
 
-        if (onlySwap)
-			newRot += 2;
-		else
-            newRot += dir;
-
-        newRot = (newRot + 4) % 4;
-
-        activePill.SetRotation(newRot);
-
+		// update 's GridPos to targetPos and do UpdateActivePillPosition
         if (activePill.GridPos != targetPos)
 		{
 			activePill.GridPos = targetPos;
 			UpdateActivePillPosition();
 		}
+		// if targetPos hasn't changed from activePill.GridPos, just update ghost preview
 		else
 		{
 			UpdateGhostPillPreview();
