@@ -14,9 +14,9 @@ powerUpPreviewTextures = Array[Texture2D]([ExtResource("4_tidck"), ExtResource("
 powerUpPreview = NodePath("PowerUpPreview")
 ghostPowerUpPreview = NodePath("GhostPowerUpPreview")
 
-[node name="PowerUpPreview" type="Sprite2D" parent="." index="2"]
+[node name="PowerUpPreview" type="Sprite2D" parent="." index="1"]
 texture = ExtResource("3_4c2x7")
 
-[node name="GhostPowerUpPreview" type="Sprite2D" parent="." index="3"]
+[node name="GhostPowerUpPreview" type="Sprite2D" parent="." index="2"]
 modulate = Color(1, 1, 1, 0.243137)
 texture = ExtResource("3_4c2x7")

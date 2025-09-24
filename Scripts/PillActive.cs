@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Godot;
 using Godot.Collections;
 using static PowerUpEnums;
+using static PillEnums;
 
 public partial class PillActive : Pill
 {
@@ -52,17 +53,17 @@ public partial class PillActive : Pill
         UpdateGhostPowerUpPreviewVisibility();
     }
 
-    public override void SetRandomSegmentColours(List<int> possibleColours, bool guaranteeSingleColour, RandomNumberGenerator rng)
+    public override void SetRandomPillColours(List<int> possibleColours, bool guaranteeSingleColour, PillType pType, PillShape pShape, RandomNumberGenerator rng)
 	{
         SetPowerUpPreviewVisibility(false);
         
-        base.SetRandomSegmentColours(possibleColours, guaranteeSingleColour, rng);
+        base.SetRandomPillColours(possibleColours, guaranteeSingleColour, pType, pShape, rng);
 	}
-	public override void SetSegmentColours(int centreColour, int secondaryColour)
+	public override void SetPillColours(int centreColour, int secondaryColour, PillType pType, PillShape pShape, bool skipTileMapUpdate = false)
 	{
         SetPowerUpPreviewVisibility(false);
 
-        base.SetSegmentColours(centreColour, secondaryColour);
+        base.SetPillColours(centreColour, secondaryColour, pType, pShape, skipTileMapUpdate);
 	}
 
     public override void SetPowerUp(PowerUp powerUp, int colour)

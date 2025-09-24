@@ -16,6 +16,18 @@ public struct JarTileData
         else
             colour = (int)data.GetCustomData("Colour");
     }
+
+    public JarTileData(int sid, Vector2I att)
+    {
+        sourceID = sid;
+
+        atlas = att;
+
+        colour = att.Y;
+
+        if (sid != GameConstants.powerUpSourceID)
+            colour += 1;
+    }
     
     public int sourceID;
     public Vector2I atlas;

@@ -1,4 +1,4 @@
-[gd_scene load_steps=103 format=3 uid="uid://b2vcutf5f3jja"]
+[gd_scene load_steps=98 format=3 uid="uid://b2vcutf5f3jja"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/MenuScreenManager.cs" id="1_i7n64"]
 [ext_resource type="Script" path="res://Scripts/Menu/Screens/UpdateableSettingScreen.cs" id="2_ig0jp"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://cdx3w60jp1c15" path="res://Assets/Sprites/UI/ButtonIcons/SinglePlayerIcon.png" id="8_mdyyj"]
 [ext_resource type="Texture2D" uid="uid://bke0ljm3pmmab" path="res://Assets/Sprites/UI/ButtonIcons/MultiPlayerIcon.png" id="9_nkpne"]
 [ext_resource type="PackedScene" uid="uid://3igdbj037lt3" path="res://Assets/Prefabs/GameSettingsUI/GameSettingGameplayContainer.tscn" id="10_3cebr"]
+[ext_resource type="Script" path="res://Scripts/Menu/ChangeLogButton.cs" id="13_bgt3e"]
 [ext_resource type="Script" path="res://Scripts/Menu/Screens/MultiplayerPlayerScreen.cs" id="14_evqt7"]
 [ext_resource type="Resource" uid="uid://cwxx0untun2hu" path="res://Assets/Resources/ThemeList.tres" id="14_pe025"]
 [ext_resource type="Texture2D" uid="uid://wjvng62544bt" path="res://Assets/Sprites/Themes/Modern/BGMed.png" id="15_02jdi"]
@@ -75,7 +76,6 @@
 [ext_resource type="Texture2D" uid="uid://b2fdeqm4vxdgl" path="res://Assets/Sprites/UI/ButtonIcons/VersusModeIcon.png" id="63_fred1"]
 [ext_resource type="Script" path="res://Scripts/Menu/NotificationBox.cs" id="64_nvfqe"]
 [ext_resource type="AudioStream" uid="uid://hcaheekwk5c" path="res://Assets/Audio/Sounds/NES/Notification.ogg" id="65_2j87m"]
-[ext_resource type="Script" path="res://Scripts/Menu/Screens/UserCustomLevelScreen.cs" id="65_pvv62"]
 [ext_resource type="Texture2D" uid="uid://dinu0y42o015h" path="res://Assets/Sprites/UI/ButtonIcons/WebIcon.png" id="65_qeijr"]
 [ext_resource type="Script" path="res://Scripts/Menu/GameSettingUI/HighScoreScreenVariants/HighScoreButtonGroup.cs" id="66_5mwtl"]
 [ext_resource type="Texture2D" uid="uid://cwgt1jbtsslfw" path="res://Assets/Sprites/UI/ButtonIcons/ImportIcon.png" id="66_jhsql"]
@@ -88,11 +88,6 @@
 [ext_resource type="Resource" uid="uid://bg0t1x05maugm" path="res://Assets/Resources/OfficialCustomLevelList.tres" id="75_8f8n1"]
 [ext_resource type="PackedScene" uid="uid://bfcv2361x0ono" path="res://Assets/Prefabs/OfficialCustomLevelPanel.tscn" id="75_nsn7q"]
 [ext_resource type="PackedScene" uid="uid://dejlotb7w8jno" path="res://Assets/Prefabs/MusicPreviewPlayer.tscn" id="80_slce4"]
-[ext_resource type="Material" uid="uid://eegvnpx7u4ly" path="res://Assets/Materials/ScrollTriMaterial.tres" id="85_7hup0"]
-[ext_resource type="Texture2D" uid="uid://dpgxpp410sva4" path="res://Assets/Sprites/BG/BGFrontTriangle.png" id="85_au0vt"]
-[ext_resource type="Texture2D" uid="uid://be71jeucs25n8" path="res://Assets/Sprites/BG/BGLogo.png" id="88_2ojq3"]
-[ext_resource type="Material" uid="uid://bvhh10ltuo7ek" path="res://Assets/Materials/ScrollLogoMaterial.tres" id="88_byq0h"]
-[ext_resource type="Material" uid="uid://bh1ol4li58slp" path="res://Assets/Materials/ScrollLogoRMaterial.tres" id="90_otuy0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rwg2g"]
 content_margin_left = 4.0
@@ -240,7 +235,6 @@ popUpGroup = NodePath("../PopUpGroup")
 screenContainer = NodePath(".")
 
 [node name="MainScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -384,48 +378,16 @@ grow_horizontal = 0
 grow_vertical = 1
 focus_neighbor_left = NodePath("../QuitButton")
 focus_neighbor_bottom = NodePath("../VBoxContainer/1PButton")
-text = "v1.1.1"
+text = "v0.0.0"
 icon = null
-title = "v1.1.1 - CHANGE LOG"
-description = "Basically just a hotfix for Android
+script = ExtResource("13_bgt3e")
+title = "v0.0.0 - CHANGE LOG"
+description = "GAMEPLAY:
 
-- Fixed low scroll deadzone, which made certain buttons hard to press
-
-- Fixed custom music for Android
-
-v1.1.0 CHANGES:
-
-GAMEPLAY:
-
-- Level pack 3 added with 8 new levels
-
-- Added new brick, hard brick, solid block and fire tiles to the editor
-
-- Single pill segments can now be placed in the editor
-
-AUDIO:
-
-- Added original remixes by gameboi64 for the Mania theme and credits menu (thank you!)
-
-- Added custom music option for loading MP3/OGGs
-
-- Added the 3 Mixed Match songs under the SNES category
-
-- Added a setting to make a custom level's music play throughout the editor (ON by default)
-
-VISUALS:
-
-- Added a visual setting to enable/disable the virus tile animations within the jar
-
-- Added a visual setting to enlarge the jar, ON by default on mobile (single player only)
-
-FIXES/IMPROVEMENTS:
-
-- Fixed inconsistent auto repeat when holding left or right while a pill enters the jar
-
-- Fixed free-drawing in the editor causing unwanted lines on mobile
-
-- Improved arrow key/d-pad navigation in the custom level menu"
+- Added new pill shapes:
+  - L-shape (Dr. Luigi)
+  - Single (1 tile)
+  - Square (2x2 tiles)"
 alignDescToLeft = true
 popUpGroup = NodePath("../../../PopUpGroup")
 
@@ -3442,7 +3404,8 @@ icon = ExtResource("37_c1edi")
 alignment = 0
 icon_alignment = 2
 
-[node name="UserCustomLevelScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("singleInitialHoverNode", "multiInitialHoverNode", "InitialHoverNode")]
+[node name="UserCustomLevelScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3450,10 +3413,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("65_pvv62")
-singleInitialHoverNode = NodePath("HBoxContainer/CreateButton")
-multiInitialHoverNode = NodePath("HBoxContainer/ImportButton")
-commonGameSettings = ExtResource("17_7dvs3")
+script = ExtResource("20_w70yh")
 InitialHoverNode = NodePath("HBoxContainer/CreateButton")
 
 [node name="Title" type="Label" parent="UILayer/MenuScreenManager/UserCustomLevelScreen"]
@@ -4259,52 +4219,6 @@ texture = ExtResource("6_i5e12")
 stretch_mode = 1
 metadata/_edit_lock_ = true
 
-[node name="FrontTriangle" type="TextureRect" parent="BackgroundLayer"]
-material = ExtResource("85_7hup0")
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 20.0
-grow_horizontal = 2
-texture = ExtResource("85_au0vt")
-stretch_mode = 1
-
-[node name="FrontTriangle2" type="TextureRect" parent="BackgroundLayer"]
-material = ExtResource("85_7hup0")
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -20.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("85_au0vt")
-stretch_mode = 1
-flip_h = true
-flip_v = true
-
-[node name="BGLogo" type="TextureRect" parent="BackgroundLayer"]
-material = ExtResource("88_byq0h")
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = 32.0
-offset_bottom = 64.0
-grow_horizontal = 2
-texture = ExtResource("88_2ojq3")
-stretch_mode = 1
-
-[node name="BGLogo2" type="TextureRect" parent="BackgroundLayer"]
-material = ExtResource("90_otuy0")
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -64.0
-offset_bottom = -32.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("88_2ojq3")
-stretch_mode = 1
-
 [node name="TransitionLayer" type="CanvasLayer" parent="."]
 layer = 2
 
@@ -4383,14 +4297,12 @@ normalMusicPlayer = NodePath("../MusicPlayer")
 [connection signal="pressed" from="UILayer/MenuScreenManager/SettingsScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
 [connection signal="pressed" from="UILayer/MenuScreenManager/ModeSingleScreen/VBoxContainer/ClassicButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [1]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/ModeSingleScreen/VBoxContainer/OfficialLevelsButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [16]]
-[connection signal="pressed" from="UILayer/MenuScreenManager/ModeSingleScreen/VBoxContainer/CustomLevelsButton" to="UILayer/MenuScreenManager/UserCustomLevelScreen" method="UpdateInitialHoverNode"]
 [connection signal="pressed" from="UILayer/MenuScreenManager/ModeSingleScreen/VBoxContainer/CustomLevelsButton" to="UILayer/MenuScreenManager/UserCustomLevelScreen/CustomLevelPanelContainer" method="UpdateVisuals"]
 [connection signal="pressed" from="UILayer/MenuScreenManager/ModeSingleScreen/VBoxContainer/CustomLevelsButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [11]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/ModeSingleScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
 [connection signal="pressed" from="UILayer/MenuScreenManager/ModeMultiScreen/VBoxContainer/VersusButton" to="UILayer/MenuScreenManager/MultiplayerPlayerScreen" method="InitialisePlayerConfiguring"]
 [connection signal="pressed" from="UILayer/MenuScreenManager/ModeMultiScreen/VBoxContainer/VersusButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [7]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/ModeMultiScreen/VBoxContainer/OfficialLevelsButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [16]]
-[connection signal="pressed" from="UILayer/MenuScreenManager/ModeMultiScreen/VBoxContainer/CustomLevelsButton" to="UILayer/MenuScreenManager/UserCustomLevelScreen" method="UpdateInitialHoverNode"]
 [connection signal="pressed" from="UILayer/MenuScreenManager/ModeMultiScreen/VBoxContainer/CustomLevelsButton" to="UILayer/MenuScreenManager/UserCustomLevelScreen/CustomLevelPanelContainer" method="UpdateVisuals"]
 [connection signal="pressed" from="UILayer/MenuScreenManager/ModeMultiScreen/VBoxContainer/CustomLevelsButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [11]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/ModeMultiScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]

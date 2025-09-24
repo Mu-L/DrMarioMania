@@ -279,17 +279,6 @@ public partial class JarUIManager : Node
 		powerUpSource.Texture = powerUpTileTex;
 		objectSource.Texture = themeList.GetObjectTileTexture(theme);
 
-		// Pills
-		activePill.SetPillTexture(pillTileTex);
-		nextPill.SetPillTexture(pillTileTex);
-		holdPill.SetPillTexture(pillTileTex);
-		powerUpPill.SetPillTexture(pillTileTex);
-
-		activePill.SetPowerUpTexture(powerUpTileTex);
-		nextPill.SetPowerUpTexture(powerUpTileTex);
-		holdPill.SetPowerUpTexture(powerUpTileTex);
-		powerUpPill.SetPowerUpTexture(powerUpTileTex);
-
 		activePill.PowerUpPreviewColour = themeList.GetPowerUpPreviewColour(theme);
 
 		// Arrays

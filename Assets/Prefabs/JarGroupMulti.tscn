@@ -295,7 +295,15 @@ position = Vector2(8, 8)
 texture = ExtResource("3_2oyln")
 hframes = 2
 
-[node name="UIManager" parent="." index="12" node_paths=PackedStringArray("levelLabel", "speedLabel", "virusLabel", "nextLabel", "holdLabel", "holdKeyLabel", "jarRects", "uiBoxesSmall", "uiLabels", "uiLightLabels", "uiShadows", "winIconContainer", "hudGroup")]
+[node name="NextPill" parent="." index="7"]
+startWithSmallScale = true
+neverUseSmallScale = false
+origPosShapeOffsets = Array[Vector2]([Vector2(0, 0), Vector2(-6, -1), Vector2(-4, 0), Vector2(-6, 1)])
+
+[node name="HoldPill" parent="." index="8"]
+origPosShapeOffsets = Array[Vector2]([Vector2(0, 0), Vector2(6, -1), Vector2(8, 0), Vector2(6, 1)])
+
+[node name="UIManager" parent="." index="13" node_paths=PackedStringArray("levelLabel", "speedLabel", "virusLabel", "nextLabel", "holdLabel", "holdKeyLabel", "jarRects", "uiBoxesSmall", "uiLabels", "uiLightLabels", "uiShadows", "winIconContainer", "hudGroup")]
 levelLabel = NodePath("../HUD/BottomHUD/LevelLabel")
 speedLabel = NodePath("../HUD/BottomHUD/SpeedLabel")
 virusLabel = NodePath("../HUD/BottomHUD/VirusLabel")
