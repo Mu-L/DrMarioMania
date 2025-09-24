@@ -266,10 +266,12 @@ position = Vector2(-4, -44)
 [node name="NextPill" parent="." instance=ExtResource("4_apqij")]
 position = Vector2(26, -73)
 isRotationCentred = true
+neverUseSmallScale = true
 
 [node name="HoldPill" parent="." instance=ExtResource("4_apqij")]
 position = Vector2(-33, -73)
 isRotationCentred = true
+startWithSmallScale = true
 
 [node name="Overlay" type="Control" parent="."]
 visible = false

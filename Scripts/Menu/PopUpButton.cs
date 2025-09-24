@@ -3,10 +3,10 @@ using System;
 
 public partial class PopUpButton : Button
 {
-    [Export] private string title;
-    [Export(PropertyHint.MultilineText)] private string description;
-    [Export] private bool alignDescToLeft;
-    [Export] private PopUpGroup popUpGroup;
+    [Export] protected string title;
+    [Export(PropertyHint.MultilineText)] protected string description;
+    [Export] protected bool alignDescToLeft;
+    [Export] protected PopUpGroup popUpGroup;
     public PopUpGroup PopUpGroup
     {
         set

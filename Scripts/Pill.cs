@@ -8,7 +8,13 @@ public partial class Pill : Node2D
 {
 	[Export] protected TileMapLayer pillTiles;
 	[Export] protected Material rainbowMat;
+	// whether the pill is rotated around its centre
 	[Export] protected bool isRotationCentred;
+	// whether the pill should use smallScale when it its starting position (aka in the ui)
+	[Export] protected bool startWithSmallScale;
+	[Export] protected bool neverUseSmallScale;
+	// Offsets from orig position for each pill shape, used to align pills of each shape in ui nicely
+	[Export] protected Godot.Collections.Array<Vector2> origPosShapeOffsets;
 
     protected PillType pillType = PillType.Regular;
     public PillType PillType { get { return pillType; } }
@@ -74,17 +80,35 @@ public partial class Pill : Node2D
 	}
 	protected Texture2D pillTex;
 	protected Texture2D powerUpTex;
-
     private bool hasSetOrigPos = false;
+	// scale of pill when shrunked down in the ui (dependent on pill shape)
+    private float smallScale = 1;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
 		if (!hasSetOrigPos)
-        	SetOrigPosToCurrent();
+        	InitialiseVariables();
+
+		if (startWithSmallScale)
+            Scale = Vector2.One * smallScale;
     }
 
-	public void SetOrigPosToCurrent()
+	// set scale between 1 to smallScale
+	public void InterpolatedScale(float range)
+	{
+		if (neverUseSmallScale)
+			Scale = Vector2.One;
+		else
+			Scale = Vector2.One * ((1.0f - range) + smallScale * range);
+	}
+
+	public void ResetScale()
+	{
+        Scale = Vector2.One * (startWithSmallScale && !neverUseSmallScale ? smallScale : 1.0f);
+	}
+
+	public void InitialiseVariables()
 	{
 		if (hasSetOrigPos)
             return;
@@ -93,7 +117,7 @@ public partial class Pill : Node2D
 
         origPos = Position;
         origPillTilesPos = pillTiles.Position;
-	}
+    }
 
 	public PillAttributes GetAttributes()
 	{
@@ -102,23 +126,39 @@ public partial class Pill : Node2D
         atts.pillType = pillType;
         atts.pillShape = pillShape;
         atts.pillRotation = PillRotation;
+        atts.smallScale = smallScale;
 
         atts.unrotatedTiles = UnrotatedTiles;
         atts.rotatedTiles = RotatedTiles;
-
+		
         return atts;
     }
 	public void SetAttributes(PillAttributes atts)
 	{
+		if (pillShape != atts.pillShape)
+        	OffsetFromOrigPos((int)atts.pillShape);
+			
         pillType = atts.pillType;
         pillShape = atts.pillShape;
         pillRotation = atts.pillRotation;
+        smallScale = atts.smallScale;
 
         unrotatedTiles = new Dictionary<Vector2I, JarTileData>(atts.unrotatedTiles);
         rotatedTiles = new Dictionary<Vector2I, JarTileData>(atts.rotatedTiles);
+		
 
         UpdateTileMap();
     }
+
+	public Vector2 GetOrigPosOffset(int index)
+	{
+        return (origPosShapeOffsets != null && origPosShapeOffsets.Count - 1 >= index) ? origPosShapeOffsets[index] : Vector2.Zero;
+    }
+
+	private void OffsetFromOrigPos(int index)
+	{
+        Position = origPos + GetOrigPosOffset(index);
+	}
 
 	public int GetTileColour(Vector2I pos)
 	{
@@ -143,7 +183,7 @@ public partial class Pill : Node2D
 	public void ResetState()
 	{
 		if (origPos != Vector2.Zero)
-			Position = origPos;
+			Position = origPos + GetOrigPosOffset((int)pillShape);;
 
         SetRotation(0);
     }
@@ -210,7 +250,10 @@ public partial class Pill : Node2D
     }
 
 	protected void SetPillShape(PillShape pShape, bool skipRotatedTiles)
-	{		
+	{
+		if (pillShape != pShape)
+            OffsetFromOrigPos((int)pShape);
+
         pillShape = pShape;
 
         unrotatedTiles.Clear();
@@ -219,15 +262,21 @@ public partial class Pill : Node2D
 
 		// tiles with colour 0 will use main colour
 		// tiles with colour 1 will use main secondary colour
+
+		// DOUBLE (2x1)
 		if (pShape == PillShape.Double)
 		{
             unrotatedTiles.Add(Vector2I.Zero, new JarTileData(sourceID, new Vector2I(PillConstants.atlasLeft, 0)));
             unrotatedTiles.Add(Vector2I.Right, new JarTileData(sourceID, new Vector2I(PillConstants.atlasRight, 1)));
+            smallScale = 1;
         }
+		// SINGLE (1x1)
 		else if (pShape == PillShape.Single)
 		{
             unrotatedTiles.Add(Vector2I.Zero, new JarTileData(sourceID, new Vector2I(PillConstants.atlasSingle, 0)));
+            smallScale = 1;
         }
+		// L-PILL (DR. LUIGI)
 		else if (pShape == PillShape.Luigi)
 		{
 			// upper/vertical pill
@@ -237,13 +286,16 @@ public partial class Pill : Node2D
 			// lower/horizontal pill
 			unrotatedTiles.Add(Vector2I.Down, new JarTileData(sourceID, new Vector2I(PillConstants.atlasLeft, 0)));
             unrotatedTiles.Add(Vector2I.Down + Vector2I.Right, new JarTileData(sourceID, new Vector2I(PillConstants.atlasRight, 1)));
+            smallScale = 0.5f;
         }
+		// QUAD (2x2)
 		else
 		{
 			unrotatedTiles.Add(Vector2I.Zero, new JarTileData(sourceID, new Vector2I(PillConstants.atlasLeft, 0)));
             unrotatedTiles.Add(Vector2I.Right, new JarTileData(sourceID, new Vector2I(PillConstants.atlasRight, 0)));
 			unrotatedTiles.Add(Vector2I.Zero + Vector2I.Up, new JarTileData(sourceID, new Vector2I(PillConstants.atlasLeft, 0)));
             unrotatedTiles.Add(Vector2I.Right + Vector2I.Up, new JarTileData(sourceID, new Vector2I(PillConstants.atlasRight, 1)));
+            smallScale = 0.5f;
 		}
 
 		if (!skipRotatedTiles)

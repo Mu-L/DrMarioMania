@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=3 uid="uid://b2vcutf5f3jja"]
+[gd_scene load_steps=98 format=3 uid="uid://b2vcutf5f3jja"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/MenuScreenManager.cs" id="1_i7n64"]
 [ext_resource type="Script" path="res://Scripts/Menu/Screens/UpdateableSettingScreen.cs" id="2_ig0jp"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://cdx3w60jp1c15" path="res://Assets/Sprites/UI/ButtonIcons/SinglePlayerIcon.png" id="8_mdyyj"]
 [ext_resource type="Texture2D" uid="uid://bke0ljm3pmmab" path="res://Assets/Sprites/UI/ButtonIcons/MultiPlayerIcon.png" id="9_nkpne"]
 [ext_resource type="PackedScene" uid="uid://3igdbj037lt3" path="res://Assets/Prefabs/GameSettingsUI/GameSettingGameplayContainer.tscn" id="10_3cebr"]
+[ext_resource type="Script" path="res://Scripts/Menu/ChangeLogButton.cs" id="13_bgt3e"]
 [ext_resource type="Script" path="res://Scripts/Menu/Screens/MultiplayerPlayerScreen.cs" id="14_evqt7"]
 [ext_resource type="Resource" uid="uid://cwxx0untun2hu" path="res://Assets/Resources/ThemeList.tres" id="14_pe025"]
 [ext_resource type="Texture2D" uid="uid://wjvng62544bt" path="res://Assets/Sprites/Themes/Modern/BGMed.png" id="15_02jdi"]
@@ -377,48 +378,16 @@ grow_horizontal = 0
 grow_vertical = 1
 focus_neighbor_left = NodePath("../QuitButton")
 focus_neighbor_bottom = NodePath("../VBoxContainer/1PButton")
-text = "v1.1.1"
+text = "v0.0.0"
 icon = null
-title = "v1.1.1 - CHANGE LOG"
-description = "Basically just a hotfix for Android
+script = ExtResource("13_bgt3e")
+title = "v0.0.0 - CHANGE LOG"
+description = "GAMEPLAY:
 
-- Fixed low scroll deadzone, which made certain buttons hard to press
-
-- Fixed custom music for Android
-
-v1.1.0 CHANGES:
-
-GAMEPLAY:
-
-- Level pack 3 added with 8 new levels
-
-- Added new brick, hard brick, solid block and fire tiles to the editor
-
-- Single pill segments can now be placed in the editor
-
-AUDIO:
-
-- Added original remixes by gameboi64 for the Mania theme and credits menu (thank you!)
-
-- Added custom music option for loading MP3/OGGs
-
-- Added the 3 Mixed Match songs under the SNES category
-
-- Added a setting to make a custom level's music play throughout the editor (ON by default)
-
-VISUALS:
-
-- Added a visual setting to enable/disable the virus tile animations within the jar
-
-- Added a visual setting to enlarge the jar, ON by default on mobile (single player only)
-
-FIXES/IMPROVEMENTS:
-
-- Fixed inconsistent auto repeat when holding left or right while a pill enters the jar
-
-- Fixed free-drawing in the editor causing unwanted lines on mobile
-
-- Improved arrow key/d-pad navigation in the custom level menu"
+- Added new pill shapes:
+  - L-shape (Dr. Luigi)
+  - Single (1 tile)
+  - Square (2x2 tiles)"
 alignDescToLeft = true
 popUpGroup = NodePath("../../../PopUpGroup")
 

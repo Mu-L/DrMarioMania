@@ -595,7 +595,7 @@ public partial class JarManager : Node
 		PowerUpMeter.SetVisibility(PlayerGameSettings.IsUsingPowerUps);
 		uiMan.SetSpeedLabel(PlayerGameSettings.SpeedLevel);
 
-        pillMan.UpdateNextPillOrigPos();
+        pillMan.InitialiseNextPillVariables();
 
         if (customLevelTiles != null)
 			GenerateCustomLevel();
@@ -1215,6 +1215,7 @@ public partial class JarManager : Node
 			// If rainbow and not on a hazard, auto-activate power-up
 			if (pill.CentreSegmentColour == 0 && !IsTileHazard(centrePos))
 			{
+				SfxMan.Play("Land");
 				ActivatePowerUp(pill.CurrentPowerUp, pill.CentreSegmentColour, centrePos);
 
 				SetProcess(true);
@@ -1282,8 +1283,8 @@ public partial class JarManager : Node
 		// check for segments which should fall (ignoring ones to destroy)
 		foreach (Vector2I pos in positions)
 		{
-			// continue if cell below is solid OR tile already going to fall
-			if (!IsCellFree(pos + Vector2I.Down) || TilesToFallContainsPos(pos))
+			// continue if cell below is solid OR tile already going to fall/destroy
+			if (!IsCellFree(pos + Vector2I.Down) || TilesToFallContainsPos(pos) || TilesToDestroyContainsPos(pos))
                 continue;
 
 			// get connected segment pos (same as current pos is single)
@@ -1302,7 +1303,9 @@ public partial class JarManager : Node
 				if (conDownPos == pos || IsCellFree(connectedPos + Vector2I.Down))
 				{
 					AddTileToFall(pos);
-					AddTileToFall(connectedPos);
+					
+					if (!TilesToDestroyContainsPos(connectedPos))
+						AddTileToFall(connectedPos);
 				}
 			}
 		}

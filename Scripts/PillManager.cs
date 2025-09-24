@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using static PowerUpEnums;
 using static PillEnums;
 
+// Handles movement, rotation and activation of a player's falling pill
 public partial class PillManager : Node
 {
-	// handles movement, rotation and activation of a player's falling pill
 
 	[ExportGroup("Pills")]
 	[Export] private PillActive activePill;
@@ -124,8 +124,6 @@ public partial class PillManager : Node
 
 		// Set throwEndPos to activePill's current position (based on startGridPos)
 		throwEndPos = activePill.Position;
-		// Set same for throwHoldEndPos but using holdPill's orig pos
-		throwHoldEndPos = holdPill.OrigPos;
 
 		SetProcess(false);
 
@@ -172,9 +170,9 @@ public partial class PillManager : Node
 		throwRotateSpeed = 60.0f / (slowThrow ? 8.0f : 4.0f);
     }
 
-	public void UpdateNextPillOrigPos()
+	public void InitialiseNextPillVariables()
 	{
-        nextPill.SetOrigPosToCurrent();
+        nextPill.InitialiseVariables();
     }
 
 	public void RandomiseNextPillColours()
@@ -182,7 +180,7 @@ public partial class PillManager : Node
 		if (!nextPill.Visible)
 			nextPill.Visible = true;
 			
-		nextPill.SetRandomPillColours(jarMan.PossibleColours, PlayerGameSettings.OnlySingleColourPills, PillType.Regular, PillShape.Quad, jarMan.LocalRng);
+		nextPill.SetRandomPillColours(jarMan.PossibleColours, PlayerGameSettings.OnlySingleColourPills, PillType.Regular, PillShape.Luigi, jarMan.LocalRng);
 	}
 
 	private void ResetAllTimersAndResets()
@@ -268,7 +266,7 @@ public partial class PillManager : Node
 
 		if (justHeld)
 		{
-			throwHoldEndPos = holdPill.OrigPos;
+            throwHoldEndPos = holdPill.OrigPos + holdPill.GetOrigPosOffset((int)activePill.PillShape);
 
 			throwingPill2 = activePill;
 			throwingPill2.SetRotation(0);
@@ -350,6 +348,7 @@ public partial class PillManager : Node
 		{
 			holdPill.SetAttributes(activePillAttributes);
             holdPill.SetRotation(0);
+			holdPill.ResetScale();
         }
 
 		// Reset activePill's rotation and grid position
@@ -611,6 +610,13 @@ public partial class PillManager : Node
 			throwingPill.Position = throwStartPos;
             throwingPill.SetRotation(0);
 
+            throwingPill.ResetScale();
+
+            if (throwingPill2 != null)
+			{
+            	throwingPill2.ResetScale();
+			}
+
             ActivateNextPill();
 			return;
 		}
@@ -622,18 +628,19 @@ public partial class PillManager : Node
 		newPos.Y -= throwHeight * Mathf.Sin(throwProgress * Mathf.Pi);
 
 		throwingPill.Position = newPos;
+        throwingPill.InterpolatedScale(1.0f - throwProgress);
 
-		// If throwingPill2 exists, move it into hold slot
-		if (throwingPill2 != null)
+        // If throwingPill2 exists, move it into hold slot
+        if (throwingPill2 != null)
 		{
 			// Set throwingPill2 position along a downwards curve depending on throwProgress
 			Vector2 newPos2;
-
-			newPos2 = throwHoldStartPos * (1 - throwProgress) + throwHoldEndPos * throwProgress;
+            newPos2 = throwHoldStartPos * (1 - throwProgress) + throwHoldEndPos * throwProgress;
 			newPos2.Y += throwHeight * Mathf.Sin(throwProgress * Mathf.Pi);
 
 			throwingPill2.Position = newPos2;
-		}
+        	throwingPill2.InterpolatedScale(throwProgress);
+        }
 
 		// Rotate pill after throwRotateRate intervals
 		if (throwSpinProgress >= 1)

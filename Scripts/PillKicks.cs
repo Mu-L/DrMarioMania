@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using static PillEnums;
 
+// Handles pill offsets upon collisions - these are known as "kicks"
 public static class PillKicks
 {
     private static Vector2I[] v2hDoubleKicks = { Vector2I.Left };
