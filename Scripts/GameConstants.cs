@@ -36,6 +36,9 @@ public static class GameConstants
 	public static int NoOfPowerUps { get { return Enum.GetValues(typeof(PowerUpEnums.PowerUp)).Length; } }
 	public static int PowerUpTileSetWidth { get { return NoOfPowerUps + 1; } }
 
+	// number of pill shapes
+	public static int NoOfPillShapes { get { return Enum.GetValues(typeof(PillEnums.PillShape)).Length; } }
+
 	// number of object tiles AND no. of tiles making up the width of the object tileset
 	public const int noOfObjects = 4;
 	public const int objectTileSetWidth = 3;

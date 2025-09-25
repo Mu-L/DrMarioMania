@@ -62,6 +62,11 @@ layout_mode = 2
 text = "ITEMS"
 value = 4
 
+[node name="Button7" parent="MarginContainer/GameplayContainer" instance=ExtResource("3_2jvn8")]
+layout_mode = 2
+text = "PILL MIX"
+value = 6
+
 [node name="Button4" parent="MarginContainer/GameplayContainer" instance=ExtResource("3_2jvn8")]
 layout_mode = 2
 text = "CUSTOM"

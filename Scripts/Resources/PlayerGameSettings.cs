@@ -83,7 +83,7 @@ public partial class PlayerGameSettings : Resource
                     FasterAutoRepeat = false;
 
                     ClearPowerUps();
-                    SetPillShape(PillShape.Double);
+                    SetSinglePillShape(PillShape.Double);
 
                     break;
                 // quad
@@ -104,7 +104,7 @@ public partial class PlayerGameSettings : Resource
                     FasterAutoRepeat = true;
 
                     ClearPowerUps();
-                    SetPillShape(PillShape.Double);
+                    SetSinglePillShape(PillShape.Double);
 
                     break;
                 // custom
@@ -129,7 +129,7 @@ public partial class PlayerGameSettings : Resource
                     FasterAutoRepeat = true;
 
                     ClearPowerUps();
-                    SetPillShape(PillShape.Double);
+                    SetSinglePillShape(PillShape.Double);
 
                     for (int i = 0; i < Enum.GetValues<PowerUp>().Length; i++)
                     {
@@ -160,7 +160,33 @@ public partial class PlayerGameSettings : Resource
                     FasterAutoRepeat = true;
 
                     ClearPowerUps();
-                    SetPillShape(PillShape.Luigi);
+                    SetSinglePillShape(PillShape.Luigi);
+
+                    break;
+                // all pill shapes
+                case 6:
+                    if (!isCustomLevelSettings)
+                        ColourCount = 3;
+                    IsHoldEnabled = true;
+                    MinStreakLength = 4;
+                    GenerousLockDelay = true;
+                    AutoFallSpeed = 6;
+                    ImpatientMatching = true;
+                    FasterSoftDrop = false;
+                    FasterAutoFall = true;
+                    InstantSoftDropLock = false;
+                    NoFallSpeedIncrease = false;
+                    OnlySingleColourPills = false;
+                    PowerUpMeterMaxLevel = 16;
+                    FasterAutoRepeat = true;
+
+                    ClearPowerUps();
+
+                    AvailablePillShapes.Clear();
+                    for (int i = 0; i < GameConstants.NoOfPillShapes; i++)
+                    {
+                        AvailablePillShapes.Add((PillShape)i);
+                    }
 
                     break;
                 // modern (default)
@@ -181,7 +207,7 @@ public partial class PlayerGameSettings : Resource
                     FasterAutoRepeat = true;
                     
                     ClearPowerUps();
-                    SetPillShape(PillShape.Double);
+                    SetSinglePillShape(PillShape.Double);
                     
                     break;
             }
@@ -281,6 +307,11 @@ public partial class PlayerGameSettings : Resource
     [Export] public bool OnlySingleColourPills { get; set; }
     public List<PowerUp> AvailablePowerUps = new List<PowerUp>();
     public List<PowerUp> AvailableSpecialPowerUps = new List<PowerUp>();
+    private void ClearPowerUps()
+    {
+        AvailablePowerUps.Clear();
+        AvailableSpecialPowerUps.Clear();
+    }
     [Export] public int PowerUpMeterMaxLevel { get; set; }
     public bool FasterAutoRepeat
     {
@@ -303,16 +334,17 @@ public partial class PlayerGameSettings : Resource
     public float RepeatedMoveSpeed { get { return repeatedMoveSpeed; } }
     public List<PillShape> AvailablePillShapes = new List<PillShape> { PillShape.Double };
 
-    private void ClearPowerUps()
-    {
-        AvailablePowerUps.Clear();
-        AvailableSpecialPowerUps.Clear();
-    }
-
-    private void SetPillShape(PillShape shape)
+    private void SetSinglePillShape(PillShape shape)
     {
         AvailablePillShapes.Clear();
         AvailablePillShapes.Add(shape);
+    }
+
+    // If AvailablePillShapes is empty, add the double shape to it
+    public void FixAvailablePillShapes()
+    {
+        if (AvailablePillShapes.Count == 0)
+            AvailablePillShapes.Add(PillShape.Double);
     }
 
     private string BoolToString(bool b)

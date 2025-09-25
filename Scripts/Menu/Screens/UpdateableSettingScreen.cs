@@ -55,7 +55,7 @@ public partial class UpdateableSettingScreen : BaseScreen
 
 	protected virtual bool IsNodeFindable(Node node)
 	{
-		return node is GameSettingToggleButton or GameSettingSlider or GameSettingButtonGroup or GameSettingColourGroup or ThemePreview or GameSettingPowerUpContainer;
+		return node is GameSettingToggleButton or GameSettingSlider or GameSettingButtonGroup or GameSettingColourGroup or ThemePreview or GameSettingPowerUpContainer or GameSettingPillShapeContainer;
 	}
 
 	protected void RecursiveSearch(Node startNode)
@@ -97,6 +97,8 @@ public partial class UpdateableSettingScreen : BaseScreen
 			((ThemePreview)node).RefreshPreviewTextures();
 		else if (node is GameSettingPowerUpContainer)
 			((GameSettingPowerUpContainer)node).UpdateVisuals();
+		else if (node is GameSettingPillShapeContainer)
+			((GameSettingPillShapeContainer)node).UpdateVisuals();
 		else
 			return false;
 

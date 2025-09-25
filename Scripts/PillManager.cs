@@ -90,7 +90,10 @@ public partial class PillManager : Node
 	private bool debugMode = false;
 	private bool canSoftDrop = true;
 
+	// No. of pills used (including ones used from the hold slot and power-ups)
 	private int pillsUsed = 0;
+	// No. of pills used - ONLY counting ones thrown from the "next" slot
+	private int nextPillsUsed = 0;
 	private bool canUseDebugMode = false;
 
 	private bool IsActionJustPressed(string action)
@@ -149,6 +152,7 @@ public partial class PillManager : Node
 		holdPill.ResetState();
 
 		pillsUsed = 0;
+		nextPillsUsed = 0;
 
 		if (PlayerGameSettings.SpeedLevel == 2)
             fallSpeed = initialHiFallSpeed;
@@ -181,14 +185,18 @@ public partial class PillManager : Node
 		if (!nextPill.Visible)
 			nextPill.Visible = true;
 
+		// Get next pill shape using possibleShapes from PlayerGameSettings
         PillShape nextShape;
         List<PillShape> possibleShapes = PlayerGameSettings.AvailablePillShapes;
 
-        if (possibleShapes.Count == 1)
-            nextShape = possibleShapes[0];
+		// Fall back to double (2x1) if possibleShapes is empty
+        if (possibleShapes.Count == 0)
+            nextShape = PillShape.Double;
+		// Choose pill shape based on how many pills have been thrown from the "next" slot
 		else
-            nextShape = possibleShapes[jarMan.LocalRng.RandiRange(0, possibleShapes.Count - 1)];
+            nextShape = possibleShapes[nextPillsUsed % possibleShapes.Count];
 
+        // Randomise next pill colours with given shape
         nextPill.SetRandomPillColours(jarMan.PossibleColours, PlayerGameSettings.OnlySingleColourPills, PillType.Regular, nextShape, jarMan.LocalRng);
 	}
 
@@ -366,7 +374,10 @@ public partial class PillManager : Node
 
 		// If pill thrown was the pill thrown from mario, randomise its segments
 		if (throwingPill == nextPill)
+		{
+            nextPillsUsed++;
 			RandomiseNextPillColours();
+        }
 
 		ResetAllTimersAndResets();
 

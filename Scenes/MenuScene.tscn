@@ -385,10 +385,15 @@ script = ExtResource("13_bgt3e")
 title = "v0.0.0 - CHANGE LOG"
 description = "GAMEPLAY:
 
-- Added new pill shapes:
-  - L-shape (Dr. Luigi)
-  - Single (1 tile)
-  - Square (2x2 tiles)"
+- New gameplay styles:
+- - Dr. Luigi, featuring L-shaped pills
+- - Pill Mix, cycling through 4 unique pill shapes
+
+- Added toggleable pill shapes in the Custom Gameplay Style menu, including:
+- - Standard (2x1)
+- - L pills
+- - Single (1x1)
+- - Quad (2x2)"
 alignDescToLeft = true
 popUpGroup = NodePath("../../../PopUpGroup")
 
