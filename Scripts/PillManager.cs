@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using static PowerUpEnums;
 using static PillEnums;
+using System.Collections.Generic;
 
 // Handles movement, rotation and activation of a player's falling pill
 public partial class PillManager : Node
@@ -179,8 +180,16 @@ public partial class PillManager : Node
 	{
 		if (!nextPill.Visible)
 			nextPill.Visible = true;
-			
-		nextPill.SetRandomPillColours(jarMan.PossibleColours, PlayerGameSettings.OnlySingleColourPills, PillType.Regular, PillShape.Luigi, jarMan.LocalRng);
+
+        PillShape nextShape;
+        List<PillShape> possibleShapes = PlayerGameSettings.AvailablePillShapes;
+
+        if (possibleShapes.Count == 1)
+            nextShape = possibleShapes[0];
+		else
+            nextShape = possibleShapes[jarMan.LocalRng.RandiRange(0, possibleShapes.Count - 1)];
+
+        nextPill.SetRandomPillColours(jarMan.PossibleColours, PlayerGameSettings.OnlySingleColourPills, PillType.Regular, nextShape, jarMan.LocalRng);
 	}
 
 	private void ResetAllTimersAndResets()

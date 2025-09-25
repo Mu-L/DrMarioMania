@@ -47,6 +47,11 @@ layout_mode = 2
 text = "CLASSIC"
 value = 1
 
+[node name="Button6" parent="MarginContainer/GameplayContainer" instance=ExtResource("3_2jvn8")]
+layout_mode = 2
+text = "Dr.LUIGI"
+value = 5
+
 [node name="Button3" parent="MarginContainer/GameplayContainer" instance=ExtResource("3_2jvn8")]
 layout_mode = 2
 text = "QUAD"

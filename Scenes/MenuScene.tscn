@@ -235,6 +235,7 @@ popUpGroup = NodePath("../PopUpGroup")
 screenContainer = NodePath(".")
 
 [node name="MainScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -392,7 +393,6 @@ alignDescToLeft = true
 popUpGroup = NodePath("../../../PopUpGroup")
 
 [node name="GameplayScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

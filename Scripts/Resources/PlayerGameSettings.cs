@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using static PowerUpEnums;
+using static PillEnums;
 
 public partial class PlayerGameSettings : Resource
 {
@@ -43,6 +44,7 @@ public partial class PlayerGameSettings : Resource
             AvailableSpecialPowerUps = new List<PowerUp>(otherPlayer.AvailableSpecialPowerUps);
             PowerUpMeterMaxLevel = otherPlayer.PowerUpMeterMaxLevel;
             FasterAutoRepeat = otherPlayer.FasterAutoRepeat;
+            AvailablePillShapes = new List<PillShape>(otherPlayer.AvailablePillShapes);
         }
     }
 
@@ -80,6 +82,9 @@ public partial class PlayerGameSettings : Resource
                     PowerUpMeterMaxLevel = 16;
                     FasterAutoRepeat = false;
 
+                    ClearPowerUps();
+                    SetPillShape(PillShape.Double);
+
                     break;
                 // quad
                 case 2:
@@ -95,9 +100,11 @@ public partial class PlayerGameSettings : Resource
                     InstantSoftDropLock = false;
                     NoFallSpeedIncrease = false;
                     OnlySingleColourPills = false;
-                    ClearPowerUps();
                     PowerUpMeterMaxLevel = 16;
                     FasterAutoRepeat = true;
+
+                    ClearPowerUps();
+                    SetPillShape(PillShape.Double);
 
                     break;
                 // custom
@@ -118,9 +125,11 @@ public partial class PlayerGameSettings : Resource
                     InstantSoftDropLock = false;
                     NoFallSpeedIncrease = false;
                     OnlySingleColourPills = false;
-                    ClearPowerUps();
                     PowerUpMeterMaxLevel = 16;
                     FasterAutoRepeat = true;
+
+                    ClearPowerUps();
+                    SetPillShape(PillShape.Double);
 
                     for (int i = 0; i < Enum.GetValues<PowerUp>().Length; i++)
                     {
@@ -131,6 +140,27 @@ public partial class PlayerGameSettings : Resource
                     {
                         AvailableSpecialPowerUps.Add((PowerUp)i);
                     }
+
+                    break;
+                // luigi
+                case 5:
+                    if (!isCustomLevelSettings)
+                        ColourCount = 3;
+                    IsHoldEnabled = true;
+                    MinStreakLength = 4;
+                    GenerousLockDelay = true;
+                    AutoFallSpeed = 6;
+                    ImpatientMatching = true;
+                    FasterSoftDrop = false;
+                    FasterAutoFall = true;
+                    InstantSoftDropLock = false;
+                    NoFallSpeedIncrease = false;
+                    OnlySingleColourPills = false;
+                    PowerUpMeterMaxLevel = 16;
+                    FasterAutoRepeat = true;
+
+                    ClearPowerUps();
+                    SetPillShape(PillShape.Luigi);
 
                     break;
                 // modern (default)
@@ -151,6 +181,7 @@ public partial class PlayerGameSettings : Resource
                     FasterAutoRepeat = true;
                     
                     ClearPowerUps();
+                    SetPillShape(PillShape.Double);
                     
                     break;
             }
@@ -270,11 +301,18 @@ public partial class PlayerGameSettings : Resource
     public float FirstMoveSpeed { get { return firstMoveSpeed; } }
 	private float repeatedMoveSpeed;
     public float RepeatedMoveSpeed { get { return repeatedMoveSpeed; } }
+    public List<PillShape> AvailablePillShapes = new List<PillShape> { PillShape.Double };
 
     private void ClearPowerUps()
     {
         AvailablePowerUps.Clear();
         AvailableSpecialPowerUps.Clear();
+    }
+
+    private void SetPillShape(PillShape shape)
+    {
+        AvailablePillShapes.Clear();
+        AvailablePillShapes.Add(shape);
     }
 
     private string BoolToString(bool b)
@@ -342,6 +380,12 @@ public partial class PlayerGameSettings : Resource
 
             code += BoolToString(FasterAutoRepeat);
 
+            for (int i = 0; i < AvailablePillShapes.Count; i++)
+            {
+                code += (int)AvailablePillShapes[i];
+                if (i < AvailablePillShapes.Count - 1)
+                    code += subItemDivider;
+            }
         }
 
         return code;
@@ -425,6 +469,21 @@ public partial class PlayerGameSettings : Resource
                 if (codeChunks.Length > 17)
                 {
                     FasterAutoRepeat = StringToBool(codeChunks[17]);
+                }
+
+                if (codeChunks.Length > 18)
+                {
+                    string[] pillShapeData = codeChunks[18].Split(subItemDivider);
+
+                    AvailablePillShapes.Clear();
+
+                    if (pillShapeData[0] != "")
+                    {
+                        for (int i = 0; i < pillShapeData.Length; i++)
+                        {
+                            AvailablePillShapes.Add((PillShape)int.Parse(pillShapeData[i]));
+                        }
+                    }
                 }
             }
             // successful
