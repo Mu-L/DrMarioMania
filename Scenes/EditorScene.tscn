@@ -596,15 +596,19 @@ offset_bottom = 15.0
 grow_horizontal = 1
 grow_vertical = 1
 title = "GAMEPLAY STYLE"
-description = "Modern: Has hold slot and generous lock delay
+description = "MODERN: Has hold slot and generous lock delay
 
-Classic: Gameplay closer to older Dr. Mario games
+CLASSIC: Gameplay closer to older Dr. Mario games
 
-Quad: Modern with 4 colours
+Dr. LUIGI: Modern with L-shaped pills
 
-Items: Modern with power-ups
+QUAD: Modern with 4 colours
 
-Custom: Use custom game rules"
+ITEMS: Modern with power-ups
+
+PILL MIX: Modern with various pill shapes
+
+CUSTOM: Use custom game rules"
 alignDescToLeft = true
 popUpGroup = NodePath("../../../../../../../PopUpGroup")
 

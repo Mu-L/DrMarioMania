@@ -386,14 +386,17 @@ title = "v0.0.0 - CHANGE LOG"
 description = "GAMEPLAY:
 
 - New gameplay styles:
-- - Dr. Luigi, featuring L-shaped pills
-- - Pill Mix, cycling through 4 unique pill shapes
+  - Dr. Luigi, featuring
+    L-shaped pills
+  - Pill Mix, cycles
+    through 4 unique
+    pill shapes
 
 - Added toggleable pill shapes in the Custom Gameplay Style menu, including:
-- - Standard (2x1)
-- - L pills
-- - Single (1x1)
-- - Quad (2x2)"
+  - Standard (2x1)
+  - L pills
+  - Single (1x1)
+  - Quad (2x2)"
 alignDescToLeft = true
 popUpGroup = NodePath("../../../PopUpGroup")
 
@@ -583,15 +586,19 @@ offset_right = 17.0
 offset_bottom = -22.0
 grow_vertical = 2
 title = "GAMEPLAY STYLE"
-description = "Modern: Has hold slot and generous lock delay
+description = "MODERN: Has hold slot and generous lock delay
 
-Classic: Gameplay closer to older Dr. Mario games
+CLASSIC: Gameplay closer to older Dr. Mario games
 
-Quad: Modern with 4 colours
+Dr. LUIGI: Modern with L-shaped pills
 
-Items: Modern with power-ups
+QUAD: Modern with 4 colours
 
-Custom: Use custom game rules"
+ITEMS: Modern with power-ups
+
+PILL MIX: Modern with various pill shapes
+
+CUSTOM: Use custom game rules"
 alignDescToLeft = true
 popUpGroup = NodePath("../../../PopUpGroup")
 
@@ -1233,15 +1240,19 @@ offset_right = 14.0
 offset_bottom = 14.0
 grow_vertical = 2
 title = "GAMEPLAY STYLE"
-description = "Modern: Has hold slot and generous lock delay
+description = "MODERN: Has hold slot and generous lock delay
 
-Classic: Gameplay closer to older Dr. Mario games
+CLASSIC: Gameplay closer to older Dr. Mario games
 
-Quad: Modern with 4 colours
+Dr. LUIGI: Modern with L-shaped pills
 
-Items: Modern with power-ups
+QUAD: Modern with 4 colours
 
-Custom: Use custom game rules"
+ITEMS: Modern with power-ups
+
+PILL MIX: Modern with various pill shapes
+
+CUSTOM: Use custom game rules"
 alignDescToLeft = true
 popUpGroup = NodePath("../../../PopUpGroup")
 
