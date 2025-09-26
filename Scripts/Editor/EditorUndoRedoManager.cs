@@ -57,7 +57,7 @@ public partial class EditorUndoRedoManager : Node
         UpdateSelection(undoRedoSteps[currentUndoRedoStep - 1].OldSelectedTiles);
 
         currentUndoRedoStep--;
-        GD.Print("undid");
+        //GD.Print("undid");
     }
 
     public void Redo()
@@ -70,7 +70,7 @@ public partial class EditorUndoRedoManager : Node
 
 
         currentUndoRedoStep++;
-        GD.Print("redid");
+        //GD.Print("redid");
     }
 
     public void StartUndoRedoStep()
@@ -86,7 +86,7 @@ public partial class EditorUndoRedoManager : Node
         if (undoRedoSteps.Count - 1 > currentUndoRedoStep)
             undoRedoSteps.Insert(currentUndoRedoStep, new UndoRedoStep());
 
-        GD.Print("START STEP");
+        //GD.Print("START STEP");
     }
 
      // removes every undo/redo step after the current one
@@ -106,7 +106,7 @@ public partial class EditorUndoRedoManager : Node
             return;
         }
 
-        GD.Print("CANCEL STEP");
+        //GD.Print("CANCEL STEP");
 
         // if there are undo/redo states after the current one, remove the current empty undo/redo state
         if (undoRedoSteps.Count - 1 > currentUndoRedoStep)
@@ -147,6 +147,6 @@ public partial class EditorUndoRedoManager : Node
 
         isRecordingUndoRedoStep = false;
 
-        GD.Print("END STEP");
+        //GD.Print("END STEP");
     }
 }
