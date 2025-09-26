@@ -57,6 +57,13 @@ public partial class GameThemer : Node
 			jarMan.UIMan.UpdateJarTexture(commonGameSettings.CurrentTheme, themeList);
 		}
 	}
+	public void UpdateMarioSprite()
+	{
+		foreach (JarManager jarMan in gameMan.Jars)
+		{
+			jarMan.UIMan.UpdateMarioSprite(commonGameSettings.CurrentTheme, themeList);
+		}
+	}
 
 	private void UpdateCommonVisuals()
 	{

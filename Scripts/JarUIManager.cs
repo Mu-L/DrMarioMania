@@ -265,6 +265,12 @@ public partial class JarUIManager : Node
 		}
 	}
 
+	public void UpdateMarioSprite(int theme, ThemeList themeList)
+	{
+		string texStr = jarMan.PlayerGameSettings.UseLuigiSprite ? "DrLuigi" : "TheDoc";
+        mario.Texture = themeList.GetTexture(texStr, theme);
+	}
+
     public void UpdateJarVisuals(int theme, ThemeList themeList)
 	{		
 		if (origJarPositionY == -999)
@@ -448,9 +454,8 @@ public partial class JarUIManager : Node
 		
 		if (mario != null)
 		{
-            string texStr = jarMan.PlayerGameSettings.UseLuigiSprite ? "DrLuigi" : "TheDoc";
-            mario.Texture = themeList.GetTexture(texStr, theme);
-		}
+            UpdateMarioSprite(theme, themeList);
+        }
 
 		if (docBoxTexRec != null)
 			docBoxTexRec.Texture = themeList.GetTexture("DocBox", theme);

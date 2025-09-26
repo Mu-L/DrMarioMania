@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=3 uid="uid://b2vcutf5f3jja"]
+[gd_scene load_steps=103 format=3 uid="uid://b2vcutf5f3jja"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/MenuScreenManager.cs" id="1_i7n64"]
 [ext_resource type="Script" path="res://Scripts/Menu/Screens/UpdateableSettingScreen.cs" id="2_ig0jp"]
@@ -110,6 +110,8 @@ anti_aliasing = false
 [sub_resource type="ButtonGroup" id="ButtonGroup_8bdlw"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_3oko3"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_4u0so"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_5b5yk"]
 
@@ -628,7 +630,9 @@ grow_vertical = 2
 title = "SCORE KEEP"
 description = "Score Keep is when your score doesn't reset when progressing onto the next level.
 
-This is how older Dr. Mario games behave, but scores became level-specific since the Wii installment."
+This is how older Dr. Mario games behave, but scores became level-specific since the Wii installment.
+
+High score records with score keep on or off will be saved separately from each other."
 popUpGroup = NodePath("../../../PopUpGroup")
 
 [node name="BackButton" type="Button" parent="UILayer/MenuScreenManager/GameplayScreen"]
@@ -3597,6 +3601,21 @@ popUpGroup = NodePath("../../../../../../../PopUpGroup")
 
 [node name="OverrideColourContainer" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel" index="2"]
 doIntialSetup = true
+
+[node name="Button" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="0"]
+button_group = SubResource("ButtonGroup_4u0so")
+
+[node name="Button2" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="1"]
+button_group = SubResource("ButtonGroup_4u0so")
+
+[node name="Button3" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="2"]
+button_group = SubResource("ButtonGroup_4u0so")
+
+[node name="Button5" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="3"]
+button_group = SubResource("ButtonGroup_4u0so")
+
+[node name="Button4" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="4"]
+button_group = SubResource("ButtonGroup_4u0so")
 
 [node name="ModeSingleScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
 visible = false

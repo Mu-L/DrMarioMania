@@ -594,6 +594,9 @@ public partial class JarManager : Node
 		DisablePowerUpSpawning = false;
 		PowerUpMeter.SetVisibility(PlayerGameSettings.IsUsingPowerUps);
 		uiMan.SetSpeedLabel(PlayerGameSettings.SpeedLevel);
+		
+		if (!CommonGameSettings.IsMultiplayer)
+			GameThemer.UpdateMarioSprite();
 
         pillMan.InitialiseNextPillVariables();
 
