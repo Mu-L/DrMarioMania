@@ -81,6 +81,11 @@ text = "GB
 B&W"
 value = 7
 
+[node name="Button10" parent="MarginContainer/ThemeContainer" instance=ExtResource("3_1s8ju")]
+layout_mode = 2
+text = "SMB1"
+value = 10
+
 [node name="Button9" parent="MarginContainer/ThemeContainer" instance=ExtResource("3_1s8ju")]
 layout_mode = 2
 text = "WHATSAPP"

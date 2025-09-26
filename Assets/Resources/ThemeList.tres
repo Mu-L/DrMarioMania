@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource("1_avnkq")
-themeFolderNames = Array[String](["Modern", "NES", "SNES", "ModernSNES", "GBC", "GB", "GBP", "GBGreyscale", "N64", "WhatsApp"])
+themeFolderNames = Array[String](["Modern", "NES", "SNES", "ModernSNES", "GBC", "GB", "GBP", "GBGreyscale", "N64", "WhatsApp", "SMB1"])

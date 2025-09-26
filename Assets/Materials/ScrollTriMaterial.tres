@@ -5,4 +5,4 @@
 [resource]
 shader = ExtResource("1_hnaye")
 shader_parameter/speed = Vector2(0.1, 0)
-shader_parameter/opacity = 0.4
+shader_parameter/opacity = 0.3

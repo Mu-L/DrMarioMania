@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://up7l7b7sr6ch"]
+[gd_scene load_steps=44 format=3 uid="uid://up7l7b7sr6ch"]
 
 [ext_resource type="Script" path="res://Scripts/PauseManager.cs" id="1_40uu0"]
 [ext_resource type="Material" uid="uid://d0mvlpdi7fs7q" path="res://Assets/Materials/BlurMaterial.tres" id="1_eplak"]
@@ -39,6 +39,8 @@
 [sub_resource type="ButtonGroup" id="ButtonGroup_bfh0x"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_fqxxv"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_o2we1"]
 
 [sub_resource type="Animation" id="Animation_fmwac"]
 resource_name = "Hide"
@@ -358,7 +360,10 @@ button_group = SubResource("ButtonGroup_fqxxv")
 [node name="Button3" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="2"]
 button_group = SubResource("ButtonGroup_fqxxv")
 
-[node name="Button4" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="3"]
+[node name="Button5" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="3"]
+button_group = SubResource("ButtonGroup_o2we1")
+
+[node name="Button4" parent="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="4"]
 button_group = SubResource("ButtonGroup_fqxxv")
 
 [node name="PauseAniPlayer" type="AnimationPlayer" parent="PauseLayer"]

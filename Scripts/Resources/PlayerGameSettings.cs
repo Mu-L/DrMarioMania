@@ -543,4 +543,12 @@ public partial class PlayerGameSettings : Resource
     
     // whether or not this player is using any power-ups
     public bool IsUsingPowerUps { get { return AvailablePowerUps.Count != 0 || AvailableSpecialPowerUps.Count != 0; } }
+    // whether or not the dr luigi sprite should be used over mario
+    public bool UseLuigiSprite
+    {
+        get
+        {
+            return AvailablePillShapes.Contains(PillShape.Luigi) && AvailablePillShapes.Count == 1;
+        }
+    }
 }

@@ -49,11 +49,20 @@ public partial class GameThemer : Node
 	{
 		bgTexture.Texture = themeList.GetBgTilesTexture(commonGameSettings.CurrentPlayerGameSettings.SpeedLevel, commonGameSettings.CurrentTheme);
 	}
+	
+	public void UpdateJarTexture()
+	{
+		foreach (JarManager jarMan in gameMan.Jars)
+		{
+			jarMan.UIMan.UpdateJarTexture(commonGameSettings.CurrentTheme, themeList);
+		}
+	}
 
 	private void UpdateCommonVisuals()
 	{
 		UpdateBackground();
-	}
+        UpdateJarTexture();
+    }
 
 	private void UpdateSoundEffects()
 	{

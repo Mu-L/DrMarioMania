@@ -15,6 +15,7 @@ public partial class GameSettingEditorFallSpeedButtonGroup : GameSettingButtonGr
 		{
 			buttons[i].Pressed += () => themePreview.RefreshPreviewTextures();
 			buttons[i].Pressed += () => gameThemer.UpdateBackground();
+			buttons[i].Pressed += () => gameThemer.UpdateJarTexture();
 		}
     }
 }

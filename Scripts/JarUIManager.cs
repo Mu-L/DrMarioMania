@@ -256,6 +256,15 @@ public partial class JarUIManager : Node
 		}
 	}
 
+	public void UpdateJarTexture(int theme, ThemeList themeList)
+	{
+		Texture2D jarTex = themeList.GetJarTexture(jarMan.SpeedLevel, theme, IsMultiplayer);
+		foreach (NinePatchRect rect in jarRects)
+		{
+			rect.Texture = jarTex;
+		}
+	}
+
     public void UpdateJarVisuals(int theme, ThemeList themeList)
 	{		
 		if (origJarPositionY == -999)
@@ -335,7 +344,9 @@ public partial class JarUIManager : Node
 
 			if (themeList.GetUseLabelShadow(theme))
 			{
-				label.AddThemeColorOverride("font_shadow_color", new Color(0, 0, 0, 103.0f / 255.0f));
+                float opacity = 103.0f / 255.0f;
+
+                label.AddThemeColorOverride("font_shadow_color", new Color(0, 0, 0, opacity));
 				label.AddThemeConstantOverride("shadow_outline_size", 0);
 				label.AddThemeConstantOverride("shadow_offset_x", 1);
 				label.AddThemeConstantOverride("shadow_offset_y", 1);
@@ -364,13 +375,9 @@ public partial class JarUIManager : Node
 		if (holdGroupRect != null)
 			holdGroupRect.Texture = themeList.GetTexture("HoldGroupBg", theme);
 
-		Texture2D jarTex = themeList.GetJarTexture(jarMan.SpeedLevel, theme, IsMultiplayer);
-		foreach (NinePatchRect rect in jarRects)
-		{
-			rect.Texture = jarTex;
-		}
+        UpdateJarTexture(theme, themeList);
 
-		if (IsMultiplayer)
+        if (IsMultiplayer)
 			jarGroup.Position = Vector2.Right * jarGroup.Position.X + Vector2.Down * (origJarPositionY + multiplayerJarOffset);
 		else
 			jarGroup.Position = Vector2.Right * jarGroup.Position.X + Vector2.Down * (origJarPositionY + themeList.GetJarOffset(theme));
@@ -440,7 +447,10 @@ public partial class JarUIManager : Node
 		}
 		
 		if (mario != null)
-			mario.Texture = themeList.GetTexture("TheDoc", theme);
+		{
+            string texStr = jarMan.PlayerGameSettings.UseLuigiSprite ? "DrLuigi" : "TheDoc";
+            mario.Texture = themeList.GetTexture(texStr, theme);
+		}
 
 		if (docBoxTexRec != null)
 			docBoxTexRec.Texture = themeList.GetTexture("DocBox", theme);

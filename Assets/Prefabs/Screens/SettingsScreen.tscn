@@ -579,7 +579,7 @@ script = ExtResource("9_ymv8w")
 firstButton = NodePath("VBoxContainer/AddContainer/AddButton")
 themeContainer = NodePath("VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer")
 firstActiveIcon = NodePath("VBoxContainer/Panel/ActiveContainer/ActiveColour")
-previewThemes = Array[int]([0, 1, 6, 9])
+previewThemes = Array[int]([0, 1, 6, 9, 10])
 themeList = ExtResource("10_1k6cy")
 commonGameSettings = ExtResource("11_dmxr5")
 
@@ -645,6 +645,16 @@ mouse_filter = 1
 toggle_mode = true
 button_group = SubResource("ButtonGroup_g80eo")
 text = "GAMEBOY"
+
+[node name="Button5" type="Button" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer"]
+custom_minimum_size = Vector2(13, 14)
+layout_mode = 2
+focus_neighbor_top = NodePath("../../../../../../../PopUpButton")
+focus_neighbor_bottom = NodePath("../../../../../Control/ClearButton")
+mouse_filter = 1
+toggle_mode = true
+button_group = SubResource("ButtonGroup_g80eo")
+text = "SMB1"
 
 [node name="Button4" type="Button" parent="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer"]
 custom_minimum_size = Vector2(13, 14)
@@ -763,5 +773,6 @@ icon = ExtResource("4_o54ul")
 [connection signal="pressed" from="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer/Button" to="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer" method="SetColourOrder" binds= [0]]
 [connection signal="pressed" from="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer/Button2" to="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer" method="SetColourOrder" binds= [1]]
 [connection signal="pressed" from="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer/Button3" to="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer" method="SetColourOrder" binds= [2]]
+[connection signal="pressed" from="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer/Button5" to="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer" method="SetColourOrder" binds= [4]]
 [connection signal="pressed" from="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer/Button4" to="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer" method="SetColourOrder" binds= [3]]
 [connection signal="pressed" from="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/Control/ClearButton" to="PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer" method="ClearOverrideColours"]

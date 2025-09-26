@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=3 uid="uid://b2vcutf5f3jja"]
+[gd_scene load_steps=102 format=3 uid="uid://b2vcutf5f3jja"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/MenuScreenManager.cs" id="1_i7n64"]
 [ext_resource type="Script" path="res://Scripts/Menu/Screens/UpdateableSettingScreen.cs" id="2_ig0jp"]
@@ -88,6 +88,11 @@
 [ext_resource type="Resource" uid="uid://bg0t1x05maugm" path="res://Assets/Resources/OfficialCustomLevelList.tres" id="75_8f8n1"]
 [ext_resource type="PackedScene" uid="uid://bfcv2361x0ono" path="res://Assets/Prefabs/OfficialCustomLevelPanel.tscn" id="75_nsn7q"]
 [ext_resource type="PackedScene" uid="uid://dejlotb7w8jno" path="res://Assets/Prefabs/MusicPreviewPlayer.tscn" id="80_slce4"]
+[ext_resource type="Material" uid="uid://bvhh10ltuo7ek" path="res://Assets/Materials/ScrollLogoMaterial.tres" id="86_gsitc"]
+[ext_resource type="Material" uid="uid://bh1ol4li58slp" path="res://Assets/Materials/ScrollLogoRMaterial.tres" id="86_nt1we"]
+[ext_resource type="Texture2D" uid="uid://be71jeucs25n8" path="res://Assets/Sprites/BG/BGLogo.png" id="87_f03wr"]
+[ext_resource type="Material" uid="uid://eegvnpx7u4ly" path="res://Assets/Materials/ScrollTriMaterial.tres" id="89_hlvur"]
+[ext_resource type="Texture2D" uid="uid://dpgxpp410sva4" path="res://Assets/Sprites/BG/BGFrontTriangle.png" id="90_xqjg4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rwg2g"]
 content_margin_left = 4.0
@@ -105,8 +110,6 @@ anti_aliasing = false
 [sub_resource type="ButtonGroup" id="ButtonGroup_8bdlw"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_3oko3"]
-
-[sub_resource type="ButtonGroup" id="ButtonGroup_0cckv"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_5b5yk"]
 
@@ -392,11 +395,21 @@ description = "GAMEPLAY:
     through 4 unique
     pill shapes
 
-- Added toggleable pill shapes in the Custom Gameplay Style menu, including:
+- Added 4 toggleable pill shapes in the Custom Gameplay Style menu:
   - Standard (2x1)
   - L pills
   - Single (1x1)
-  - Quad (2x2)"
+  - Quad (2x2)
+
+VISUALS:
+
+- New main menu background visuals
+- Added Super Mario Bros. theme
+- Added shading to the Modern virus magnifying glass sprites
+
+FIXES:
+
+- Fixed jar texture not updating when changing the fall speed in the editor"
 alignDescToLeft = true
 popUpGroup = NodePath("../../../PopUpGroup")
 
@@ -3585,18 +3598,6 @@ popUpGroup = NodePath("../../../../../../../PopUpGroup")
 [node name="OverrideColourContainer" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel" index="2"]
 doIntialSetup = true
 
-[node name="Button" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="0"]
-button_group = SubResource("ButtonGroup_0cckv")
-
-[node name="Button2" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="1"]
-button_group = SubResource("ButtonGroup_0cckv")
-
-[node name="Button3" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="2"]
-button_group = SubResource("ButtonGroup_0cckv")
-
-[node name="Button4" parent="UILayer/MenuScreenManager/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="3"]
-button_group = SubResource("ButtonGroup_0cckv")
-
 [node name="ModeSingleScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
 visible = false
 layout_mode = 1
@@ -4234,6 +4235,52 @@ grow_vertical = 2
 texture = ExtResource("6_i5e12")
 stretch_mode = 1
 metadata/_edit_lock_ = true
+
+[node name="ScrollingLogoBottom" type="TextureRect" parent="BackgroundLayer"]
+material = ExtResource("86_nt1we")
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -64.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("87_f03wr")
+stretch_mode = 1
+
+[node name="ScrollingLogoTop" type="TextureRect" parent="BackgroundLayer"]
+material = ExtResource("86_gsitc")
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 32.0
+offset_bottom = 64.0
+grow_horizontal = 2
+texture = ExtResource("87_f03wr")
+stretch_mode = 1
+
+[node name="ScrollingTriTop" type="TextureRect" parent="BackgroundLayer"]
+material = ExtResource("89_hlvur")
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 20.0
+grow_horizontal = 2
+texture = ExtResource("90_xqjg4")
+stretch_mode = 1
+
+[node name="ScrollingTriBottom" type="TextureRect" parent="BackgroundLayer"]
+material = ExtResource("89_hlvur")
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("90_xqjg4")
+stretch_mode = 1
+flip_h = true
+flip_v = true
 
 [node name="TransitionLayer" type="CanvasLayer" parent="."]
 layer = 2
