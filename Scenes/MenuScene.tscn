@@ -396,23 +396,30 @@ description = "GAMEPLAY:
   - Pill Mix, cycles
     through 4 unique
     pill shapes
+
 - Added 4 toggleable pill shapes in the Custom Gameplay Style menu:
   - Standard (2x1)
   - L pills
   - Single (1x1)
   - Quad (2x2)
+
 - New level pack added
+
 - Nerfed \"Rainbow Road\" level
 
 VISUALS:
 
 - New main menu background visuals
+
 - Added Super Mario Bros. theme
+
 - Added shading to the Modern virus magnifying glass sprites
 
 FIXES:
 
-- Fixed jar texture not updating when changing the fall speed in the editor"
+- Fixed jar texture not updating when changing the fall speed in the editor
+
+- Fixed a bug where exiting edit mode while destroying a tile with a power-up causes it to remain it in the editor in a half-destroyed state"
 alignDescToLeft = true
 popUpGroup = NodePath("../../../PopUpGroup")
 
