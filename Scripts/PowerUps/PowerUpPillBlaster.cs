@@ -9,7 +9,8 @@ public partial class PowerUpPillBlaster : BaseInstantPowerUp
 		if (colour == 0)
 			sfxMan.Play("PillMatch");
 		
-		jarMan.DestroyAllPillSegments(colour);
+		if (!IsQueuedForDeletion())
+			jarMan.DestroyAllPillSegments(colour);
         base._Ready();
 	}
 }

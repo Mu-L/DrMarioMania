@@ -9,7 +9,8 @@ public partial class PowerUpVirusBlaster : BaseInstantPowerUp
 		if (colour == 0)
 			sfxMan.Play("VirusMatch");
 		
-		jarMan.DestroyAllViruses(colour);
+		if (!IsQueuedForDeletion())
+			jarMan.DestroyAllViruses(colour);
         base._Ready();
 	}
 }

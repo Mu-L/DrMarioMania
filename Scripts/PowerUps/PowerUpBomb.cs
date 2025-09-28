@@ -15,6 +15,9 @@ public partial class PowerUpBomb : BasePowerUp
 
     private void DestroyTiles()
     {
+        if (IsQueuedForDeletion())
+            return;
+            
         for (int y = -radius; y < radius + 1; y++)
         {
 		    for (int x = -radius; x < radius + 1; x++)
