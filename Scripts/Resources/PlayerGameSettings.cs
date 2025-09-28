@@ -321,6 +321,7 @@ public partial class PlayerGameSettings : Resource
         }
         set
         {
+            GD.Print("setting far:" + value);
             fasterAutoRepeat = value;
 
             firstMoveSpeed = value ? 6 : 3.75f;
@@ -408,9 +409,14 @@ public partial class PlayerGameSettings : Resource
 
             code += itemDivider;
 
-            code += PowerUpMeterMaxLevel + itemDivider;
+            code += PowerUpMeterMaxLevel;
+
+            code += itemDivider;
 
             code += BoolToString(FasterAutoRepeat);
+            GD.Print("adding far to code:" + fasterAutoRepeat);
+
+            code += itemDivider;
 
             for (int i = 0; i < AvailablePillShapes.Count; i++)
             {
@@ -498,12 +504,13 @@ public partial class PlayerGameSettings : Resource
 
                 PowerUpMeterMaxLevel = int.Parse(codeChunks[16]);
 
-                if (codeChunks.Length > 17)
+                if (codeChunks.Length > 16)
                 {
+                    GD.Print("FAR: " + codeChunks[17]);
                     FasterAutoRepeat = StringToBool(codeChunks[17]);
                 }
 
-                if (codeChunks.Length > 18)
+                if (codeChunks.Length > 17)
                 {
                     string[] pillShapeData = codeChunks[18].Split(subItemDivider);
 
