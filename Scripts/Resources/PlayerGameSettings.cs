@@ -502,12 +502,12 @@ public partial class PlayerGameSettings : Resource
 
                 PowerUpMeterMaxLevel = int.Parse(codeChunks[16]);
 
-                if (codeChunks.Length > 16)
+                if (codeChunks.Length > 17)
                 {
                     FasterAutoRepeat = StringToBool(codeChunks[17]);
                 }
 
-                if (codeChunks.Length > 17)
+                if (codeChunks.Length > 18)
                 {
                     string[] pillShapeData = codeChunks[18].Split(subItemDivider);
 
