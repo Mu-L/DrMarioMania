@@ -3273,7 +3273,7 @@ offset_top = 84.0
 offset_right = 220.0
 offset_bottom = 100.0
 mouse_filter = 1
-text = "gameboi64"
+text = "nethersei"
 
 [node name="BackButton" type="Button" parent="UILayer/MenuScreenManager/CreditsScreen"]
 layout_mode = 1
