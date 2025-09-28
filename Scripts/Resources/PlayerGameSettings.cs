@@ -321,7 +321,6 @@ public partial class PlayerGameSettings : Resource
         }
         set
         {
-            GD.Print("setting far:" + value);
             fasterAutoRepeat = value;
 
             firstMoveSpeed = value ? 6 : 3.75f;
@@ -414,7 +413,6 @@ public partial class PlayerGameSettings : Resource
             code += itemDivider;
 
             code += BoolToString(FasterAutoRepeat);
-            GD.Print("adding far to code:" + fasterAutoRepeat);
 
             code += itemDivider;
 
@@ -506,7 +504,6 @@ public partial class PlayerGameSettings : Resource
 
                 if (codeChunks.Length > 16)
                 {
-                    GD.Print("FAR: " + codeChunks[17]);
                     FasterAutoRepeat = StringToBool(codeChunks[17]);
                 }
 
