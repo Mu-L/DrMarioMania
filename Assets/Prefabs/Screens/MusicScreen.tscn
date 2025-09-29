@@ -708,6 +708,68 @@ layout_mode = 2
 text = "GLACIAL STAGE"
 value = 49
 
+[node name="MarioKartLabel" type="Control" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+custom_minimum_size = Vector2(0, 11)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="CategoryLabel" type="Label" parent="SongCategoryContainer/MarginContainer/SongCategories/MarioKartLabel"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 241.0
+offset_bottom = 9.0
+text = "Mario Kart"
+
+[node name="FlowContainer18" type="FlowContainer" parent="SongCategoryContainer/MarginContainer/SongCategories"]
+layout_mode = 2
+
+[node name="Button3" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer18" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "SNES BATTLE"
+value = 75
+
+[node name="Button4" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer18" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "SNES RAINBOW"
+value = 76
+
+[node name="Button5" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer18" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "DK SUMMIT"
+value = 77
+
+[node name="Button6" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer18" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "GRUMBLE VOLCANO"
+value = 78
+
+[node name="Button7" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer18" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "SUNSHINE AIRPORT"
+value = 79
+
+[node name="Button2" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer18" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "CROWN CITY"
+value = 74
+
+[node name="Button9" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer18" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "FARAWAY OASIS"
+value = 81
+
+[node name="Button8" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer18" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "ACORN HEIGHTS"
+value = 80
+
+[node name="Button" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer18" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "MK7 CREDITS"
+value = 73
+
 [node name="MiscLabel" type="Control" parent="SongCategoryContainer/MarginContainer/SongCategories"]
 custom_minimum_size = Vector2(0, 11)
 layout_mode = 2
@@ -729,6 +791,16 @@ layout_mode = 2
 layout_mode = 2
 text = "DEEP FREEZE (DDR)"
 value = 58
+
+[node name="Button10" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer14" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "GREENHORN RUINS (WARIO)"
+value = 82
+
+[node name="Button11" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer14" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "SAVANNA (3D WORLD)"
+value = 83
 
 [node name="Button8" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer14" instance=ExtResource("4_vsqyw")]
 layout_mode = 2

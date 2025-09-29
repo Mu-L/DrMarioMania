@@ -403,7 +403,7 @@ description = "GAMEPLAY:
   - Single (1x1)
   - Quad (2x2)
 
-- New level pack added
+- New level pack containing 8 levels added
 
 - Nerfed \"Rainbow Road\" level
 
@@ -415,6 +415,12 @@ VISUALS:
 
 - Added shading to the Modern virus magnifying glass sprites
 
+AUDIO:
+
+- 11 new songs:
+- - 9 Mario Kart tracks
+- - 2 misc. tracks
+
 FIXES:
 
 - Fixed jar texture not updating when changing the fall speed in the editor
@@ -424,6 +430,7 @@ alignDescToLeft = true
 popUpGroup = NodePath("../../../PopUpGroup")
 
 [node name="GameplayScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -4087,7 +4094,6 @@ text = "BACK"
 icon = ExtResource("8_3vacb")
 
 [node name="OfficialCustomLevelScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -4188,6 +4194,12 @@ layout_mode = 2
 toggle_mode = true
 button_group = SubResource("ButtonGroup_5b5yk")
 text = "PACK 3"
+
+[node name="Button4" type="Button" parent="UILayer/MenuScreenManager/OfficialCustomLevelScreen/HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_5b5yk")
+text = "PACK 4"
 
 [node name="NotificationBox" type="Control" parent="UILayer" node_paths=PackedStringArray("aniPlayer", "audioPlayer", "label")]
 visible = false
@@ -4401,6 +4413,7 @@ normalMusicPlayer = NodePath("../MusicPlayer")
 [connection signal="pressed" from="UILayer/MenuScreenManager/OfficialCustomLevelScreen/HBoxContainer/Button" to="UILayer/MenuScreenManager/OfficialCustomLevelScreen/CustomLevelPanelContainer" method="SetPage" binds= [0]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/OfficialCustomLevelScreen/HBoxContainer/Button2" to="UILayer/MenuScreenManager/OfficialCustomLevelScreen/CustomLevelPanelContainer" method="SetPage" binds= [1]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/OfficialCustomLevelScreen/HBoxContainer/Button3" to="UILayer/MenuScreenManager/OfficialCustomLevelScreen/CustomLevelPanelContainer" method="SetPage" binds= [2]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/OfficialCustomLevelScreen/HBoxContainer/Button4" to="UILayer/MenuScreenManager/OfficialCustomLevelScreen/CustomLevelPanelContainer" method="SetPage" binds= [3]]
 
 [editable path="UILayer/MenuScreenManager/GameplayScreen/GameplayScrollContainer"]
 [editable path="UILayer/MenuScreenManager/VisualsScreen/ThemeScrollContainer"]
