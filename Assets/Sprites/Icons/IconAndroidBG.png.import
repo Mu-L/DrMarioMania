@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfrntgup7c2w5"
-path="res://.godot/imported/BGMenu.png-8fd7c99b03bec5002e23f667e78f9727.ctex"
+uid="uid://d37fmpjrxptad"
+path="res://.godot/imported/IconAndroidBG.png-ea5b176d20737d369b030354dd4ef86b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/BGMenu.png"
-dest_files=["res://.godot/imported/BGMenu.png-8fd7c99b03bec5002e23f667e78f9727.ctex"]
+source_file="res://Assets/Sprites/Icons/IconAndroidBG.png"
+dest_files=["res://.godot/imported/IconAndroidBG.png-ea5b176d20737d369b030354dd4ef86b.ctex"]
 
 [params]
 

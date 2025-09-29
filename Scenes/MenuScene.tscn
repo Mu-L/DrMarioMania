@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dyijwdbglbgly" path="res://Assets/Prefabs/GameSettingsUI/GameSettingSlider.tscn" id="4_kvqyp"]
 [ext_resource type="Material" uid="uid://do6pci8chvuax" path="res://Assets/Materials/ScrollRainbowMaterial.tres" id="5_m231i"]
 [ext_resource type="Script" path="res://Scripts/Menu/GameSettingUI/GameSettingButtonGroup.cs" id="5_vf7kc"]
-[ext_resource type="Texture2D" uid="uid://cfrntgup7c2w5" path="res://Assets/Sprites/BGMenu.png" id="6_i5e12"]
+[ext_resource type="Texture2D" uid="uid://cfrntgup7c2w5" path="res://Assets/Sprites/BG/BGMenu.png" id="6_i5e12"]
 [ext_resource type="PackedScene" uid="uid://cg3ssstpw3jum" path="res://Assets/Prefabs/GameSettingsUI/GameSettingButton.tscn" id="7_a10ok"]
 [ext_resource type="Script" path="res://Scripts/Menu/GameSettingUI/GameSettingColourGroup.cs" id="8_1bveu"]
 [ext_resource type="Texture2D" uid="uid://kqh3uxtqxbxw" path="res://Assets/Sprites/UI/ButtonIcons/BackIcon.png" id="8_3vacb"]
@@ -414,6 +414,8 @@ VISUALS:
 - Added Super Mario Bros. theme
 
 - Added shading to the Modern virus magnifying glass sprites
+
+- New icon for Android
 
 AUDIO:
 
