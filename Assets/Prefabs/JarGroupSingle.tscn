@@ -508,21 +508,21 @@ theme_override_font_sizes/font_size = 8
 text = "0"
 horizontal_alignment = 2
 
-[node name="NextPill" parent="." index="7"]
+[node name="NextPill" parent="." index="8"]
 position = Vector2(66, -54)
 origPosShapeOffsets = Array[Vector2]([Vector2(0, 0), Vector2(0, -8), Vector2(0, 0), Vector2(0, 0)])
 
-[node name="HoldPill" parent="." index="8"]
+[node name="HoldPill" parent="." index="9"]
 position = Vector2(-67, 4)
 origPosShapeOffsets = Array[Vector2]([Vector2(0, 0), Vector2(6, 0), Vector2(8, 0), Vector2(6, 2)])
 
-[node name="PowerUpIcon" parent="." index="10"]
+[node name="PowerUpIcon" parent="." index="11"]
 position = Vector2(32, -66)
 
-[node name="PowerUpPill" parent="." index="11"]
+[node name="PowerUpPill" parent="." index="12"]
 position = Vector2(32, -66)
 
-[node name="UIManager" parent="." index="13" node_paths=PackedStringArray("scoreLabel", "highScoreLabel", "levelLabel", "speedLabel", "virusLabel", "holdLabel", "uiBoxes", "uiLabels", "uiLightLabels", "uiShadows", "mario", "virusRing", "docBoxTexRec", "holdGroupRect", "hudGroup", "topLeftHud", "holdGroup", "rightHudGroup", "leftAlignedNodes", "rightAlignedNodes", "leftAlignedPills", "rightAlignedPills")]
+[node name="UIManager" parent="." index="14" node_paths=PackedStringArray("scoreLabel", "highScoreLabel", "levelLabel", "speedLabel", "virusLabel", "holdLabel", "uiBoxes", "uiLabels", "uiLightLabels", "uiShadows", "mario", "virusRing", "docBoxTexRec", "holdGroupRect", "hudGroup", "topLeftHud", "holdGroup", "rightHudGroup", "leftAlignedNodes", "rightAlignedNodes", "leftAlignedPills", "rightAlignedPills")]
 scoreLabel = NodePath("../HUD/LeftGroup/TopLeftHUD/ScoreLabel")
 highScoreLabel = NodePath("../HUD/LeftGroup/TopLeftHUD/HighScoreLabel")
 levelLabel = NodePath("../HUD/RightGroup/BottomRightHUD/LevelLabel")
@@ -532,7 +532,7 @@ holdLabel = NodePath("../HUD/LeftGroup/TopLeftHUD/HoldGroup/HoldTitle")
 uiBoxes = [NodePath("../HUD/LeftGroup/TopLeftHUD/UIBox"), NodePath("../HUD/RightGroup/BottomRightHUD/UIBox")]
 uiLabels = [NodePath("../HUD/LeftGroup/TopLeftHUD/ScoreTitle"), NodePath("../HUD/LeftGroup/TopLeftHUD/ScoreLabel"), NodePath("../HUD/RightGroup/BottomRightHUD/LevelTitle"), NodePath("../HUD/RightGroup/BottomRightHUD/LevelLabel"), NodePath("../HUD/RightGroup/BottomRightHUD/SpeedTitle"), NodePath("../HUD/RightGroup/BottomRightHUD/SpeedLabel"), NodePath("../HUD/RightGroup/BottomRightHUD/VirusTitle"), NodePath("../HUD/RightGroup/BottomRightHUD/VirusLabel"), NodePath("../Overlay/OverlayTitle"), NodePath("../HUD/LeftGroup/TopLeftHUD/HighScoreTitle"), NodePath("../HUD/LeftGroup/TopLeftHUD/HighScoreLabel"), NodePath("../HUD/LeftGroup/TopLeftHUD/HoldGroup/HoldTitle")]
 uiLightLabels = [NodePath("../HUD/LeftGroup/TopLeftHUD/HoldGroup/HoldTitle")]
-uiShadows = [NodePath("../JarShadow"), NodePath("../HUD/LeftGroup/TopLeftHUD/UIBoxShadow"), NodePath("../HUD/RightGroup/BottomRightHUD/UIBoxShadow"), NodePath("../HUD/RightGroup/DocBoxShadow"), NodePath("../HUD/LeftGroup/VirusRing/VirusRingShadow")]
+uiShadows = [NodePath("../JarShadow"), NodePath("../JarShadowTop"), NodePath("../HUD/LeftGroup/TopLeftHUD/UIBoxShadow"), NodePath("../HUD/RightGroup/BottomRightHUD/UIBoxShadow"), NodePath("../HUD/RightGroup/DocBoxShadow"), NodePath("../HUD/LeftGroup/VirusRing/VirusRingShadow")]
 mario = NodePath("../HUD/RightGroup/Mario")
 virusRing = NodePath("../HUD/LeftGroup/VirusRing")
 docBoxTexRec = NodePath("../HUD/RightGroup/DocBox")

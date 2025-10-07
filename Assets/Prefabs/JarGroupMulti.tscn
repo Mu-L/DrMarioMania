@@ -116,20 +116,20 @@ theme_override_fonts/font = ExtResource("2_jq032")
 theme_override_font_sizes/font_size = 8
 text = "Q"
 
-[node name="JarTopMiddle" type="NinePatchRect" parent="HUD/TopHUD" index="5"]
+[node name="JarTopMiddle2" type="NinePatchRect" parent="HUD/TopHUD" index="5"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -32.0
+offset_left = -24.0
 offset_top = 2.0
-offset_right = 32.0
+offset_right = 24.0
 offset_bottom = 42.0
 grow_horizontal = 2
 texture = ExtResource("4_7ptvs")
-region_rect = Rect2(8, 0, 64, 40)
-patch_margin_left = 18
-patch_margin_right = 18
+region_rect = Rect2(16, 0, 48, 40)
+patch_margin_left = 10
+patch_margin_right = 10
 axis_stretch_horizontal = 1
 
 [node name="BottomHUD" type="Control" parent="HUD" index="1"]
@@ -295,26 +295,26 @@ position = Vector2(8, 8)
 texture = ExtResource("3_2oyln")
 hframes = 2
 
-[node name="NextPill" parent="." index="7"]
+[node name="NextPill" parent="." index="8"]
 startWithSmallScale = true
 neverUseSmallScale = false
 origPosShapeOffsets = Array[Vector2]([Vector2(0, 0), Vector2(-6, -1), Vector2(-4, 0), Vector2(-6, 1)])
 
-[node name="HoldPill" parent="." index="8"]
+[node name="HoldPill" parent="." index="9"]
 origPosShapeOffsets = Array[Vector2]([Vector2(0, 0), Vector2(6, -1), Vector2(8, 0), Vector2(6, 1)])
 
-[node name="UIManager" parent="." index="13" node_paths=PackedStringArray("levelLabel", "speedLabel", "virusLabel", "nextLabel", "holdLabel", "holdKeyLabel", "jarRects", "uiBoxesSmall", "uiLabels", "uiLightLabels", "uiShadows", "winIconContainer", "hudGroup", "rightAlignedNodes", "rightAlignedPills")]
+[node name="UIManager" parent="." index="14" node_paths=PackedStringArray("levelLabel", "speedLabel", "virusLabel", "nextLabel", "holdLabel", "holdKeyLabel", "jarRects", "uiBoxesSmall", "uiLabels", "uiLightLabels", "uiShadows", "winIconContainer", "hudGroup", "rightAlignedNodes", "rightAlignedPills")]
 levelLabel = NodePath("../HUD/BottomHUD/LevelLabel")
 speedLabel = NodePath("../HUD/BottomHUD/SpeedLabel")
 virusLabel = NodePath("../HUD/BottomHUD/VirusLabel")
 nextLabel = NodePath("../HUD/TopHUD/NextLabel")
 holdLabel = NodePath("../HUD/TopHUD/HoldLabel")
 holdKeyLabel = NodePath("../HUD/TopHUD/HoldKeyLabel")
-jarRects = [NodePath("../JarContainer/JarMain"), NodePath("../JarContainer/JarTopLeft"), NodePath("../JarContainer/JarTopRight"), NodePath("../JarContainer/JarTopMiddle"), NodePath("../JarShadow"), NodePath("../Overlay/OverlayDarken"), NodePath("../HUD/TopHUD/JarTopMiddle")]
+jarRects = [NodePath("../JarContainer/JarMain"), NodePath("../JarContainer/JarTopLeft"), NodePath("../JarContainer/JarTopRight"), NodePath("../JarContainer/JarTopMiddle"), NodePath("../JarShadow"), NodePath("../JarShadowTop"), NodePath("../Overlay/OverlayDarken"), NodePath("../HUD/TopHUD/JarTopMiddle2")]
 uiBoxesSmall = [NodePath("../HUD/TopHUD/UIBoxSmall"), NodePath("../HUD/BottomHUD/UIBoxSmall")]
 uiLabels = [NodePath("../Overlay/OverlayTitle"), NodePath("../HUD/BottomHUD/LevelTitle"), NodePath("../HUD/BottomHUD/LevelLabel"), NodePath("../HUD/BottomHUD/SpeedTitle"), NodePath("../HUD/BottomHUD/SpeedLabel"), NodePath("../HUD/BottomHUD/VirusTitle"), NodePath("../HUD/BottomHUD/VirusLabel"), NodePath("../HUD/TopHUD/NextLabel"), NodePath("../HUD/TopHUD/HoldLabel"), NodePath("../HUD/TopHUD/HoldKeyLabel")]
 uiLightLabels = [NodePath("../HUD/TopHUD/HoldLabel"), NodePath("../HUD/TopHUD/HoldKeyLabel"), NodePath("../HUD/TopHUD/NextLabel"), NodePath("../HUD/BottomHUD/LevelTitle"), NodePath("../HUD/BottomHUD/LevelLabel"), NodePath("../HUD/BottomHUD/SpeedTitle"), NodePath("../HUD/BottomHUD/SpeedLabel"), NodePath("../HUD/BottomHUD/VirusTitle"), NodePath("../HUD/BottomHUD/VirusLabel")]
-uiShadows = [NodePath("../JarShadow"), NodePath("../HUD/TopHUD/UIBoxShadow"), NodePath("../HUD/BottomHUD/UIBoxShadow")]
+uiShadows = [NodePath("../JarShadow"), NodePath("../JarShadowTop"), NodePath("../HUD/TopHUD/UIBoxShadow"), NodePath("../HUD/BottomHUD/UIBoxShadow")]
 winIconContainer = NodePath("../HUD/BottomHUD/WinIconContainer")
 hudGroup = NodePath("../HUD")
 rightAlignedNodes = [NodePath("../PowerUpMeter")]

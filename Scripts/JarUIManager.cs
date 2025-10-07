@@ -30,6 +30,8 @@ public partial class JarUIManager : Node
 	[Export] private NinePatchRect jarMainRect;
 	[Export] private NinePatchRect jarTopLeftRect;
 	[Export] private NinePatchRect jarTopRightRect;
+	[Export] private NinePatchRect jarShadowRect;
+	[Export] private NinePatchRect jarOverlayDarkenRect;
 	[Export] private TileMapLayer jarTiles;
 	[Export] private Node2D jarGroup;
 
@@ -323,6 +325,12 @@ public partial class JarUIManager : Node
 
         jarMainRect.Position -= offset;
         jarMainRect.Size += offset * 2;
+
+        jarShadowRect.Position -= offset;
+        jarShadowRect.Size += offset * 2;
+
+        jarOverlayDarkenRect.Position -= offset;
+        jarOverlayDarkenRect.Size += offset * 2;
 
         previousJarSize = size;
     }

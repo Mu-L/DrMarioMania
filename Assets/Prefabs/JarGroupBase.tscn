@@ -180,10 +180,22 @@ jarMan = NodePath("JarManager")
 [node name="JarShadow" type="NinePatchRect" parent="."]
 self_modulate = Color(0, 0, 0, 0.403922)
 offset_left = -34.0
-offset_top = -82.0
+offset_top = -50.0
 offset_right = 46.0
 offset_bottom = 94.0
 texture = ExtResource("2_2kpyg")
+region_rect = Rect2(0, 32, 80, 144)
+patch_margin_left = 8
+patch_margin_right = 8
+
+[node name="JarShadowTop" type="NinePatchRect" parent="."]
+self_modulate = Color(0, 0, 0, 0.403922)
+offset_left = -18.0
+offset_top = -82.0
+offset_right = 30.0
+offset_bottom = -42.0
+texture = ExtResource("2_2kpyg")
+region_rect = Rect2(16, 0, 48, 40)
 
 [node name="JarContainer" type="Control" parent="."]
 layout_mode = 3
@@ -203,8 +215,8 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_2kpyg")
 region_rect = Rect2(0, 40, 80, 136)
-patch_margin_left = 8
-patch_margin_right = 8
+patch_margin_left = 16
+patch_margin_right = 16
 patch_margin_bottom = 9
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
@@ -300,6 +312,8 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_2kpyg")
 region_rect = Rect2(7, 39, 65, 129)
+patch_margin_left = 9
+patch_margin_right = 8
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
@@ -404,17 +418,19 @@ patch_margin_bottom = 2
 axis_stretch_vertical = 1
 metadata/_edit_lock_ = true
 
-[node name="UIManager" type="Node" parent="." node_paths=PackedStringArray("overlay", "overlayTitleLabel", "overlayAniPlayer", "nextButton", "quitButton", "jarRects", "jarMainRect", "jarTopLeftRect", "jarTopRightRect", "jarTiles", "jarGroup", "activePill", "nextPill", "holdPill", "powerUpPill", "uiBoxes", "uiBoxesSmall", "uiLabels", "uiLightLabels", "uiButtons", "uiShadows", "powerUpIcon", "powerUpMeter", "leftAlignedNodes", "rightAlignedNodes", "leftAlignedPills", "rightAlignedPills", "jarMan")]
+[node name="UIManager" type="Node" parent="." node_paths=PackedStringArray("overlay", "overlayTitleLabel", "overlayAniPlayer", "nextButton", "quitButton", "jarRects", "jarMainRect", "jarTopLeftRect", "jarTopRightRect", "jarShadowRect", "jarOverlayDarkenRect", "jarTiles", "jarGroup", "activePill", "nextPill", "holdPill", "powerUpPill", "uiBoxes", "uiBoxesSmall", "uiLabels", "uiLightLabels", "uiButtons", "uiShadows", "powerUpIcon", "powerUpMeter", "leftAlignedNodes", "rightAlignedNodes", "leftAlignedPills", "rightAlignedPills", "jarMan")]
 script = ExtResource("8_ihds5")
 overlay = NodePath("../Overlay")
 overlayTitleLabel = NodePath("../Overlay/OverlayTitle")
 overlayAniPlayer = NodePath("../Overlay/OverlayAniPlayer")
 nextButton = NodePath("../Overlay/ButtonsContainer/NextButton")
 quitButton = NodePath("../Overlay/ButtonsContainer/QuitButton")
-jarRects = [NodePath("../JarContainer/JarMain"), NodePath("../JarContainer/JarTopLeft"), NodePath("../JarContainer/JarTopRight"), NodePath("../JarContainer/JarTopMiddle"), NodePath("../JarShadow"), NodePath("../Overlay/OverlayDarken")]
+jarRects = [NodePath("../JarContainer/JarMain"), NodePath("../JarContainer/JarTopLeft"), NodePath("../JarContainer/JarTopRight"), NodePath("../JarContainer/JarTopMiddle"), NodePath("../JarShadow"), NodePath("../JarShadowTop"), NodePath("../Overlay/OverlayDarken")]
 jarMainRect = NodePath("../JarContainer/JarMain")
 jarTopLeftRect = NodePath("../JarContainer/JarTopLeft")
 jarTopRightRect = NodePath("../JarContainer/JarTopRight")
+jarShadowRect = NodePath("../JarShadow")
+jarOverlayDarkenRect = NodePath("../Overlay/OverlayDarken")
 jarTiles = NodePath("../TileLayer")
 jarGroup = NodePath("..")
 activePill = NodePath("../ActivePill")
@@ -426,7 +442,7 @@ uiBoxesSmall = []
 uiLabels = [NodePath("../Overlay/OverlayTitle")]
 uiLightLabels = []
 uiButtons = [NodePath("../Overlay/ButtonsContainer/NextButton"), NodePath("../Overlay/ButtonsContainer/QuitButton")]
-uiShadows = [NodePath("../JarShadow")]
+uiShadows = [NodePath("../JarShadow"), NodePath("../JarShadowTop")]
 powerUpIcon = NodePath("../PowerUpIcon")
 powerUpMeter = NodePath("../PowerUpMeter")
 leftAlignedNodes = []

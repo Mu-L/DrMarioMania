@@ -6,7 +6,7 @@ public static class GameConstants
 	// common constant values used across multiple other classes
 
 	// level code format version
-	public const int levelCodeVer = 3;
+	public const int levelCodeVer = 4;
 	// path for external user files (e.g. music). This is just the user path, except on android where its documents instead because android file management is pain
 	public static string ExternalFolderPath { get { return IsOnMobile ? OS.GetSystemDir(OS.SystemDir.Documents) + "/" : ProjectSettings.GlobalizePath("user://"); }	}
 	public static string MusicFolderPath { get { return ExternalFolderPath + MusicFolder + "/"; } }

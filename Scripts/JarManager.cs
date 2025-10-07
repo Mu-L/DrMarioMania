@@ -866,10 +866,7 @@ public partial class JarManager : Node
 
 		// adjust virus count based on jar size
 		float virusCountModifier = jarSize.X / (float)baseJarSize.X;
-        GD.Print(virusCount);
-        GD.Print("mod: " + virusCountModifier);
         virusCount = Mathf.FloorToInt(virusCount * virusCountModifier);
-        GD.Print("result: " + virusCount);
 
         List<Vector2I> possibleCells = new List<Vector2I>();
 		List<int> virusColours = new List<int>();
