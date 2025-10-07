@@ -108,6 +108,11 @@ public partial class Pill : Node2D
         Scale = Vector2.One * (startWithSmallScale && !neverUseSmallScale ? smallScale : 1.0f);
 	}
 
+	public void SetOrigPosToCurrentPos()
+	{
+        origPos = Position;
+    }
+
 	public void InitialiseVariables()
 	{
 		if (hasSetOrigPos)

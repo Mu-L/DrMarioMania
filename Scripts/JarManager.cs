@@ -21,8 +21,10 @@ public partial class JarManager : Node
 	// Top-left tile of jar
 	[Export] private Vector2I jarOrigin;
 	public Vector2I JarOrigin { get	{ return jarOrigin; } }
-	[Export] private Vector2I jarSize;
+    private Vector2I jarSize = Vector2I.Zero;
 	public Vector2I JarSize { get { return jarSize; } }
+	private Vector2I baseJarSize = new Vector2I(8, 16);
+	public Vector2I BaseJarSize { get { return baseJarSize; } }
 
 	[ExportGroup("Speeds")]
 	[Export] private float destroyRowSpeed;
@@ -298,8 +300,10 @@ public partial class JarManager : Node
 			}
 
 			string[] jarSizeData = basicSettingChunks[4].Split(subItemDivider);
-			jarSize.X = int.Parse(jarSizeData[0]);
-			jarSize.Y = int.Parse(jarSizeData[1]);
+            Vector2I newSize;
+            newSize.X = int.Parse(jarSizeData[0]);
+			newSize.Y = int.Parse(jarSizeData[1]);
+			SetJarSize(newSize);
 
 			// Jar tile data ==================================================================================================
 			jarTiles.Clear();
@@ -603,7 +607,10 @@ public partial class JarManager : Node
         if (customLevelTiles != null)
 			GenerateCustomLevel();
 		else
-			GenerateViruses();
+		{
+            SetJarSize(PlayerGameSettings.ChosenJarSize);
+            GenerateViruses();
+		}
 	}
 
 	// Scans all current jar tiles and adds them to the custom level tiles dictionary
@@ -838,16 +845,33 @@ public partial class JarManager : Node
 		GameMan.IndicateFinishedFillingJar();
 	}
 
+	private void SetJarSize(Vector2I size)
+	{
+		if (jarSize == size)
+            return;
+		
+        jarSize = size;
+        jarOrigin.X = -jarSize.X / 2;
+        uiMan.UpdateJarSpriteSize();
+    }
+
 	public async void GenerateViruses()
 	{
-		if (virusLevel < 0)
+        if (virusLevel < 0)
 			virusLevel = PlayerGameSettings.InitialVirusLevel;
 
 		uiMan.SetLevelLabel(virusLevel);
 
 		int virusCount = (virusLevel + 1) * 4;
 
-		List<Vector2I> possibleCells = new List<Vector2I>();
+		// adjust virus count based on jar size
+		float virusCountModifier = jarSize.X / (float)baseJarSize.X;
+        GD.Print(virusCount);
+        GD.Print("mod: " + virusCountModifier);
+        virusCount = Mathf.FloorToInt(virusCount * virusCountModifier);
+        GD.Print("result: " + virusCount);
+
+        List<Vector2I> possibleCells = new List<Vector2I>();
 		List<int> virusColours = new List<int>();
 
 		virusesRemaining.Clear();

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using static PowerUpEnums;
 using static PillEnums;
+using System.Numerics;
 
 public partial class PlayerGameSettings : Resource
 {
@@ -218,6 +219,9 @@ public partial class PlayerGameSettings : Resource
 	[Export] public int SpeedLevel { get; set; }
 	// the pill/virus colours used by this player
 	[Export] public Godot.Collections.Array<int> ChosenColours { get; set; }
+
+    // tile grid dimensions of jar
+    public Vector2I ChosenJarSize { get; set; } = new Vector2I(12, 16);
 
     [ExportGroup("Advanced")]
     // advanced gameplay settings ======================================

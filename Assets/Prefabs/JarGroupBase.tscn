@@ -209,26 +209,6 @@ patch_margin_bottom = 9
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="JarTopLeft" type="NinePatchRect" parent="JarContainer"]
-layout_mode = 1
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("2_2kpyg")
-region_rect = Rect2(0, 0, 16, 40)
-patch_margin_left = 8
-
-[node name="JarTopRight" type="NinePatchRect" parent="JarContainer"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 40.0
-grow_horizontal = 0
-texture = ExtResource("2_2kpyg")
-region_rect = Rect2(64, 0, 16, 40)
-patch_margin_right = 8
-
 [node name="JarTopMiddle" type="NinePatchRect" parent="JarContainer"]
 layout_mode = 1
 anchors_preset = 5
@@ -243,6 +223,26 @@ region_rect = Rect2(8, 0, 64, 40)
 patch_margin_left = 18
 patch_margin_right = 18
 axis_stretch_horizontal = 1
+
+[node name="JarTopLeft" type="NinePatchRect" parent="JarContainer"]
+layout_mode = 1
+offset_right = 15.0
+offset_bottom = 40.0
+texture = ExtResource("2_2kpyg")
+region_rect = Rect2(0, 0, 16, 40)
+patch_margin_left = 15
+
+[node name="JarTopRight" type="NinePatchRect" parent="JarContainer"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -15.0
+offset_bottom = 40.0
+grow_horizontal = 0
+texture = ExtResource("2_2kpyg")
+region_rect = Rect2(64, 0, 16, 40)
+patch_margin_right = 15
 
 [node name="TileLayer" type="TileMapLayer" parent="."]
 position = Vector2(0, 16)
@@ -404,7 +404,7 @@ patch_margin_bottom = 2
 axis_stretch_vertical = 1
 metadata/_edit_lock_ = true
 
-[node name="UIManager" type="Node" parent="." node_paths=PackedStringArray("overlay", "overlayTitleLabel", "overlayAniPlayer", "nextButton", "quitButton", "jarRects", "jarTiles", "jarGroup", "activePill", "nextPill", "holdPill", "powerUpPill", "uiBoxes", "uiBoxesSmall", "uiLabels", "uiLightLabels", "uiButtons", "uiShadows", "powerUpMeter", "jarMan")]
+[node name="UIManager" type="Node" parent="." node_paths=PackedStringArray("overlay", "overlayTitleLabel", "overlayAniPlayer", "nextButton", "quitButton", "jarRects", "jarMainRect", "jarTopLeftRect", "jarTopRightRect", "jarTiles", "jarGroup", "activePill", "nextPill", "holdPill", "powerUpPill", "uiBoxes", "uiBoxesSmall", "uiLabels", "uiLightLabels", "uiButtons", "uiShadows", "powerUpIcon", "powerUpMeter", "leftAlignedNodes", "rightAlignedNodes", "leftAlignedPills", "rightAlignedPills", "jarMan")]
 script = ExtResource("8_ihds5")
 overlay = NodePath("../Overlay")
 overlayTitleLabel = NodePath("../Overlay/OverlayTitle")
@@ -412,6 +412,9 @@ overlayAniPlayer = NodePath("../Overlay/OverlayAniPlayer")
 nextButton = NodePath("../Overlay/ButtonsContainer/NextButton")
 quitButton = NodePath("../Overlay/ButtonsContainer/QuitButton")
 jarRects = [NodePath("../JarContainer/JarMain"), NodePath("../JarContainer/JarTopLeft"), NodePath("../JarContainer/JarTopRight"), NodePath("../JarContainer/JarTopMiddle"), NodePath("../JarShadow"), NodePath("../Overlay/OverlayDarken")]
+jarMainRect = NodePath("../JarContainer/JarMain")
+jarTopLeftRect = NodePath("../JarContainer/JarTopLeft")
+jarTopRightRect = NodePath("../JarContainer/JarTopRight")
 jarTiles = NodePath("../TileLayer")
 jarGroup = NodePath("..")
 activePill = NodePath("../ActivePill")
@@ -424,7 +427,12 @@ uiLabels = [NodePath("../Overlay/OverlayTitle")]
 uiLightLabels = []
 uiButtons = [NodePath("../Overlay/ButtonsContainer/NextButton"), NodePath("../Overlay/ButtonsContainer/QuitButton")]
 uiShadows = [NodePath("../JarShadow")]
+powerUpIcon = NodePath("../PowerUpIcon")
 powerUpMeter = NodePath("../PowerUpMeter")
+leftAlignedNodes = []
+rightAlignedNodes = []
+leftAlignedPills = []
+rightAlignedPills = []
 jarMan = NodePath("../JarManager")
 
 [node name="PillManager" type="Node" parent="." node_paths=PackedStringArray("activePill", "nextPill", "holdPill", "powerUpPill", "jarMan", "powerUpMeter")]
@@ -450,7 +458,6 @@ jarTiles = NodePath("../TileLayer")
 previewTiles = NodePath("../PreviewTileLayer")
 foregroundTiles = NodePath("../ForegroundTileLayer")
 jarOrigin = Vector2i(-4, -8)
-jarSize = Vector2i(8, 16)
 destroyRowSpeed = 60.0
 destroyDisappearSpeed = 4.0
 virusGenerationSpeed = 60

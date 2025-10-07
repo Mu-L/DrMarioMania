@@ -303,7 +303,7 @@ origPosShapeOffsets = Array[Vector2]([Vector2(0, 0), Vector2(-6, -1), Vector2(-4
 [node name="HoldPill" parent="." index="8"]
 origPosShapeOffsets = Array[Vector2]([Vector2(0, 0), Vector2(6, -1), Vector2(8, 0), Vector2(6, 1)])
 
-[node name="UIManager" parent="." index="13" node_paths=PackedStringArray("levelLabel", "speedLabel", "virusLabel", "nextLabel", "holdLabel", "holdKeyLabel", "jarRects", "uiBoxesSmall", "uiLabels", "uiLightLabels", "uiShadows", "winIconContainer", "hudGroup")]
+[node name="UIManager" parent="." index="13" node_paths=PackedStringArray("levelLabel", "speedLabel", "virusLabel", "nextLabel", "holdLabel", "holdKeyLabel", "jarRects", "uiBoxesSmall", "uiLabels", "uiLightLabels", "uiShadows", "winIconContainer", "hudGroup", "rightAlignedNodes", "rightAlignedPills")]
 levelLabel = NodePath("../HUD/BottomHUD/LevelLabel")
 speedLabel = NodePath("../HUD/BottomHUD/SpeedLabel")
 virusLabel = NodePath("../HUD/BottomHUD/VirusLabel")
@@ -317,5 +317,7 @@ uiLightLabels = [NodePath("../HUD/TopHUD/HoldLabel"), NodePath("../HUD/TopHUD/Ho
 uiShadows = [NodePath("../JarShadow"), NodePath("../HUD/TopHUD/UIBoxShadow"), NodePath("../HUD/BottomHUD/UIBoxShadow")]
 winIconContainer = NodePath("../HUD/BottomHUD/WinIconContainer")
 hudGroup = NodePath("../HUD")
+rightAlignedNodes = [NodePath("../PowerUpMeter")]
+rightAlignedPills = [NodePath("../PowerUpPill")]
 
 [editable path="PowerUpPill"]

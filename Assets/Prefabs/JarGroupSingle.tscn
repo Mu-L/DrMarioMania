@@ -522,7 +522,7 @@ position = Vector2(32, -66)
 [node name="PowerUpPill" parent="." index="11"]
 position = Vector2(32, -66)
 
-[node name="UIManager" parent="." index="13" node_paths=PackedStringArray("scoreLabel", "highScoreLabel", "levelLabel", "speedLabel", "virusLabel", "holdLabel", "uiBoxes", "uiLabels", "uiLightLabels", "uiShadows", "mario", "virusRing", "docBoxTexRec", "holdGroupRect", "hudGroup", "topLeftHud", "holdGroup", "rightHudGroup")]
+[node name="UIManager" parent="." index="13" node_paths=PackedStringArray("scoreLabel", "highScoreLabel", "levelLabel", "speedLabel", "virusLabel", "holdLabel", "uiBoxes", "uiLabels", "uiLightLabels", "uiShadows", "mario", "virusRing", "docBoxTexRec", "holdGroupRect", "hudGroup", "topLeftHud", "holdGroup", "rightHudGroup", "leftAlignedNodes", "rightAlignedNodes", "leftAlignedPills", "rightAlignedPills")]
 scoreLabel = NodePath("../HUD/LeftGroup/TopLeftHUD/ScoreLabel")
 highScoreLabel = NodePath("../HUD/LeftGroup/TopLeftHUD/HighScoreLabel")
 levelLabel = NodePath("../HUD/RightGroup/BottomRightHUD/LevelLabel")
@@ -541,5 +541,9 @@ hudGroup = NodePath("../HUD")
 topLeftHud = NodePath("../HUD/LeftGroup/TopLeftHUD")
 holdGroup = NodePath("../HUD/LeftGroup/TopLeftHUD/HoldGroup")
 rightHudGroup = NodePath("../HUD/RightGroup")
+leftAlignedNodes = [NodePath("../HUD/LeftGroup")]
+rightAlignedNodes = [NodePath("../HUD/RightGroup"), NodePath("../PowerUpMeter")]
+leftAlignedPills = [NodePath("../HoldPill")]
+rightAlignedPills = [NodePath("../NextPill"), NodePath("../PowerUpPill")]
 
 [editable path="PowerUpPill"]

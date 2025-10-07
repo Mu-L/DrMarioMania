@@ -27,6 +27,9 @@ public partial class JarUIManager : Node
 
 	[ExportSubgroup("Jar")]
 	[Export] private Godot.Collections.Array<NinePatchRect> jarRects;
+	[Export] private NinePatchRect jarMainRect;
+	[Export] private NinePatchRect jarTopLeftRect;
+	[Export] private NinePatchRect jarTopRightRect;
 	[Export] private TileMapLayer jarTiles;
 	[Export] private Node2D jarGroup;
 
@@ -45,6 +48,7 @@ public partial class JarUIManager : Node
 	[Export] private Godot.Collections.Array<Control> uiShadows;
 
 	[ExportSubgroup("Other")]
+	[Export] private Sprite2D powerUpIcon;
 	[Export] private PowerUpMeter powerUpMeter;
 	public PowerUpMeter PowerUpMeter { get { return powerUpMeter; } }
 	[Export] private JarMario mario;
@@ -55,13 +59,20 @@ public partial class JarUIManager : Node
 	[Export] private NinePatchRect holdGroupRect;
 	[Export] private WinIconContainer winIconContainer;
 
-    [ExportGroup("Other References")]
+    [ExportGroup("Groups")]
     [Export] private Control hudGroup;
     [Export] private Control topLeftHud;
     [Export] private Control holdGroup;
     [Export] private Control rightHudGroup;
+    [Export] private Control[] leftAlignedNodes;
+    [Export] private Control[] rightAlignedNodes;
+	[Export] private Pill[] leftAlignedPills;
+    [Export] private Pill[] rightAlignedPills;
+
+    [ExportGroup("External References")]
     [Export] private JarManager jarMan;
 	
+	private Vector2I previousJarSize = Vector2I.Zero;
 	private int origJarPositionY = -999;
 	private int origTopLeftHudPositionY = -999;
 	private int origTopLeftHudHeight = -999;
@@ -270,6 +281,51 @@ public partial class JarUIManager : Node
 		string texStr = jarMan.PlayerGameSettings.UseLuigiSprite ? "DrLuigi" : "TheDoc";
         mario.Texture = themeList.GetTexture(texStr, theme);
 	}
+
+    public void UpdateJarSpriteSize()
+	{
+        Vector2I baseSize = jarMan.BaseJarSize;
+
+		if (previousJarSize == Vector2.Zero)
+            previousJarSize = baseSize;
+
+        Vector2I size = jarMan.JarSize;
+        Vector2I offset = Vector2I.Right * (size - previousJarSize).X * 4;
+
+        foreach (Control leftNode in leftAlignedNodes)
+		{
+            leftNode.Position -= offset;
+        }
+
+		foreach (Control rightNode in rightAlignedNodes)
+		{
+            rightNode.Position += offset;
+		}
+
+        foreach (Pill leftPill in leftAlignedPills)
+		{
+            leftPill.Position -= offset;
+            leftPill.SetOrigPosToCurrentPos();
+        }
+
+		foreach (Pill rightPill in rightAlignedPills)
+		{
+            rightPill.Position += offset;
+            rightPill.SetOrigPosToCurrentPos();
+		}
+
+		powerUpIcon.Position += offset;
+
+        jarTopLeftRect.Position -= offset;
+        jarTopLeftRect.Size += offset;
+		
+        jarTopRightRect.Size += offset;
+
+        jarMainRect.Position -= offset;
+        jarMainRect.Size += offset * 2;
+
+        previousJarSize = size;
+    }
 
     public void UpdateJarVisuals(int theme, ThemeList themeList)
 	{		
