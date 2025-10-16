@@ -46,6 +46,7 @@ public partial class PlayerGameSettings : Resource
             PowerUpMeterMaxLevel = otherPlayer.PowerUpMeterMaxLevel;
             FasterAutoRepeat = otherPlayer.FasterAutoRepeat;
             AvailablePillShapes = new List<PillShape>(otherPlayer.AvailablePillShapes);
+            JarSize = otherPlayer.JarSize;
         }
     }
 
@@ -79,9 +80,9 @@ public partial class PlayerGameSettings : Resource
                     InstantSoftDropLock = true;
                     NoFallSpeedIncrease = false;
                     OnlySingleColourPills = false;
-                    ClearPowerUps();
                     PowerUpMeterMaxLevel = 16;
                     FasterAutoRepeat = false;
+                    JarSize = GameConstants.DefaultJarSize;
 
                     ClearPowerUps();
                     SetSinglePillShape(PillShape.Double);
@@ -103,6 +104,7 @@ public partial class PlayerGameSettings : Resource
                     OnlySingleColourPills = false;
                     PowerUpMeterMaxLevel = 16;
                     FasterAutoRepeat = true;
+                    JarSize = GameConstants.DefaultJarSize;
 
                     ClearPowerUps();
                     SetSinglePillShape(PillShape.Double);
@@ -128,6 +130,7 @@ public partial class PlayerGameSettings : Resource
                     OnlySingleColourPills = false;
                     PowerUpMeterMaxLevel = 16;
                     FasterAutoRepeat = true;
+                    JarSize = GameConstants.DefaultJarSize;
 
                     ClearPowerUps();
                     SetSinglePillShape(PillShape.Double);
@@ -159,6 +162,7 @@ public partial class PlayerGameSettings : Resource
                     OnlySingleColourPills = false;
                     PowerUpMeterMaxLevel = 16;
                     FasterAutoRepeat = true;
+                    JarSize = GameConstants.DefaultJarSize;
 
                     ClearPowerUps();
                     SetSinglePillShape(PillShape.Luigi);
@@ -180,6 +184,7 @@ public partial class PlayerGameSettings : Resource
                     OnlySingleColourPills = false;
                     PowerUpMeterMaxLevel = 16;
                     FasterAutoRepeat = true;
+                    JarSize = GameConstants.DefaultJarSize;
 
                     ClearPowerUps();
 
@@ -206,6 +211,7 @@ public partial class PlayerGameSettings : Resource
                     OnlySingleColourPills = false;
                     PowerUpMeterMaxLevel = 16;
                     FasterAutoRepeat = true;
+                    JarSize = GameConstants.DefaultJarSize;
                     
                     ClearPowerUps();
                     SetSinglePillShape(PillShape.Double);
@@ -221,7 +227,12 @@ public partial class PlayerGameSettings : Resource
 	[Export] public Godot.Collections.Array<int> ChosenColours { get; set; }
 
     // tile grid dimensions of jar
-    public Vector2I ChosenJarSize { get; set; } = new Vector2I(12, 16);
+    public Vector2I JarSize { get; set; } = GameConstants.DefaultJarSize;
+    public int JarWidth
+    {
+        get { return JarSize.X; }
+        set { JarSize = new Vector2I(value, JarSize.Y); }
+    }
 
     [ExportGroup("Advanced")]
     // advanced gameplay settings ======================================
@@ -426,6 +437,12 @@ public partial class PlayerGameSettings : Resource
                 if (i < AvailablePillShapes.Count - 1)
                     code += subItemDivider;
             }
+
+            code += itemDivider;
+
+            code += JarSize.X;
+            code += subItemDivider;
+            code += JarSize.Y;
         }
 
         return code;
@@ -524,6 +541,13 @@ public partial class PlayerGameSettings : Resource
                             AvailablePillShapes.Add((PillShape)int.Parse(pillShapeData[i]));
                         }
                     }
+                }
+
+                if (codeChunks.Length > 19)
+                {
+                    string[] jarSizeData = codeChunks[19].Split(subItemDivider);
+
+                    JarSize = new Vector2I(int.Parse(jarSizeData[0]), int.Parse(jarSizeData[1]));
                 }
             }
             // successful

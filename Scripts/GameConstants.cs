@@ -48,4 +48,6 @@ public static class GameConstants
 	
 	// size of camera zoom when "EnableLargerView" common game setting is enabled
 	public const float largerViewZoom = 1.265f;
+	
+	public static Vector2I DefaultJarSize { get { return new Vector2I(8, 16); } }
 }

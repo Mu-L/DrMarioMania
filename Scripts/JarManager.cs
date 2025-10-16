@@ -21,8 +21,7 @@ public partial class JarManager : Node
 	// Top-left tile of jar
 	[Export] private Vector2I jarOrigin;
 	public Vector2I JarOrigin { get	{ return jarOrigin; } }
-    private Vector2I jarSize = Vector2I.Zero;
-	public Vector2I JarSize { get { return jarSize; } }
+	public Vector2I JarSize { get { return PlayerGameSettings.JarSize; } }
 	private Vector2I baseJarSize = new Vector2I(8, 16);
 	public Vector2I BaseJarSize { get { return baseJarSize; } }
 
@@ -71,10 +70,10 @@ public partial class JarManager : Node
 	public Vector2I JarCellSize { get { return jarTiles.TileSet.TileSize; } }
 
 	// Jar edge positions
-	public float JarTopPos { get { return jarTiles.GlobalPosition.Y + JarCellSize.Y * (-jarSize.Y / 2.0f + 0.5f); } }
-	public float JarBottomPos { get { return jarTiles.GlobalPosition.Y + JarCellSize.Y * (jarSize.Y / 2.0f - 0.5f); } }
-	public float JarLeftPos { get { return jarTiles.GlobalPosition.X + JarCellSize.X * (-jarSize.X / 2.0f + 0.5f); } }
-	public float JarRightPos { get { return jarTiles.GlobalPosition.X + JarCellSize.X * (jarSize.X / 2.0f - 0.5f); } }
+	public float JarTopPos { get { return jarTiles.GlobalPosition.Y + JarCellSize.Y * (-JarSize.Y / 2.0f + 0.5f); } }
+	public float JarBottomPos { get { return jarTiles.GlobalPosition.Y + JarCellSize.Y * (JarSize.Y / 2.0f - 0.5f); } }
+	public float JarLeftPos { get { return jarTiles.GlobalPosition.X + JarCellSize.X * (-JarSize.X / 2.0f + 0.5f); } }
+	public float JarRightPos { get { return jarTiles.GlobalPosition.X + JarCellSize.X * (JarSize.X / 2.0f - 0.5f); } }
 
 
 	// key = y pos
@@ -217,7 +216,7 @@ public partial class JarManager : Node
 		code += CommonGameSettings.CustomLevelName + itemDivider;
 		code += CommonGameSettings.CustomLevelTheme + itemDivider;
 		code += CommonGameSettings.CustomLevelMusic + itemDivider;
-		code += jarSize.X + subItemDivider + jarSize.Y + itemDivider;
+		code += JarSize.X + subItemDivider + JarSize.Y + itemDivider;
 		code += (CommonGameSettings.CustomLevelMusic == GameConstants.customMusicID ? CommonGameSettings.CustomLevelCustomMusicFile : "") + sectionDivider;
 
 		// Jar tile data ==================================================================================================
@@ -299,12 +298,6 @@ public partial class JarManager : Node
 					CommonGameSettings.CustomLevelCustomMusicFile = basicSettingChunks[5];
 			}
 
-			string[] jarSizeData = basicSettingChunks[4].Split(subItemDivider);
-            Vector2I newSize;
-            newSize.X = int.Parse(jarSizeData[0]);
-			newSize.Y = int.Parse(jarSizeData[1]);
-			SetJarSize(newSize);
-
 			// Jar tile data ==================================================================================================
 			jarTiles.Clear();
 			foregroundTiles.Clear();
@@ -364,6 +357,8 @@ public partial class JarManager : Node
 
 			// Player game settings ============================================================================
 			PlayerGameSettings.ImportFromString(codeSections[2]);
+
+			UpdateJarSpriteSize(PlayerGameSettings.JarSize);
 
 			// Update all visuals
 			GameThemer.UpdateAllVisualsAndSfx();
@@ -608,7 +603,7 @@ public partial class JarManager : Node
 			GenerateCustomLevel();
 		else
 		{
-            SetJarSize(PlayerGameSettings.ChosenJarSize);
+            UpdateJarSpriteSize(JarSize);
             GenerateViruses();
 		}
 	}
@@ -653,9 +648,9 @@ public partial class JarManager : Node
 	{
 		List<int> presentColours = new List<int>();
 
-		for (int y = jarOrigin.Y; y < jarOrigin.Y + jarSize.Y; y++)
+		for (int y = jarOrigin.Y; y < jarOrigin.Y + JarSize.Y; y++)
 		{
-			for (int x = jarOrigin.X; x < jarOrigin.X + jarSize.X; x++)
+			for (int x = jarOrigin.X; x < jarOrigin.X + JarSize.X; x++)
 			{
 				Vector2I pos = new Vector2I(x, y);
 
@@ -845,13 +840,9 @@ public partial class JarManager : Node
 		GameMan.IndicateFinishedFillingJar();
 	}
 
-	private void SetJarSize(Vector2I size)
+	private void UpdateJarSpriteSize(Vector2I size)
 	{
-		if (jarSize == size)
-            return;
-		
-        jarSize = size;
-        jarOrigin.X = -jarSize.X / 2;
+        jarOrigin.X = -JarSize.X / 2;
         uiMan.UpdateJarSpriteSize();
     }
 
@@ -865,7 +856,7 @@ public partial class JarManager : Node
 		int virusCount = (virusLevel + 1) * 4;
 
 		// adjust virus count based on jar size
-		float virusCountModifier = jarSize.X / (float)baseJarSize.X;
+		float virusCountModifier = JarSize.X / (float)baseJarSize.X;
         virusCount = Mathf.FloorToInt(virusCount * virusCountModifier);
 
         List<Vector2I> possibleCells = new List<Vector2I>();
@@ -884,9 +875,9 @@ public partial class JarManager : Node
 	
 
 		// possible positions the viruses could spawn
-		for (int i = gap; i < jarSize.Y; i++)
+		for (int i = gap; i < JarSize.Y; i++)
 		{
-			for (int j = 0; j < jarSize.X; j++)
+			for (int j = 0; j < JarSize.X; j++)
 			{
 				possibleCells.Add(jarOrigin + new Vector2I(j, i));
 			}
@@ -948,7 +939,7 @@ public partial class JarManager : Node
 				{
 					potentialPos = pos;
 
-					while (potentialPos.X < jarOrigin.X + jarSize.X - 1)
+					while (potentialPos.X < jarOrigin.X + JarSize.X - 1)
 					{
 						potentialPos.X++;
 
@@ -1559,7 +1550,7 @@ public partial class JarManager : Node
 		// Get possible spawn locations for junk segments
 		List<int> possiblePositions = new List<int>();
 
-		for (int i = 0; i < jarSize.X; i++)
+		for (int i = 0; i < JarSize.X; i++)
 		{
 			Vector2I pos = jarOrigin + Vector2I.Right * i;
 
@@ -1695,9 +1686,9 @@ public partial class JarManager : Node
 	{
 		bool destroyAll = colour == 0;
 
-		for (int y = jarOrigin.Y; y < jarOrigin.Y + jarSize.Y; y++)
+		for (int y = jarOrigin.Y; y < jarOrigin.Y + JarSize.Y; y++)
 		{
-			for (int x = jarOrigin.X; x < jarOrigin.X + jarSize.X; x++)
+			for (int x = jarOrigin.X; x < jarOrigin.X + JarSize.X; x++)
 			{
 				Vector2I pos = new Vector2I(x, y);
 
@@ -2032,8 +2023,8 @@ public partial class JarManager : Node
 	// Returns whether a cell is empty AND is not out-of-bounds
 	public bool IsCellFree(Vector2I pos)
 	{
-		bool validX = pos.X - jarOrigin.X == Mathf.Clamp(pos.X - jarOrigin.X, 0, jarSize.X - 1);
-		bool validY = pos.Y - jarOrigin.Y < jarSize.Y;
+		bool validX = pos.X - jarOrigin.X == Mathf.Clamp(pos.X - jarOrigin.X, 0, JarSize.X - 1);
+		bool validY = pos.Y - jarOrigin.Y < JarSize.Y;
 		return validX && validY && jarTiles.GetCellTileData(pos) == null;
 	}
 
