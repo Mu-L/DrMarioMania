@@ -14,10 +14,16 @@ public class UndoRedoStep
     private Dictionary<Vector2I, bool> newSelectedTiles = new Dictionary<Vector2I, bool>();
     public Dictionary<Vector2I, bool> NewSelectedTiles { get { return newSelectedTiles; } }
 
+    public int OldJarWidth { get; set; } = 0;
+    public int NewJarWidth { get; set; } = 0;
+
     public bool ChangesPresent
     {
         get
         {
+            if (OldJarWidth != NewJarWidth)
+                return true;
+            
             if (oldTiles.Count == 0 && oldSelectedTiles.Count == 0)
                 return false;
             
@@ -95,5 +101,7 @@ public class UndoRedoStep
         newTiles.Clear();
         oldSelectedTiles.Clear();
         newSelectedTiles.Clear();
+        OldJarWidth = 0;
+        NewJarWidth = 0;
     }
 }

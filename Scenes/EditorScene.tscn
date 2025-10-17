@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://dhy6fjq1xc4w2"]
+[gd_scene load_steps=63 format=3 uid="uid://dhy6fjq1xc4w2"]
 
 [ext_resource type="PackedScene" uid="uid://up7l7b7sr6ch" path="res://Scenes/GameScene.tscn" id="1_s5m0s"]
 [ext_resource type="Script" path="res://Scripts/Editor/EditorBaseSelector.cs" id="2_g5ukp"]
@@ -42,6 +42,7 @@
 [ext_resource type="PackedScene" uid="uid://ciycvm6fh6cel" path="res://Assets/Prefabs/PopUpGroup.tscn" id="24_ngsmh"]
 [ext_resource type="PackedScene" uid="uid://dejlotb7w8jno" path="res://Assets/Prefabs/MusicPreviewPlayer.tscn" id="29_pwdah"]
 [ext_resource type="Texture2D" uid="uid://be6drct25wp0f" path="res://Assets/Sprites/UI/ButtonIcons/PlayIcon.png" id="35_fosab"]
+[ext_resource type="Texture2D" uid="uid://f4s2eofbobuu" path="res://Assets/Sprites/UI/Editor/JarResizeIcons.png" id="36_q5130"]
 [ext_resource type="Texture2D" uid="uid://bafh73vcs08cv" path="res://Assets/Sprites/UI/Editor/SaveButton.png" id="40_rnsc5"]
 [ext_resource type="Texture2D" uid="uid://cb6qr0bqxms7o" path="res://Assets/Sprites/Themes/Modern/PowerUpTiles.png" id="40_s6gkj"]
 
@@ -1192,7 +1193,22 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
-[node name="RedoButton" type="Button" parent="EditorUILayer/BottomToolbar" index="1"]
+[node name="ColorRect2" type="ColorRect" parent="EditorUILayer/BottomToolbar" index="1"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = 2.0
+offset_right = 1.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.498039)
+
+[node name="RedoButton" type="Button" parent="EditorUILayer/BottomToolbar" index="2"]
 custom_minimum_size = Vector2(14, 15)
 layout_mode = 1
 anchors_preset = 7
@@ -1200,9 +1216,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = -19.0
-offset_right = 21.0
+offset_left = 27.0
+offset_top = -20.0
+offset_right = 47.0
 offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -1211,12 +1227,12 @@ script = ExtResource("13_hyfa0")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="EditorUILayer/BottomToolbar/RedoButton" index="0"]
-position = Vector2(10, 7)
+position = Vector2(10, 8)
 texture = ExtResource("13_iq6qk")
 hframes = 2
 frame = 1
 
-[node name="UndoButton" type="Button" parent="EditorUILayer/BottomToolbar" index="2"]
+[node name="UndoButton" type="Button" parent="EditorUILayer/BottomToolbar" index="3"]
 custom_minimum_size = Vector2(14, 15)
 layout_mode = 1
 anchors_preset = 7
@@ -1224,9 +1240,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -21.0
-offset_top = -19.0
-offset_right = -1.0
+offset_left = 5.0
+offset_top = -20.0
+offset_right = 25.0
 offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -1235,11 +1251,58 @@ script = ExtResource("13_hyfa0")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="EditorUILayer/BottomToolbar/UndoButton" index="0"]
-position = Vector2(10, 7)
+position = Vector2(10, 8)
 texture = ExtResource("13_iq6qk")
 hframes = 2
 
-[node name="LevelSettingsButton" type="Button" parent="EditorUILayer/BottomToolbar" index="3"]
+[node name="IncreaseWidthButton" type="Button" parent="EditorUILayer/BottomToolbar" index="4"]
+custom_minimum_size = Vector2(14, 15)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -20.0
+offset_right = -5.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7hvga")
+script = ExtResource("13_hyfa0")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUILayer/BottomToolbar/IncreaseWidthButton" index="0"]
+position = Vector2(10, 8)
+texture = ExtResource("36_q5130")
+hframes = 2
+frame = 1
+
+[node name="DecreaseWidthButton" type="Button" parent="EditorUILayer/BottomToolbar" index="5"]
+custom_minimum_size = Vector2(14, 15)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -47.0
+offset_top = -20.0
+offset_right = -27.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7hvga")
+script = ExtResource("13_hyfa0")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUILayer/BottomToolbar/DecreaseWidthButton" index="0"]
+position = Vector2(10, 8)
+texture = ExtResource("36_q5130")
+hframes = 2
+
+[node name="LevelSettingsButton" type="Button" parent="EditorUILayer/BottomToolbar" index="6"]
 custom_minimum_size = Vector2(14, 15)
 layout_mode = 1
 anchors_preset = 3
@@ -1258,7 +1321,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_7hvga")
 text = "CONFIG"
 metadata/_edit_group_ = true
 
-[node name="PlayButton" type="Button" parent="EditorUILayer/BottomToolbar" index="4"]
+[node name="PlayButton" type="Button" parent="EditorUILayer/BottomToolbar" index="7"]
 custom_minimum_size = Vector2(14, 15)
 layout_mode = 1
 anchors_preset = 2
@@ -1457,6 +1520,8 @@ vframes = 10
 [connection signal="pressed" from="EditorUILayer/LeftSideToolbar/ColorRect/DrawingStyleSelector/Button5" to="GameLayer/EditorCursor" method="SetDrawingStyle" binds= [4]]
 [connection signal="pressed" from="EditorUILayer/BottomToolbar/RedoButton" to="UndoRedoManager" method="Redo"]
 [connection signal="pressed" from="EditorUILayer/BottomToolbar/UndoButton" to="UndoRedoManager" method="Undo"]
+[connection signal="pressed" from="EditorUILayer/BottomToolbar/IncreaseWidthButton" to="EditorManager" method="IncreaseJarWidth"]
+[connection signal="pressed" from="EditorUILayer/BottomToolbar/DecreaseWidthButton" to="EditorManager" method="DecreaseJarWidth"]
 [connection signal="pressed" from="EditorUILayer/BottomToolbar/LevelSettingsButton" to="EditorManager" method="OpenPauseScreen" binds= [3]]
 [connection signal="pressed" from="EditorUILayer/BottomToolbar/PlayButton" to="EditorManager" method="PlayTest"]
 [connection signal="pressed" from="EditorUILayer/TopToolbar/SaveButton" to="EditorManager" method="OpenPauseScreen" binds= [0.0]]

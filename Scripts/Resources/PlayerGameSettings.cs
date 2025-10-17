@@ -82,7 +82,8 @@ public partial class PlayerGameSettings : Resource
                     OnlySingleColourPills = false;
                     PowerUpMeterMaxLevel = 16;
                     FasterAutoRepeat = false;
-                    JarSize = GameConstants.DefaultJarSize;
+                    if (!isCustomLevelSettings)
+                        JarSize = GameConstants.DefaultJarSize;
 
                     ClearPowerUps();
                     SetSinglePillShape(PillShape.Double);
@@ -104,7 +105,8 @@ public partial class PlayerGameSettings : Resource
                     OnlySingleColourPills = false;
                     PowerUpMeterMaxLevel = 16;
                     FasterAutoRepeat = true;
-                    JarSize = GameConstants.DefaultJarSize;
+                    if (!isCustomLevelSettings)
+                        JarSize = GameConstants.DefaultJarSize;
 
                     ClearPowerUps();
                     SetSinglePillShape(PillShape.Double);
@@ -130,7 +132,8 @@ public partial class PlayerGameSettings : Resource
                     OnlySingleColourPills = false;
                     PowerUpMeterMaxLevel = 16;
                     FasterAutoRepeat = true;
-                    JarSize = GameConstants.DefaultJarSize;
+                    if (!isCustomLevelSettings)
+                        JarSize = GameConstants.DefaultJarSize;
 
                     ClearPowerUps();
                     SetSinglePillShape(PillShape.Double);
@@ -162,7 +165,8 @@ public partial class PlayerGameSettings : Resource
                     OnlySingleColourPills = false;
                     PowerUpMeterMaxLevel = 16;
                     FasterAutoRepeat = true;
-                    JarSize = GameConstants.DefaultJarSize;
+                    if (!isCustomLevelSettings)
+                        JarSize = GameConstants.DefaultJarSize;
 
                     ClearPowerUps();
                     SetSinglePillShape(PillShape.Luigi);
@@ -184,7 +188,8 @@ public partial class PlayerGameSettings : Resource
                     OnlySingleColourPills = false;
                     PowerUpMeterMaxLevel = 16;
                     FasterAutoRepeat = true;
-                    JarSize = GameConstants.DefaultJarSize;
+                    if (!isCustomLevelSettings)
+                        JarSize = GameConstants.DefaultJarSize;
 
                     ClearPowerUps();
 
@@ -211,7 +216,8 @@ public partial class PlayerGameSettings : Resource
                     OnlySingleColourPills = false;
                     PowerUpMeterMaxLevel = 16;
                     FasterAutoRepeat = true;
-                    JarSize = GameConstants.DefaultJarSize;
+                    if (!isCustomLevelSettings)
+                        JarSize = GameConstants.DefaultJarSize;
                     
                     ClearPowerUps();
                     SetSinglePillShape(PillShape.Double);
@@ -543,7 +549,7 @@ public partial class PlayerGameSettings : Resource
                     }
                 }
 
-                if (codeChunks.Length > 19)
+                if (!isCustomLevelSettings && codeChunks.Length > 19)
                 {
                     string[] jarSizeData = codeChunks[19].Split(subItemDivider);
 

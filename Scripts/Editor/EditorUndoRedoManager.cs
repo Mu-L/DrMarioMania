@@ -53,8 +53,15 @@ public partial class EditorUndoRedoManager : Node
         if (!editorMan.CanPressButtons || currentUndoRedoStep < 1 || isRecordingUndoRedoStep)
             return;
 
-        CreateTiles(undoRedoSteps[currentUndoRedoStep - 1].OldTiles);
-        UpdateSelection(undoRedoSteps[currentUndoRedoStep - 1].OldSelectedTiles);
+        UndoRedoStep step = undoRedoSteps[currentUndoRedoStep - 1];
+        CreateTiles(step.OldTiles);
+        UpdateSelection(step.OldSelectedTiles);
+
+        if (step.OldJarWidth != step.NewJarWidth)
+        {
+            jarMan.PlayerGameSettings.JarWidth = step.OldJarWidth;
+            jarMan.UpdateJarSize();
+        }
 
         currentUndoRedoStep--;
         //GD.Print("undid");
@@ -65,9 +72,15 @@ public partial class EditorUndoRedoManager : Node
         if (!editorMan.CanPressButtons || undoRedoSteps.Count - 1 <= currentUndoRedoStep || isRecordingUndoRedoStep)
             return;
 
-        CreateTiles(undoRedoSteps[currentUndoRedoStep].NewTiles);
-        UpdateSelection(undoRedoSteps[currentUndoRedoStep].NewSelectedTiles);
+        UndoRedoStep step = undoRedoSteps[currentUndoRedoStep];
+        CreateTiles(step.NewTiles);
+        UpdateSelection(step.NewSelectedTiles);
 
+        if (step.OldJarWidth != step.NewJarWidth)
+        {
+            jarMan.PlayerGameSettings.JarWidth = step.NewJarWidth;
+            jarMan.UpdateJarSize();
+        }
 
         currentUndoRedoStep++;
         //GD.Print("redid");
@@ -86,6 +99,7 @@ public partial class EditorUndoRedoManager : Node
         if (undoRedoSteps.Count - 1 > currentUndoRedoStep)
             undoRedoSteps.Insert(currentUndoRedoStep, new UndoRedoStep());
 
+        ActiveUndoRedoStep.OldJarWidth = jarMan.JarSize.X;
         //GD.Print("START STEP");
     }
 
@@ -125,6 +139,8 @@ public partial class EditorUndoRedoManager : Node
             GD.PrintErr("NOTICE: Attempted to stop logging while not logging!");
             return;
         }
+
+        ActiveUndoRedoStep.NewJarWidth = jarMan.JarSize.X;
 
         // if nothing has changed, cancel undo/redo step and don't increase count
         if (!undoRedoSteps[currentUndoRedoStep].ChangesPresent)

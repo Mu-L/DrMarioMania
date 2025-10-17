@@ -298,6 +298,11 @@ public partial class JarManager : Node
 					CommonGameSettings.CustomLevelCustomMusicFile = basicSettingChunks[5];
 			}
 
+			string[] jarSizeData = basicSettingChunks[4].Split(subItemDivider);
+			PlayerGameSettings.JarWidth = int.Parse(jarSizeData[0]);
+			//PlayerGameSettings.JarSize.Y = int.Parse(jarSizeData[1]);
+			UpdateJarSize();
+
 			// Jar tile data ==================================================================================================
 			jarTiles.Clear();
 			foregroundTiles.Clear();
@@ -355,10 +360,8 @@ public partial class JarManager : Node
 				}
 			}
 
-			// Player game settings ============================================================================
-			PlayerGameSettings.ImportFromString(codeSections[2]);
-
-			UpdateJarSpriteSize(PlayerGameSettings.JarSize);
+            // Player game settings ============================================================================
+            PlayerGameSettings.ImportFromString(codeSections[2]);
 
 			// Update all visuals
 			GameThemer.UpdateAllVisualsAndSfx();
@@ -603,7 +606,7 @@ public partial class JarManager : Node
 			GenerateCustomLevel();
 		else
 		{
-            UpdateJarSpriteSize(JarSize);
+            UpdateJarSize();
             GenerateViruses();
 		}
 	}
@@ -840,7 +843,8 @@ public partial class JarManager : Node
 		GameMan.IndicateFinishedFillingJar();
 	}
 
-	private void UpdateJarSpriteSize(Vector2I size)
+	// updates the size of the jar based on the jar size set
+	public void UpdateJarSize()
 	{
         jarOrigin.X = -JarSize.X / 2;
         uiMan.UpdateJarSpriteSize();

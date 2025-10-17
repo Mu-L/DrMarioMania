@@ -221,6 +221,20 @@ public partial class EditorManager : Node
         selectedTiles.Clear();
     }
 
+    public void EraseTile(Vector2I pos, bool logChanges)
+    {
+        if (jarTiles.GetCellSourceId(pos) != -1)
+        {
+            if (logChanges)
+                undoRedoMan.ActiveUndoRedoStep.AddOldTile(pos, jarTiles);
+
+            jarTiles.SetCell(pos, -1);
+
+            if (logChanges)
+                undoRedoMan.ActiveUndoRedoStep.AddNewTile(pos, jarTiles);
+        }
+    }
+
     public void ClearAllTiles(bool logChanges)
     {
         for (int y = jarMan.JarOrigin.Y; y < jarMan.JarOrigin.Y + jarMan.JarSize.Y; y++)
@@ -228,17 +242,8 @@ public partial class EditorManager : Node
             for (int x = jarMan.JarOrigin.X; x < jarMan.JarOrigin.X + jarMan.JarSize.X; x++)
             {
                 Vector2I pos = new Vector2I(x, y);
-                
-                if (jarTiles.GetCellSourceId(pos) != -1)
-                {
-                    if (logChanges)
-                        undoRedoMan.ActiveUndoRedoStep.AddOldTile(pos, jarTiles);
-                    jarTiles.SetCell(pos, -1);
-                    if (logChanges)
-                        undoRedoMan.ActiveUndoRedoStep.AddNewTile(pos, jarTiles);
-                }
+                EraseTile(pos, logChanges);
             }
-
         }
 
         ClearSelectedTiles(logChanges);
@@ -337,6 +342,60 @@ public partial class EditorManager : Node
         selectionTileMap.Position = origGrabbedSelectionPos;
     }
 
+    private void ChangeJarWidth(int amount)
+    {
+        if (cursor.IsBusy)
+            return;
+
+        int newWidth = jarMan.PlayerGameSettings.JarWidth + amount;
+
+        // size limits
+        if (newWidth > GameConstants.jarWidthMax || newWidth < GameConstants.jarWidthMin)
+            return;
+
+        undoRedoMan.StartUndoRedoStep();
+
+        jarMan.PlayerGameSettings.JarWidth = newWidth;
+        jarMan.UpdateJarSize();
+
+        // if shrinking jar size, delete any tiles that would be out-of-bounds
+        if (amount < 0)
+        {
+            Vector2I orig = jarMan.JarOrigin;
+            int halfAmount = amount / 2;
+
+            for (int i = 0; i < -halfAmount; i++)
+            {
+                int xl = orig.X + newWidth + i;
+                int xr = orig.X - (i + 1);
+
+                for (int y = orig.Y; y < orig.Y + jarMan.JarSize.Y; y++)
+                {
+                    Vector2I pos = new Vector2I(xl, y);
+
+                    RemoveSelectedTile(pos, true);
+                    EraseTile(pos, true);
+                    pos.X = xr;
+                    RemoveSelectedTile(pos, true);
+                    EraseTile(pos, true);
+                }
+            }
+
+        }
+
+        undoRedoMan.EndUndoRedoStep();
+    }
+
+    public void IncreaseJarWidth()
+    {
+        ChangeJarWidth(2);
+    }
+
+    public void DecreaseJarWidth()
+    {
+        ChangeJarWidth(-2);
+    }
+
     public void OpenPauseScreen(int screen)
     {
         if (!isPaused)
@@ -385,6 +444,14 @@ public partial class EditorManager : Node
         else if (Input.IsActionJustPressed("Undo"))
         {
             undoRedoMan.Undo();
+        }
+        else if (Input.IsActionJustPressed("EditorIncreaseJarWidth"))
+        {
+            IncreaseJarWidth();
+        }
+        else if (Input.IsActionJustPressed("EditorDecreaseJarWidth"))
+        {
+            DecreaseJarWidth();
         }
     }
 }
