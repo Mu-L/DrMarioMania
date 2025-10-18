@@ -404,9 +404,10 @@ description = "GAMEPLAY:
 
 - New level pack containing 8 levels added
 
-FIXES/IMPROVEMENTS:
+FIXES & IMPROVEMENTS:
 
-- Fixed next pill preview sizes being wrong when playing Pill Mix in multiplayer"
+- Fixed next pill preview sizes being wrong when playing Pill Mix in multiplayer
+- Mouse cursor now hides during gameplay"
 alignDescToLeft = true
 popUpGroup = NodePath("../../../PopUpGroup")
 

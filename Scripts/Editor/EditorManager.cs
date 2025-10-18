@@ -77,6 +77,7 @@ public partial class EditorManager : Node
 
         jarMan.SavePresentColoursToGameSettings();
         
+        Input.MouseMode = Input.MouseModeEnum.Hidden;
         cursor.Visible = false;
         cursor.SetProcess(false);
         SetProcess(false);
@@ -97,6 +98,34 @@ public partial class EditorManager : Node
 
         GetViewport().GetCamera2D().Zoom = Vector2.One * (commonGameSettings.EnableLargerView ? GameConstants.largerViewZoom : 1);
         jarMan.SetVirusTileAnimationState(commonGameSettings.EnableVirusTileAnimation);
+    }
+
+    public void EndPlayTest()
+    {
+        GetViewport().GetCamera2D().Zoom = Vector2.One;
+
+        jarMan.DisablePowerUpSpawning = true;
+        jarMan.DeleteAllPowerUps();
+        jarMan.ResetScore();
+        jarMan.ResetVirusCount();
+        jarMan.PillMan.HideAllPills();
+        jarMan.RestoreCustomLevelTilesForEditor();
+
+        jarMan.UIMan.SetHUDVisibility(false);
+        jarMan.UIMan.PowerUpMeter.SetVisibility(false);
+        jarMan.SetVirusTileAnimationState(false);
+        
+        musicMan.Stop();
+
+        SetProcess(true);
+        cursor.SetProcess(true);
+
+        GetViewport().GuiReleaseFocus();
+        editorUILayer.Visible = true;
+        selectionTileMap.Visible = true;
+
+        touchControlsMan.ShowTouchControlsIfAvailable(false);
+        Input.MouseMode = Input.MouseModeEnum.Visible;
     }
 
     public void SaveLevel()
@@ -129,33 +158,6 @@ public partial class EditorManager : Node
     {
         SaveLevel();
         gameMan.QuitGame();
-    }
-
-    public void EndPlayTest()
-    {
-        GetViewport().GetCamera2D().Zoom = Vector2.One;
-
-        jarMan.DisablePowerUpSpawning = true;
-        jarMan.DeleteAllPowerUps();
-        jarMan.ResetScore();
-        jarMan.ResetVirusCount();
-        jarMan.PillMan.HideAllPills();
-        jarMan.RestoreCustomLevelTilesForEditor();
-
-        jarMan.UIMan.SetHUDVisibility(false);
-        jarMan.UIMan.PowerUpMeter.SetVisibility(false);
-        jarMan.SetVirusTileAnimationState(false);
-        
-        musicMan.Stop();
-
-        SetProcess(true);
-        cursor.SetProcess(true);
-
-        GetViewport().GuiReleaseFocus();
-        editorUILayer.Visible = true;
-        selectionTileMap.Visible = true;
-
-        touchControlsMan.ShowTouchControlsIfAvailable(false);
     }
 
     public bool IsPosOutOfBounds(Vector2I pos)

@@ -67,6 +67,7 @@ public partial class GameManager : Node
             
             isInEditorScene = true;
         }
+
         touchControlsMan.ShowTouchControlsIfAvailable(!isInEditorScene);
 
         // if creating new level, reset settings
@@ -82,7 +83,10 @@ public partial class GameManager : Node
         gameThemer.UpdateAllVisualsAndSfx();
         
         if (!isInEditorScene)
+        {
             musicMan.PlayGameMusic();
+            Input.MouseMode = Input.MouseModeEnum.Hidden;
+        }
         
         UpdateCameraZoom();
 	}
@@ -244,6 +248,7 @@ public partial class GameManager : Node
 
     public void EndGame()
     {
+        Input.MouseMode = Input.MouseModeEnum.Visible;
         isGameOngoing = false;
         hasPlayerWonEnoughRounds = false;
         bool didSomeoneWin = false;
@@ -311,6 +316,7 @@ public partial class GameManager : Node
         if (!(isInEditorScene && commonGameSettings.EnableEditorMusic))
             musicMan.PlayGameMusic();
         hasSavedScore = false;
+        Input.MouseMode = Input.MouseModeEnum.Hidden;
     }
 
     public void ReplayLevel()
@@ -357,6 +363,7 @@ public partial class GameManager : Node
             return;
 
         isPaused = b;
+        Input.MouseMode = b ? Input.MouseModeEnum.Visible : Input.MouseModeEnum.Hidden;
 
         musicMan.StreamPaused = b;
 
