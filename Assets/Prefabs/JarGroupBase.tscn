@@ -418,7 +418,7 @@ patch_margin_bottom = 2
 axis_stretch_vertical = 1
 metadata/_edit_lock_ = true
 
-[node name="UIManager" type="Node" parent="." node_paths=PackedStringArray("overlay", "overlayTitleLabel", "overlayAniPlayer", "nextButton", "quitButton", "jarRects", "jarMainRect", "jarTopLeftRect", "jarTopRightRect", "jarShadowRect", "jarOverlayDarkenRect", "jarTiles", "jarGroup", "activePill", "nextPill", "holdPill", "powerUpPill", "uiBoxes", "uiBoxesSmall", "uiLabels", "uiLightLabels", "uiButtons", "uiShadows", "powerUpIcon", "powerUpMeter", "leftAlignedNodes", "rightAlignedNodes", "leftAlignedPills", "rightAlignedPills", "jarMan")]
+[node name="UIManager" type="Node" parent="." node_paths=PackedStringArray("overlay", "overlayTitleLabel", "overlayAniPlayer", "nextButton", "quitButton", "jarRects", "jarMainRect", "jarTopLeftRect", "jarTopRightRect", "jarShadowRect", "jarOverlayDarkenRect", "jarTiles", "jarGroup", "activePill", "nextPill", "holdPill", "powerUpPill", "uiBoxes", "uiBoxesSmall", "uiLabels", "uiLightLabels", "uiButtons", "uiShadows", "powerUpIcon", "powerUpMeter", "leftAlignedNodes", "rightAlignedNodes", "leftAlignedPills", "rightAlignedPills", "tlMarker", "brMarker", "jarMan")]
 script = ExtResource("8_ihds5")
 overlay = NodePath("../Overlay")
 overlayTitleLabel = NodePath("../Overlay/OverlayTitle")
@@ -449,6 +449,8 @@ leftAlignedNodes = []
 rightAlignedNodes = []
 leftAlignedPills = []
 rightAlignedPills = []
+tlMarker = NodePath("../TopLeftMarker")
+brMarker = NodePath("../BottomRightMarker")
 jarMan = NodePath("../JarManager")
 
 [node name="PillManager" type="Node" parent="." node_paths=PackedStringArray("activePill", "nextPill", "holdPill", "powerUpPill", "jarMan", "powerUpMeter")]
@@ -480,6 +482,12 @@ virusGenerationSpeed = 60
 powerUpPrefabs = ExtResource("13_nwj07")
 uiMan = NodePath("../UIManager")
 pillMan = NodePath("../PillManager")
+
+[node name="TopLeftMarker" type="Marker2D" parent="."]
+position = Vector2(-40, -65)
+
+[node name="BottomRightMarker" type="Marker2D" parent="."]
+position = Vector2(40, 87)
 
 [connection signal="pressed" from="Overlay/ButtonsContainer/NextButton" to="JarManager" method="Continue"]
 [connection signal="pressed" from="Overlay/ButtonsContainer/QuitButton" to="JarManager" method="QuitGame"]

@@ -71,6 +71,13 @@ public partial class JarUIManager : Node
 	[Export] private Pill[] leftAlignedPills;
     [Export] private Pill[] rightAlignedPills;
 
+    [ExportGroup("Other Local References")]
+    [Export] private Marker2D tlMarker;
+    [Export] private Marker2D brMarker;
+
+	public Vector2 TopLeftPos { get { return tlMarker.GlobalPosition; } }
+	public Vector2 BottomRightPos { get { return brMarker.GlobalPosition; } }
+
     [ExportGroup("External References")]
     [Export] private JarManager jarMan;
 	
@@ -331,6 +338,9 @@ public partial class JarUIManager : Node
 
         jarOverlayDarkenRect.Position -= offset;
         jarOverlayDarkenRect.Size += offset * 2;
+
+		tlMarker.Position -= offset;
+		brMarker.Position += offset;
 
         previousJarSize = size;
     }

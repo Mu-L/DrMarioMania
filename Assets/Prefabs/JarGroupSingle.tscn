@@ -546,4 +546,10 @@ rightAlignedNodes = [NodePath("../HUD/RightGroup"), NodePath("../PowerUpMeter")]
 leftAlignedPills = [NodePath("../HoldPill")]
 rightAlignedPills = [NodePath("../NextPill"), NodePath("../PowerUpPill")]
 
+[node name="TopLeftMarker" parent="." index="17"]
+position = Vector2(-120, -74)
+
+[node name="BottomRightMarker" parent="." index="18"]
+position = Vector2(120, 96)
+
 [editable path="PowerUpPill"]

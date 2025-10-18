@@ -7,6 +7,7 @@ public partial class GameManager : Node
 {
     // manages the entire game, not individual jar
 
+    // the distance between each jar in multiplayer (EXTRA DISTANCE WILL BE ADDED IF A JAR HAS A NON-DEFAULT WIDTH)
     [Export] private int jarSpacing;
 
     [ExportGroup("Audio References")]
@@ -102,6 +103,9 @@ public partial class GameManager : Node
 
         jarsLeftToFill = jars.Count;
 
+        // value used to offset each jar's x pois
+        int jarOffsetX = 0;
+
         for (int i = 0; i < commonGameSettings.PlayerCount; i++)
         {
             JarGroup group = jarGroupPrefab.Instantiate<JarGroup>();
@@ -150,7 +154,38 @@ public partial class GameManager : Node
                 jar.PrepareLevel(sharedSeed);
             }
 
-            group.Position = new Vector2((i - ((commonGameSettings.PlayerCount - 1) / 2.0f)) * jarSpacing, 0);
+            if (i != 0)
+                // offset further if jar if not of a default width
+                jarOffsetX += (jar.JarSize.X - GameConstants.jarWidthMin) * GameConstants.tileSize;
+
+
+            //group.Position = new Vector2((i - ((commonGameSettings.PlayerCount - 1) / 2.0f)) * jarSpacing, 0);
+            group.Position = new Vector2(jarOffsetX, 0);
+            
+            if (i != commonGameSettings.PlayerCount - 1)
+            {
+                jarOffsetX += jarSpacing;
+                // offset further if jar if not of a default width
+                jarOffsetX += (jar.JarSize.X - GameConstants.jarWidthMin) * GameConstants.tileSize;
+            }
+        }
+
+        // centre all jars
+        if (commonGameSettings.PlayerCount > 1)
+        {
+            float leftMostPos = jars[0].UIMan.TopLeftPos.X;
+            float rightMostPos = jars[jars.Count - 1].UIMan.BottomRightPos.X;
+
+            // left-most edge of first jar at x:0
+            float offset = -leftMostPos;
+            // a
+            offset -= (rightMostPos - leftMostPos) / 2.0f;
+
+            for (int i = 0; i < commonGameSettings.PlayerCount; i++)
+            {
+                JarGroup group = jars[i].GetParent() as JarGroup;
+                group.Position += new Vector2(offset, 0);
+            }
         }
 
 

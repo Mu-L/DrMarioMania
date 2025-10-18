@@ -240,6 +240,7 @@ popUpGroup = NodePath("../PopUpGroup")
 screenContainer = NodePath(".")
 
 [node name="MainScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -390,48 +391,26 @@ title = "v0.0.0 - CHANGE LOG"
 description = "GAMEPLAY:
 
 - New gameplay styles:
-  - Dr. Luigi, featuring
-    L-shaped pills
-  - Pill Mix, cycles
-    through 4 unique
-    pill shapes
+  - ?
 
-- Added 4 toggleable pill shapes in the Custom Gameplay Style menu:
-  - Standard (2x1)
-  - L pills
-  - Single (1x1)
-  - Quad (2x2)
+- Added support for variable jar widths:
+- - The jar width can be
+    changed in the Custom
+    Gameplay Style menu
+- - For custom levels,
+    width size buttons
+    have been added to
+    the editor
 
 - New level pack containing 8 levels added
 
-- Nerfed \"Rainbow Road\" level
+FIXES/IMPROVEMENTS:
 
-VISUALS:
-
-- New main menu background visuals
-
-- Added Super Mario Bros. theme
-
-- Added shading to the Modern virus magnifying glass sprites
-
-- New icon for Android
-
-AUDIO:
-
-- 11 new songs:
-- - 9 Mario Kart tracks
-- - 2 misc. tracks
-
-FIXES:
-
-- Fixed jar texture not updating when changing the fall speed in the editor
-
-- Fixed a bug where exiting edit mode while destroying a tile with a power-up causes it to remain it in the editor in a half-destroyed state"
+- Fixed next pill preview sizes being wrong when playing Pill Mix in multiplayer"
 alignDescToLeft = true
 popUpGroup = NodePath("../../../PopUpGroup")
 
 [node name="GameplayScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

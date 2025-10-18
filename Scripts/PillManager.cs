@@ -629,6 +629,7 @@ public partial class PillManager : Node
 		{
 			throwingPill.Position = throwStartPos;
             throwingPill.SetRotation(0);
+            ActivateNextPill();
 
             throwingPill.ResetScale();
 
@@ -637,7 +638,6 @@ public partial class PillManager : Node
             	throwingPill2.ResetScale();
 			}
 
-            ActivateNextPill();
 			return;
 		}
 
