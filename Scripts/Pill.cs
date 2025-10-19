@@ -165,6 +165,12 @@ public partial class Pill : Node2D
         Position = origPos + GetOrigPosOffset(index);
 	}
 
+	public void OffsetOrigPos(Vector2 offset)
+	{
+		if (hasSetOrigPos)
+        	origPos += offset;
+    }
+
 	public int GetTileColour(Vector2I pos)
 	{
 		TileData data = pillTiles.GetCellTileData(pos);
@@ -187,10 +193,11 @@ public partial class Pill : Node2D
 
 	public void ResetState()
 	{
-		if (origPos != Vector2.Zero)
-			Position = origPos + GetOrigPosOffset((int)pillShape);;
+		if (hasSetOrigPos)
+			Position = origPos + GetOrigPosOffset((int)pillShape);
 
         SetRotation(0);
+        ResetScale();
     }
 
 	public virtual void SetRandomPillColours(List<int> possibleColours, bool guaranteeSingleColour, PillType pType, PillShape pShape, RandomNumberGenerator rng)

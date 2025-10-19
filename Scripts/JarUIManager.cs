@@ -314,13 +314,13 @@ public partial class JarUIManager : Node
         foreach (Pill leftPill in leftAlignedPills)
 		{
             leftPill.Position -= offset;
-            leftPill.SetOrigPosToCurrentPos();
+            leftPill.OffsetOrigPos(-offset);
         }
 
 		foreach (Pill rightPill in rightAlignedPills)
 		{
             rightPill.Position += offset;
-            rightPill.SetOrigPosToCurrentPos();
+            rightPill.OffsetOrigPos(offset);
 		}
 
 		powerUpIcon.Position += offset;

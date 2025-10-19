@@ -409,11 +409,13 @@ description = "GAMEPLAY:
 
 FIXES & IMPROVEMENTS:
 
-- Fixed next pill preview sizes being wrong when playing Pill Mix in multiplayer
+- Mouse cursor now hides during gameplay
 
 - If the game window is too small to fit all jars on-screen, the camera will zoom out
 
-- Mouse cursor now hides during gameplay"
+- Fixed next pill preview sizes being wrong when playing Pill Mix in multiplayer
+
+- Fixed pill inside jar being scaled-down if exiting/re-entering an editor playtest under specific conditions"
 alignDescToLeft = true
 popUpGroup = NodePath("../../../PopUpGroup")
 
