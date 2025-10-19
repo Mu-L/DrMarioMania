@@ -94,13 +94,8 @@ public partial class GameManager : Node
 
     public void UpdateCameraZoom()
     {
-        // temp to-do: DELETE THIS PRINT
-
-        GD.Print("update zoom");
-
         bool isEditing = IsInEditorScene && (editorMan.IsProcessing() || !editorMan.IsNodeReady());
-        GD.Print("is editing: " + isEditing);
-
+        
         // only use larger view if its setting is enable, in 1 player AND not in the editor scene while editing
         bool enableEnlargedView = commonGameSettings.EnableLargerView && commonGameSettings.PlayerCount == 1 && !isEditing;
 

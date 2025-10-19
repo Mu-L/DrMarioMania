@@ -30,7 +30,6 @@ public partial class EditorUndoRedoManager : Node
 
     private void CreateTiles(Dictionary<Vector2I, JarTileData> tiles)
     {
-        GD.Print("no. of tiles to change: " + tiles.Count);
         foreach (Vector2I pos in tiles.Keys)
         {
             jarMan.JarTiles.SetCell(pos, tiles[pos].sourceID, tiles[pos].atlas);
@@ -61,6 +60,7 @@ public partial class EditorUndoRedoManager : Node
         {
             jarMan.PlayerGameSettings.JarWidth = step.OldJarWidth;
             jarMan.UpdateJarSize();
+            gameMan.UpdateCameraZoom();
         }
 
         currentUndoRedoStep--;
@@ -80,6 +80,7 @@ public partial class EditorUndoRedoManager : Node
         {
             jarMan.PlayerGameSettings.JarWidth = step.NewJarWidth;
             jarMan.UpdateJarSize();
+            gameMan.UpdateCameraZoom();
         }
 
         currentUndoRedoStep++;
