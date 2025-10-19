@@ -1349,10 +1349,6 @@ public partial class JarManager : Node
 			else
 			{
 				pillMan.ThrowNextPill();
-
-				// speed up music if 3 or less viruses remain
-				if (virusesRemaining.Count <= 3 && CommonGameSettings.EnableHurryUpJingle && !IsInEditorScene)
-                    GameMan.PlayHurryUpJingle();
 			}
 		}
 		else
@@ -1467,7 +1463,9 @@ public partial class JarManager : Node
 
 	private void CompleteAutoFallingAndDestruction()
 	{
-		if (lineCombo > 3)
+        bool killedViruses = virusCombo != 0;
+
+        if (lineCombo > 3)
 			SfxMan.Play("ChainX3");
 		else if (lineCombo > 2)
 			SfxMan.Play("ChainX3");
@@ -1500,7 +1498,7 @@ public partial class JarManager : Node
 
 		autoFallTimer = 0;
 
-		ResetCombo();
+        ResetCombo();
 
 		if (queuedJunkSegments.Count > 0)
 		{
@@ -1514,8 +1512,8 @@ public partial class JarManager : Node
 			pillMan.ThrowNextPill();
 
 			// speed up music if 3 or less viruses remain
-			if (virusesRemaining.Count <= 3 && CommonGameSettings.EnableHurryUpJingle && !IsInEditorScene)
-                GameMan.PlayHurryUpJingle();
+			if (virusesRemaining.Count <= 3 && killedViruses)
+                GameMan.PlayHurryUpJingleIfEnabled();
 		}
 	}
 

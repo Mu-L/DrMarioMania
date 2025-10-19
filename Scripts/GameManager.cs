@@ -332,9 +332,10 @@ public partial class GameManager : Node
         gameThemer.SetMusic(commonGameSettings.CurrentMusic);
     }
 
-    public void PlayHurryUpJingle()
+    public void PlayHurryUpJingleIfEnabled()
     {
-        musicMan.PlayHurryUpJingle();
+        if (commonGameSettings.EnableHurryUpJingle && !IsInEditorScene)
+            musicMan.PlayHurryUpJingle();
     }
 
     private void PrepareNextRound()
