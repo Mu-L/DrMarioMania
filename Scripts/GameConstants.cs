@@ -16,6 +16,9 @@ public static class GameConstants
 	public const int customMusicID = -5;
 	public const string forbiddenLevelNameChars = "/;,\"";
 
+	// no. of levels in each level pack
+	public const int levelPackLevelCount = 8;
+
 	// source IDs
 	public const int pillSourceID = 0;
 	public const int virusSourceID = 1;

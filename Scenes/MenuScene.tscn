@@ -407,9 +407,13 @@ description = "GAMEPLAY:
 
 - New level pack containing 8 levels added
 
-FIXES & IMPROVEMENTS:
+VISUAL:
 
 - Mouse cursor now hides during gameplay
+
+- Levels in level packs now display their pack and level numbers during gameplay
+
+FIXES & IMPROVEMENTS:
 
 - If the game window is too small to fit all jars on-screen, the camera will zoom out
 

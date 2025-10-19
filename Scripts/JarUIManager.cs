@@ -107,6 +107,7 @@ public partial class JarUIManager : Node
     public void SetHighScoreLabel(int score) { highScoreLabel.Text = "" + score; }
     public void SetScoreLabel(int score) { scoreLabel.Text = "" + score; }
     public void SetLevelLabel(int level) { levelLabel.Text = level == -1 ? "-" : "" + level; }
+    public void SetLevelLabel(int a, int b) { levelLabel.Text = a + "-" + b; }
     public void SetVirusLabel(int virus) { virusLabel.Text = "" + virus; }
     public void SetSpeedLabel(int speed)
     {

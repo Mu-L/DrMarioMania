@@ -784,8 +784,16 @@ public partial class JarManager : Node
 		if (PlayerGameSettings.IsUsingPowerUps)
 			PowerUpMeter.QueueNewPowerUp();
 
-		// Blank out level label number
-		uiMan.SetLevelLabel(-1);
+		// If official level, use #-# (pack-lvl) number format for level label
+		if (CommonGameSettings.IsOfficialCustomLevel)
+		{
+			int packNo = (CommonGameSettings.CustomLevelID / GameConstants.levelPackLevelCount) + 1;
+            int lvlNo = (CommonGameSettings.CustomLevelID % GameConstants.levelPackLevelCount) + 1;
+            uiMan.SetLevelLabel(packNo, lvlNo);
+		}
+		// Else, blank out level label number
+		else
+			uiMan.SetLevelLabel(-1);
 
 		// Create viruses of each possible colour in the virus ring/magnifying glass
 		if (VirusRing != null)

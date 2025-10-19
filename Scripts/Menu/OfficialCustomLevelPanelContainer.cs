@@ -20,7 +20,7 @@ public partial class OfficialCustomLevelPanelContainer : ScrollContainer
 
     private Godot.Collections.Array<string> Levels { get { return levelList.Levels; } }
 	private int currentPage = 0;
-	private const int levelsPerPage = 8;
+	private int LevelsPerPage { get { return GameConstants.levelPackLevelCount; } }
 	private int PageCount
     {
         get 
@@ -28,7 +28,7 @@ public partial class OfficialCustomLevelPanelContainer : ScrollContainer
             if (Levels.Count == 0)
                 return 1;
             
-            return ((Levels.Count - 1) / levelsPerPage) + 1;
+            return ((Levels.Count - 1) / LevelsPerPage) + 1;
         }
     }
 
@@ -65,9 +65,9 @@ public partial class OfficialCustomLevelPanelContainer : ScrollContainer
 		OfficialCustomLevelPanel prevPanel = null;
 
 		// make new panels
-        for (int i = 0; i < levelsPerPage; i++)
+        for (int i = 0; i < LevelsPerPage; i++)
         {
-			int lvlID = currentPage * levelsPerPage + i;
+			int lvlID = currentPage * LevelsPerPage + i;
 
             if (lvlID > Levels.Count - 1)
                 break;
