@@ -104,7 +104,6 @@ follow_focus = true
 scroll_deadzone = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PageContainer/ScrollContainer"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 2
@@ -211,6 +210,35 @@ offset_left = -33.0
 offset_right = -1.0
 grow_horizontal = 0
 settingName = &"EnableEditorMusic"
+isCommonSetting = true
+
+[node name="HurryUpPanel" type="Control" parent="PageContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="PageContainer/ScrollContainer/VBoxContainer/HurryUpPanel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 1.0
+offset_top = -4.0
+offset_right = 73.0
+offset_bottom = 4.0
+grow_vertical = 2
+text = "Play Hurry Up Jingle"
+
+[node name="ToggleButton" parent="PageContainer/ScrollContainer/VBoxContainer/HurryUpPanel" instance=ExtResource("3_nagm0")]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -33.0
+offset_right = -1.0
+grow_horizontal = 0
+settingName = &"EnableHurryUpJingle"
 isCommonSetting = true
 
 [node name="GhostPanel" type="Control" parent="PageContainer/ScrollContainer/VBoxContainer"]
@@ -440,6 +468,7 @@ settingName = &"SwapABButtons"
 isCommonSetting = true
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="PageContainer/ScrollContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 2

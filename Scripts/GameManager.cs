@@ -332,6 +332,11 @@ public partial class GameManager : Node
         gameThemer.SetMusic(commonGameSettings.CurrentMusic);
     }
 
+    public void PlayHurryUpJingle()
+    {
+        musicMan.PlayHurryUpJingle();
+    }
+
     private void PrepareNextRound()
     {
         // Generate randomised seed to be given to each jar

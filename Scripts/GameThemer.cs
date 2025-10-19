@@ -90,6 +90,7 @@ public partial class GameThemer : Node
 		musicMan.WinMusic = musicList.GetThemeMusicStream("Win");
 		musicMan.MultiWinMusic = musicList.GetThemeMusicStream("MultiWin");
 		musicMan.LoseMusic = musicList.GetThemeMusicStream("Lose");
+		musicMan.HurryUpJingle = musicList.GetThemeMusicStream("HurryUp");
 	}
 
 	private void UpdateEditorVisuals()

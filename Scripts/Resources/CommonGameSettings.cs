@@ -334,6 +334,7 @@ public partial class CommonGameSettings : Resource
     }
     private int sfxVolume = 100;
     public bool EnableEditorMusic { get; set; } = true;
+    public bool EnableHurryUpJingle { get; set; } = true;
 
     private void SetBusVolume(int index, int vol)
     {
@@ -456,6 +457,7 @@ public partial class CommonGameSettings : Resource
         config.SetValue("Audio Settings", "MusicVolume", MusicVolume);
         config.SetValue("Audio Settings", "SFXVolume", SFXVolume);
         config.SetValue("Audio Settings", "EnableEditorMusic", EnableEditorMusic);
+        config.SetValue("Audio Settings", "EnableHurryUpJingle", EnableHurryUpJingle);
         config.SetValue("Audio Settings", "CustomMusicFile", CustomMusicFile);
 
         config.SetValue("Misc Settings", "HasSeenDisclaimer", HasSeenDisclaimer);
@@ -549,6 +551,9 @@ public partial class CommonGameSettings : Resource
 
             if (config.HasSectionKey("Audio Settings", "EnableEditorMusic"))
                 EnableEditorMusic = (bool)config.GetValue("Audio Settings", "EnableEditorMusic");
+
+            if (config.HasSectionKey("Audio Settings", "EnableHurryUpJingle"))
+                EnableHurryUpJingle = (bool)config.GetValue("Audio Settings", "EnableHurryUpJingle");
 
             if (config.HasSectionKey("Audio Settings", "CustomMusicFile"))
                 CustomMusicFile = (string)config.GetValue("Audio Settings", "CustomMusicFile");

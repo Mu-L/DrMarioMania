@@ -407,11 +407,17 @@ description = "GAMEPLAY:
 
 - New level pack containing 8 levels added
 
-VISUAL:
+VISUALS:
 
 - Mouse cursor now hides during gameplay
 
 - Levels in level packs now display their pack and level numbers during gameplay
+
+AUDIO:
+
+- Once 3 viruses remain, a jingle will play then the music will speed up. This can be toggled on or off in settings.
+
+- WhatsApp theme now uses Mania music instead of NES
 
 FIXES & IMPROVEMENTS:
 

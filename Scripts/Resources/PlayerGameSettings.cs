@@ -18,6 +18,7 @@ public partial class PlayerGameSettings : Resource
         GameplayStyle = 0;
         InitialVirusLevel = 0;
         SpeedLevel = 1;
+        JarSize = GameConstants.DefaultJarSize;
     }
 
     public void CopySettings(PlayerGameSettings otherPlayer)

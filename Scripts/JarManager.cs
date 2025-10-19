@@ -1349,6 +1349,10 @@ public partial class JarManager : Node
 			else
 			{
 				pillMan.ThrowNextPill();
+
+				// speed up music if 3 or less viruses remain
+				if (virusesRemaining.Count <= 3 && CommonGameSettings.EnableHurryUpJingle && !IsInEditorScene)
+                    GameMan.PlayHurryUpJingle();
 			}
 		}
 		else
@@ -1469,8 +1473,8 @@ public partial class JarManager : Node
 			SfxMan.Play("ChainX3");
 		else if (lineCombo > 1)
 			SfxMan.Play("ChainX2");
-	
-		if (CommonGameSettings.IsMultiplayer && CommonGameSettings.MultiplayerUseJunkPills && lineCombo > 1)
+
+        if (CommonGameSettings.IsMultiplayer && CommonGameSettings.MultiplayerUseJunkPills && lineCombo > 1)
 		{
 			// Get random player which isn't this player
 			int receivingPlayer = GD.RandRange(0, CommonGameSettings.PlayerCount - 2);
@@ -1508,6 +1512,10 @@ public partial class JarManager : Node
 			isJunkFalling = false;
 			SetProcess(false);
 			pillMan.ThrowNextPill();
+
+			// speed up music if 3 or less viruses remain
+			if (virusesRemaining.Count <= 3 && CommonGameSettings.EnableHurryUpJingle && !IsInEditorScene)
+                GameMan.PlayHurryUpJingle();
 		}
 	}
 
