@@ -10,6 +10,7 @@ public partial class EditorManager : Node
     [Export] private EditorCursor cursor;
     [Export] private EditorBaseSelector drawingToolSelector;
     [Export] private CanvasLayer editorUILayer;
+    [Export] private Control leftSideToolbar;
     public EditorBaseSelector DrawingToolSelector { get { return drawingToolSelector; } }
     [Export] private EditorColourSelector colourSelector;
     public EditorColourSelector ColourSelector { get { return colourSelector; } }
@@ -43,8 +44,10 @@ public partial class EditorManager : Node
     public bool CanPressButtons { get { return !isPaused && !cursor.IsBusy && editorUILayer.Visible; } }
     private bool isPaused = false;
 
+    private const float sidebarDistFromJar = 8;
+
     // Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+    public override void _Ready()
 	{
         jarMan = gameMan.Jars[0];
 
@@ -68,7 +71,7 @@ public partial class EditorManager : Node
 
         if (commonGameSettings.EnableEditorMusic)
             musicPreviewPlayer.SetPreviewMusicToCurrent();
-	}
+    }
 
     public void PlayTest()
     {
@@ -96,14 +99,12 @@ public partial class EditorManager : Node
 
         touchControlsMan.ShowTouchControlsIfAvailable(true);
 
-        GetViewport().GetCamera2D().Zoom = Vector2.One * (commonGameSettings.EnableLargerView ? GameConstants.largerViewZoom : 1);
         jarMan.SetVirusTileAnimationState(commonGameSettings.EnableVirusTileAnimation);
+        gameMan.UpdateCameraZoom();
     }
 
     public void EndPlayTest()
     {
-        GetViewport().GetCamera2D().Zoom = Vector2.One;
-
         jarMan.DisablePowerUpSpawning = true;
         jarMan.DeleteAllPowerUps();
         jarMan.ResetScore();
@@ -126,6 +127,8 @@ public partial class EditorManager : Node
 
         touchControlsMan.ShowTouchControlsIfAvailable(false);
         Input.MouseMode = Input.MouseModeEnum.Visible;
+
+        gameMan.UpdateCameraZoom();
     }
 
     public void SaveLevel()
@@ -386,6 +389,8 @@ public partial class EditorManager : Node
         }
 
         undoRedoMan.EndUndoRedoStep();
+
+        gameMan.UpdateCameraZoom();
     }
 
     public void IncreaseJarWidth()
@@ -415,6 +420,21 @@ public partial class EditorManager : Node
 
         if (b)
             sfxMan.Play("Pause");
+    }
+
+    public void UpdateSidebarPosition(float jarWidth)
+    {
+
+        // initially set xPos based on the jar width and sidebarDistFromJar
+        float xPos = -jarWidth * GameConstants.tileSize / 2.0f - sidebarDistFromJar;
+
+        // scale x pos based on cam zoom
+        xPos *= GetViewport().GetCamera2D().Zoom.X;
+
+        // offset x pos to centre of screen (aligned to the top-right corner of sidebar)
+        xPos += GetViewport().GetVisibleRect().Size.X / 2.0f - leftSideToolbar.Size.X;
+
+        leftSideToolbar.Position = new Vector2(xPos, leftSideToolbar.Position.Y);
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.

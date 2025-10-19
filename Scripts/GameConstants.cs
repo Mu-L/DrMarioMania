@@ -52,5 +52,5 @@ public static class GameConstants
 	public static Vector2I DefaultJarSize { get { return new Vector2I(8, 16); } }
 	public const int jarWidthMin = 8;
 	public const int jarWidthMax = 24;
-	public const int tileSize = 4;
+    public const int tileSize = 8;
 }

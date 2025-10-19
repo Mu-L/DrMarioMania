@@ -391,12 +391,15 @@ title = "v0.0.0 - CHANGE LOG"
 description = "GAMEPLAY:
 
 - New gameplay styles:
+
   - ?
 
 - Added support for variable jar widths:
+
 - - The jar width can be
     changed in the Custom
     Gameplay Style menu
+
 - - For custom levels,
     width size buttons
     have been added to
@@ -407,6 +410,9 @@ description = "GAMEPLAY:
 FIXES & IMPROVEMENTS:
 
 - Fixed next pill preview sizes being wrong when playing Pill Mix in multiplayer
+
+- If the game window is too small to fit all jars on-screen, the camera will zoom out
+
 - Mouse cursor now hides during gameplay"
 alignDescToLeft = true
 popUpGroup = NodePath("../../../PopUpGroup")

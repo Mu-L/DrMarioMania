@@ -959,13 +959,14 @@ colourSelector = NodePath("../EditorUILayer/TopToolbar/ColourSelector")
 [node name="GameManager" parent="." index="6" node_paths=PackedStringArray("editorMan")]
 editorMan = NodePath("../EditorManager")
 
-[node name="EditorManager" type="Node" parent="." index="7" node_paths=PackedStringArray("editorPauseMan", "undoRedoMan", "cursor", "drawingToolSelector", "editorUILayer", "colourSelector", "tileTypeSelector", "gameMan", "gameThemer", "sfxMan", "musicMan", "touchControlsMan", "musicPreviewPlayer")]
+[node name="EditorManager" type="Node" parent="." index="7" node_paths=PackedStringArray("editorPauseMan", "undoRedoMan", "cursor", "drawingToolSelector", "editorUILayer", "leftSideToolbar", "colourSelector", "tileTypeSelector", "gameMan", "gameThemer", "sfxMan", "musicMan", "touchControlsMan", "musicPreviewPlayer")]
 script = ExtResource("2_tonjn")
 editorPauseMan = NodePath("../EditorPauseLayer/EditorPauseManager")
 undoRedoMan = NodePath("../UndoRedoManager")
 cursor = NodePath("../GameLayer/EditorCursor")
 drawingToolSelector = NodePath("../EditorUILayer/LeftSideToolbar/ColorRect/DrawingToolSelector")
 editorUILayer = NodePath("../EditorUILayer")
+leftSideToolbar = NodePath("../EditorUILayer/LeftSideToolbar")
 colourSelector = NodePath("../EditorUILayer/TopToolbar/ColourSelector")
 tileTypeSelector = NodePath("../EditorUILayer/TopToolbar/TileTypeSelector")
 gameMan = NodePath("../GameManager")

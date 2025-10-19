@@ -38,7 +38,7 @@ public partial class GameManager : Node
     private bool isGameOngoing = false;
     private int jarsLeftToFill;
     private int remainingPlayers;
-    private bool isInEditorScene = false;
+    private bool IsInEditorScene { get { return editorMan != null; } }
     private ulong sharedSeed;
     // Whether or not a player has enough round wins to win the whole game (reached best of # rounds)
     private bool hasPlayerWonEnoughRounds = false;
@@ -64,11 +64,9 @@ public partial class GameManager : Node
         {
             if (commonGameSettings.CustomLevelID == -2)
                 commonGameSettings.CustomLevelID = -1;
-            
-            isInEditorScene = true;
         }
-
-        touchControlsMan.ShowTouchControlsIfAvailable(!isInEditorScene);
+        
+        touchControlsMan.ShowTouchControlsIfAvailable(!IsInEditorScene);
 
         // if creating new level, reset settings
         if (commonGameSettings.CustomLevelID == -1)
@@ -82,19 +80,52 @@ public partial class GameManager : Node
 
         gameThemer.UpdateAllVisualsAndSfx();
         
-        if (!isInEditorScene)
+        if (!IsInEditorScene)
         {
             musicMan.PlayGameMusic();
             Input.MouseMode = Input.MouseModeEnum.Hidden;
         }
         
         UpdateCameraZoom();
+
+        // calls UpdateCameraZoom when viewport size changes
+        GetViewport().SizeChanged += UpdateCameraZoom;
 	}
 
-    private void UpdateCameraZoom()
+    public void UpdateCameraZoom()
     {
-        bool enableZoom = commonGameSettings.EnableLargerView && !isInEditorScene && commonGameSettings.PlayerCount == 1;
-        GetViewport().GetCamera2D().Zoom = Vector2.One * (enableZoom ? GameConstants.largerViewZoom : 1);
+        // temp to-do: DELETE THIS PRINT
+
+        GD.Print("update zoom");
+
+        bool isEditing = IsInEditorScene && (editorMan.IsProcessing() || !editorMan.IsNodeReady());
+        GD.Print("is editing: " + isEditing);
+
+        // only use larger view if its setting is enable, in 1 player AND not in the editor scene while editing
+        bool enableEnlargedView = commonGameSettings.EnableLargerView && commonGameSettings.PlayerCount == 1 && !isEditing;
+
+        float zoom = enableEnlargedView ? GameConstants.largerViewZoom : 1;
+
+        Vector2 topLeftPos = jars[0].UIMan.TopLeftPos;
+        Vector2 bottomRightPos = jars[jars.Count - 1].UIMan.BottomRightPos;
+
+        // get total width of all the jars
+        float totalJarWidth = bottomRightPos.X - topLeftPos.X;
+
+        // if in editing, jar hud will be hidden, so reduce the total width (still keeping enough room for editor ui)
+        if (isEditing)
+            totalJarWidth -= 30 * 2;
+
+        float viewPortWidth = GetViewport().GetVisibleRect().Size.X;
+
+        // if total width of all the jars is larger than the viewport, scale zoom to fit everything in
+        if (totalJarWidth > viewPortWidth / zoom)
+            zoom = viewPortWidth / totalJarWidth;
+
+        GetViewport().GetCamera2D().Zoom = Vector2.One * zoom;
+
+        if (IsInEditorScene)
+            editorMan.UpdateSidebarPosition(jars[0].JarSize.X);
     }
 
     private void CreateJars()
@@ -149,7 +180,7 @@ public partial class GameManager : Node
 
             jar.PlayerID = i;
             
-            if (isInEditorScene)
+            if (IsInEditorScene)
                 jar.IsInEditorScene = true;
             else
             {
@@ -160,7 +191,7 @@ public partial class GameManager : Node
 
             if (i != 0)
                 // offset further if jar if not of a default width
-                jarOffsetX += (jar.JarSize.X - GameConstants.jarWidthMin) * GameConstants.tileSize;
+                jarOffsetX += (jar.JarSize.X - GameConstants.jarWidthMin) * (GameConstants.tileSize / 2);
 
 
             //group.Position = new Vector2((i - ((commonGameSettings.PlayerCount - 1) / 2.0f)) * jarSpacing, 0);
@@ -170,7 +201,7 @@ public partial class GameManager : Node
             {
                 jarOffsetX += jarSpacing;
                 // offset further if jar if not of a default width
-                jarOffsetX += (jar.JarSize.X - GameConstants.jarWidthMin) * GameConstants.tileSize;
+                jarOffsetX += (jar.JarSize.X - GameConstants.jarWidthMin) * (GameConstants.tileSize / 2);
             }
         }
 
@@ -209,7 +240,7 @@ public partial class GameManager : Node
         if (jarsLeftToFill > 0)
             jarsLeftToFill--;
 
-        if (!isInEditorScene)
+        if (!IsInEditorScene)
             await Task.Delay(startDelay);
 
         if (!isGameOngoing && jarsLeftToFill == 0 && !failedToLoadCustomLevel)
@@ -266,11 +297,11 @@ public partial class GameManager : Node
         }
         
         // Return early if in editor scene
-        if (isInEditorScene)
+        if (IsInEditorScene)
             return;
 
         // If in single player and NOT in editor...
-        if (commonGameSettings.PlayerCount == 1 && !isInEditorScene)
+        if (commonGameSettings.PlayerCount == 1 && !IsInEditorScene)
         {
             if (jars[0].LastWinState)
                 highScoreList.AddClearedLevel(false);
@@ -313,7 +344,7 @@ public partial class GameManager : Node
 
         isGameOngoing = false;
         jarsLeftToFill = jars.Count;
-        if (!(isInEditorScene && commonGameSettings.EnableEditorMusic))
+        if (!(IsInEditorScene && commonGameSettings.EnableEditorMusic))
             musicMan.PlayGameMusic();
         hasSavedScore = false;
         Input.MouseMode = Input.MouseModeEnum.Hidden;
@@ -349,7 +380,7 @@ public partial class GameManager : Node
     public void QuitGame()
     {
         // If in single player, NOT in editor AND hasSavedScore is false, add score to highscore list
-        if (commonGameSettings.PlayerCount == 1 && !isInEditorScene && !hasSavedScore)
+        if (commonGameSettings.PlayerCount == 1 && !IsInEditorScene && !hasSavedScore)
         {
             highScoreList.AddScore(jars[0].Score, true);
         }
@@ -401,9 +432,9 @@ public partial class GameManager : Node
 	{
         if (Input.IsActionJustPressed("ui_cancel") && isPaused)
             pauseMan.GoBack();
-		else if (isGameOngoing && (Input.IsActionJustPressed("Pause") || (isInEditorScene && Input.IsActionJustPressed("EditorPlayTest"))))
+		else if (isGameOngoing && (Input.IsActionJustPressed("Pause") || (IsInEditorScene && Input.IsActionJustPressed("EditorPlayTest"))))
         {
-            if (isInEditorScene)
+            if (IsInEditorScene)
                 EndGame();
             else
                 SetIsPaused(!isPaused);
