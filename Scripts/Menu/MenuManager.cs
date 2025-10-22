@@ -36,6 +36,11 @@ public partial class MenuManager : Node
 		multiControlCon.RefreshVisuals();
 	}
 
+	public void SetGameMode(int mode)
+	{
+		commonGameSettings.GameMode = mode;
+	}
+
 	public void StartEditor(int levelID = -1)
 	{
 		SetPlayerCount(1);

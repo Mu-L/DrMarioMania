@@ -25,7 +25,11 @@ public partial class MenuScreenManager : BaseHistoryScreenManager
 			{
 				// single player - last screen = visuals, new screen = game rules
 				case 2:
-					currentScreen = 1;
+					if (commonGameSettings.GameMode == 0)
+						currentScreen = 1;
+					else
+						currentScreen = 17;
+						
 					screenHistory.RemoveAt(screenHistory.Count - 1);
 					break;
 				// multiplayer player - last screen = player-specific settings, new screen = shared settings

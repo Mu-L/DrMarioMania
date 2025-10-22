@@ -1,4 +1,4 @@
-[gd_scene load_steps=103 format=3 uid="uid://b2vcutf5f3jja"]
+[gd_scene load_steps=104 format=3 uid="uid://b2vcutf5f3jja"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/MenuScreenManager.cs" id="1_i7n64"]
 [ext_resource type="Script" path="res://Scripts/Menu/Screens/UpdateableSettingScreen.cs" id="2_ig0jp"]
@@ -84,6 +84,7 @@
 [ext_resource type="Script" path="res://Scripts/Menu/GameSettingUI/HighScoreScreenVariants/HighScoreToggleButton.cs" id="67_bnmyu"]
 [ext_resource type="Texture2D" uid="uid://cbv7ybh40c75x" path="res://Assets/Sprites/UI/ButtonIcons/OfficialLevelIcon.png" id="70_y4wno"]
 [ext_resource type="PackedScene" uid="uid://ciycvm6fh6cel" path="res://Assets/Prefabs/PopUpGroup.tscn" id="72_3ij4p"]
+[ext_resource type="Texture2D" uid="uid://pb7e7651wxor" path="res://Assets/Sprites/UI/ButtonIcons/MarathonIcon.png" id="73_d5veu"]
 [ext_resource type="Script" path="res://Scripts/Menu/OfficialCustomLevelPanelContainer.cs" id="73_febh5"]
 [ext_resource type="Resource" uid="uid://bg0t1x05maugm" path="res://Assets/Resources/OfficialCustomLevelList.tres" id="75_8f8n1"]
 [ext_resource type="PackedScene" uid="uid://bfcv2361x0ono" path="res://Assets/Prefabs/OfficialCustomLevelPanel.tscn" id="75_nsn7q"]
@@ -430,6 +431,7 @@ alignDescToLeft = true
 popUpGroup = NodePath("../../../PopUpGroup")
 
 [node name="GameplayScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3679,6 +3681,14 @@ size_flags_vertical = 0
 text = "CLASSIC"
 icon = ExtResource("61_ailxn")
 
+[node name="MarathonButton" type="Button" parent="UILayer/MenuScreenManager/ModeSingleScreen/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "MARATHON"
+icon = ExtResource("73_d5veu")
+
 [node name="OfficialLevelsButton" type="Button" parent="UILayer/MenuScreenManager/ModeSingleScreen/VBoxContainer"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
@@ -4201,6 +4211,213 @@ toggle_mode = true
 button_group = SubResource("ButtonGroup_5b5yk")
 text = "PACK 4"
 
+[node name="AltGameplayScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_ig0jp")
+InitialHoverNode = NodePath("")
+
+[node name="Title" type="Label" parent="UILayer/MenuScreenManager/AltGameplayScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -60.0
+offset_top = 25.0
+offset_right = 60.0
+offset_bottom = 48.0
+grow_horizontal = 2
+text = "GAME RULES"
+horizontal_alignment = 1
+
+[node name="VirusLabel" type="Label" parent="UILayer/MenuScreenManager/AltGameplayScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.0
+offset_top = -65.0
+offset_right = -31.0
+offset_bottom = -57.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Difficulty"
+
+[node name="VirusContainer" type="BoxContainer" parent="UILayer/MenuScreenManager/AltGameplayScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = -54.0
+offset_right = 112.0
+offset_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("5_vf7kc")
+settingName = &"VirusDifficulty"
+commonGameSettings = ExtResource("17_7dvs3")
+metadata/_edit_group_ = true
+
+[node name="Button" parent="UILayer/MenuScreenManager/AltGameplayScreen/VirusContainer" instance=ExtResource("7_a10ok")]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+button_pressed = true
+text = "EASY"
+
+[node name="Button2" parent="UILayer/MenuScreenManager/AltGameplayScreen/VirusContainer" instance=ExtResource("7_a10ok")]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "NORM"
+value = 1
+
+[node name="Button3" parent="UILayer/MenuScreenManager/AltGameplayScreen/VirusContainer" instance=ExtResource("7_a10ok")]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "HARD"
+value = 2
+
+[node name="GameplayLabel" type="Label" parent="UILayer/MenuScreenManager/AltGameplayScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.0
+offset_top = -33.0
+offset_right = 1.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Gameplay Style"
+
+[node name="GameplayScrollContainer" parent="UILayer/MenuScreenManager/AltGameplayScreen" instance=ExtResource("10_3cebr")]
+layout_mode = 1
+offset_left = -112.0
+offset_top = -20.0
+offset_right = 112.0
+offset_bottom = 6.0
+
+[node name="SpeedLabel" type="Label" parent="UILayer/MenuScreenManager/AltGameplayScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.0
+offset_top = 11.0
+offset_right = 9.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Fall Speed"
+
+[node name="SpeedContainer" type="BoxContainer" parent="UILayer/MenuScreenManager/AltGameplayScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = 24.0
+offset_right = 112.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("5_vf7kc")
+settingName = &"SpeedLevel"
+commonGameSettings = ExtResource("17_7dvs3")
+metadata/_edit_group_ = true
+
+[node name="Button" parent="UILayer/MenuScreenManager/AltGameplayScreen/SpeedContainer" instance=ExtResource("7_a10ok")]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+button_pressed = true
+text = "LOW"
+
+[node name="Button2" parent="UILayer/MenuScreenManager/AltGameplayScreen/SpeedContainer" instance=ExtResource("7_a10ok")]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "MEDIUM"
+value = 1
+
+[node name="Button3" parent="UILayer/MenuScreenManager/AltGameplayScreen/SpeedContainer" instance=ExtResource("7_a10ok")]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "HIGH"
+value = 2
+
+[node name="PopUpButton" parent="UILayer/MenuScreenManager/AltGameplayScreen" node_paths=PackedStringArray("popUpGroup") instance=ExtResource("19_utcow")]
+layout_mode = 1
+anchors_preset = 8
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -36.0
+offset_right = 17.0
+offset_bottom = -22.0
+grow_vertical = 2
+title = "GAMEPLAY STYLE"
+description = "MODERN: Has hold slot and generous lock delay
+
+CLASSIC: Gameplay closer to older Dr. Mario games
+
+Dr. LUIGI: Modern with L-shaped pills
+
+QUAD: Modern with 4 colours
+
+ITEMS: Modern with power-ups
+
+PILL MIX: Modern with various pill shapes
+
+CUSTOM: Use custom game rules"
+alignDescToLeft = true
+popUpGroup = NodePath("../../../PopUpGroup")
+
+[node name="BackButton" type="Button" parent="UILayer/MenuScreenManager/AltGameplayScreen"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = -29.0
+offset_right = 71.0
+offset_bottom = -7.0
+grow_vertical = 0
+focus_neighbor_right = NodePath("../NextButton")
+text = "BACK"
+icon = ExtResource("8_3vacb")
+
+[node name="NextButton" type="Button" parent="UILayer/MenuScreenManager/AltGameplayScreen"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -71.0
+offset_top = -29.0
+offset_right = -7.0
+offset_bottom = -7.0
+grow_horizontal = 0
+grow_vertical = 0
+focus_neighbor_left = NodePath("../BackButton")
+text = "NEXT"
+
 [node name="NotificationBox" type="Control" parent="UILayer" node_paths=PackedStringArray("aniPlayer", "audioPlayer", "label")]
 visible = false
 layout_mode = 3
@@ -4397,15 +4614,23 @@ normalMusicPlayer = NodePath("../MusicPlayer")
 [connection signal="pressed" from="UILayer/MenuScreenManager/UserCustomLevelScreen/PreviousButton" to="UILayer/MenuScreenManager/UserCustomLevelScreen/CustomLevelPanelContainer" method="PreviousPage"]
 [connection signal="pressed" from="UILayer/MenuScreenManager/UserCustomLevelScreen/NextButton" to="UILayer/MenuScreenManager/UserCustomLevelScreen/CustomLevelPanelContainer" method="NextPage"]
 [connection signal="pressed" from="UILayer/MenuScreenManager/SettingsScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/ModeSingleScreen/VBoxContainer/ClassicButton" to="MenuManager" method="SetGameMode" binds= [0]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/ModeSingleScreen/VBoxContainer/ClassicButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [1]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/ModeSingleScreen/VBoxContainer/MarathonButton" to="MenuManager" method="SetGameMode" binds= [1]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/ModeSingleScreen/VBoxContainer/MarathonButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [17]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/ModeSingleScreen/VBoxContainer/OfficialLevelsButton" to="MenuManager" method="SetGameMode" binds= [0]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/ModeSingleScreen/VBoxContainer/OfficialLevelsButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [16]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/ModeSingleScreen/VBoxContainer/CustomLevelsButton" to="UILayer/MenuScreenManager/UserCustomLevelScreen/CustomLevelPanelContainer" method="UpdateVisuals"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/ModeSingleScreen/VBoxContainer/CustomLevelsButton" to="MenuManager" method="SetGameMode" binds= [0]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/ModeSingleScreen/VBoxContainer/CustomLevelsButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [11]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/ModeSingleScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
 [connection signal="pressed" from="UILayer/MenuScreenManager/ModeMultiScreen/VBoxContainer/VersusButton" to="UILayer/MenuScreenManager/MultiplayerPlayerScreen" method="InitialisePlayerConfiguring"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/ModeMultiScreen/VBoxContainer/VersusButton" to="MenuManager" method="SetGameMode" binds= [0]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/ModeMultiScreen/VBoxContainer/VersusButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [7]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/ModeMultiScreen/VBoxContainer/OfficialLevelsButton" to="MenuManager" method="SetGameMode" binds= [0]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/ModeMultiScreen/VBoxContainer/OfficialLevelsButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [16]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/ModeMultiScreen/VBoxContainer/CustomLevelsButton" to="UILayer/MenuScreenManager/UserCustomLevelScreen/CustomLevelPanelContainer" method="UpdateVisuals"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/ModeMultiScreen/VBoxContainer/CustomLevelsButton" to="MenuManager" method="SetGameMode" binds= [0]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/ModeMultiScreen/VBoxContainer/CustomLevelsButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [11]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/ModeMultiScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
 [connection signal="pressed" from="UILayer/MenuScreenManager/HighScoreScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
@@ -4414,6 +4639,9 @@ normalMusicPlayer = NodePath("../MusicPlayer")
 [connection signal="pressed" from="UILayer/MenuScreenManager/OfficialCustomLevelScreen/HBoxContainer/Button2" to="UILayer/MenuScreenManager/OfficialCustomLevelScreen/CustomLevelPanelContainer" method="SetPage" binds= [1]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/OfficialCustomLevelScreen/HBoxContainer/Button3" to="UILayer/MenuScreenManager/OfficialCustomLevelScreen/CustomLevelPanelContainer" method="SetPage" binds= [2]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/OfficialCustomLevelScreen/HBoxContainer/Button4" to="UILayer/MenuScreenManager/OfficialCustomLevelScreen/CustomLevelPanelContainer" method="SetPage" binds= [3]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/AltGameplayScreen/GameplayScrollContainer/MarginContainer/GameplayContainer/Button4" to="UILayer/MenuScreenManager" method="SetScreen" binds= [3]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/AltGameplayScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/AltGameplayScreen/NextButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [2]]
 
 [editable path="UILayer/MenuScreenManager/GameplayScreen/GameplayScrollContainer"]
 [editable path="UILayer/MenuScreenManager/VisualsScreen/ThemeScrollContainer"]
@@ -4432,3 +4660,4 @@ normalMusicPlayer = NodePath("../MusicPlayer")
 [editable path="UILayer/MenuScreenManager/MultiplayerCommonScreen/ThemeScrollContainer"]
 [editable path="UILayer/MenuScreenManager/SettingsScreen"]
 [editable path="UILayer/MenuScreenManager/HighScoreScreen/GameplayScrollContainer"]
+[editable path="UILayer/MenuScreenManager/AltGameplayScreen/GameplayScrollContainer"]

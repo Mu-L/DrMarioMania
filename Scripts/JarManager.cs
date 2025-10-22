@@ -160,8 +160,26 @@ public partial class JarManager : Node
 	// Whether or not this player has won enough rounds to be declared the winner of the overall game
 	public bool HasWonEnoughRounds { get { return roundWins == CommonGameSettings.MultiplayerRequiredWinCount; } }
 
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+
+    // marathon/endless mode parameters =========================
+
+	// no. of throws before next push up occurs
+    private const int throwsBeforePushUp = 10;
+	// no. of throws that the push-up warning will show for
+    private const int throwsDuringPushUpWarnin = 3;
+	// no. of lines to push-up upon clearing all viruses
+    private const int clearPushUpLines = 6;
+	// no. of times push-ups (of any line amount) have been done
+    private int pushUpCount = 0;
+	// push-up countdown, decreases with every throw and resets when a push-up occurs
+    private int pushUpCountdown = throwsBeforePushUp;
+
+	// no. of push-ups (of any line amount) before a virus level increase
+    private const int pushUpsBeforeLvlIncrease = 3;
+
+
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
 	{
 		UpdatePoppedAtlasPositions();
 		if (CommonGameSettings.PlayerCount == 1)
@@ -251,7 +269,6 @@ public partial class JarManager : Node
 					sameStreak = 1;
 				}
             }
-
         }
 
 		if (lastDifferentSourceID != -1)
@@ -538,7 +555,10 @@ public partial class JarManager : Node
 		destroyTimer = 0;
 		autoFallTimer = 0;
 
-		ResetCombo();
+        pushUpCount = 0;
+		pushUpCountdown = throwsBeforePushUp;
+
+        ResetCombo();
 		isJunkFalling = false;
 
 		isPlayerOut = false;
@@ -860,10 +880,28 @@ public partial class JarManager : Node
 
 	public async void GenerateViruses()
 	{
-        if (virusLevel < 0)
-			virusLevel = PlayerGameSettings.InitialVirusLevel;
+		if (CommonGameSettings.GameMode == 0)
+		{
+			if (virusLevel < 0)
+				virusLevel = PlayerGameSettings.InitialVirusLevel;
+		}
+		else
+			virusLevel = PlayerGameSettings.VirusDifficultyLevel;
 
-		uiMan.SetLevelLabel(virusLevel);
+		if (CommonGameSettings.GameMode == 0)
+			uiMan.SetLevelLabel(virusLevel);
+		else
+		{
+            int diff = PlayerGameSettings.VirusDifficulty;
+
+            if (diff == 0)
+				uiMan.SetLevelLabel("EASY");
+			else if (diff == 1)
+				uiMan.SetLevelLabel("NORM");
+			else if (diff == 2)
+				uiMan.SetLevelLabel("HARD");
+			
+		}
 
 		int virusCount = (virusLevel + 1) * 4;
 
@@ -1348,7 +1386,7 @@ public partial class JarManager : Node
 			}
 			else
 			{
-				pillMan.ThrowNextPill();
+                CompleteMove(false);
 			}
 		}
 		else
@@ -1371,7 +1409,141 @@ public partial class JarManager : Node
 		}
 	}
 
-	private bool TilesToDestroyContainsPos(Vector2I pos)
+	// complete the current move and go onto the next one
+	private void CompleteMove(bool killedViruses)
+	{
+		// marathon/endless mode stuff
+		if (CommonGameSettings.GameMode == 1)
+		{
+			ReducePushUpCountdown();
+
+			if (isPlayerOut || tilesToFall.Count != 0)
+				return;
+		}
+
+		// speed up music if 3 or less viruses remain
+		if (virusesRemaining.Count <= 3 && killedViruses)
+			GameMan.PlayHurryUpJingleIfEnabled();
+
+        pillMan.ThrowNextPill();
+	}
+
+	// ONLY USED FOR marathon/endless mode
+	// TO-DO: CALL THIS WHEN USING HOLD
+	private void ReducePushUpCountdown()
+	{
+		if (virusesRemaining.Count == 0)
+		{
+			GD.Print("ALL CLEARED, PUSHING UP MORE");
+
+			pushUpCountdown = throwsBeforePushUp;
+            DoPushUp(clearPushUpLines);
+		}
+		else
+		{
+			pushUpCountdown--;
+
+			GD.Print(pushUpCountdown);
+
+			// reset countdown and do push up
+			if (pushUpCountdown <= 0)
+			{
+				pushUpCountdown = throwsBeforePushUp;
+				// to-do: variable push up row amounts (random within range? based on highest virus y pos (closer to bottom = more rows)?)
+				DoPushUp(1);
+			}
+		}
+	}
+
+    // push up every tile by ROWS, and generates new viruses in the new bottom rows
+    // if any tiles go above the top of the jar, its joever
+    private void DoPushUp(int rows)
+    {
+        bool pushedOutOfJar = false;
+        pushUpCount++;
+
+        GD.Print("PUSH UP, ROWS: " + rows);
+
+		if (pushUpCount % pushUpsBeforeLvlIncrease == 0)
+		{
+            virusLevel++;
+            GD.Print("VIRUS LEVEL INCREASE");
+        }
+
+        // Push up existing tiles by ROWS
+        for (int y = 0; y < JarSize.Y; y++)
+        {
+            for (int x = 0; x < JarSize.X; x++)
+            {
+                Vector2I oldPos = new Vector2I(x + jarOrigin.X, y + jarOrigin.Y);
+				
+                if (!IsTilePresent(oldPos))
+                    continue;
+
+                Vector2I newPos = oldPos + Vector2I.Up * rows;
+
+				// if new pos would be out the top of the jar, set pushedOutOfJar to true to trigger a game over
+                if (newPos.Y < jarOrigin.Y)
+                    pushedOutOfJar = true;
+
+				// create copy of tile at new pos and erase old one
+				int sourceID = jarTiles.GetCellSourceId(oldPos);
+				Vector2I atlas = jarTiles.GetCellAtlasCoords(oldPos);
+				
+				jarTiles.SetCell(newPos, sourceID, atlas);
+				jarTiles.EraseCell(oldPos);
+
+				// update lists storing tile positions
+				if (virusesRemaining.ContainsKey(oldPos))
+				{
+                    virusesRemaining.Add(newPos, virusesRemaining[oldPos]);
+                    virusesRemaining.Remove(oldPos);
+                }
+				if (frozenPowerUps.Contains(oldPos))
+				{
+                    frozenPowerUps.Add(newPos);
+                    frozenPowerUps.Remove(oldPos);
+                }
+            }
+        }
+
+        // to-do: generate new row(s) containing viruses
+		// ENSURE VIRUSES SPAWNED DON'T MATCH MORE THAN 2 OF THE SAME VIRUSES IN A ROW *OR* HAVE THE SAME COLOUR AS THE PILL/POWE-UP ABOVE
+		// IF THE RULES ABOVE CAUSE NO VIRUSES TO SPAWN, FORCE MATCHING VIRUSES TO APPEAR AND DO MATCH CHECKS TO DESTROY (only if a pill/power-up is above)
+		{
+
+		}
+
+        // if pushedOutOfJar is true (aka tiles have gone out the top of the jar), do a game over
+        if (pushedOutOfJar)
+		{
+			GameOver();
+            return;
+        }
+
+        // to-do: fall checks for old bottom row
+        int oldBottomY = JarSize.Y - 1 - rows;
+        for (int x = 0; x < JarSize.X; x++)
+        {
+			Vector2I pos = new Vector2I(x + jarOrigin.X, oldBottomY + jarOrigin.Y);
+
+			// if NO tile at pos OR tile below pos exists, continue 
+			if (!IsTilePresent(pos) || IsTilePresent(pos + Vector2I.Down))
+            	continue;
+	
+            RecursiveFall(pos);
+        }
+
+		if (tilesToFall.Count != 0)
+		{
+            destroyTimer = 0;
+			autoFallTimer = 1;
+			SetProcess(true);
+        }
+
+    }
+
+    private bool TilesToDestroyContainsPos(Vector2I pos)
 	{
 		if (tilesToDestroy.ContainsKey(pos.Y) && tilesToDestroy[pos.Y].Contains(pos.X))
 			return true;
@@ -1509,11 +1681,7 @@ public partial class JarManager : Node
 		{
 			isJunkFalling = false;
 			SetProcess(false);
-			pillMan.ThrowNextPill();
-
-			// speed up music if 3 or less viruses remain
-			if (virusesRemaining.Count <= 3 && killedViruses)
-                GameMan.PlayHurryUpJingleIfEnabled();
+            CompleteMove(killedViruses);
 		}
 	}
 
@@ -1758,7 +1926,7 @@ public partial class JarManager : Node
 		// if there were no tiles to be destroyed or they have all been destroyed, remove all the "popped" tiles
 		if (tilesToDestroy.Count == 0 || destroyRow < tilesToDestroy.Keys.Min())
 		{
-			if (activePowerUps.Count != 0 && virusesRemaining.Count != 0)
+			if (activePowerUps.Count != 0 && (virusesRemaining.Count != 0 || CommonGameSettings.GameMode == 1))
 			{
 				if (destroyTimer > 0)
 					destroyTimer -= delta * destroyDisappearSpeed;
@@ -1776,7 +1944,7 @@ public partial class JarManager : Node
 					uiMan.SetHighScoreLabel(score);
 			}
 
-			if (virusesRemaining.Count() == 0 && virusCombo > 0)
+			if (virusesRemaining.Count() == 0 && virusCombo > 0 && CommonGameSettings.GameMode != 1)
 			{
 				Win();
 				return;

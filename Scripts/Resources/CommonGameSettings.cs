@@ -31,6 +31,10 @@ public partial class CommonGameSettings : Resource
     // 4 = player 4
     public int PlayerConfiguring { get; set; }
 
+    // 0 = normal - regular level (clear all viruses to win - aka classic, versus, pre-made/custom level)
+    // 1 = marathon - endless level (new viruses spawn from bottom)
+    public int GameMode { get; set; } = 0;
+
     // -1 = new, unsaved level
     // -2 = not a custom level
     public int CustomLevelID { get; set; } = -2;

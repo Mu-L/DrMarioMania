@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using static PowerUpEnums;
 using static PillEnums;
 using System.Numerics;
+using System.Linq;
 
 public partial class PlayerGameSettings : Resource
 {
@@ -17,6 +18,7 @@ public partial class PlayerGameSettings : Resource
 
         GameplayStyle = 0;
         InitialVirusLevel = 0;
+        VirusDifficulty = 0;
         SpeedLevel = 1;
         JarSize = GameConstants.DefaultJarSize;
     }
@@ -27,6 +29,7 @@ public partial class PlayerGameSettings : Resource
 
         GameplayStyle = otherPlayer.gameplayStyle;
         InitialVirusLevel = otherPlayer.InitialVirusLevel;
+        VirusDifficulty = otherPlayer.VirusDifficulty;
         SpeedLevel = otherPlayer.SpeedLevel;
 
         if (gameplayStyle == 3)
@@ -228,7 +231,22 @@ public partial class PlayerGameSettings : Resource
         }
     }
     private int gameplayStyle;
+    // virus level on a scale of 0 - 20 (unless player continues playing after lvl 20)
     [Export] public int InitialVirusLevel { get; set; }
+
+    // used when a mode doesn't specify a virus level, instead using easy, normal, hard
+    // each difficulty uses these predetermined virus levels:
+    private int[] VirusDifficultyLevels = { 6, 10, 14 };
+    public int VirusDifficulty { get; set; }
+    public int VirusDifficultyLevel
+    {
+        get
+        {
+            int diff = Mathf.Clamp(VirusDifficulty, 0, VirusDifficultyLevels.Length - 1);
+            return VirusDifficultyLevels[diff];
+        }
+    }
+
 	[Export] public int SpeedLevel { get; set; }
 	// the pill/virus colours used by this player
 	[Export] public Godot.Collections.Array<int> ChosenColours { get; set; }
@@ -452,6 +470,9 @@ public partial class PlayerGameSettings : Resource
             code += JarSize.Y;
         }
 
+        code += itemDivider;
+        code += VirusDifficulty;
+
         return code;
     }
     public bool ImportFromString(string code)
@@ -531,9 +552,7 @@ public partial class PlayerGameSettings : Resource
                 PowerUpMeterMaxLevel = int.Parse(codeChunks[16]);
 
                 if (codeChunks.Length > 17)
-                {
                     FasterAutoRepeat = StringToBool(codeChunks[17]);
-                }
 
                 if (codeChunks.Length > 18)
                 {
@@ -556,6 +575,14 @@ public partial class PlayerGameSettings : Resource
 
                     JarSize = new Vector2I(int.Parse(jarSizeData[0]), int.Parse(jarSizeData[1]));
                 }
+                
+                if (codeChunks.Length > 20)
+                    VirusDifficulty = int.Parse(codeChunks[20]);
+            }
+            else
+            {
+                if (codeChunks.Length > 4)
+                    VirusDifficulty = int.Parse(codeChunks[4]);
             }
             // successful
             return true;
