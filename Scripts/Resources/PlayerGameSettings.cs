@@ -142,14 +142,13 @@ public partial class PlayerGameSettings : Resource
                     ClearPowerUps();
                     SetSinglePillShape(PillShape.Double);
 
-                    for (int i = 0; i < Enum.GetValues<PowerUp>().Length; i++)
+                    for (int i = 0; i < PowerUpConstants.itemStylePowerUps.Length; i++)
                     {
-                        AvailablePowerUps.Add((PowerUp)i);
+                        AvailablePowerUps.Add(PowerUpConstants.itemStylePowerUps[i]);
                     }
-
-                    for (int i = 0; i < Enum.GetValues<PowerUp>().Length; i++)
+                    for (int i = 0; i < PowerUpConstants.itemStyleSpecialPowerUps.Length; i++)
                     {
-                        AvailableSpecialPowerUps.Add((PowerUp)i);
+                        AvailableSpecialPowerUps.Add(PowerUpConstants.itemStyleSpecialPowerUps[i]);
                     }
 
                     break;

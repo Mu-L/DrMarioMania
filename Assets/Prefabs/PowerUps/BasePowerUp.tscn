@@ -11,5 +11,5 @@ rainbowMat = ExtResource("2_27q06")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_62fo2")
-hframes = 7
+hframes = 10
 vframes = 11

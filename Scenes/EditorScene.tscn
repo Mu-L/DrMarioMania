@@ -1437,28 +1437,27 @@ hframes = 3
 vframes = 10
 
 [node name="SaveButton" type="Button" parent="EditorUILayer/TopToolbar" index="3"]
-custom_minimum_size = Vector2(14, 15)
 layout_mode = 1
-offset_left = 6.0
-offset_top = 8.0
-offset_right = 32.0
-offset_bottom = 25.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 20.0
+offset_bottom = 28.0
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
 theme_override_styles/pressed = SubResource("StyleBoxFlat_7hvga")
 icon = ExtResource("40_rnsc5")
 icon_alignment = 1
 metadata/_edit_group_ = true
 
 [node name="ResetButton" type="Button" parent="EditorUILayer/TopToolbar" index="4" node_paths=PackedStringArray("sprite", "gameMan", "editorMan", "undoRedoMan")]
-custom_minimum_size = Vector2(14, 15)
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -32.0
-offset_top = 8.0
-offset_right = -6.0
-offset_bottom = 25.0
+offset_left = -20.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = 28.0
 grow_horizontal = 0
 theme_override_styles/pressed = SubResource("StyleBoxFlat_7hvga")
 script = ExtResource("8_pskj7")
@@ -1469,7 +1468,7 @@ undoRedoMan = NodePath("../../../UndoRedoManager")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="EditorUILayer/TopToolbar/ResetButton" index="0"]
-position = Vector2(13, 8)
+position = Vector2(8, 12)
 texture = ExtResource("9_nsotx")
 hframes = 4
 

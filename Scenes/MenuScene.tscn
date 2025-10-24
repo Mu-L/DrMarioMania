@@ -395,6 +395,12 @@ description = "GAMEPLAY:
 
   - ?
 
+- New power-ups:
+
+- - Lightning - a
+
+- - Push Down Block - a
+
 - Added support for variable jar widths:
 
 - - The jar width can be
@@ -407,6 +413,8 @@ description = "GAMEPLAY:
     the editor
 
 - New level pack containing 8 levels added
+
+- Adjusted the \"Items\" gameplay style's possible power-ups
 
 VISUALS:
 
@@ -4211,7 +4219,7 @@ toggle_mode = true
 button_group = SubResource("ButtonGroup_5b5yk")
 text = "PACK 4"
 
-[node name="AltGameplayScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
+[node name="AltGameplayScreen" type="Control" parent="UILayer/MenuScreenManager"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -4220,7 +4228,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("2_ig0jp")
-InitialHoverNode = NodePath("")
 
 [node name="Title" type="Label" parent="UILayer/MenuScreenManager/AltGameplayScreen"]
 layout_mode = 1
