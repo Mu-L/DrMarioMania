@@ -311,7 +311,7 @@ public partial class JarManager : Node
 				CommonGameSettings.CustomLevelTheme = int.Parse(basicSettingChunks[2]);
 				CommonGameSettings.CustomLevelMusic = int.Parse(basicSettingChunks[3]);
 
-				if (CommonGameSettings.CustomLevelMusic == GameConstants.customMusicID)
+				if (basicSettingChunks.Length > 5 && CommonGameSettings.CustomLevelMusic == GameConstants.customMusicID)
 					CommonGameSettings.CustomLevelCustomMusicFile = basicSettingChunks[5];
 			}
 
@@ -1085,6 +1085,11 @@ public partial class JarManager : Node
 	public bool IsTileUnbreakable(Vector2I pos) { return IsObjectWithAttribute(pos, "Unbreakable"); }
 	public bool ShouldTileBeForeground(Vector2I pos)  { return IsObjectWithAttribute(pos, "Foreground"); }
 	public bool IsTileHazard(Vector2I pos)  { return IsObjectWithAttribute(pos, "Hazard"); }
+	public int GetTileSourceID(Vector2I pos)  { return jarTiles.GetCellSourceId(pos); }
+	public Vector2I GetTileAtlas(Vector2I pos)  { return jarTiles.GetCellAtlasCoords(pos); }
+	public bool IsTilePill(Vector2I pos)  { return jarTiles.GetCellSourceId(pos) == GameConstants.pillSourceID; }
+	public bool IsTileVirus(Vector2I pos)  { return jarTiles.GetCellSourceId(pos) == GameConstants.virusSourceID; }
+	public bool IsTilePowerUp(Vector2I pos)  { return jarTiles.GetCellSourceId(pos) == GameConstants.powerUpSourceID; }
 	public bool IsTilePowerUp(Vector2I pos, PowerUp powerUp) 
 	{
 		if (jarTiles.GetCellSourceId(pos) == GameConstants.powerUpSourceID)
@@ -1139,9 +1144,12 @@ public partial class JarManager : Node
 		return connectedPos;
 	}
 
-	private void AddTileToFall(Vector2I pos)
+	public void AddTileToFall(Vector2I pos)
 	{
-		if (!tilesToFall.ContainsKey(pos.Y))
+		if (IsTilePowerUp(pos) && frozenPowerUps.Contains(pos))
+            frozenPowerUps.Remove(pos);
+
+        if (!tilesToFall.ContainsKey(pos.Y))
 			tilesToFall.Add(pos.Y, new List<int>());
 
 		if (!tilesToFall[pos.Y].Contains(pos.X))
@@ -1226,7 +1234,7 @@ public partial class JarManager : Node
 
 	private void CheckForLinesToDestroy(Vector2I origPos)
 	{
-		int origColour = GetTileColour(origPos);
+        int origColour = GetTileColour(origPos);
 		
 		int streakLeft = CheckForStreakFromPos(origPos, Vector2I.Left, origColour);
 		int streakRight = CheckForStreakFromPos(origPos, Vector2I.Right, origColour);
@@ -1234,46 +1242,91 @@ public partial class JarManager : Node
 		int streakUp = CheckForStreakFromPos(origPos, Vector2I.Up, origColour);
 		int streakDown = CheckForStreakFromPos(origPos, Vector2I.Down, origColour);
 
+		// row / horizontal streak
 		if (streakLeft + streakRight + 1 >= PlayerGameSettings.MinStreakLength)
 		{
-			bool isNewLine = false;
+			// check if streak contains non-virus tiles
+			bool streakContainsMatchableTiles = !IsTileVirus(origPos);
 
-			if (!tilesToDestroy.ContainsKey(origPos.Y))
-				tilesToDestroy.Add(origPos.Y, new List<int>());
-
-			for (int i = -streakLeft; i <= streakRight; i++)
+			if (!streakContainsMatchableTiles)
 			{
-				Vector2I pos = origPos + Vector2I.Right * i;
+                for (int i = -streakLeft; i <= streakRight; i++)
+                {
+                    Vector2I pos = origPos + Vector2I.Right * i;
 
-				if (!tilesToDestroy[pos.Y].Contains(pos.X))
+					if (!IsTileVirus(pos))
+					{
+                        streakContainsMatchableTiles = true;
+                        break;
+                    }
+                }
+            }
+
+			// add tiles to be destroyed and increase combo
+			if (streakContainsMatchableTiles)
+			{
+				bool isNewLine = false;
+
+				if (!tilesToDestroy.ContainsKey(origPos.Y))
+					tilesToDestroy.Add(origPos.Y, new List<int>());
+
+				for (int i = -streakLeft; i <= streakRight; i++)
 				{
-					tilesToDestroy[pos.Y].Add(pos.X);
-					isNewLine = true;
+					Vector2I pos = origPos + Vector2I.Right * i;
 
-					if (virusesRemaining.ContainsKey(pos))
-						destructionContainsVirus = true;
+					if (!tilesToDestroy[pos.Y].Contains(pos.X))
+					{
+						tilesToDestroy[pos.Y].Add(pos.X);
+						isNewLine = true;
+
+						if (virusesRemaining.ContainsKey(pos))
+							destructionContainsVirus = true;
+					}
 				}
+
+				if (isNewLine)
+					IncrementLineCombo(origColour);
 			}
 
-			if (isNewLine)
-				IncrementLineCombo(origColour);
 		}
 
+		// column / vertical streak
 		if (streakUp + streakDown + 1 >= PlayerGameSettings.MinStreakLength)
 		{
-			bool isNewLine = false;
+			// check if streak contains non-virus tiles
+			bool streakContainsMatchableTiles = !IsTileVirus(origPos);
 
-			for (int i = -streakUp; i <= streakDown; i++)
+			if (!streakContainsMatchableTiles)
 			{
-				Vector2I pos = origPos + Vector2I.Down * i;
+                for (int i = -streakUp; i <= streakDown; i++)
+                {
+                    Vector2I pos = origPos + Vector2I.Down * i;
 
-				if (AddTileToDestroy(pos))
-					isNewLine = true;
-			}
+					if (!IsTileVirus(pos))
+					{
+                        streakContainsMatchableTiles = true;
+                        break;
+                    }
+                }
+            }
 
-			if (isNewLine)
-				IncrementLineCombo(origColour);
-		}
+			// add tiles to be destroyed and increase combo
+            if (streakContainsMatchableTiles)
+            {
+                bool isNewLine = false;
+
+                for (int i = -streakUp; i <= streakDown; i++)
+                {
+                    Vector2I pos = origPos + Vector2I.Down * i;
+
+                    if (AddTileToDestroy(pos))
+                        isNewLine = true;
+                }
+
+                if (isNewLine)
+                    IncrementLineCombo(origColour);
+            }
+        }
 	}
 
 	public void AddPillToTilemap(Pill pill)
@@ -1864,6 +1917,14 @@ public partial class JarManager : Node
 		return true;
 	}
 
+	public void SplitPillInTwo(Vector2I pos)
+	{
+        Vector2I atlas = GetTileAtlas(pos);
+
+		jarTiles.SetCell(pos, GameConstants.pillSourceID, new Vector2I(PillConstants.atlasSingle, atlas.Y));
+        SeparateConnectedSegment(pos, GameConstants.pillSourceID, atlas);
+	}
+
 	private void SeparateConnectedSegment(Vector2I pos, int sourceID, Vector2I atlas)
 	{
 		Vector2I connectedPos = GetConnectedSegment(pos, sourceID, atlas.X);
@@ -2160,6 +2221,13 @@ public partial class JarManager : Node
 				Vector2I pos = new Vector2I(tilesToFall[y][i], y);
 				Vector2I atlas = jarTiles.GetCellAtlasCoords(pos);
 				int sourceID = jarTiles.GetCellSourceId(pos);
+
+				if (sourceID == GameConstants.virusSourceID)
+				{
+                    int virusCol = virusesRemaining[pos];
+                    virusesRemaining.Remove(pos);
+                    virusesRemaining.Add(pos + Vector2I.Down, virusCol);
+                }
 
 				jarTiles.SetCell(pos, -1);
 				jarTiles.SetCell(pos + Vector2I.Down, sourceID, atlas);

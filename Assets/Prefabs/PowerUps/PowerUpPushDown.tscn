@@ -1,11 +1,102 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbwl3wq4kt2d1"]
+[gd_scene load_steps=7 format=3 uid="uid://cbwl3wq4kt2d1"]
 
 [ext_resource type="PackedScene" uid="uid://4x81aemi6t00" path="res://Assets/Prefabs/PowerUps/BasePowerUp.tscn" id="1_ipahs"]
 [ext_resource type="Script" path="res://Scripts/PowerUps/PowerUpPushDown.cs" id="2_s83yg"]
+[ext_resource type="Texture2D" uid="uid://b0fui3tjdofdq" path="res://Assets/Sprites/PushDownLine.png" id="3_001m1"]
 
-[node name="PowerUpPushDown" instance=ExtResource("1_ipahs")]
+[sub_resource type="Animation" id="Animation_n1ijp"]
+resource_name = "PushDown"
+length = 0.466673
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:RegionRectY")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4, 0.433333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, -2.0, -4.0, -6.0, 0.0, -2.0, -4.0, -6.0, 0.0, -2.0, -4.0, -6.0, 0.0, -2.0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.466667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"FinishPowerUp"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Line:self_modulate")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.498039)]
+}
+
+[sub_resource type="Animation" id="Animation_qxab4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:RegionRectY")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Line:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mdedd"]
+_data = {
+"PushDown": SubResource("Animation_n1ijp"),
+"RESET": SubResource("Animation_qxab4")
+}
+
+[node name="PowerUpPushDown" node_paths=PackedStringArray("aniPlayer", "lineSprite") instance=ExtResource("1_ipahs")]
 script = ExtResource("2_s83yg")
+aniPlayer = NodePath("AnimationPlayer")
+lineSprite = NodePath("Line")
+RegionRectY = 0.0
 powerUp = 8
 
 [node name="Sprite2D" parent="." index="0"]
+visible = false
 frame = 8
+
+[node name="Line" type="Sprite2D" parent="." index="1"]
+texture_repeat = 2
+texture = ExtResource("3_001m1")
+region_enabled = true
+region_rect = Rect2(0, 0, 8, 40)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_mdedd")
+}

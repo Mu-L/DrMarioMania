@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=10 format=3 uid="uid://gnwx1etyo6q7"]
+[gd_resource type="Resource" load_steps=11 format=3 uid="uid://gnwx1etyo6q7"]
 
 [ext_resource type="Script" path="res://Scripts/Resources/PowerUpPrefabs.cs" id="1_fk5rw"]
 [ext_resource type="PackedScene" uid="uid://rqtlvoynhl0i" path="res://Assets/Prefabs/PowerUps/PowerUpThwomp.tscn" id="1_m8vr0"]
@@ -9,8 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://s3ip5xg0t6f" path="res://Assets/Prefabs/PowerUps/PowerUpVirusBlaster.tscn" id="6_b6dqt"]
 [ext_resource type="PackedScene" uid="uid://wl5hqhdje1jn" path="res://Assets/Prefabs/PowerUps/PowerUpLightningV.tscn" id="7_a1jn2"]
 [ext_resource type="PackedScene" uid="uid://bmhmsspa48f1s" path="res://Assets/Prefabs/PowerUps/PowerUpLightningH.tscn" id="8_1rtod"]
+[ext_resource type="PackedScene" uid="uid://cbwl3wq4kt2d1" path="res://Assets/Prefabs/PowerUps/PowerUpPushDown.tscn" id="9_0b1f4"]
 
 [resource]
 script = ExtResource("1_fk5rw")
 powerUpPrefabKeys = Array[int]([0, 1, 2, 3, 4, 5, 6, 7, 8])
-powerUpPrefabs = Array[PackedScene]([ExtResource("1_m8vr0"), ExtResource("2_qqa6x"), ExtResource("3_v0f0g"), ExtResource("4_l7vyd"), ExtResource("5_xq8vb"), ExtResource("6_b6dqt"), ExtResource("7_a1jn2"), ExtResource("8_1rtod"), null])
+powerUpPrefabs = Array[PackedScene]([ExtResource("1_m8vr0"), ExtResource("2_qqa6x"), ExtResource("3_v0f0g"), ExtResource("4_l7vyd"), ExtResource("5_xq8vb"), ExtResource("6_b6dqt"), ExtResource("7_a1jn2"), ExtResource("8_1rtod"), ExtResource("9_0b1f4")])

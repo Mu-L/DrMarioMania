@@ -395,6 +395,17 @@ description = "GAMEPLAY:
 
   - ?
 
+- Added support for variable jar widths:
+
+- - The jar width can be
+    changed in the Custom
+    Gameplay Style menu
+
+- - For custom levels,
+    width size buttons
+    have been added to
+    the editor
+
 Lightning power up:
   Destroys all viruses/
   bricks in its way and
@@ -407,17 +418,6 @@ Compressor power up:
   Causes all viruses
   below it to get pushed
   downwards.
-
-- Added support for variable jar widths:
-
-- - The jar width can be
-    changed in the Custom
-    Gameplay Style menu
-
-- - For custom levels,
-    width size buttons
-    have been added to
-    the editor
 
 - New level pack containing 8 levels added
 
@@ -436,6 +436,8 @@ AUDIO:
 - WhatsApp theme now uses Mania music instead of NES
 
 FIXES & IMPROVEMENTS:
+
+- Fixed missing power-up direction/radius previews
 
 - If the game window is too small to fit all jars on-screen, the camera will zoom out
 
