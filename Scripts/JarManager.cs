@@ -1085,6 +1085,17 @@ public partial class JarManager : Node
 	public bool IsTileUnbreakable(Vector2I pos) { return IsObjectWithAttribute(pos, "Unbreakable"); }
 	public bool ShouldTileBeForeground(Vector2I pos)  { return IsObjectWithAttribute(pos, "Foreground"); }
 	public bool IsTileHazard(Vector2I pos)  { return IsObjectWithAttribute(pos, "Hazard"); }
+	public bool IsTilePowerUp(Vector2I pos, PowerUp powerUp) 
+	{
+		if (jarTiles.GetCellSourceId(pos) == GameConstants.powerUpSourceID)
+		{
+            return jarTiles.GetCellAtlasCoords(pos).X == (int)powerUp;
+        }
+		else
+		{
+            return false;
+        }
+	}
 
 	public bool IsObjectWithAttribute(Vector2I pos, string attribute)
 	{
@@ -1687,7 +1698,8 @@ public partial class JarManager : Node
 
 	private void ActivatePowerUp(PowerUp pwr, int colour, Vector2I pos)
 	{
-		if (DisablePowerUpSpawning)
+        GD.Print("ACTIVATE POWER UP AT " + pos);
+        if (DisablePowerUpSpawning)
 			return;
 		
 		BasePowerUp powerUp = powerUpPrefabs.GetPowerUpPrefab(pwr).Instantiate<BasePowerUp>();
@@ -1701,7 +1713,7 @@ public partial class JarManager : Node
 		jarTiles.GetParent().AddChild(powerUp);
 		powerUp.GetParent().MoveChild(powerUp, previewTiles.GetIndex());
 
-		powerUp.GlobalPosition = TilemapGlobalPos + pos * JarCellSize;
+        powerUp.GlobalPosition = TilemapGlobalPos + pos * JarCellSize;
 		powerUp.GlobalPosition += JarCellSize / 2;
 
 		activePowerUps.Add(powerUp);
@@ -1781,7 +1793,7 @@ public partial class JarManager : Node
 	}
 
 	// Destroys tile at given position - returns true if pos is not empty, aka something gets destroyed
-	public bool DestroyTile(Vector2I pos, bool forceInsta = false)
+	public bool DestroyTile(Vector2I pos, bool forceInsta = false, bool dontActivatePowerUp = false)
 	{
 		// Add pos to destroyedTiles (if not forceInsta) - return if pos is already in destroyedTiles or pos is empty
 		if (jarTiles.GetCellSourceId(pos) == -1 || (forceInsta ? false : !AddDestroyedTile(pos)))
@@ -1839,8 +1851,9 @@ public partial class JarManager : Node
 		{
 			if (frozenPowerUps.Contains(pos))
 				frozenPowerUps.Remove(pos);
-				
-			ActivatePowerUp((PowerUp)atlas.X, colour, pos);
+			
+			if (!dontActivatePowerUp)
+				ActivatePowerUp((PowerUp)atlas.X, colour, pos);
 		}
 		
 		jarTiles.SetCell(pos, sourceID, poppedAtlas);

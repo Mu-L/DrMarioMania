@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmhmsspa48f1s"]
+
+[ext_resource type="PackedScene" uid="uid://wl5hqhdje1jn" path="res://Assets/Prefabs/PowerUps/PowerUpLightningV.tscn" id="1_q1weu"]
+
+[node name="PowerUpLightningH" instance=ExtResource("1_q1weu")]
+isHorizontal = true
+powerUp = 7
+
+[node name="Sprite2D" parent="." index="0"]
+frame = 7

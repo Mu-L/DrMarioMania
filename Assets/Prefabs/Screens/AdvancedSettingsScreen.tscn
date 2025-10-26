@@ -441,17 +441,23 @@ grow_vertical = 1
 title = "POWER-UPS"
 description = "Power-ups need to be matched to activate, except for the rarer rainbow variants.
 ------------
-Thwomp: Destroys everything above and below it.
+Thwomp: Rises upwards then falls down, destroying any objects in its path.
 
-Shell: Destroys everything to the left and right of it.
+Shell: Shoots to the right and rebounds to the left, destroying any objects in its path.
 
-Spikeinator: Destroys everything above, below and either side of it.
+Spikeinator: Destroys objects above, below and either side of it.
 
-Bomb: Destroys surrounding objects.
+Bomb: Destroys surrounding objects in a small radius.
 
 Pill Blaster: Elminates all pills of a certain colour (all if rainbow).
 
-Virus Blaster: Elminates all viruses of a certain colour (or halves them all if rainbow)."
+Virus Blaster: Elminates all viruses of a certain colour (or halves them all if rainbow).
+
+Lightning (vertical): Destroys objects in its column and doesn't get stopped by any blocks.
+
+Lightning (horizontal): Same as above, but destroys objects in its row instead.
+
+Compressor: Causes objects below it to get pushed downwards."
 alignDescToLeft = true
 
 [node name="PowerUpContainer" type="FlowContainer" parent="SettingsContainer/BoxContainer/PowerUps" node_paths=PackedStringArray("firstButton")]

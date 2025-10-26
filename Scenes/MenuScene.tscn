@@ -395,11 +395,18 @@ description = "GAMEPLAY:
 
   - ?
 
-- New power-ups:
+Lightning power up:
+  Destroys all viruses/
+  bricks in its way and
+  doesn't get stopped by
+  any blocks. Comes in
+  vertical and horizontal
+  variants.
 
-- - Lightning - a
-
-- - Push Down Block - a
+Compressor power up:
+  Causes all viruses
+  below it to get pushed
+  downwards.
 
 - Added support for variable jar widths:
 
@@ -3642,7 +3649,6 @@ button_group = SubResource("ButtonGroup_4u0so")
 button_group = SubResource("ButtonGroup_4u0so")
 
 [node name="ModeSingleScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3690,6 +3696,7 @@ text = "CLASSIC"
 icon = ExtResource("61_ailxn")
 
 [node name="MarathonButton" type="Button" parent="UILayer/MenuScreenManager/ModeSingleScreen/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -4220,6 +4227,7 @@ button_group = SubResource("ButtonGroup_5b5yk")
 text = "PACK 4"
 
 [node name="AltGameplayScreen" type="Control" parent="UILayer/MenuScreenManager"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
