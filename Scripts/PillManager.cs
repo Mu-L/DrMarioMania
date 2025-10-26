@@ -268,9 +268,8 @@ public partial class PillManager : Node
 		if (powerUpMeter.IsPowerUpReady && !usingHoldPill)
 		{
 			powerUpPill.Visible = true;
-			powerUpPill.SetPowerUp(powerUpMeter.NextPowerUp, powerUpMeter.NextColour);
-
-			powerUpMeter.QueueNewPowerUp();
+            powerUpPill.SetPowerUp(powerUpMeter.NextPowerUp, powerUpMeter.NextColour);
+            powerUpMeter.QueueNewPowerUp();
 
 			throwingPill = powerUpPill;
 		}

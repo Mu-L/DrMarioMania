@@ -138,7 +138,8 @@ public partial class Pill : Node2D
 		
         return atts;
     }
-	public void SetAttributes(PillAttributes atts)
+
+	public virtual void SetAttributes(PillAttributes atts)
 	{
 		if (pillShape != atts.pillShape)
         	OffsetFromOrigPos((int)atts.pillShape);
@@ -150,7 +151,6 @@ public partial class Pill : Node2D
 
         unrotatedTiles = new Dictionary<Vector2I, JarTileData>(atts.unrotatedTiles);
         rotatedTiles = new Dictionary<Vector2I, JarTileData>(atts.rotatedTiles);
-		
 
         UpdateTileMap();
     }

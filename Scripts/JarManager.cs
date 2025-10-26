@@ -1698,7 +1698,6 @@ public partial class JarManager : Node
 
 	private void ActivatePowerUp(PowerUp pwr, int colour, Vector2I pos)
 	{
-        GD.Print("ACTIVATE POWER UP AT " + pos);
         if (DisablePowerUpSpawning)
 			return;
 		

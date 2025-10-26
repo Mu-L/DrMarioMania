@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbwl3wq4kt2d1"]
+
+[ext_resource type="PackedScene" uid="uid://4x81aemi6t00" path="res://Assets/Prefabs/PowerUps/BasePowerUp.tscn" id="1_ipahs"]
+[ext_resource type="Script" path="res://Scripts/PowerUps/PowerUpPushDown.cs" id="2_s83yg"]
+
+[node name="PowerUpPushDown" instance=ExtResource("1_ipahs")]
+script = ExtResource("2_s83yg")
+powerUp = 8
+
+[node name="Sprite2D" parent="." index="0"]
+frame = 8

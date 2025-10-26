@@ -46,6 +46,13 @@ public partial class PillActive : Pill
         ghostPowerUpPreview.Visible = GridPos != LandPos && powerUpPreview.Visible;
     }
 
+    private void SetPowerUpPreview(PowerUp powerUp)
+    {
+        int previewIndex = powerUps.IndexOf(powerUp);
+        powerUpPreview.Texture = powerUpPreviewTextures[previewIndex];
+        ghostPowerUpPreview.Texture = powerUpPreviewTextures[previewIndex];
+    }   
+
     public void SetPowerUpPreviewVisibility(bool b)
     {
         powerUpPreview.Visible = b;
@@ -66,16 +73,33 @@ public partial class PillActive : Pill
         base.SetPillColours(centreColour, secondaryColour, pType, pShape, skipTileMapUpdate);
 	}
 
+    public override void SetAttributes(PillAttributes atts)
+    {
+        base.SetAttributes(atts);
+
+        if (atts.pillType == PillType.PowerUp)
+        {
+            PowerUp powerUp = (PowerUp)pillTiles.GetCellAtlasCoords(Vector2I.Zero).X;
+            if (powerUps.Contains(powerUp))
+            {
+                SetPowerUpPreview(powerUp);
+                SetPowerUpPreviewVisibility(true);
+            }
+            else
+                SetPowerUpPreviewVisibility(false);
+        }
+        else
+            SetPowerUpPreviewVisibility(false);
+    }
+
     public override void SetPowerUp(PowerUp powerUp, int colour)
 	{
-		base.SetPowerUp(powerUp, colour);
+        base.SetPowerUp(powerUp, colour);
 
         if (powerUps.Contains(powerUp))
         {
-            int previewIndex = powerUps.IndexOf(powerUp);
+            SetPowerUpPreview(powerUp);
             SetPowerUpPreviewVisibility(true);
-            powerUpPreview.Texture = powerUpPreviewTextures[previewIndex];
-            ghostPowerUpPreview.Texture = powerUpPreviewTextures[previewIndex];
         }
         else
             SetPowerUpPreviewVisibility(false);

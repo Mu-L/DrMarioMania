@@ -6,7 +6,6 @@ using static PowerUpEnums;
 public partial class BasePowerUp : Node2D
 {
     [Export] protected Sprite2D sprite;
-    [Export] protected Sprite2D previewSprite;
     [Export] protected PowerUp powerUp;
     [Export] private Material rainbowMat;
     protected JarManager jarMan;

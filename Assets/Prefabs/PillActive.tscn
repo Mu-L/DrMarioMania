@@ -9,8 +9,8 @@
 
 [node name="ActivePill" node_paths=PackedStringArray("powerUpPreview", "ghostPowerUpPreview") instance=ExtResource("1_oc8gn")]
 script = ExtResource("2_xog4u")
-powerUps = Array[int]([0, 1, 2, 3])
-powerUpPreviewTextures = Array[Texture2D]([ExtResource("4_tidck"), ExtResource("3_4c2x7"), ExtResource("5_lowm5"), ExtResource("6_f10r6")])
+powerUps = Array[int]([0, 1, 2, 3, 6, 7])
+powerUpPreviewTextures = Array[Texture2D]([ExtResource("4_tidck"), ExtResource("3_4c2x7"), ExtResource("5_lowm5"), ExtResource("6_f10r6"), ExtResource("4_tidck"), ExtResource("3_4c2x7")])
 powerUpPreview = NodePath("PowerUpPreview")
 ghostPowerUpPreview = NodePath("GhostPowerUpPreview")
 
