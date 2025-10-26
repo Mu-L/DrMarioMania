@@ -610,8 +610,6 @@ CLASSIC: Gameplay closer to older Dr. Mario games
 
 Dr. LUIGI: Modern with L-shaped pills
 
-QUAD: Modern with 4 colours
-
 ITEMS: Modern with power-ups
 
 PILL MIX: Modern with various pill shapes
@@ -634,6 +632,9 @@ offset_bottom = 42.0
 grow_vertical = 1
 
 [node name="Button3" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/GameplayStyle/GameplayScrollContainer/MarginContainer/GameplayContainer" index="3"]
+visible = false
+
+[node name="Button8" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/GameplayStyle/GameplayScrollContainer/MarginContainer/GameplayContainer" index="6"]
 visible = false
 
 [node name="FallSpeed" type="Control" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer" index="1"]

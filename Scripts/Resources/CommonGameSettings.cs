@@ -37,8 +37,7 @@ public partial class CommonGameSettings : Resource
 
     // -1 = new, unsaved level
     // -2 = not a custom level
-    //public int CustomLevelID { get; set; } = -2;
-    public int CustomLevelID { get; set; } = 0;
+    public int CustomLevelID { get; set; } = -2;
     public string CustomLevelName { get; set; } = "";
     public bool IsCustomLevel { get { return CustomLevelID != -2; } }
     

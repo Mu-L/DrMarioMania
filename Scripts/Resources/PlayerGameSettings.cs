@@ -203,6 +203,29 @@ public partial class PlayerGameSettings : Resource
                     }
 
                     break;
+                // double jar width
+                case 7:
+                    if (!isCustomLevelSettings)
+                        ColourCount = 3;
+                    IsHoldEnabled = true;
+                    MinStreakLength = 4;
+                    GenerousLockDelay = true;
+                    AutoFallSpeed = 6;
+                    ImpatientMatching = true;
+                    FasterSoftDrop = false;
+                    FasterAutoFall = true;
+                    InstantSoftDropLock = false;
+                    NoFallSpeedIncrease = false;
+                    OnlySingleColourPills = false;
+                    PowerUpMeterMaxLevel = 16;
+                    FasterAutoRepeat = true;
+                    if (!isCustomLevelSettings)
+                        JarSize = new Vector2I(GameConstants.DefaultJarSize.X * 2, GameConstants.DefaultJarSize.Y);
+                    
+                    ClearPowerUps();
+                    SetSinglePillShape(PillShape.Double);
+
+                    break;
                 // modern (default)
                 default:
                     if (!isCustomLevelSettings)

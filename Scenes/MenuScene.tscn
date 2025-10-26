@@ -393,7 +393,8 @@ description = "GAMEPLAY:
 
 - New gameplay styles:
 
-  - ?
+  - Big Jar: The jar has
+    doubled its width!
 
 - Added support for variable jar widths:
 
@@ -645,6 +646,8 @@ QUAD: Modern with 4 colours
 ITEMS: Modern with power-ups
 
 PILL MIX: Modern with various pill shapes
+
+BIG JAR: Modern with a wider jar
 
 CUSTOM: Use custom game rules"
 alignDescToLeft = true
@@ -3651,6 +3654,7 @@ button_group = SubResource("ButtonGroup_4u0so")
 button_group = SubResource("ButtonGroup_4u0so")
 
 [node name="ModeSingleScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -4120,7 +4124,6 @@ text = "BACK"
 icon = ExtResource("8_3vacb")
 
 [node name="OfficialCustomLevelScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -4208,25 +4211,31 @@ alignment = 1
 layout_mode = 2
 toggle_mode = true
 button_group = SubResource("ButtonGroup_5b5yk")
-text = "PACK 1"
+text = "W1"
 
 [node name="Button2" type="Button" parent="UILayer/MenuScreenManager/OfficialCustomLevelScreen/HBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 button_group = SubResource("ButtonGroup_5b5yk")
-text = "PACK 2"
+text = "W2"
 
 [node name="Button3" type="Button" parent="UILayer/MenuScreenManager/OfficialCustomLevelScreen/HBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 button_group = SubResource("ButtonGroup_5b5yk")
-text = "PACK 3"
+text = "W3"
 
 [node name="Button4" type="Button" parent="UILayer/MenuScreenManager/OfficialCustomLevelScreen/HBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 button_group = SubResource("ButtonGroup_5b5yk")
-text = "PACK 4"
+text = "W4"
+
+[node name="Button5" type="Button" parent="UILayer/MenuScreenManager/OfficialCustomLevelScreen/HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_5b5yk")
+text = "W5"
 
 [node name="AltGameplayScreen" type="Control" parent="UILayer/MenuScreenManager"]
 visible = false
@@ -4656,6 +4665,7 @@ normalMusicPlayer = NodePath("../MusicPlayer")
 [connection signal="pressed" from="UILayer/MenuScreenManager/OfficialCustomLevelScreen/HBoxContainer/Button2" to="UILayer/MenuScreenManager/OfficialCustomLevelScreen/CustomLevelPanelContainer" method="SetPage" binds= [1]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/OfficialCustomLevelScreen/HBoxContainer/Button3" to="UILayer/MenuScreenManager/OfficialCustomLevelScreen/CustomLevelPanelContainer" method="SetPage" binds= [2]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/OfficialCustomLevelScreen/HBoxContainer/Button4" to="UILayer/MenuScreenManager/OfficialCustomLevelScreen/CustomLevelPanelContainer" method="SetPage" binds= [3]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/OfficialCustomLevelScreen/HBoxContainer/Button5" to="UILayer/MenuScreenManager/OfficialCustomLevelScreen/CustomLevelPanelContainer" method="SetPage" binds= [4]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/AltGameplayScreen/GameplayScrollContainer/MarginContainer/GameplayContainer/Button4" to="UILayer/MenuScreenManager" method="SetScreen" binds= [3]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/AltGameplayScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
 [connection signal="pressed" from="UILayer/MenuScreenManager/AltGameplayScreen/NextButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [2]]
