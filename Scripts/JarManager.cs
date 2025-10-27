@@ -1927,12 +1927,7 @@ public partial class JarManager : Node
 
 		if (sourceID == GameConstants.virusSourceID)
 		{
-			virusesRemaining.Remove(pos);
-			uiMan.SetVirusLabel(virusesRemaining.Count);
-			if (VirusRing != null)
-				VirusRing.StunVirus(colour, !virusesRemaining.ContainsValue(colour));
-
-			IncrementVirusCombo();
+			RemoveRemainingVirus(pos, true);
 		}
 		else if (sourceID == GameConstants.powerUpSourceID)
 		{
@@ -1952,7 +1947,24 @@ public partial class JarManager : Node
 		return true;
 	}
 
-	public void SplitPillInTwo(Vector2I pos)
+    private void RemoveRemainingVirus(Vector2I pos, bool updateHud)
+    {
+		int colour = virusesRemaining[pos];
+
+		virusesRemaining.Remove(pos);
+
+		if (updateHud)
+			uiMan.SetVirusLabel(virusesRemaining.Count);
+
+		if (VirusRing != null)
+		{
+            VirusRing.StunVirus(colour, !virusesRemaining.ContainsValue(colour));
+		}
+
+		IncrementVirusCombo();
+    }
+
+    public void SplitPillInTwo(Vector2I pos)
 	{
         Vector2I atlas = GetTileAtlas(pos);
 
@@ -2177,7 +2189,7 @@ public partial class JarManager : Node
 					// insta-destroy tile if hazard
 					if (IsTileHazard(pos + Vector2I.Down))
 					{
-						tilesToInstaDestroy.Add(pos);
+                        tilesToInstaDestroy.Add(pos);
 					}
 				}
 			}
@@ -2192,9 +2204,29 @@ public partial class JarManager : Node
 			SfxMan.Play("VirusStunLand");
 			for (int i = 0; i < tilesToInstaDestroy.Count; i++)
 			{
-				DestroyTile(tilesToInstaDestroy[i], true);
+                Vector2I pos = tilesToInstaDestroy[i];
+
+                if (IsTileVirus(pos))
+				{
+					SfxMan.Play("VirusMatch");
+                    RemoveRemainingVirus(pos, true);
+				}
+
+				DestroyTile(pos, true);
+			}
+
+			if (virusCombo > 0)
+			{
+				uiMan.SetVirusLabel(virusesRemaining.Count);
+
+				if (virusesRemaining.Count() == 0 && CommonGameSettings.GameMode != 1)
+				{
+					Win();
+					return;
+				}
 			}
 		}
+
 
 		// do line checks for landed tiles
 		if (uncheckedLandedTiles.Count > 0 && PlayerGameSettings.ImpatientMatching || tilesToFall.Count == 0)
