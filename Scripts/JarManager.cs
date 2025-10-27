@@ -1664,7 +1664,7 @@ public partial class JarManager : Node
 	}
 
 	// whether the position given is empty, or will be updated (e.g. will fall, be destroyed or is already destroyed/popped) 
-	private bool IsPosEmptyOrWillUpdate(Vector2I pos)
+	public bool IsPosEmptyOrWillUpdate(Vector2I pos)
 	{
 		return IsCellFree(pos) || TilesToDestroyContainsPos(pos) || DestroyedTilesContainsPos(pos) || TilesToFallContainsPos(pos);
 	}

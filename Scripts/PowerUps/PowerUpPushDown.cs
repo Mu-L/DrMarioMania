@@ -59,13 +59,14 @@ public partial class PowerUpPushDown : BasePowerUp
 
 	private void PushDown()
 	{
-		for (int y = jarMan.JarOrigin.Y; y < jarMan.JarOrigin.Y + jarMan.JarSize.Y; y++)
+		for (int y = jarMan.JarOrigin.Y + jarMan.JarSize.Y - 1; y >= jarMan.JarOrigin.Y; y--)
 		{
             Vector2I pos = new Vector2I(InitialGridPos.X, y);
 
             int sourceID = jarMan.GetTileSourceID(pos);
 
-			if (sourceID == GameConstants.pillSourceID || sourceID == GameConstants.virusSourceID || sourceID == GameConstants.powerUpSourceID)
+
+            if (sourceID == GameConstants.pillSourceID || sourceID == GameConstants.virusSourceID || sourceID == GameConstants.powerUpSourceID)
 			{
 				// split pill if horizontal double
 				if (sourceID == GameConstants.pillSourceID)
@@ -77,7 +78,11 @@ public partial class PowerUpPushDown : BasePowerUp
                         jarMan.SplitPillInTwo(pos);
                     }
                 }
-
+                
+                // if solid below pos, don't fall
+                if (!jarMan.IsPosEmptyOrWillUpdate(pos + Vector2I.Down))
+                    continue;
+                    
             	jarMan.AddTileToFall(pos);
 			}
         }
