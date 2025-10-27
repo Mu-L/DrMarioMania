@@ -51,15 +51,15 @@ public partial class PowerUpPushDown : BasePowerUp
     {
         Vector2 linePos;
 
-        RegionHeight = (jarMan.JarSize.Y - (InitialGridPos.Y - jarMan.JarOrigin.Y)) * GameConstants.tileSize;
-        linePos = new Vector2(0, RegionHeight / 2.0f - (GameConstants.tileSize / 2.0f));
+        RegionHeight = jarMan.JarSize.Y * GameConstants.tileSize;
+        linePos = new Vector2(0, -(InitialGridPos.Y + 0.5f) * GameConstants.tileSize);
 
         lineSprite.Position = linePos;
     }
 
 	private void PushDown()
 	{
-		for (int y = InitialGridPos.Y; y < jarMan.JarOrigin.Y + jarMan.JarSize.Y; y++)
+		for (int y = jarMan.JarOrigin.Y; y < jarMan.JarOrigin.Y + jarMan.JarSize.Y; y++)
 		{
             Vector2I pos = new Vector2I(InitialGridPos.X, y);
 

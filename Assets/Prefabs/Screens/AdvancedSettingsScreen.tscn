@@ -457,7 +457,7 @@ Lightning (vertical): Destroys objects in its column and doesn't get stopped by 
 
 Lightning (horizontal): Same as above, but destroys objects in its row instead.
 
-Compressor: Causes objects below it to get pushed downwards."
+Fallinator: Causes objects above and below it to fall downwards."
 alignDescToLeft = true
 
 [node name="PowerUpContainer" type="FlowContainer" parent="SettingsContainer/BoxContainer/PowerUps" node_paths=PackedStringArray("firstButton")]
