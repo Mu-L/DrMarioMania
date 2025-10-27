@@ -1,4 +1,4 @@
-[gd_scene load_steps=104 format=3 uid="uid://b2vcutf5f3jja"]
+[gd_scene load_steps=107 format=3 uid="uid://b2vcutf5f3jja"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/MenuScreenManager.cs" id="1_i7n64"]
 [ext_resource type="Script" path="res://Scripts/Menu/Screens/UpdateableSettingScreen.cs" id="2_ig0jp"]
@@ -38,6 +38,8 @@
 [ext_resource type="Texture2D" uid="uid://doear5od7shdw" path="res://Assets/Sprites/UI/Controls/ArrowsIcon.png" id="21_4po7x"]
 [ext_resource type="Texture2D" uid="uid://l2n8k3ovsqxj" path="res://Assets/Sprites/UI/Controls/Z.png" id="21_8jx2b"]
 [ext_resource type="Script" path="res://Scripts/Menu/GameSettingUI/GameSettingMultiGamestyleButtonGroup.cs" id="21_wrncj"]
+[ext_resource type="Texture2D" uid="uid://c2cfpimdnvap5" path="res://Assets/Sprites/UI/ColourIcon.png" id="21_wvpfx"]
+[ext_resource type="Material" uid="uid://csmp6th1p5ym4" path="res://Assets/Materials/BgTintMaterial.tres" id="22_3rqkv"]
 [ext_resource type="Texture2D" uid="uid://c5uqo86o5wt7i" path="res://Assets/Sprites/UI/Controls/RotateArrow.png" id="22_112wb"]
 [ext_resource type="Texture2D" uid="uid://mrjbvu1xrjb3" path="res://Assets/Sprites/UI/Controls/WASDIcon.png" id="22_rvc21"]
 [ext_resource type="Texture2D" uid="uid://dr0la23648k5p" path="res://Assets/Sprites/UI/Controls/ControllerIcon.png" id="23_gcu0b"]
@@ -89,6 +91,7 @@
 [ext_resource type="Resource" uid="uid://bg0t1x05maugm" path="res://Assets/Resources/OfficialCustomLevelList.tres" id="75_8f8n1"]
 [ext_resource type="PackedScene" uid="uid://bfcv2361x0ono" path="res://Assets/Prefabs/OfficialCustomLevelPanel.tscn" id="75_nsn7q"]
 [ext_resource type="PackedScene" uid="uid://dejlotb7w8jno" path="res://Assets/Prefabs/MusicPreviewPlayer.tscn" id="80_slce4"]
+[ext_resource type="PackedScene" uid="uid://4xwlkm6vrj27" path="res://Assets/Prefabs/Screens/BgColourScreen.tscn" id="83_ocge7"]
 [ext_resource type="Material" uid="uid://bvhh10ltuo7ek" path="res://Assets/Materials/ScrollLogoMaterial.tres" id="86_gsitc"]
 [ext_resource type="Material" uid="uid://bh1ol4li58slp" path="res://Assets/Materials/ScrollLogoRMaterial.tres" id="86_nt1we"]
 [ext_resource type="Texture2D" uid="uid://be71jeucs25n8" path="res://Assets/Sprites/BG/BGLogo.png" id="87_f03wr"]
@@ -426,6 +429,8 @@ Compressor power up:
 
 VISUALS:
 
+- Backgrounds can now be tinted a custom colour - press the colour icon in the corner of theme preview panels
+
 - Mouse cursor now hides during gameplay
 
 - Levels in level packs now display their pack and level numbers during gameplay
@@ -449,7 +454,6 @@ alignDescToLeft = true
 popUpGroup = NodePath("../../../PopUpGroup")
 
 [node name="GameplayScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -752,6 +756,7 @@ commonGameSettings = ExtResource("17_7dvs3")
 metadata/_edit_group_ = true
 
 [node name="BG" type="TextureRect" parent="UILayer/MenuScreenManager/VisualsScreen/ThemePreview"]
+material = ExtResource("22_3rqkv")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -784,6 +789,18 @@ texture = ExtResource("17_h5mjb")
 hframes = 6
 vframes = 10
 frame = 1
+
+[node name="ColourButton" type="Button" parent="UILayer/MenuScreenManager/VisualsScreen/ThemePreview"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -18.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 18.0
+grow_horizontal = 0
+icon = ExtResource("21_wvpfx")
 
 [node name="ColourLabel" type="Label" parent="UILayer/MenuScreenManager/VisualsScreen"]
 layout_mode = 1
@@ -1477,6 +1494,7 @@ commonGameSettings = ExtResource("17_7dvs3")
 metadata/_edit_group_ = true
 
 [node name="BG" type="TextureRect" parent="UILayer/MenuScreenManager/MultiplayerCommonScreen/ThemePreview"]
+material = ExtResource("22_3rqkv")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1517,6 +1535,14 @@ texture = ExtResource("17_h5mjb")
 hframes = 6
 vframes = 10
 frame = 1
+
+[node name="ColourButton" type="Button" parent="UILayer/MenuScreenManager/MultiplayerCommonScreen/ThemePreview"]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 18.0
+offset_bottom = 18.0
+icon = ExtResource("21_wvpfx")
 
 [node name="ThemeLabel" type="Label" parent="UILayer/MenuScreenManager/MultiplayerCommonScreen"]
 layout_mode = 1
@@ -4124,6 +4150,7 @@ text = "BACK"
 icon = ExtResource("8_3vacb")
 
 [node name="OfficialCustomLevelScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -4444,6 +4471,10 @@ grow_vertical = 0
 focus_neighbor_left = NodePath("../BackButton")
 text = "NEXT"
 
+[node name="BgColourScreen" parent="UILayer/MenuScreenManager" instance=ExtResource("83_ocge7")]
+visible = false
+layout_mode = 1
+
 [node name="NotificationBox" type="Control" parent="UILayer" node_paths=PackedStringArray("aniPlayer", "audioPlayer", "label")]
 visible = false
 layout_mode = 3
@@ -4595,6 +4626,8 @@ normalMusicPlayer = NodePath("../MusicPlayer")
 [connection signal="pressed" from="UILayer/MenuScreenManager/GameplayScreen/GameplayScrollContainer/MarginContainer/GameplayContainer/Button4" to="UILayer/MenuScreenManager" method="SetScreen" binds= [3]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/GameplayScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
 [connection signal="pressed" from="UILayer/MenuScreenManager/GameplayScreen/NextButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [2]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/VisualsScreen/ThemePreview/ColourButton" to="UILayer/MenuScreenManager/BgColourScreen" method="UpdateVisuals"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/VisualsScreen/ThemePreview/ColourButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [18]]
 [connection signal="focus_entered" from="UILayer/MenuScreenManager/VisualsScreen/MusicContainer/Button" to="MusicPreviewPlayer" method="SetPreviewMusic" binds= [-1]]
 [connection signal="focus_entered" from="UILayer/MenuScreenManager/VisualsScreen/MusicContainer/Button2" to="MusicPreviewPlayer" method="SetPreviewMusic" binds= [-2]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/VisualsScreen/MusicContainer/Button3" to="UILayer/MenuScreenManager" method="SetScreen" binds= [4]]
@@ -4611,6 +4644,8 @@ normalMusicPlayer = NodePath("../MusicPlayer")
 [connection signal="pressed" from="UILayer/MenuScreenManager/MultiplayerPlayerScreen/NextButton" to="UILayer/MenuScreenManager/MultiplayerPlayerScreen" method="NextPlayer"]
 [connection signal="pressed" from="UILayer/MenuScreenManager/MultiplayerPlayerScreen/AllUseP1SettingsButton" to="UILayer/MenuScreenManager/MultiplayerPlayerScreen" method="AllUseP1SettingsAndStart"]
 [connection signal="pressed" from="UILayer/MenuScreenManager/MultiplayerPlayerScreen/CopyButton" to="UILayer/MenuScreenManager/MultiplayerPlayerScreen" method="CopyPlayer1Settings"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MultiplayerCommonScreen/ThemePreview/ColourButton" to="UILayer/MenuScreenManager/BgColourScreen" method="UpdateVisuals"]
+[connection signal="pressed" from="UILayer/MenuScreenManager/MultiplayerCommonScreen/ThemePreview/ColourButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [18]]
 [connection signal="focus_entered" from="UILayer/MenuScreenManager/MultiplayerCommonScreen/MusicContainer/Button" to="MusicPreviewPlayer" method="SetPreviewMusic" binds= [-1]]
 [connection signal="focus_entered" from="UILayer/MenuScreenManager/MultiplayerCommonScreen/MusicContainer/Button2" to="MusicPreviewPlayer" method="SetPreviewMusic" binds= [-2]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/MultiplayerCommonScreen/MusicContainer/Button3" to="UILayer/MenuScreenManager" method="SetScreen" binds= [4]]
@@ -4669,6 +4704,7 @@ normalMusicPlayer = NodePath("../MusicPlayer")
 [connection signal="pressed" from="UILayer/MenuScreenManager/AltGameplayScreen/GameplayScrollContainer/MarginContainer/GameplayContainer/Button4" to="UILayer/MenuScreenManager" method="SetScreen" binds= [3]]
 [connection signal="pressed" from="UILayer/MenuScreenManager/AltGameplayScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
 [connection signal="pressed" from="UILayer/MenuScreenManager/AltGameplayScreen/NextButton" to="UILayer/MenuScreenManager" method="SetScreen" binds= [2]]
+[connection signal="pressed" from="UILayer/MenuScreenManager/BgColourScreen/BackButton" to="UILayer/MenuScreenManager" method="GoBack"]
 
 [editable path="UILayer/MenuScreenManager/GameplayScreen/GameplayScrollContainer"]
 [editable path="UILayer/MenuScreenManager/VisualsScreen/ThemeScrollContainer"]
@@ -4688,3 +4724,4 @@ normalMusicPlayer = NodePath("../MusicPlayer")
 [editable path="UILayer/MenuScreenManager/SettingsScreen"]
 [editable path="UILayer/MenuScreenManager/HighScoreScreen/GameplayScrollContainer"]
 [editable path="UILayer/MenuScreenManager/AltGameplayScreen/GameplayScrollContainer"]
+[editable path="UILayer/MenuScreenManager/BgColourScreen"]

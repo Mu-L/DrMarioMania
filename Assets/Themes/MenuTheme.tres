@@ -1,9 +1,10 @@
-[gd_resource type="Theme" load_steps=33 format=3 uid="uid://b3vsve12v7uit"]
+[gd_resource type="Theme" load_steps=34 format=3 uid="uid://b3vsve12v7uit"]
 
 [ext_resource type="Texture2D" uid="uid://mtkfqaci2y44" path="res://Assets/Sprites/UI/SliderHighlight.png" id="1_ekeot"]
 [ext_resource type="Texture2D" uid="uid://cvuo0v4fxsgis" path="res://Assets/Sprites/UI/SliderGrabber.png" id="1_f7rxv"]
 [ext_resource type="Texture2D" uid="uid://bmt8gq648mmye" path="res://Assets/Sprites/UI/SliderTick.png" id="1_j0ajs"]
 [ext_resource type="FontFile" uid="uid://c2e4sl3d40to5" path="res://Assets/Fonts/PressStart2P.ttf" id="1_v5db2"]
+[ext_resource type="Texture2D" uid="uid://cmvdi5ixwflji" path="res://Assets/Sprites/UI/ColourCursor.png" id="1_wx4sa"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fnvl6"]
 content_margin_left = 4.0
@@ -343,6 +344,10 @@ Button/styles/hover = SubResource("StyleBoxFlat_i4lv3")
 Button/styles/hover_pressed = SubResource("StyleBoxFlat_xc3uv")
 Button/styles/normal = SubResource("StyleBoxFlat_8fvdt")
 Button/styles/pressed = SubResource("StyleBoxFlat_aginb")
+ColorPicker/constants/h_width = 12
+ColorPicker/constants/sv_height = 70
+ColorPicker/constants/sv_width = 101
+ColorPicker/icons/picker_cursor = ExtResource("1_wx4sa")
 HScrollBar/styles/grabber = SubResource("StyleBoxFlat_3q6qv")
 HScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_830yv")
 HScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_cu4bo")

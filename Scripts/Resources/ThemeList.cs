@@ -21,13 +21,15 @@ public partial class ThemeList : Resource
     public Texture2D GetPowerUpIconTexture(int theme) { return ResourceLoader.Load<Texture2D>(themePath + themeFolderNames[theme] + "/PowerUpIcons.png"); }
     public Texture2D GetUIBoxTexture(int theme) { return ResourceLoader.Load<Texture2D>(themePath + themeFolderNames[theme] + "/UIBox.png"); }
     public Texture2D GetUIBoxSmallTexture(int theme) { return ResourceLoader.Load<Texture2D>(themePath + themeFolderNames[theme] + "/UIBoxSmall.png"); }
-    public Texture2D GetJarTexture(int speed, int theme, bool isMultiplayer)
+    public Texture2D GetJarTexture(int speed, int theme, bool isMultiplayer, bool bgIsTintable)
     {
         bool themeUsesCommonBg = ResourceLoader.Exists(themePath + themeFolderNames[theme] + "/Jar.png");
         string fileName;
 
         if (themeUsesCommonBg)
             fileName = "Jar";
+        else if (bgIsTintable)
+            fileName = "JarTintableBg";
         else if (speed == 2)
             fileName = "JarHi";
         else if (speed == 0)
@@ -45,12 +47,14 @@ public partial class ThemeList : Resource
 
         return ResourceLoader.Load<Texture2D>(themePath + themeFolderNames[theme] + "/" + fileName + ".png");
     }
-    public Texture2D GetBgTilesTexture(int speed, int theme)
+    public Texture2D GetBgTilesTexture(int speed, int theme, bool bgIsTintable)
     {
         bool themeUsesCommonBg = ResourceLoader.Exists(themePath + themeFolderNames[theme] + "/BG.png");
         string fileName;
 
-        if (themeUsesCommonBg)
+        if (bgIsTintable)
+            fileName = "BGTintable";
+        else if (themeUsesCommonBg)
             fileName = "BG";
         else if (speed == 2)
             fileName = "BGHi";

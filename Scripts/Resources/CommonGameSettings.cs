@@ -5,6 +5,10 @@ using static ColourOrderCategoryEnums;
 
 public partial class CommonGameSettings : Resource
 {
+    [ExportGroup("Misc References")]
+    [Export] private ShaderMaterial bgTintMat;
+
+
     [ExportGroup("Player Game Setting Resources")]
     // Player-specific game settings (stored in their own resources)
     [Export] public PlayerGameSettings P1GameSettings { get; set; }
@@ -177,6 +181,45 @@ public partial class CommonGameSettings : Resource
         }
     }
     private int customLevelMusic = -1;
+
+    // bg colour
+    public bool IsCustomLevelUsingCustomBgColour { get; set; } = false;
+    public bool IsUsingCustomBgColour { get; set; } = false;
+    public bool CurrentIsUsingCustomBgColour
+    {
+        get { return IsCustomLevel ? IsCustomLevelUsingCustomBgColour : IsUsingCustomBgColour; }
+        set
+        {
+            if (IsCustomLevel)
+                IsCustomLevelUsingCustomBgColour = value;
+            else
+                IsUsingCustomBgColour = value;
+
+            UpdateBgTintShader();
+        }
+    }
+
+    public Color CustomLevelCustomBgColour { get; set; } = new Color(1,1,1);
+    public Color CustomBgColour { get; set; } = new Color(1,1,1);
+    public Color CurrentCustomBgColour
+    {
+        get { return IsCustomLevel ? CustomLevelCustomBgColour : CustomBgColour; }
+        set
+        {
+            if (IsCustomLevel)
+                CustomLevelCustomBgColour = value;
+            else
+                CustomBgColour = value;
+
+            UpdateBgTintShader();
+        }
+    }
+
+    public void UpdateBgTintShader()
+    {
+        bgTintMat.SetShaderParameter("tint_colour", CurrentCustomBgColour);
+        bgTintMat.SetShaderParameter("is_active", CurrentIsUsingCustomBgColour);
+    }
 
     // auto get the correct theme and music depending on whether in a custom level or not
     public int CurrentTheme { get { return IsCustomLevel ? CustomLevelTheme : Theme; } }
@@ -442,6 +485,8 @@ public partial class CommonGameSettings : Resource
         config.SetValue("Game Settings", "Music", Music);
         config.SetValue("Game Settings", "UseScoreKeep", UseScoreKeep);
         config.SetValue("Game Settings", "P1Settings", P1GameSettings.ExportToString());
+        config.SetValue("Game Settings", "IsUsingCustomBgColour", IsUsingCustomBgColour);
+        config.SetValue("Game Settings", "CustomBgColour", CustomBgColour);
 
         config.SetValue("Multiplayer Settings", "MultiplayerRequiredWinCount", MultiplayerRequiredWinCount);
         config.SetValue("Multiplayer Settings", "MultiplayerUseJunkPills", MultiplayerUseJunkPills);
@@ -561,6 +606,14 @@ public partial class CommonGameSettings : Resource
 
             if (config.HasSectionKey("Audio Settings", "CustomMusicFile"))
                 CustomMusicFile = (string)config.GetValue("Audio Settings", "CustomMusicFile");
+        }
+
+        if (config.HasSectionKey("Game Settings", "CustomBgColour"))
+        {
+            IsUsingCustomBgColour = (bool)config.GetValue("Game Settings", "IsUsingCustomBgColour");
+            CustomBgColour = (Color)config.GetValue("Game Settings", "CustomBgColour");
+
+            UpdateBgTintShader();
         }
 
         HasLoadedSettings = true;

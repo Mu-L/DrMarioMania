@@ -13,7 +13,6 @@ public partial class ThemePreview : Control
     [ExportGroup("Resources")]
     [Export] private ThemeList themeList;
     [Export] private CommonGameSettings commonGameSettings;
-
     private float initialPillPosY;
     
     // Called when the node enters the scene tree for the first time.
@@ -28,10 +27,20 @@ public partial class ThemePreview : Control
         SetPreviewTextures(commonGameSettings.CurrentTheme);
     }
 
+    public void UpdateBgAndJarTexture()
+    {
+        UpdateBgAndJarTexture(commonGameSettings.CurrentTheme);
+    }
+
+    private void UpdateBgAndJarTexture(int theme)
+    {
+        bg.Texture = themeList.GetBgTilesTexture(useSpeedBg ? commonGameSettings.CurrentPlayerGameSettings.SpeedLevel : 1, theme, commonGameSettings.CurrentIsUsingCustomBgColour);
+        jar.Texture = themeList.GetJarTexture(useSpeedBg ? commonGameSettings.CurrentPlayerGameSettings.SpeedLevel : 1, theme, false, commonGameSettings.CurrentIsUsingCustomBgColour);
+    }
+
     public void SetPreviewTextures(int theme)
     {
-        bg.Texture = themeList.GetBgTilesTexture(useSpeedBg ? commonGameSettings.CurrentPlayerGameSettings.SpeedLevel : 1, theme);
-        jar.Texture = themeList.GetJarTexture(useSpeedBg ? commonGameSettings.CurrentPlayerGameSettings.SpeedLevel : 1, theme, false);
+        UpdateBgAndJarTexture(theme);
 
         if (virus != null)
             virus.Texture = themeList.GetVirusTileTexture(theme);

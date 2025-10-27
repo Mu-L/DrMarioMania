@@ -1,0 +1,161 @@
+[gd_scene load_steps=12 format=3 uid="uid://4xwlkm6vrj27"]
+
+[ext_resource type="Script" path="res://Scripts/Menu/Screens/BgColourScreen.cs" id="1_12vx8"]
+[ext_resource type="Script" path="res://Scripts/Menu/ThemePreview.cs" id="2_t725r"]
+[ext_resource type="Resource" uid="uid://cwxx0untun2hu" path="res://Assets/Resources/ThemeList.tres" id="3_g1hml"]
+[ext_resource type="Resource" uid="uid://cwkwokd34qh80" path="res://Assets/Resources/CommonGameSettings.tres" id="4_6fhs3"]
+[ext_resource type="Texture2D" uid="uid://wjvng62544bt" path="res://Assets/Sprites/Themes/Modern/BGMed.png" id="5_6prrm"]
+[ext_resource type="Material" uid="uid://csmp6th1p5ym4" path="res://Assets/Materials/BgTintMaterial.tres" id="5_nx4ys"]
+[ext_resource type="Texture2D" uid="uid://pn63ad76k4o2" path="res://Assets/Sprites/Themes/Modern/Jar.png" id="6_qmehp"]
+[ext_resource type="Texture2D" uid="uid://c0hiufv220hj7" path="res://Assets/Sprites/Themes/Modern/VirusTiles.png" id="7_gyf2e"]
+[ext_resource type="Texture2D" uid="uid://dlska1epmujlf" path="res://Assets/Sprites/Themes/Modern/PillTiles.png" id="8_2q3r1"]
+[ext_resource type="Texture2D" uid="uid://kqh3uxtqxbxw" path="res://Assets/Sprites/UI/ButtonIcons/BackIcon.png" id="9_3jdoc"]
+[ext_resource type="PackedScene" uid="uid://dmiylj2kheea0" path="res://Assets/Prefabs/GameSettingsUI/GameSettingToggleButton.tscn" id="10_ub00c"]
+
+[node name="BgColourScreen" type="Control" node_paths=PackedStringArray("themePreview", "colourPicker", "activeButton", "InitialHoverNode")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_12vx8")
+themePreview = NodePath("ThemePreview")
+commonGameSettings = ExtResource("4_6fhs3")
+colourPicker = NodePath("ColorPicker")
+activeButton = NodePath("GameSettingToggleButton")
+InitialHoverNode = NodePath("BackButton")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -92.0
+offset_top = 10.0
+offset_right = 91.0
+offset_bottom = 18.0
+grow_horizontal = 2
+text = "CUSTOM BACKGROUND COLOUR"
+horizontal_alignment = 1
+
+[node name="ThemePreview" type="Control" parent="." node_paths=PackedStringArray("bg", "jar", "virus", "pill", "pill2")]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = -86.0
+offset_right = 122.0
+offset_bottom = 74.0
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_t725r")
+bg = NodePath("BG")
+jar = NodePath("Jar")
+virus = NodePath("Virus")
+pill = NodePath("Pill")
+pill2 = NodePath("Pill2")
+useSpeedBg = true
+themeList = ExtResource("3_g1hml")
+commonGameSettings = ExtResource("4_6fhs3")
+metadata/_edit_group_ = true
+
+[node name="BG" type="TextureRect" parent="ThemePreview"]
+material = ExtResource("5_nx4ys")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_6prrm")
+stretch_mode = 1
+
+[node name="Jar" type="TextureRect" parent="ThemePreview"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 96.0
+offset_bottom = 184.0
+texture = ExtResource("6_qmehp")
+
+[node name="Virus" type="Sprite2D" parent="ThemePreview"]
+position = Vector2(40, 80)
+scale = Vector2(2, 2)
+texture = ExtResource("7_gyf2e")
+hframes = 3
+vframes = 10
+frame = 3
+
+[node name="Pill" type="Sprite2D" parent="ThemePreview"]
+position = Vector2(56, 80)
+scale = Vector2(2, 2)
+texture = ExtResource("8_2q3r1")
+hframes = 6
+vframes = 10
+frame = 12
+
+[node name="Pill2" type="Sprite2D" parent="ThemePreview"]
+position = Vector2(72, 80)
+scale = Vector2(2, 2)
+texture = ExtResource("8_2q3r1")
+hframes = 6
+vframes = 10
+frame = 1
+
+[node name="ColorPicker" type="ColorPicker" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -88.0
+offset_right = 121.0
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2
+edit_alpha = false
+color_mode = 1
+can_add_swatches = false
+sampler_visible = false
+color_modes_visible = false
+presets_visible = false
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = -29.0
+offset_right = 77.0
+offset_bottom = -7.0
+grow_vertical = 0
+text = "BACK"
+icon = ExtResource("9_3jdoc")
+
+[node name="GameSettingToggleButton" parent="." instance=ExtResource("10_ub00c")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -83.0
+offset_top = -29.0
+offset_right = -7.0
+offset_bottom = -7.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "INACTIVE"
+onString = "ACTIVE"
+offString = "INACTIVE"
+settingName = &"CurrentIsUsingCustomBgColour"
+isCommonSetting = true
+
+[connection signal="color_changed" from="ColorPicker" to="." method="UpdateBgColour"]
+[connection signal="toggled" from="GameSettingToggleButton" to="." method="UpdateBgColourState"]

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=12 format=3 uid="uid://cwkwokd34qh80"]
+[gd_resource type="Resource" load_steps=13 format=3 uid="uid://cwkwokd34qh80"]
 
 [ext_resource type="Script" path="res://Scripts/Resources/CommonGameSettings.cs" id="1_0ghk3"]
 [ext_resource type="Resource" uid="uid://cwxmv5gjaigr2" path="res://Assets/Resources/P1GameSettings.tres" id="1_6avm1"]
@@ -10,10 +10,12 @@
 [ext_resource type="Resource" uid="uid://b2iuu3gh2uh0r" path="res://Assets/Resources/P2MultiInputSettings.tres" id="5_qmb6r"]
 [ext_resource type="Resource" uid="uid://buseoen2tyl28" path="res://Assets/Resources/P3MultiInputSettings.tres" id="7_bi3ij"]
 [ext_resource type="Resource" uid="uid://c3yu67jlscn32" path="res://Assets/Resources/P4MultiInputSettings.tres" id="9_smlgy"]
+[ext_resource type="Material" uid="uid://csmp6th1p5ym4" path="res://Assets/Materials/BgTintMaterial.tres" id="10_i15o8"]
 [ext_resource type="Resource" uid="uid://cwxx0untun2hu" path="res://Assets/Resources/ThemeList.tres" id="11_j3ocu"]
 
 [resource]
 script = ExtResource("1_0ghk3")
+bgTintMat = ExtResource("10_i15o8")
 P1GameSettings = ExtResource("1_6avm1")
 P2GameSettings = ExtResource("2_3lkx6")
 P3GameSettings = ExtResource("3_je880")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://up7l7b7sr6ch"]
+[gd_scene load_steps=45 format=3 uid="uid://up7l7b7sr6ch"]
 
 [ext_resource type="Script" path="res://Scripts/PauseManager.cs" id="1_40uu0"]
 [ext_resource type="Material" uid="uid://d0mvlpdi7fs7q" path="res://Assets/Materials/BlurMaterial.tres" id="1_eplak"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/Menu/Screens/BaseScreen.cs" id="3_c841w"]
 [ext_resource type="PackedScene" uid="uid://blrcky0050ep3" path="res://Assets/Prefabs/ScreenTransition.tscn" id="3_tamir"]
 [ext_resource type="PackedScene" uid="uid://mdtbub1d7nur" path="res://Assets/Prefabs/Screens/SettingsScreen.tscn" id="5_ek13n"]
+[ext_resource type="Material" uid="uid://csmp6th1p5ym4" path="res://Assets/Materials/BgTintMaterial.tres" id="6_d3q6h"]
 [ext_resource type="Resource" uid="uid://cwxx0untun2hu" path="res://Assets/Resources/ThemeList.tres" id="7_7mg6x"]
 [ext_resource type="Resource" uid="uid://bbsie5itk63lc" path="res://Assets/Resources/MusicList.tres" id="11_oh0kq"]
 [ext_resource type="PackedScene" uid="uid://dpdnlbcibdfrl" path="res://Assets/Prefabs/JarGroupSingle.tscn" id="15_g4ex7"]
@@ -375,6 +376,7 @@ libraries = {
 layer = 0
 
 [node name="BackgroundTex" type="TextureRect" parent="BackgroundLayer"]
+material = ExtResource("6_d3q6h")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

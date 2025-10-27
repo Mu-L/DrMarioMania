@@ -280,7 +280,7 @@ public partial class JarUIManager : Node
 
 	public void UpdateJarTexture(int theme, ThemeList themeList)
 	{
-		Texture2D jarTex = themeList.GetJarTexture(jarMan.SpeedLevel, theme, IsMultiplayer);
+		Texture2D jarTex = themeList.GetJarTexture(jarMan.SpeedLevel, theme, IsMultiplayer, jarMan.CommonGameSettings.CurrentIsUsingCustomBgColour);
 		foreach (NinePatchRect rect in jarRects)
 		{
 			rect.Texture = jarTex;

@@ -25,7 +25,9 @@ public partial class GameThemer : Node
 
 	public void UpdateAllVisualsAndSfx()
 	{
-		UpdateCommonVisuals();
+        commonGameSettings.UpdateBgTintShader();
+
+        UpdateCommonVisuals();
 
 		foreach (JarManager jarMan in gameMan.Jars)
 		{
@@ -47,7 +49,7 @@ public partial class GameThemer : Node
 	
 	public void UpdateBackground()
 	{
-		bgTexture.Texture = themeList.GetBgTilesTexture(commonGameSettings.CurrentPlayerGameSettings.SpeedLevel, commonGameSettings.CurrentTheme);
+        bgTexture.Texture = themeList.GetBgTilesTexture(commonGameSettings.CurrentPlayerGameSettings.SpeedLevel, commonGameSettings.CurrentTheme, commonGameSettings.CurrentIsUsingCustomBgColour);
 	}
 	
 	public void UpdateJarTexture()

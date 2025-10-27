@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://dhy6fjq1xc4w2"]
+[gd_scene load_steps=66 format=3 uid="uid://dhy6fjq1xc4w2"]
 
 [ext_resource type="PackedScene" uid="uid://up7l7b7sr6ch" path="res://Scenes/GameScene.tscn" id="1_s5m0s"]
 [ext_resource type="Script" path="res://Scripts/Editor/EditorBaseSelector.cs" id="2_g5ukp"]
@@ -36,10 +36,13 @@
 [ext_resource type="Texture2D" uid="uid://wjvng62544bt" path="res://Assets/Sprites/Themes/Modern/BGMed.png" id="14_snxut"]
 [ext_resource type="Texture2D" uid="uid://i4ji6ee1hdhl" path="res://Assets/Sprites/UI/Editor/DrawToolPreviews.png" id="14_tpaje"]
 [ext_resource type="Texture2D" uid="uid://pn63ad76k4o2" path="res://Assets/Sprites/Themes/Modern/Jar.png" id="15_6tw3r"]
+[ext_resource type="Material" uid="uid://csmp6th1p5ym4" path="res://Assets/Materials/BgTintMaterial.tres" id="15_b6ueb"]
 [ext_resource type="Texture2D" uid="uid://dlska1epmujlf" path="res://Assets/Sprites/Themes/Modern/PillTiles.png" id="17_bppd6"]
+[ext_resource type="Texture2D" uid="uid://c2cfpimdnvap5" path="res://Assets/Sprites/UI/ColourIcon.png" id="21_81fa4"]
 [ext_resource type="PackedScene" uid="uid://mdtbub1d7nur" path="res://Assets/Prefabs/Screens/SettingsScreen.tscn" id="22_4ru8j"]
 [ext_resource type="Resource" uid="uid://31tismb2r7a" path="res://Assets/Resources/UserCustomLevelList.tres" id="22_h7pql"]
 [ext_resource type="PackedScene" uid="uid://ciycvm6fh6cel" path="res://Assets/Prefabs/PopUpGroup.tscn" id="24_ngsmh"]
+[ext_resource type="PackedScene" uid="uid://4xwlkm6vrj27" path="res://Assets/Prefabs/Screens/BgColourScreen.tscn" id="26_2d50g"]
 [ext_resource type="PackedScene" uid="uid://dejlotb7w8jno" path="res://Assets/Prefabs/MusicPreviewPlayer.tscn" id="29_pwdah"]
 [ext_resource type="Texture2D" uid="uid://be6drct25wp0f" path="res://Assets/Sprites/UI/ButtonIcons/PlayIcon.png" id="35_fosab"]
 [ext_resource type="Texture2D" uid="uid://f4s2eofbobuu" path="res://Assets/Sprites/UI/Editor/JarResizeIcons.png" id="36_q5130"]
@@ -529,6 +532,7 @@ settingName = &"CustomLevelMusic"
 popUpGroup = NodePath("../../../../../../../../PopUpGroup")
 
 [node name="LevelSettingsScreen" type="Control" parent="EditorPauseLayer/ScreenCentre/ScreenContainer" index="3" node_paths=PackedStringArray("InitialHoverNode")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -720,6 +724,7 @@ commonGameSettings = ExtResource("9_ljri1")
 metadata/_edit_group_ = true
 
 [node name="BG" type="TextureRect" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Theme/ThemePreview" index="0"]
+material = ExtResource("15_b6ueb")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -760,6 +765,14 @@ texture = ExtResource("17_bppd6")
 hframes = 6
 vframes = 10
 frame = 1
+
+[node name="ColourButton" type="Button" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Theme/ThemePreview" index="5"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 18.0
+offset_bottom = 18.0
+icon = ExtResource("21_81fa4")
 
 [node name="ThemeScrollContainer" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Theme" index="2" instance=ExtResource("12_7nw2i")]
 layout_mode = 1
@@ -943,6 +956,10 @@ button_group = SubResource("ButtonGroup_aqdl3")
 
 [node name="Button4" parent="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/PageContainer/ScrollContainer/VBoxContainer3/OverrideColoursPanel/OverrideColourContainer/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/ThemeContainer" index="4"]
 button_group = SubResource("ButtonGroup_i2lxc")
+
+[node name="BgColourScreen" parent="EditorPauseLayer/ScreenCentre/ScreenContainer" index="6" node_paths=PackedStringArray("gameThemer") instance=ExtResource("26_2d50g")]
+layout_mode = 1
+gameThemer = NodePath("../../../../GameThemer")
 
 [node name="PopUpGroup" parent="EditorPauseLayer" index="3" node_paths=PackedStringArray("screenMan") instance=ExtResource("24_ngsmh")]
 screenMan = NodePath("../EditorPauseManager")
@@ -1490,7 +1507,6 @@ texture = ExtResource("3_6i3kl")
 hframes = 3
 vframes = 10
 
-[connection signal="pressed" from="PauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/BackButton" to="PauseLayer/PauseManager" method="GoBack"]
 [connection signal="text_changed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/LevelNameBox" to="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/LevelNameBox" method="UpdateLevelName"]
 [connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/SaveButton" to="EditorPauseLayer/EditorPauseManager" method="GoBack"]
 [connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/SaveScreen/VBoxContainer/SaveButton" to="EditorManager" method="SaveLevel"]
@@ -1502,6 +1518,8 @@ vframes = 10
 [connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/QuitConfirmationScreen/VBoxContainer/NoButton" to="EditorPauseLayer/EditorPauseManager" method="GoBack"]
 [connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/GameplayStyle/GameplayScrollContainer/MarginContainer/GameplayContainer/Button4" to="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen" method="RefreshUpdateableSettingScreenValues"]
 [connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/GameplayStyle/GameplayScrollContainer/MarginContainer/GameplayContainer/Button4" to="EditorPauseLayer/EditorPauseManager" method="SetScreen" binds= [4]]
+[connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Theme/ThemePreview/ColourButton" to="EditorPauseLayer/ScreenCentre/ScreenContainer/BgColourScreen" method="UpdateVisuals"]
+[connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Theme/ThemePreview/ColourButton" to="EditorPauseLayer/EditorPauseManager" method="SetScreen" binds= [6]]
 [connection signal="focus_entered" from="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Music/MusicContainer/Button" to="MusicPreviewPlayer" method="SetPreviewMusic" binds= [-1]]
 [connection signal="focus_entered" from="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Music/MusicContainer/Button2" to="MusicPreviewPlayer" method="SetPreviewMusic" binds= [-2]]
 [connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/SettingsContainer/BoxContainer/Music/MusicContainer/Button3" to="EditorPauseLayer/EditorPauseManager" method="SetScreen" binds= [2]]
@@ -1509,6 +1527,7 @@ vframes = 10
 [connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/LevelSettingsScreen/BackButton" to="EditorPauseLayer/EditorPauseManager" method="GoBack"]
 [connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/OkButton" to="EditorPauseLayer/EditorPauseManager" method="GoBack"]
 [connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen/BackButton" to="EditorPauseLayer/EditorPauseManager" method="GoBack"]
+[connection signal="pressed" from="EditorPauseLayer/ScreenCentre/ScreenContainer/BgColourScreen/BackButton" to="EditorPauseLayer/EditorPauseManager" method="GoBack"]
 [connection signal="pressed" from="EditorUILayer/LeftSideToolbar/ColorRect/DrawingToolSelector/Button" to="GameLayer/EditorCursor" method="SetDrawingTool" binds= [0]]
 [connection signal="pressed" from="EditorUILayer/LeftSideToolbar/ColorRect/DrawingToolSelector/Button2" to="GameLayer/EditorCursor" method="SetDrawingTool" binds= [1]]
 [connection signal="pressed" from="EditorUILayer/LeftSideToolbar/ColorRect/DrawingToolSelector/Button3" to="GameLayer/EditorCursor" method="SetDrawingTool" binds= [2]]
@@ -1544,3 +1563,4 @@ vframes = 10
 [editable path="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer/MatchCheck"]
 [editable path="EditorPauseLayer/ScreenCentre/ScreenContainer/AdvancedGameplayScreen/SettingsContainer/BoxContainer/FasterAutoFall"]
 [editable path="EditorPauseLayer/ScreenCentre/ScreenContainer/SettingsScreen"]
+[editable path="EditorPauseLayer/ScreenCentre/ScreenContainer/BgColourScreen"]

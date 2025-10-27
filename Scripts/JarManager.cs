@@ -235,10 +235,22 @@ public partial class JarManager : Node
 		code += CommonGameSettings.CustomLevelTheme + itemDivider;
 		code += CommonGameSettings.CustomLevelMusic + itemDivider;
 		code += JarSize.X + subItemDivider + JarSize.Y + itemDivider;
-		code += (CommonGameSettings.CustomLevelMusic == GameConstants.customMusicID ? CommonGameSettings.CustomLevelCustomMusicFile : "") + sectionDivider;
+		code += (CommonGameSettings.CustomLevelMusic == GameConstants.customMusicID ? CommonGameSettings.CustomLevelCustomMusicFile : "") + itemDivider;
 
-		// Jar tile data ==================================================================================================
-		for (int y = 0; y < JarSize.Y; y++)
+        code += (CommonGameSettings.IsCustomLevelUsingCustomBgColour ? "1" : "0") + itemDivider;
+
+		if (CommonGameSettings.IsCustomLevelUsingCustomBgColour)
+		{
+			code += CommonGameSettings.CustomLevelCustomBgColour.R + subItemDivider;
+			code += CommonGameSettings.CustomLevelCustomBgColour.G + subItemDivider;
+			code += CommonGameSettings.CustomLevelCustomBgColour.B;
+		}
+
+		code += sectionDivider;
+
+
+        // Jar tile data ==================================================================================================
+        for (int y = 0; y < JarSize.Y; y++)
         {
             for (int x = 0; x < JarSize.X; x++)
             {
@@ -313,6 +325,29 @@ public partial class JarManager : Node
 
 				if (basicSettingChunks.Length > 5 && CommonGameSettings.CustomLevelMusic == GameConstants.customMusicID)
 					CommonGameSettings.CustomLevelCustomMusicFile = basicSettingChunks[5];
+
+                if (basicSettingChunks.Length > 6)
+				{
+                	GD.Print("is using: " + basicSettingChunks[6]);
+                    bool usingCol = basicSettingChunks[6] == "1";
+                    CommonGameSettings.IsCustomLevelUsingCustomBgColour = usingCol;
+					
+					if (usingCol)
+					{
+						string[] bgColourData = basicSettingChunks[7].Split(subItemDivider);
+						CommonGameSettings.CustomLevelCustomBgColour = new Color(float.Parse(bgColourData[0]), float.Parse(bgColourData[1]), float.Parse(bgColourData[2]));
+					}
+					else
+						CommonGameSettings.CustomLevelCustomBgColour = new Color(1,1,1);
+
+				}
+				else
+				{
+                    CommonGameSettings.CustomLevelCustomBgColour = new Color(1,1,1);
+                    CommonGameSettings.IsCustomLevelUsingCustomBgColour = false;
+				}
+
+				CommonGameSettings.UpdateBgTintShader();
 			}
 
 			string[] jarSizeData = basicSettingChunks[4].Split(subItemDivider);
