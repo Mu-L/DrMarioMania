@@ -73,6 +73,11 @@ public partial class GameManager : Node
         {
             commonGameSettings.CustomLevelMusic = -1;
             commonGameSettings.CustomLevelTheme = 0;
+
+            commonGameSettings.CustomLevelCustomBgColour = new Color(1,1,1);
+            commonGameSettings.IsCustomLevelUsingCustomBgColour = false;
+            commonGameSettings.UpdateBgTintShader();
+
             commonGameSettings.CustomLevelGameSettings.Reset();
         }
 
