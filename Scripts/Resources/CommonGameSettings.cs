@@ -569,6 +569,19 @@ public partial class CommonGameSettings : Resource
         {
             DisplayServer.WindowMode lastWindowMode = (DisplayServer.WindowMode)(int)config.GetValue("Graphics Settings", "LastWindowMode");
             DisplayServer.WindowSetMode(lastWindowMode);
+
+            // workaround for the windowed mode not getting set properly (godot issue?)
+            if (lastWindowMode == DisplayServer.WindowMode.Windowed)
+            {
+                DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
+
+                // set window size to default
+                Vector2I defaultSize = new Vector2I((int)ProjectSettings.GetSetting("display/window/size/window_width_override"), (int)ProjectSettings.GetSetting("display/window/size/window_height_override"));
+                DisplayServer.WindowSetSize(defaultSize);
+
+                // center window
+                DisplayServer.WindowSetPosition((DisplayServer.ScreenGetSize() - DisplayServer.WindowGetSize()) / 2);
+            }
         }
 
         if (config.HasSectionKey("Graphics Settings", "OverrideCustomLevelColours"))
