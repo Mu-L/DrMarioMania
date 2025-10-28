@@ -770,25 +770,25 @@ layout_mode = 2
 text = "CROWN CITY"
 value = 74
 
-[node name="Button9" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer18" instance=ExtResource("4_vsqyw")]
-layout_mode = 2
-text = "FARAWAY OASIS"
-value = 81
-
-[node name="Button8" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer18" instance=ExtResource("4_vsqyw")]
-layout_mode = 2
-text = "ACORN HEIGHTS"
-value = 80
-
 [node name="Button10" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer18" instance=ExtResource("4_vsqyw")]
 layout_mode = 2
 text = "STARVIEW PEAK"
 value = 84
 
+[node name="Button9" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer18" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "FARAWAY OASIS"
+value = 81
+
 [node name="Button11" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer18" instance=ExtResource("4_vsqyw")]
 layout_mode = 2
 text = "GREAT ? BLOCK RUINS"
 value = 85
+
+[node name="Button8" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer18" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "ACORN HEIGHTS"
+value = 80
 
 [node name="MiscLabel" type="Control" parent="SongCategoryContainer/MarginContainer/SongCategories"]
 custom_minimum_size = Vector2(0, 11)
