@@ -745,10 +745,25 @@ layout_mode = 2
 text = "GRUMBLE VOLCANO"
 value = 78
 
+[node name="Button13" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer18" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "DRY DRY DESERT"
+value = 87
+
+[node name="Button" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer18" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "MK7 CREDITS"
+value = 73
+
 [node name="Button7" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer18" instance=ExtResource("4_vsqyw")]
 layout_mode = 2
 text = "SUNSHINE AIRPORT"
 value = 79
+
+[node name="Button12" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer18" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "SKY-HIGH SUNDAE"
+value = 86
 
 [node name="Button2" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer18" instance=ExtResource("4_vsqyw")]
 layout_mode = 2
@@ -765,10 +780,15 @@ layout_mode = 2
 text = "ACORN HEIGHTS"
 value = 80
 
-[node name="Button" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer18" instance=ExtResource("4_vsqyw")]
+[node name="Button10" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer18" instance=ExtResource("4_vsqyw")]
 layout_mode = 2
-text = "MK7 CREDITS"
-value = 73
+text = "STARVIEW PEAK"
+value = 84
+
+[node name="Button11" parent="SongCategoryContainer/MarginContainer/SongCategories/FlowContainer18" instance=ExtResource("4_vsqyw")]
+layout_mode = 2
+text = "GREAT ? BLOCK RUINS"
+value = 85
 
 [node name="MiscLabel" type="Control" parent="SongCategoryContainer/MarginContainer/SongCategories"]
 custom_minimum_size = Vector2(0, 11)
