@@ -698,12 +698,15 @@ public partial class PillManager : Node
 
 					if (IsGrounded())
 						UpdateTimersOnGroundedAdjustment();
-				}
 
-				if (IsActionJustPressed("MoveLeft"))
-					moveTimer = 1;
-				else
-					moveTimer = 1.0f * (PlayerGameSettings.FirstMoveSpeed / PlayerGameSettings.RepeatedMoveSpeed);
+					if (IsActionJustPressed("MoveLeft"))
+						moveTimer = 1;
+					else
+						moveTimer = 1.0f * (PlayerGameSettings.FirstMoveSpeed / PlayerGameSettings.RepeatedMoveSpeed);
+				}
+				else if (moveTimer > 0)
+                    moveTimer = 0;
+
 			}
 			if (IsActionJustPressed("MoveRight") || (moveTimer <= 0 && IsActionPressed("MoveRight")))
 			{
@@ -713,13 +716,16 @@ public partial class PillManager : Node
 
 					if (IsGrounded())
 						UpdateTimersOnGroundedAdjustment();
-				}
 
-				if (IsActionJustPressed("MoveRight"))
-					moveTimer = 1;
-				else
-					moveTimer = 1.0f * (PlayerGameSettings.FirstMoveSpeed / PlayerGameSettings.RepeatedMoveSpeed);
-			}
+					if (IsActionJustPressed("MoveRight"))
+						moveTimer = 1;
+					else
+						moveTimer = 1.0f * (PlayerGameSettings.FirstMoveSpeed / PlayerGameSettings.RepeatedMoveSpeed);
+				}
+				else if (moveTimer > 0)
+                    moveTimer = 0;
+
+            }
 		}
 
 		// if processing has stopped (due to a hazard hit), place pill then return

@@ -10,6 +10,7 @@ public partial class MultiplayerPlayerScreen : UpdateableSettingScreen
     [Export] private Button nextButton;
     [Export] private Button allUseP1SettingsButton;
     [Export] private Button copyButton;
+    [Export] private Button backButton;
     [Export] private GameSettingColourGroup colourGroup;
 
     [ExportGroup("External References/Resources")]
@@ -37,6 +38,10 @@ public partial class MultiplayerPlayerScreen : UpdateableSettingScreen
         nextButton.Text = (commonGameSettings.PlayerConfiguring  == commonGameSettings.PlayerCount) ? "START!" : "NEXT";
         copyButton.Visible = commonGameSettings.PlayerConfiguring > 1;
         allUseP1SettingsButton.Visible = !copyButton.Visible;
+
+        NodePath centreButtonPath = (copyButton.Visible ? copyButton : allUseP1SettingsButton).GetPath();
+        nextButton.FocusNeighborLeft = centreButtonPath;
+        backButton.FocusNeighborRight = centreButtonPath;
 
         screenMan.RefreshUpdateableSettingScreenValues(GetIndex());
         InitialHoverNode.GrabFocus();

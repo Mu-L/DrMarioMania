@@ -392,7 +392,15 @@ text = "v0.0.0"
 icon = null
 script = ExtResource("13_bgt3e")
 title = "v0.0.0 - CHANGE LOG"
-description = "GAMEPLAY:
+description = "- Auto repeat now occurs instantly when falling and a space becomes available while already holding left or right
+
+- Game now defaults to fullscreen
+
+- Improved button naviation on per-player multiplayer screens
+
+v1.3.0 CHANGES:
+
+GAMEPLAY:
 
 - New gameplay styles:
 
@@ -456,6 +464,7 @@ alignDescToLeft = true
 popUpGroup = NodePath("../../../PopUpGroup")
 
 [node name="GameplayScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("InitialHoverNode")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1122,8 +1131,7 @@ layout_mode = 2
 focus_neighbor_left = NodePath("../../BackButton")
 text = "4"
 
-[node name="MultiplayerPlayerScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("titleLabel", "nextButton", "allUseP1SettingsButton", "copyButton", "colourGroup", "menuMan", "screenMan", "InitialHoverNode")]
-visible = false
+[node name="MultiplayerPlayerScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("titleLabel", "nextButton", "allUseP1SettingsButton", "copyButton", "backButton", "colourGroup", "menuMan", "screenMan", "InitialHoverNode")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1136,6 +1144,7 @@ titleLabel = NodePath("Title")
 nextButton = NodePath("NextButton")
 allUseP1SettingsButton = NodePath("AllUseP1SettingsButton")
 copyButton = NodePath("CopyButton")
+backButton = NodePath("BackButton")
 colourGroup = NodePath("ColourContainer")
 menuMan = NodePath("../../../MenuManager")
 screenMan = NodePath("..")
@@ -1365,21 +1374,18 @@ metadata/_edit_group_ = true
 [node name="Button" parent="UILayer/MenuScreenManager/MultiplayerPlayerScreen/SpeedContainer" instance=ExtResource("7_a10ok")]
 custom_minimum_size = Vector2(56, 0)
 layout_mode = 2
-focus_neighbor_bottom = NodePath("../../NextButton")
 button_pressed = true
 text = "LOW"
 
 [node name="Button2" parent="UILayer/MenuScreenManager/MultiplayerPlayerScreen/SpeedContainer" instance=ExtResource("7_a10ok")]
 custom_minimum_size = Vector2(56, 0)
 layout_mode = 2
-focus_neighbor_bottom = NodePath("../../NextButton")
 text = "MEDIUM"
 value = 1
 
 [node name="Button3" parent="UILayer/MenuScreenManager/MultiplayerPlayerScreen/SpeedContainer" instance=ExtResource("7_a10ok")]
 custom_minimum_size = Vector2(56, 0)
 layout_mode = 2
-focus_neighbor_bottom = NodePath("../../NextButton")
 text = "HIGH"
 value = 2
 
@@ -1393,6 +1399,7 @@ offset_top = -29.0
 offset_right = 71.0
 offset_bottom = -7.0
 grow_vertical = 0
+focus_neighbor_right = NodePath("../AllUseP1SettingsButton")
 text = "BACK"
 icon = ExtResource("8_3vacb")
 
@@ -1409,6 +1416,7 @@ offset_right = -7.0
 offset_bottom = -7.0
 grow_horizontal = 0
 grow_vertical = 0
+focus_neighbor_left = NodePath("../AllUseP1SettingsButton")
 text = "NEXT"
 
 [node name="AllUseP1SettingsButton" type="Button" parent="UILayer/MenuScreenManager/MultiplayerPlayerScreen"]
@@ -1425,6 +1433,7 @@ offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 0
 focus_neighbor_left = NodePath("../BackButton")
+focus_neighbor_right = NodePath("../NextButton")
 text = "All use the
 same & START"
 
@@ -1442,6 +1451,8 @@ offset_right = 52.0
 offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 0
+focus_neighbor_left = NodePath("../BackButton")
+focus_neighbor_right = NodePath("../NextButton")
 theme_override_fonts/font = ExtResource("2_paq13")
 theme_override_font_sizes/font_size = 8
 text = "COPY P1"
