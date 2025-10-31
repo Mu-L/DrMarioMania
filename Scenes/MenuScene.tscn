@@ -392,7 +392,9 @@ text = "v0.0.0"
 icon = null
 script = ExtResource("13_bgt3e")
 title = "v0.0.0 - CHANGE LOG"
-description = "- Auto repeat now occurs instantly when falling and a space becomes available while already holding left or right
+description = "- The random music option (\"???\") now randomises the music after each round
+
+- Auto repeat now occurs instantly when falling and a space becomes available while already holding left or right
 
 - Game now defaults to fullscreen
 

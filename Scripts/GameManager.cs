@@ -351,7 +351,13 @@ public partial class GameManager : Node
         isGameOngoing = false;
         jarsLeftToFill = jars.Count;
         if (!(IsInEditorScene && commonGameSettings.EnableEditorMusic))
+        {
+            // if music is set to random, randomise music for the next round
+            if (commonGameSettings.Music == -4)
+                UpdateMusic();
+                
             musicMan.PlayGameMusic();
+        }
         hasSavedScore = false;
         Input.MouseMode = Input.MouseModeEnum.Hidden;
     }
