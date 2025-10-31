@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cwyo15lik8i87"]
+[gd_scene load_steps=10 format=3 uid="uid://cwyo15lik8i87"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/Screens/UpdateableSettingScreen.cs" id="1_5cs2x"]
 [ext_resource type="Script" path="res://Scripts/Menu/GameSettingUI/GameSettingMusicButtonGroup.cs" id="2_eyajr"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/Menu/CustomMusicContainer.cs" id="5_7650x"]
 [ext_resource type="Texture2D" uid="uid://cj5h0x7520ayk" path="res://Assets/Sprites/UI/ButtonIcons/RefreshIcon.png" id="6_3gqld"]
 [ext_resource type="Texture2D" uid="uid://bw6btowveyc02" path="res://Assets/Sprites/UI/ButtonIcons/FolderIcon.png" id="6_5hswk"]
+[ext_resource type="Resource" uid="uid://bbsie5itk63lc" path="res://Assets/Resources/MusicList.tres" id="6_la588"]
 [ext_resource type="PackedScene" uid="uid://b4pwwg8xgiew0" path="res://Assets/Prefabs/PopUpButton.tscn" id="7_spfat"]
 
 [node name="MusicScreen" type="Control"]
@@ -112,26 +113,58 @@ offset_right = 241.0
 offset_bottom = 9.0
 text = "Custom (MP3 or OGG)"
 
-[node name="CustomMusicContainer" type="FlowContainer" parent="SongCategoryContainer/MarginContainer/SongCategories" node_paths=PackedStringArray("desktopFolderButton", "mobileFolderButton", "musicGroup")]
+[node name="CustomMusicContainer" type="FlowContainer" parent="SongCategoryContainer/MarginContainer/SongCategories" node_paths=PackedStringArray("desktopFolderButton", "popUpButtonMobile", "popUpButtonPC", "musicGroup")]
 layout_mode = 2
 script = ExtResource("5_7650x")
 desktopFolderButton = NodePath("OpenButton")
-mobileFolderButton = NodePath("PopUpButton")
+popUpButtonMobile = NodePath("PopUpButtonMobile")
+popUpButtonPC = NodePath("PopUpButtonPC")
 buttonPrefab = ExtResource("4_vsqyw")
 commonGameSettings = ExtResource("3_5vpca")
 musicGroup = NodePath("../../..")
+musicList = ExtResource("6_la588")
 
 [node name="OpenButton" type="Button" parent="SongCategoryContainer/MarginContainer/SongCategories/CustomMusicContainer"]
 layout_mode = 2
 mouse_filter = 1
 icon = ExtResource("6_5hswk")
 
-[node name="PopUpButton" parent="SongCategoryContainer/MarginContainer/SongCategories/CustomMusicContainer" instance=ExtResource("7_spfat")]
+[node name="PopUpButtonMobile" parent="SongCategoryContainer/MarginContainer/SongCategories/CustomMusicContainer" instance=ExtResource("7_spfat")]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 icon_alignment = 1
 title = "Adding Custom Music"
-description = "To add custom music, go to your device's Documents folder, then DrMarioMania/Music, and place MP3 or OGG files there. Afterwards, hit the refresh button in-game to update the music list."
+description = "To add custom music, go to your device's Documents folder, then DrMarioMania/Music, and place MP3 or OGG files there. Afterwards, hit the refresh button in-game to update the music list.
+
+If you want your song to loop, format its filename like this:
+
+mysong.#.mp3
+mysong.#.ogg
+
+The # should be the timestamp that the song should reset to once reaching its end, such as:
+
+song.1.mp3 - for 1s
+song.5.21.ogg - for 5.21s"
+
+[node name="PopUpButtonPC" parent="SongCategoryContainer/MarginContainer/SongCategories/CustomMusicContainer" instance=ExtResource("7_spfat")]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+icon_alignment = 1
+title = "Adding Custom Music"
+description = "MP3 and OGG files can be used as custom background music.
+
+Just press the button to left of the 'i' button you just pressed to open the folder, drag your music files in, then hit the refresh button in-game.
+
+If you want your song to loop, format its filename like this:
+
+mysong.#.mp3
+mysong.#.ogg
+
+The # should be the timestamp that the song should reset to once reaching its end, such as:
+
+song.1.mp3 - for 1s
+song.5.21.ogg - for 5.21s"
+alignDescToLeft = true
 
 [node name="RefreshButton" type="Button" parent="SongCategoryContainer/MarginContainer/SongCategories/CustomMusicContainer"]
 layout_mode = 2
@@ -880,6 +913,7 @@ focus_mode = 1
 text = "OK"
 
 [connection signal="pressed" from="SongCategoryContainer/MarginContainer/SongCategories/CustomMusicContainer/OpenButton" to="SongCategoryContainer/MarginContainer/SongCategories/CustomMusicContainer" method="OpenMusicFolder"]
-[connection signal="pressed" from="SongCategoryContainer/MarginContainer/SongCategories/CustomMusicContainer/PopUpButton" to="SongCategoryContainer/MarginContainer/SongCategories/CustomMusicContainer" method="MakeMusicFolder"]
+[connection signal="pressed" from="SongCategoryContainer/MarginContainer/SongCategories/CustomMusicContainer/PopUpButtonMobile" to="SongCategoryContainer/MarginContainer/SongCategories/CustomMusicContainer" method="MakeMusicFolder"]
+[connection signal="pressed" from="SongCategoryContainer/MarginContainer/SongCategories/CustomMusicContainer/PopUpButtonPC" to="SongCategoryContainer/MarginContainer/SongCategories/CustomMusicContainer" method="MakeMusicFolder"]
 [connection signal="pressed" from="SongCategoryContainer/MarginContainer/SongCategories/CustomMusicContainer/RefreshButton" to="SongCategoryContainer/MarginContainer/SongCategories/CustomMusicContainer" method="Refresh"]
 [connection signal="pressed" from="OkButton" to="SongCategoryContainer" method="SelectPreviewButton"]

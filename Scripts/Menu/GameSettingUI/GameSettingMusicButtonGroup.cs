@@ -103,7 +103,7 @@ public partial class GameSettingMusicButtonGroup : GameSettingButtonGroup
 				buttonToFocus = buttons[i];
 		}
 
-		string secondSettingValue = commonGameSettings.CurrentCustomMusicFile;
+		string secondSettingValue = commonGameSettings.CurrentCustomMusicFile.Split('.')[0];
 		List<GameSettingButtonInGroup> extraButtons = customMusicContainer.Buttons;
 		
 		for (int i = 0; i < extraButtons.Count; i++)

@@ -5,10 +5,12 @@ using System.Collections.Generic;
 public partial class CustomMusicContainer : FlowContainer
 {
 	[Export] private Button desktopFolderButton;
-	[Export] private Button mobileFolderButton;
+	[Export] private Button popUpButtonMobile;
+	[Export] private Button popUpButtonPC;
 	[Export] private PackedScene buttonPrefab;
 	[Export] private CommonGameSettings commonGameSettings;
 	[Export] private GameSettingMusicButtonGroup musicGroup;
+	[Export] private MusicList musicList;
 	private List<GameSettingButtonInGroup> buttons = new List<GameSettingButtonInGroup>();
 	public List<GameSettingButtonInGroup> Buttons { get { return buttons; } }
 
@@ -36,44 +38,6 @@ public partial class CustomMusicContainer : FlowContainer
 			dir.MakeDirRecursive(GameConstants.MusicFolder);
 	}
 
-	private List<string> GetCustomMusic()
-	{
-		List<string> customMusicList = new List<string>();
-
-		DirAccess dir = DirAccess.Open(GameConstants.ExternalFolderPath);
-
-		// return if folder doesnt exist
-		if (dir == null || !dir.DirExists(GameConstants.MusicFolder))
-			return customMusicList;
-
-		dir.ChangeDir(GameConstants.MusicFolder);
-
-		string[] files = dir.GetFiles();
-
-		for (int i = 0; i < files.Length; i++)
-		{
-			string file = files[i];
-			bool invalid = false;
-
-			foreach (char forbiddenChar in GameConstants.forbiddenLevelNameChars)
-			{
-				if (file.Contains(forbiddenChar))
-				{
-					invalid = true;
-					break;
-				}
-			}
-
-			if (invalid)
-				continue;
-
-			if (file.Contains(".mp3") || file.Contains(".ogg"))
-				customMusicList.Add(file);
-		}
-		
-		return customMusicList;
-	}
-
 	private void Refresh()
 	{
 		GD.Print("refresh custom music");
@@ -91,7 +55,8 @@ public partial class CustomMusicContainer : FlowContainer
 	public void UpdateVisuals()
 	{
 		desktopFolderButton.Visible = !GameConstants.IsOnMobile;
-		mobileFolderButton.Visible = GameConstants.IsOnMobile;
+		popUpButtonMobile.Visible = GameConstants.IsOnMobile;
+		popUpButtonPC.Visible = !GameConstants.IsOnMobile;
 
 		// Remove old song buttons
 		foreach (var button in buttons)
@@ -100,22 +65,29 @@ public partial class CustomMusicContainer : FlowContainer
 		}
 		buttons.Clear();
 
-		List<string> customMusicList = GetCustomMusic();
+		List<string> customMusicList = musicList.GetCustomMusicList();
 
-		for (int i = 0; i < customMusicList.Count; i++)
+        string prevButtonText = "";
+
+        for (int i = 0; i < customMusicList.Count; i++)
 		{
-			GameSettingButtonInGroup button = buttonPrefab.Instantiate<GameSettingButtonInGroup>();
+			string fileName = customMusicList[i];
+            string buttonText = fileName.ToUpper().Split('.')[0];
+
+			if (buttonText == prevButtonText)
+                continue;
+
+            GameSettingButtonInGroup button = buttonPrefab.Instantiate<GameSettingButtonInGroup>();
 			AddChild(button);
 
-			string name = customMusicList[i];
-			button.Text = name.ToUpper();
+			button.Text = buttonText;
 			button.ButtonGroup = musicGroup.MusicButtonGroup;
 
 			button.SetValue(GameConstants.customMusicID);
 			int buttonValue = button.GetValue();
 			
-			button.FocusEntered += () => musicGroup.MusicPreviewPlayer.SetPreviewedCustomMusic(name);
-			button.Pressed += () => SetCustomMusic(name);
+			button.FocusEntered += () => musicGroup.MusicPreviewPlayer.SetPreviewedCustomMusic(fileName);
+			button.Pressed += () => SetCustomMusic(fileName);
 
 			button.Pressed += () => musicGroup.ButtonPressed(button);
 				
@@ -123,7 +95,9 @@ public partial class CustomMusicContainer : FlowContainer
 			button.FocusEntered += () => musicGroup.SetPreviewButton(button);
 
 			buttons.Add(button);
-		}
+
+            prevButtonText = button.Text;
+        }
 	}
 
 	private void SetCustomMusic(string name)

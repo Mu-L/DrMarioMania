@@ -392,7 +392,11 @@ text = "v0.0.0"
 icon = null
 script = ExtResource("13_bgt3e")
 title = "v0.0.0 - CHANGE LOG"
-description = "- The random music option (\"???\") now randomises the music after each round
+description = "- Custom music can now have user-defined loop points, press the \"i\" button in the music menu for more info.
+
+- The custom music buttons no longer show file extensions
+
+- The random music option (\"???\") now randomises the music after each round
 
 - Auto repeat now occurs instantly when falling and a space becomes available while already holding left or right
 
@@ -1055,7 +1059,10 @@ layout_mode = 1
 screenMan = NodePath("../..")
 musicPreviewPlayer = NodePath("../../../../MusicPreviewPlayer")
 
-[node name="PopUpButton" parent="UILayer/MenuScreenManager/MusicScreen/SongCategoryContainer/MarginContainer/SongCategories/CustomMusicContainer" index="1" node_paths=PackedStringArray("popUpGroup")]
+[node name="PopUpButtonMobile" parent="UILayer/MenuScreenManager/MusicScreen/SongCategoryContainer/MarginContainer/SongCategories/CustomMusicContainer" index="1" node_paths=PackedStringArray("popUpGroup")]
+popUpGroup = NodePath("../../../../../../../PopUpGroup")
+
+[node name="PopUpButtonPC" parent="UILayer/MenuScreenManager/MusicScreen/SongCategoryContainer/MarginContainer/SongCategories/CustomMusicContainer" index="2" node_paths=PackedStringArray("popUpGroup")]
 popUpGroup = NodePath("../../../../../../../PopUpGroup")
 
 [node name="MultiplayerCountScreen" type="Control" parent="UILayer/MenuScreenManager" node_paths=PackedStringArray("menuMan", "screenMan", "multiControlCon", "InitialHoverNode")]
